@@ -134,37 +134,50 @@ export function ProjectsSection({ onSelectProject }) {
                         )}
                       </div>
 
-                      {/* Explicit Interactive Links */}
+                      {/* Explicit Interactive Action Buttons */}
                       <div className="flex items-center justify-between pt-2">
-                        <span className="text-xs font-mono text-[#123C2F] font-bold group-hover:underline flex items-center gap-1">
-                          <Eye className="w-3.5 h-3.5" />
-                          <span>Inspect Deep Dive</span>
+                        <span className="text-xs font-mono text-[#123C2F] font-bold group-hover:underline flex items-center gap-1.5">
+                          <Eye className="w-3.5 h-3.5 text-[#123C2F]" />
+                          <span>Deep Dive</span>
                         </span>
-                        <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
+                        <div
+                          className="flex items-center gap-2"
+                          onClick={(e) => e.stopPropagation()}
+                        >
                           {project.githubUrl && (
                             <a
                               href={project.githubUrl}
                               target="_blank"
-                              rel="noreferrer"
+                              rel="noopener noreferrer"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                soundManager.playClick();
+                              }}
                               onMouseEnter={() => soundManager.playHover()}
-                              className="p-2 rounded-full hover:bg-[#123C2F]/10 text-[#666666] hover:text-[#111111] transition-colors"
-                              title="View Source Code"
+                              className="px-2.5 py-1.5 rounded-lg bg-[#123C2F]/5 hover:bg-[#123C2F]/15 text-[#111111] font-mono text-[11px] font-semibold flex items-center gap-1.5 transition-colors"
+                              title="View GitHub Repository"
                               data-cursor="pointer"
                             >
-                              <Github className="w-4 h-4" />
+                              <Github className="w-3.5 h-3.5" />
+                              <span className="hidden sm:inline">Code</span>
                             </a>
                           )}
                           {project.liveUrl && (
                             <a
                               href={project.liveUrl}
                               target="_blank"
-                              rel="noreferrer"
+                              rel="noopener noreferrer"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                soundManager.playClick();
+                              }}
                               onMouseEnter={() => soundManager.playHover()}
-                              className="p-2 rounded-full hover:bg-[#123C2F]/10 text-[#666666] hover:text-[#111111] transition-colors"
+                              className="px-3 py-1.5 rounded-lg bg-[#123C2F] hover:bg-[#1A5442] text-[#F7F7F3] font-mono text-[11px] font-bold flex items-center gap-1 shadow-xs transition-colors"
                               title="Open Live Deployment"
                               data-cursor="pointer"
                             >
-                              <ExternalLink className="w-4 h-4" />
+                              <span>Live App</span>
+                              <ExternalLink className="w-3 h-3" />
                             </a>
                           )}
                         </div>

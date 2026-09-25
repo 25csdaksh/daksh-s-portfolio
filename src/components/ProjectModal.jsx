@@ -240,8 +240,12 @@ export function ProjectModal({ project, onClose }) {
                         <a
                           href={project.liveUrl}
                           target="_blank"
-                          rel="noreferrer"
-                          className="bg-[#123C2F] hover:bg-[#1A5442] text-white px-3 py-1 rounded-lg flex items-center gap-1.5 shadow-sm transition-colors"
+                          rel="noopener noreferrer"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            soundManager.playClick();
+                          }}
+                          className="bg-[#123C2F] hover:bg-[#1A5442] text-white px-3 py-1.5 rounded-lg flex items-center gap-1.5 shadow-sm transition-colors font-mono text-xs font-semibold"
                         >
                           <span>Open Live Site</span>
                           <ExternalLink className="w-3.5 h-3.5" />
@@ -445,7 +449,11 @@ export function ProjectModal({ project, onClose }) {
                 <a
                   href={project.githubUrl}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    soundManager.playClick();
+                  }}
                   onMouseEnter={() => soundManager.playHover()}
                   className="flex items-center gap-1.5 px-4 py-2 rounded-full border border-[#123C2F]/20 text-xs font-semibold text-[#111111] hover:bg-[#123C2F]/10 transition-colors"
                   data-cursor="pointer"
@@ -458,7 +466,11 @@ export function ProjectModal({ project, onClose }) {
                 <a
                   href={project.liveUrl}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    soundManager.playClick();
+                  }}
                   onMouseEnter={() => soundManager.playHover()}
                   className="flex items-center gap-1.5 px-5 py-2 rounded-full bg-[#123C2F] text-[#F7F7F3] text-xs font-semibold hover:bg-[#1A5442] shadow-sm transition-all"
                   data-cursor="pointer"

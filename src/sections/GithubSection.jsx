@@ -107,7 +107,8 @@ export function GithubSection() {
             <a
               href={data.profileUrl}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
+              onClick={() => soundManager.playClick()}
               onMouseEnter={() => soundManager.playHover()}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#123C2F]/20 text-xs font-mono font-bold text-[#123C2F] hover:bg-[#123C2F] hover:text-[#F7F7F3] transition-all shadow-xs"
               data-cursor="pointer"
@@ -214,7 +215,8 @@ export function GithubSection() {
                   key={idx}
                   href={repo.url}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
+                  onClick={() => soundManager.playClick()}
                   onMouseEnter={() => soundManager.playHover()}
                   className="p-5 rounded-2xl bg-white border border-[#123C2F]/10 hover:border-[#123C2F]/30 hover:shadow-md transition-all duration-300 flex flex-col justify-between group"
                   data-cursor="pointer"

@@ -59,7 +59,7 @@ async def websocket_endpoint(websocket: WebSocket):
     ],
     technologies: ["Next.js", "React", "Tailwind CSS", "Lucide Icons", "Vercel Edge", "SEO Schema JSON-LD"],
     accentColor: "#1A5442",
-    githubUrl: "https://github.com/25csdaksh/swayur-agrotech",
+    githubUrl: "https://github.com/25csdaksh/krishiSeva",
     liveUrl: "https://swayuragrotech.vercel.app/",
     coverImage: "/projects/swayur-agrotech-cover.jpg",
     stats: {
@@ -94,7 +94,7 @@ async def websocket_endpoint(websocket: WebSocket):
     ],
     technologies: ["React", "Node.js", "Express.js", "MongoDB", "JWT Auth", "Tailwind CSS", "REST APIs"],
     accentColor: "#123C2F",
-    githubUrl: "https://github.com/25csdaksh/shreejee-education-erp",
+    githubUrl: "https://github.com/25csdaksh/dakshkumar-school-management-system",
     liveUrl: "https://shreejeeeducation.vercel.app/login",
     coverImage: "/projects/shreejee-education-cover.jpg",
     stats: {
@@ -135,7 +135,7 @@ async def websocket_endpoint(websocket: WebSocket):
     ],
     technologies: ["React", "Vite", "Tailwind CSS", "Framer Motion", "Netlify", "JavaScript (ES6+)"],
     accentColor: "#4F46E5",
-    githubUrl: "https://github.com/25csdaksh/vidyapath-learning",
+    githubUrl: "https://github.com/25csdaksh/VidyaPath",
     liveUrl: "https://shreejeelearning.netlify.app/",
     coverImage: "/projects/vidyapath-learning-cover.jpg",
     stats: {
@@ -169,7 +169,7 @@ async def websocket_endpoint(websocket: WebSocket):
     ],
     technologies: ["React", "Vite", "Tailwind CSS", "Framer Motion", "Cloudinary CDN", "REST APIs"],
     accentColor: "#D4AF37",
-    githubUrl: "https://github.com/25csdaksh/devkrupa-jewellers",
+    githubUrl: "https://github.com/25csdaksh/devkrupajwellers",
     liveUrl: "https://devkrupajwellers.vercel.app/",
     coverImage: "/projects/devkrupa-jewellers-cover.jpg",
     stats: {
@@ -205,7 +205,7 @@ async def websocket_endpoint(websocket: WebSocket):
     ],
     technologies: ["React", "JavaScript (ES6+)", "Tailwind CSS", "Framer Motion", "Vercel Edge"],
     accentColor: "#B8860B",
-    githubUrl: "https://github.com/25csdaksh/rakeshkumar-jewellers",
+    githubUrl: "https://github.com/25csdaksh/rakeshkumarjwellers",
     liveUrl: "https://rakeshkumarjwellers.vercel.app/",
     coverImage: "/projects/rakeshkumar-jewellers-cover.jpg",
     stats: {

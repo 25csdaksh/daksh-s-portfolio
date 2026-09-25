@@ -38,21 +38,21 @@ export function ResumeSection({ onOpenResume }) {
               }}
               onMouseEnter={() => soundManager.playHover()}
               className="px-7 py-3.5 rounded-full bg-[#123C2F] text-[#F7F7F3] text-xs sm:text-sm font-semibold hover:bg-[#1A5442] shadow-lg shadow-[#123C2F]/15 transition-all flex items-center gap-2"
-              data-cursor="pointer"
             >
               <Eye className="w-4 h-4" />
               <span>View Interactive Resume</span>
             </button>
 
-            <button
-              onClick={handleDownload}
+            <a
+              href={resumeData.personal.pdfUrl}
+              download="Daksh_Soni_Resume.pdf"
+              onClick={() => soundManager.playClick()}
               onMouseEnter={() => soundManager.playHover()}
-              className="px-7 py-3.5 rounded-full bg-white border border-[#123C2F]/20 text-[#111111] text-xs sm:text-sm font-semibold hover:bg-[#123C2F]/5 transition-all flex items-center gap-2"
-              data-cursor="pointer"
+              className="px-7 py-3.5 rounded-full bg-white border border-[#123C2F]/20 text-[#111111] text-xs sm:text-sm font-semibold hover:bg-[#123C2F]/5 transition-all flex items-center gap-2 shadow-xs"
             >
               <Download className="w-4 h-4 text-[#123C2F]" />
-              <span>Download Printable PDF</span>
-            </button>
+              <span>Download Official PDF</span>
+            </a>
           </div>
         </div>
 
@@ -65,7 +65,6 @@ export function ResumeSection({ onOpenResume }) {
           }}
           onMouseEnter={() => soundManager.playHover()}
           className="editorial-card p-6 sm:p-10 bg-[#F7F7F3] max-w-4xl mx-auto space-y-6 cursor-pointer group"
-          data-cursor="pointer"
         >
           <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-[#123C2F]/10 gap-3">
             <div>
@@ -88,8 +87,8 @@ export function ResumeSection({ onOpenResume }) {
                 <GraduationCap className="w-4 h-4 text-[#123C2F]" />
                 <span>Education</span>
               </div>
-              <p className="text-[#555555]">B.Tech in Computer Science</p>
-              <p className="font-mono text-emerald-800 font-semibold">Top 5% Cohort</p>
+              <p className="text-[#555555]">B.Tech in Computer Science & Engineering</p>
+              <p className="font-mono text-emerald-800 font-semibold">CHARUSAT University (2026–2029)</p>
             </div>
 
             <div className="space-y-2 p-4 rounded-xl bg-white border border-black/5">
@@ -97,17 +96,17 @@ export function ResumeSection({ onOpenResume }) {
                 <Award className="w-4 h-4 text-[#123C2F]" />
                 <span>Leadership</span>
               </div>
-              <p className="text-[#555555]">SIH 2026 Team Leader</p>
-              <p className="font-mono text-emerald-800 font-semibold">IBM AI Finalist</p>
+              <p className="text-[#555555]">Smart India Hackathon 2026 (Lead)</p>
+              <p className="font-mono text-emerald-800 font-semibold">IBM BoB Hackathon (TrialGuard Lead)</p>
             </div>
 
             <div className="space-y-2 p-4 rounded-xl bg-white border border-black/5">
               <div className="flex items-center gap-2 font-bold text-[#111111]">
                 <Code className="w-4 h-4 text-[#123C2F]" />
-                <span>Full Stack</span>
+                <span>Full Stack & AI</span>
               </div>
-              <p className="text-[#555555]">FastAPI, React, NestJS</p>
-              <p className="font-mono text-emerald-800 font-semibold">5+ Production Systems</p>
+              <p className="text-[#555555]">FastAPI, React, NestJS, Node.js</p>
+              <p className="font-mono text-emerald-800 font-semibold">PyTorch, Gemini, PostgreSQL</p>
             </div>
           </div>
         </motion.div>

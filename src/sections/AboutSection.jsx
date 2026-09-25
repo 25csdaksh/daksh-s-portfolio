@@ -213,44 +213,16 @@ export function AboutSection() {
         <div className="space-y-5 pt-8 border-t border-[#123C2F]/10">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <div className="flex items-center gap-2.5">
-                <h3 className="font-mono text-xs uppercase tracking-widest text-[#123C2F] font-bold">
-                  The Evolution: Journey Pipeline
-                </h3>
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono font-bold bg-emerald-500/10 text-[#123C2F] border border-emerald-600/20">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-ping" />
-                  <span>INFINITE FLOW</span>
-                </span>
-              </div>
+              <h3 className="font-mono text-xs uppercase tracking-widest text-[#123C2F] font-bold">
+                The Evolution: Journey Pipeline
+              </h3>
               <p className="text-xs font-mono text-[#666666] mt-0.5">
                 End-to-End Progression
               </p>
             </div>
 
-            {/* Navigation & Play/Pause Controls */}
+            {/* Navigation Arrow Controls */}
             <div className="flex items-center gap-2 shrink-0">
-              <button
-                onClick={() => {
-                  soundManager.playClick();
-                  setIsPlaying(!isPlaying);
-                }}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[#123C2F]/20 text-xs font-mono font-semibold text-[#123C2F] hover:bg-[#123C2F] hover:text-[#F7F7F3] transition-all duration-200"
-                data-cursor="pointer"
-                title={isPlaying ? "Pause auto-scroll" : "Resume auto-scroll"}
-              >
-                {isPlaying ? (
-                  <>
-                    <Pause className="w-3 h-3 fill-current" />
-                    <span className="text-[11px]">Auto-Scroll</span>
-                  </>
-                ) : (
-                  <>
-                    <Play className="w-3 h-3 fill-current" />
-                    <span className="text-[11px]">Paused</span>
-                  </>
-                )}
-              </button>
-
               <button
                 onClick={() => handleScroll("left")}
                 aria-label="Scroll left"

@@ -20,21 +20,7 @@ import { certificatesData, certificateStats } from "../data/certificates";
 import { soundManager } from "../utils/sound";
 
 export function CertificatesSection({ onOpenLearning }) {
-  const [selectedType, setSelectedType] = useState("all");
   const [activeCertificate, setActiveCertificate] = useState(null);
-
-  const filteredCertificates =
-    selectedType === "all"
-      ? certificatesData
-      : certificatesData.filter((c) => c.type === selectedType);
-
-  const filterTabs = [
-    { id: "all", label: `All Credentials (${certificatesData.length})` },
-    { id: "university", label: "University Specializations" },
-    { id: "industry", label: "Industry & Certifications (Meta, Cisco, Udemy)" },
-    { id: "hackathon", label: "Hackathon Awards" },
-    { id: "business", label: "BITSoM Business" }
-  ];
 
   return (
     <section id="certificates" className="py-24 sm:py-32 px-4 sm:px-6 md:px-12 relative bg-[#F7F7F3]">
@@ -77,32 +63,10 @@ export function CertificatesSection({ onOpenLearning }) {
           ))}
         </div>
 
-        {/* Filter Slicer Tabs */}
-        <div className="flex flex-wrap items-center gap-2">
-          {filterTabs.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => {
-                soundManager.playClick();
-                setSelectedType(tab.id);
-              }}
-              onMouseEnter={() => soundManager.playHover()}
-              className={`px-4 py-2 rounded-full text-xs font-mono font-semibold transition-all ${
-                selectedType === tab.id
-                  ? "bg-[#123C2F] text-[#F7F7F3] shadow-sm scale-[1.02]"
-                  : "bg-white border border-[#123C2F]/15 text-[#666666] hover:text-[#111111]"
-              }`}
-              data-cursor="pointer"
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
-
         {/* Certificates Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           <AnimatePresence>
-            {filteredCertificates.map((cert, idx) => (
+            {certificatesData.map((cert, idx) => (
               <motion.div
                 key={cert.id}
                 layout

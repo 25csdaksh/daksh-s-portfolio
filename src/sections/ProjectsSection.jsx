@@ -6,23 +6,6 @@ import { projectsData } from "../data/projects";
 import { soundManager } from "../utils/sound";
 
 export function ProjectsSection({ onSelectProject }) {
-  const [activeFilter, setActiveFilter] = useState("all");
-
-  const categories = [
-    "all",
-    "AI & Cybersecurity",
-    "AgriTech & Biotechnology",
-    "EdTech & Institutional ERP",
-    "EdTech & Career Platforms",
-    "Luxury E-Commerce & Retail",
-    "Retail Tech & Heritage Brand"
-  ];
-
-  const filteredProjects =
-    activeFilter === "all"
-      ? projectsData
-      : projectsData.filter((p) => p.category === activeFilter);
-
   return (
     <section id="projects" className="py-24 sm:py-32 px-4 sm:px-6 md:px-12 relative bg-white/80 border-t border-b border-[#123C2F]/10">
       <div className="max-w-7xl mx-auto space-y-16">
@@ -42,31 +25,10 @@ export function ProjectsSection({ onSelectProject }) {
           </p>
         </div>
 
-        {/* Project Category Filter Pills */}
-        <div className="flex flex-wrap items-center gap-2">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => {
-                soundManager.playClick();
-                setActiveFilter(cat);
-              }}
-              className={`px-4 py-2 rounded-full text-xs font-mono font-semibold transition-all ${
-                activeFilter === cat
-                  ? "bg-[#123C2F] text-[#F7F7F3] shadow-sm"
-                  : "bg-[#F7F7F3] border border-[#123C2F]/15 text-[#666666] hover:text-[#111111]"
-              }`}
-              data-cursor="pointer"
-            >
-              {cat === "all" ? `All Live Deployments (0${projectsData.length})` : cat}
-            </button>
-          ))}
-        </div>
-
         {/* Featured Project Showcase Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10">
           <AnimatePresence>
-            {filteredProjects.map((project, idx) => {
+            {projectsData.map((project, idx) => {
               const isLarge = idx === 0 || idx === 1;
               return (
                 <motion.div

@@ -135,6 +135,25 @@
   opacity: 0.035;
 }
 
+/* Sleek Modal Scrollbar */
+.modal-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.modal-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.modal-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(18, 60, 47, 0.2);
+  border-radius: 9999px;
+}
+.modal-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #123C2F;
+}
+.modal-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(18, 60, 47, 0.25) transparent;
+}
+
 /* Respect user reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -146,3 +165,4 @@
     scroll-behavior: auto !important;
   }
 }
+

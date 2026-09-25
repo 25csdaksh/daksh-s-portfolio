@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Lenis from "lenis";
 import { CustomCursor } from "./components/CustomCursor";
 import { Navbar } from "./components/Navbar";
@@ -23,16 +23,15 @@ export default function App() {
   const [selectedPost, setSelectedPost] = useState(null);
   const [resumeOpen, setResumeOpen] = useState(false);
   const [learningOpen, setLearningOpen] = useState(false);
+  const lenisRef = useRef(null);
 
   // Initialize smooth scroll using Lenis
   useEffect(() => {
-    // Respect reduced motion preference
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReducedMotion) return;
 
-    let lenis;
     try {
-      lenis = new Lenis({
+      const lenis = new Lenis({
         duration: 1.2,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         orientation: "vertical",
@@ -40,6 +39,8 @@ export default function App() {
         smoothWheel: true,
         wheelMultiplier: 0.9,
       });
+
+      lenisRef.current = lenis;
 
       function raf(time) {
         lenis.raf(time);
@@ -52,9 +53,26 @@ export default function App() {
     }
 
     return () => {
-      if (lenis) lenis.destroy();
+      if (lenisRef.current) lenisRef.current.destroy();
     };
   }, []);
+
+  // Pause background smooth scroll when any modal is open
+  useEffect(() => {
+    const isAnyModalOpen = Boolean(selectedProject || selectedPost || resumeOpen || learningOpen);
+    if (lenisRef.current) {
+      if (isAnyModalOpen) {
+        lenisRef.current.stop();
+        document.body.style.overflow = "hidden";
+        document.documentElement.style.overflow = "hidden";
+      } else {
+        lenisRef.current.start();
+        document.body.style.overflow = "unset";
+        document.documentElement.style.overflow = "unset";
+      }
+    }
+  }, [selectedProject, selectedPost, resumeOpen, learningOpen]);
+
 
   return (
     <div className="relative min-h-screen bg-[#F7F7F3] text-[#111111] overflow-x-hidden selection:bg-[#123C2F] selection:text-[#F7F7F3]">

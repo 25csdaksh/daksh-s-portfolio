@@ -21,7 +21,10 @@ export function ResumeModal({ isOpen, onClose }) {
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-8 overflow-y-auto">
+      <div
+        data-lenis-prevent="true"
+        className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-8 overflow-y-auto overscroll-contain"
+      >
         {/* Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -40,10 +43,12 @@ export function ResumeModal({ isOpen, onClose }) {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.96, y: 20 }}
           transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full max-w-4xl bg-white rounded-3xl border border-[#123C2F]/20 shadow-2xl overflow-hidden z-10 max-h-[92vh] flex flex-col"
+          onClick={(e) => e.stopPropagation()}
+          data-lenis-prevent="true"
+          className="relative w-full max-w-4xl bg-white rounded-3xl border border-[#123C2F]/20 shadow-2xl overflow-hidden z-10 max-h-[92vh] flex flex-col overscroll-contain"
         >
           {/* Action Header */}
-          <div className="flex items-center justify-between px-6 py-4 border-b border-[#123C2F]/10 bg-[#F7F7F3] print:hidden">
+          <div className="flex items-center justify-between px-6 py-4 border-b border-[#123C2F]/10 bg-[#F7F7F3] print:hidden shrink-0">
             <div className="flex items-center gap-2">
               <span className="font-serif text-lg font-bold text-[#111111]">Curriculum Vitae</span>
               <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-100 text-emerald-800 font-semibold">
@@ -82,7 +87,10 @@ export function ResumeModal({ isOpen, onClose }) {
           </div>
 
           {/* Printable Resume Document */}
-          <div className="overflow-y-auto p-6 sm:p-10 text-[#111111] space-y-6 font-sans bg-white print:p-0">
+          <div
+            data-lenis-prevent="true"
+            className="overflow-y-auto modal-scrollbar p-6 sm:p-10 text-[#111111] space-y-6 font-sans bg-white print:p-0 flex-1"
+          >
             {/* Header / Personal Info */}
             <div className="border-b border-black/10 pb-6">
               <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">

@@ -100,7 +100,10 @@ export function ProjectModal({ project, onClose }) {
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 md:p-8 overflow-y-auto">
+      <div
+        data-lenis-prevent="true"
+        className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 md:p-8 overflow-y-auto overscroll-contain"
+      >
         {/* Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -119,10 +122,12 @@ export function ProjectModal({ project, onClose }) {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full max-w-4xl bg-[#F7F7F3] rounded-3xl border border-[#123C2F]/20 shadow-2xl overflow-hidden z-10 max-h-[92vh] flex flex-col"
+          onClick={(e) => e.stopPropagation()}
+          data-lenis-prevent="true"
+          className="relative w-full max-w-4xl bg-[#F7F7F3] rounded-3xl border border-[#123C2F]/20 shadow-2xl overflow-hidden z-10 max-h-[92vh] flex flex-col overscroll-contain"
         >
           {/* Header Bar */}
-          <div className="flex items-center justify-between px-6 py-5 border-b border-[#123C2F]/10 bg-white/80 backdrop-blur-sm">
+          <div className="flex items-center justify-between px-6 py-5 border-b border-[#123C2F]/10 bg-white/80 backdrop-blur-sm shrink-0">
             <div className="flex items-center gap-3">
               <span className="px-3 py-1 rounded-full bg-[#123C2F] text-[#F7F7F3] font-mono text-xs font-semibold">
                 {project.category}
@@ -144,7 +149,10 @@ export function ProjectModal({ project, onClose }) {
           </div>
 
           {/* Modal Body */}
-          <div className="overflow-y-auto p-6 sm:p-8 space-y-8">
+          <div
+            data-lenis-prevent="true"
+            className="overflow-y-auto modal-scrollbar p-6 sm:p-8 space-y-8 flex-1"
+          >
             {/* Title & Tagline */}
             <div>
               <div className="flex items-center gap-2 mb-2">

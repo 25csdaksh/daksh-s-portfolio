@@ -127,25 +127,65 @@ export function ProjectModal({ project, onClose }) {
           className="relative w-full max-w-4xl bg-[#F7F7F3] rounded-3xl border border-[#123C2F]/20 shadow-2xl overflow-hidden z-10 max-h-[92vh] flex flex-col overscroll-contain"
         >
           {/* Header Bar */}
-          <div className="flex items-center justify-between px-6 py-5 border-b border-[#123C2F]/10 bg-white/80 backdrop-blur-sm shrink-0">
-            <div className="flex items-center gap-3">
+          <div className="flex items-center justify-between px-5 sm:px-6 py-4 sm:py-5 border-b border-[#123C2F]/10 bg-white/90 backdrop-blur-md shrink-0">
+            <div className="flex items-center gap-2 sm:gap-3">
               <span className="px-3 py-1 rounded-full bg-[#123C2F] text-[#F7F7F3] font-mono text-xs font-semibold">
                 {project.category}
               </span>
-              <span className="font-mono text-xs text-[#666666]">{project.year}</span>
+              <span className="font-mono text-xs text-[#666666] hidden sm:inline">{project.year}</span>
             </div>
-            <button
-              onClick={() => {
-                soundManager.playClick();
-                onClose();
-              }}
-              onMouseEnter={() => soundManager.playHover()}
-              className="p-2 rounded-full hover:bg-[#123C2F]/10 text-[#111111] transition-colors"
-              data-cursor="pointer"
-              aria-label="Close modal"
-            >
-              <X className="w-5 h-5" />
-            </button>
+
+            <div className="flex items-center gap-2 sm:gap-3">
+              {project.liveUrl && (
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    soundManager.playClick();
+                    window.open(project.liveUrl, "_blank", "noopener,noreferrer");
+                  }}
+                  onMouseEnter={() => soundManager.playHover()}
+                  className="px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-[#123C2F] hover:bg-[#1A5442] text-[#F7F7F3] font-mono text-xs font-bold flex items-center gap-1.5 shadow-sm transition-all hover:scale-105"
+                  title="Launch Live Project in New Tab"
+                >
+                  <span>Launch Live App</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+              )}
+
+              {project.githubUrl && (
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    soundManager.playClick();
+                    window.open(project.githubUrl, "_blank", "noopener,noreferrer");
+                  }}
+                  onMouseEnter={() => soundManager.playHover()}
+                  className="p-2 rounded-xl border border-[#123C2F]/20 hover:bg-[#123C2F]/10 text-[#123C2F] transition-colors hidden sm:flex items-center"
+                  title="View Source on GitHub"
+                >
+                  <Github className="w-4 h-4" />
+                </a>
+              )}
+
+              <button
+                onClick={() => {
+                  soundManager.playClick();
+                  onClose();
+                }}
+                onMouseEnter={() => soundManager.playHover()}
+                className="p-2 rounded-full hover:bg-[#123C2F]/10 text-[#111111] transition-colors"
+                data-cursor="pointer"
+                aria-label="Close modal"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
           </div>
 
           {/* Modal Body */}
@@ -244,8 +284,9 @@ export function ProjectModal({ project, onClose }) {
                           onClick={(e) => {
                             e.stopPropagation();
                             soundManager.playClick();
+                            window.open(project.liveUrl, "_blank", "noopener,noreferrer");
                           }}
-                          className="bg-[#123C2F] hover:bg-[#1A5442] text-white px-3 py-1.5 rounded-lg flex items-center gap-1.5 shadow-sm transition-colors font-mono text-xs font-semibold"
+                          className="bg-[#123C2F] hover:bg-[#1A5442] text-white px-3.5 py-1.5 rounded-lg flex items-center gap-1.5 shadow-sm transition-all hover:scale-105 font-mono text-xs font-semibold"
                         >
                           <span>Open Live Site</span>
                           <ExternalLink className="w-3.5 h-3.5" />
@@ -453,10 +494,10 @@ export function ProjectModal({ project, onClose }) {
                   onClick={(e) => {
                     e.stopPropagation();
                     soundManager.playClick();
+                    window.open(project.githubUrl, "_blank", "noopener,noreferrer");
                   }}
                   onMouseEnter={() => soundManager.playHover()}
                   className="flex items-center gap-1.5 px-4 py-2 rounded-full border border-[#123C2F]/20 text-xs font-semibold text-[#111111] hover:bg-[#123C2F]/10 transition-colors"
-                  data-cursor="pointer"
                 >
                   <Github className="w-3.5 h-3.5" />
                   <span>GitHub</span>
@@ -470,12 +511,12 @@ export function ProjectModal({ project, onClose }) {
                   onClick={(e) => {
                     e.stopPropagation();
                     soundManager.playClick();
+                    window.open(project.liveUrl, "_blank", "noopener,noreferrer");
                   }}
                   onMouseEnter={() => soundManager.playHover()}
-                  className="flex items-center gap-1.5 px-5 py-2 rounded-full bg-[#123C2F] text-[#F7F7F3] text-xs font-semibold hover:bg-[#1A5442] shadow-sm transition-all"
-                  data-cursor="pointer"
+                  className="flex items-center gap-1.5 px-5 py-2 rounded-full bg-[#123C2F] text-[#F7F7F3] text-xs font-semibold hover:bg-[#1A5442] shadow-sm transition-all hover:scale-105"
                 >
-                  <span>Live Demo</span>
+                  <span>Launch Live Demo</span>
                   <ExternalLink className="w-3.5 h-3.5" />
                 </a>
               )}

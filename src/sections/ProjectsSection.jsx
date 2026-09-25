@@ -81,7 +81,7 @@ export function ProjectsSection({ onSelectProject }) {
                       </span>
                     </div>
 
-                    {/* Bottom Overlay Metric Bar */}
+                    {/* Bottom Overlay Metric Bar & Live Link Launch Button */}
                     <div className="absolute bottom-3 left-3.5 right-3.5 flex items-center justify-between z-10 text-white">
                       <div className="flex items-center gap-2.5 font-mono text-[10px] bg-black/65 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/10">
                         {Object.entries(project.stats).slice(0, 2).map(([k, v]) => (
@@ -92,10 +92,23 @@ export function ProjectsSection({ onSelectProject }) {
                         ))}
                       </div>
 
-                      <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-white/20 hover:bg-white text-white hover:text-black font-mono text-[10px] font-bold backdrop-blur-md transition-all shadow-xs">
-                        <span>Preview</span>
-                        <ArrowUpRight className="w-3 h-3" />
-                      </span>
+                      {project.liveUrl && (
+                        <a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            soundManager.playClick();
+                            window.open(project.liveUrl, "_blank", "noopener,noreferrer");
+                          }}
+                          className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-white hover:bg-emerald-400 text-stone-950 font-mono text-[10px] font-bold backdrop-blur-md transition-all shadow-md hover:scale-105"
+                          title="Open Live Deployment in New Tab"
+                        >
+                          <span>Live App</span>
+                          <ExternalLink className="w-3 h-3" />
+                        </a>
+                      )}
                     </div>
                   </div>
 
@@ -106,9 +119,22 @@ export function ProjectsSection({ onSelectProject }) {
                         <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#111111] group-hover:text-[#123C2F] transition-colors">
                           {project.title}
                         </h3>
-                        <div className="w-9 h-9 rounded-full bg-[#123C2F]/10 text-[#123C2F] flex items-center justify-center group-hover:bg-[#123C2F] group-hover:text-white transition-all transform group-hover:rotate-45">
-                          <ArrowUpRight className="w-4 h-4" />
-                        </div>
+                        {project.liveUrl && (
+                          <a
+                            href={project.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              soundManager.playClick();
+                              window.open(project.liveUrl, "_blank", "noopener,noreferrer");
+                            }}
+                            className="w-10 h-10 rounded-full bg-[#123C2F]/10 hover:bg-[#123C2F] text-[#123C2F] hover:text-white flex items-center justify-center transition-all transform hover:scale-110 shadow-xs"
+                            title="Launch Live Project in New Tab"
+                          >
+                            <ExternalLink className="w-4 h-4" />
+                          </a>
+                        )}
                       </div>
 
                       <p className="text-sm text-[#555555] leading-relaxed line-clamp-3">
@@ -136,10 +162,17 @@ export function ProjectsSection({ onSelectProject }) {
 
                       {/* Explicit Interactive Action Buttons */}
                       <div className="flex items-center justify-between pt-2">
-                        <span className="text-xs font-mono text-[#123C2F] font-bold group-hover:underline flex items-center gap-1.5">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            soundManager.playClick();
+                            onSelectProject(project);
+                          }}
+                          className="text-xs font-mono text-[#123C2F] font-bold hover:underline flex items-center gap-1.5 py-1"
+                        >
                           <Eye className="w-3.5 h-3.5 text-[#123C2F]" />
-                          <span>Deep Dive</span>
-                        </span>
+                          <span>Case Study</span>
+                        </button>
                         <div
                           className="flex items-center gap-2"
                           onClick={(e) => e.stopPropagation()}
@@ -152,11 +185,11 @@ export function ProjectsSection({ onSelectProject }) {
                               onClick={(e) => {
                                 e.stopPropagation();
                                 soundManager.playClick();
+                                window.open(project.githubUrl, "_blank", "noopener,noreferrer");
                               }}
                               onMouseEnter={() => soundManager.playHover()}
                               className="px-2.5 py-1.5 rounded-lg bg-[#123C2F]/5 hover:bg-[#123C2F]/15 text-[#111111] font-mono text-[11px] font-semibold flex items-center gap-1.5 transition-colors"
                               title="View GitHub Repository"
-                              data-cursor="pointer"
                             >
                               <Github className="w-3.5 h-3.5" />
                               <span className="hidden sm:inline">Code</span>
@@ -170,11 +203,11 @@ export function ProjectsSection({ onSelectProject }) {
                               onClick={(e) => {
                                 e.stopPropagation();
                                 soundManager.playClick();
+                                window.open(project.liveUrl, "_blank", "noopener,noreferrer");
                               }}
                               onMouseEnter={() => soundManager.playHover()}
-                              className="px-3 py-1.5 rounded-lg bg-[#123C2F] hover:bg-[#1A5442] text-[#F7F7F3] font-mono text-[11px] font-bold flex items-center gap-1 shadow-xs transition-colors"
+                              className="px-3 py-1.5 rounded-lg bg-[#123C2F] hover:bg-[#1A5442] text-[#F7F7F3] font-mono text-[11px] font-bold flex items-center gap-1 shadow-xs transition-colors hover:scale-105"
                               title="Open Live Deployment"
-                              data-cursor="pointer"
                             >
                               <span>Live App</span>
                               <ExternalLink className="w-3 h-3" />

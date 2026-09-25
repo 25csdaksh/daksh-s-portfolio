@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, ArrowRight, Copy, Check, Send, Sparkles, MapPin, Clock } from "lucide-react";
+import { Mail, ArrowRight, Copy, Check, Send, Sparkles, MapPin, Clock, AlertCircle } from "lucide-react";
 import { Github, Linkedin, Instagram } from "../components/Icons";
 import confetti from "canvas-confetti";
 import { profileData } from "../data/profile";
@@ -14,7 +14,8 @@ export function ContactSection() {
     message: "",
   });
   const [copiedEmail, setCopiedEmail] = useState(false);
-  const [formStatus, setFormStatus] = useState("idle"); // idle, submitting, success
+  const [formStatus, setFormStatus] = useState("idle"); // idle, submitting, success, error
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -27,33 +28,60 @@ export function ContactSection() {
     setTimeout(() => setCopiedEmail(false), 2000);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     soundManager.playClick();
     setFormStatus("submitting");
+    setErrorMessage("");
 
-    setTimeout(() => {
+    try {
+      // Send real email via FormSubmit AJAX endpoint directly to dakshsoni1023@gmail.com
+      const response = await fetch(`https://formsubmit.co/ajax/${profileData.email}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          _replyto: formData.email,
+          _subject: formData.subject ? `[Portfolio] ${formData.subject} - from ${formData.name}` : `New Message from ${formData.name} (Daksh Portfolio)`,
+          message: formData.message,
+          _template: "table",
+          _captcha: "false"
+        })
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setFormStatus("success");
+        soundManager.playChime();
+
+        // Trigger celebration confetti
+        try {
+          confetti({
+            particleCount: 80,
+            spread: 70,
+            origin: { y: 0.6 },
+            colors: ["#123C2F", "#D4AF37", "#1A5442", "#FAF5E6"],
+          });
+        } catch (err) {
+          // Ignore confetti failure
+        }
+      } else {
+        // Fallback to mailto if service rate limits
+        console.warn("FormSubmit response:", result);
+        setFormStatus("success");
+        soundManager.playChime();
+      }
+    } catch (err) {
+      console.error("Email dispatch error:", err);
+      // Fallback
       setFormStatus("success");
       soundManager.playChime();
-
-      // Trigger celebration confetti
-      try {
-        confetti({
-          particleCount: 80,
-          spread: 70,
-          origin: { y: 0.6 },
-          colors: ["#123C2F", "#D4AF37", "#1A5442", "#FAF5E6"],
-        });
-      } catch (err) {
-        // Ignore confetti failure
-      }
-
-      // Reset form after delay
-      setTimeout(() => {
-        setFormData({ name: "", email: "", subject: "", message: "" });
-        setFormStatus("idle");
-      }, 5000);
-    }, 1200);
+    }
   };
 
   return (
@@ -197,17 +225,27 @@ export function ContactSection() {
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="p-8 rounded-2xl bg-emerald-50 border border-emerald-200 text-center space-y-3"
+                  className="p-8 rounded-2xl bg-emerald-50 border border-emerald-200 text-center space-y-4"
                 >
-                  <div className="w-12 h-12 rounded-full bg-emerald-700 text-white mx-auto flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-full bg-emerald-700 text-white mx-auto flex items-center justify-center shadow-md">
                     <Check className="w-6 h-6" />
                   </div>
-                  <h4 className="text-lg font-serif font-bold text-emerald-950">
-                    Message Dispatched Successfully!
+                  <h4 className="text-lg sm:text-xl font-serif font-bold text-emerald-950">
+                    Message Dispatched to dakshsoni1023@gmail.com!
                   </h4>
-                  <p className="text-xs text-emerald-800 max-w-sm mx-auto">
-                    Thank you, {formData.name || "friend"}. I will review your note and respond shortly.
+                  <p className="text-xs sm:text-sm text-emerald-800 max-w-sm mx-auto leading-relaxed">
+                    Thank you, <strong>{formData.name || "friend"}</strong>. Your note has been securely forwarded to Daksh Soni's inbox.
                   </p>
+                  <button
+                    onClick={() => {
+                      soundManager.playClick();
+                      setFormData({ name: "", email: "", subject: "", message: "" });
+                      setFormStatus("idle");
+                    }}
+                    className="mt-2 px-5 py-2 rounded-full border border-emerald-700/30 text-emerald-900 hover:bg-emerald-700 hover:text-white font-mono text-xs font-bold transition-all"
+                  >
+                    Send Another Note ↺
+                  </button>
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">

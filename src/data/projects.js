@@ -61,7 +61,7 @@ async def websocket_endpoint(websocket: WebSocket):
     accentColor: "#1A5442",
     githubUrl: "https://github.com/25csdaksh/krishiSeva",
     liveUrl: "https://swayuragrotech.vercel.app/",
-    coverImage: "/projects/swayur-agrotech-cover.jpg",
+    coverImage: "/projects/swayur-agrotech-cover.png",
     stats: {
       compliance: "FCO 1985 Standard",
       facility: "Anand, Gujarat",
@@ -171,7 +171,7 @@ async def websocket_endpoint(websocket: WebSocket):
     accentColor: "#D4AF37",
     githubUrl: "https://github.com/25csdaksh/devkrupajwellers",
     liveUrl: "https://devkrupajwellers.vercel.app/",
-    coverImage: "/projects/devkrupa-jewellers-cover.jpg",
+    coverImage: "/projects/devkrupa-jewellers-cover.png",
     stats: {
       liveRateSync: "24K / 22K",
       assetDelivery: "Cloudinary CDN",

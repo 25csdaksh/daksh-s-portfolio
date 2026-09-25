@@ -76,9 +76,6 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen bg-[#F7F7F3] text-[#111111] overflow-x-hidden selection:bg-[#123C2F] selection:text-[#F7F7F3]">
-      {/* Dynamic Interactive Cursor (Desktop) */}
-      <CustomCursor />
-
       {/* Floating Header / Navbar */}
       <Navbar
         onOpenResume={() => setResumeOpen(true)}

@@ -21,7 +21,7 @@ export const projectsData = [
     accentColor: "#3ddcc8",
     githubUrl: "https://github.com/rashiyaom2/Netram-Deepfake-Detection-",
     liveUrl: "https://naitram.netlify.app/",
-    coverImage: "/projects/netram-gods-eye-cover.jpg",
+    coverImage: "/projects/netram-gods-eye-cover.png",
     stats: {
       syncAccuracy: "98.2%",
       triageLatency: "0.14s",

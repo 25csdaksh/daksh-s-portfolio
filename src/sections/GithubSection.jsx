@@ -55,7 +55,7 @@ export function GithubSection() {
       case 4:
         return "bg-amber-400 hover:bg-yellow-300 shadow-xs ring-1 ring-amber-300";
       default:
-        return "bg-[#070E20] hover:bg-[#122452] border border-[#1E2E5D]/60";
+        return "bg-[#050B1A] hover:bg-[#0E1D3E] border border-white/10";
     }
   };
 
@@ -71,12 +71,12 @@ export function GithubSection() {
   };
 
   return (
-    <section className="py-24 sm:py-32 px-4 sm:px-6 md:px-12 relative bg-[#02040A]/75 backdrop-blur-xs text-white">
-      <div className="max-w-7xl mx-auto space-y-16">
+    <section className="py-20 sm:py-32 px-4 sm:px-6 md:px-12 relative bg-[#02040A]/80 backdrop-blur-xs text-white">
+      <div className="max-w-7xl mx-auto space-y-12 sm:space-y-16">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-[#1E2E5D]">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 pb-6 sm:pb-8 border-b border-white/10">
           <div>
-            <div className="flex items-center gap-3 mb-2 font-mono text-xs uppercase tracking-widest text-amber-400 font-bold">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-2 font-mono text-xs uppercase tracking-widest text-amber-400 font-bold">
               <Github className="w-4 h-4 text-amber-400" />
               <span>06 // Open Source & Telemetry</span>
               <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-amber-400/15 text-amber-300 border border-amber-400/40 font-bold">
@@ -84,12 +84,12 @@ export function GithubSection() {
                 <span>LIVE SYNC // @{data.username}</span>
               </span>
             </div>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-sans font-extrabold text-white tracking-tight">
+            <h2 className="text-3xl sm:text-5xl md:text-6xl font-heading font-extrabold text-white tracking-tight leading-[1.1]">
               Developer <span className="gradient-text-gold">Activity.</span>
             </h2>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
             <button
               onClick={() => {
                 soundManager.playClick();
@@ -97,11 +97,11 @@ export function GithubSection() {
               }}
               disabled={isRefreshing}
               title="Refresh live GitHub telemetry"
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full border border-[#1E2E5D] bg-[#0D1B3E] text-xs font-mono font-bold text-slate-300 hover:bg-[#122452] hover:border-amber-400 hover:text-amber-300 transition-all disabled:opacity-50"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full border border-white/15 bg-[#091328] text-xs font-mono font-bold text-slate-200 hover:bg-[#0E1D3E] hover:border-amber-400 hover:text-amber-300 transition-all disabled:opacity-50"
               data-cursor="pointer"
             >
               <RefreshCw className={`w-3.5 h-3.5 ${isRefreshing ? "animate-spin text-amber-400" : "text-amber-400"}`} />
-              <span className="hidden sm:inline">{isRefreshing ? "Syncing..." : "Refresh"}</span>
+              <span className="inline">{isRefreshing ? "Syncing..." : "Refresh"}</span>
             </button>
 
             <a
@@ -110,7 +110,7 @@ export function GithubSection() {
               rel="noopener noreferrer"
               onClick={() => soundManager.playClick()}
               onMouseEnter={() => soundManager.playHover()}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-amber-400 bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-blue-950 text-xs font-mono font-extrabold shadow-md shadow-amber-500/20 hover:scale-105 transition-all"
+              className="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-4 py-2 rounded-full border border-amber-400 bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-blue-950 text-xs font-mono font-extrabold shadow-md shadow-amber-500/20 hover:scale-105 transition-all"
               data-cursor="pointer"
             >
               <span>github.com/{data.username}</span>
@@ -120,11 +120,11 @@ export function GithubSection() {
         </div>
 
         {/* GitHub Heatmap Card */}
-        <div className="editorial-card p-6 sm:p-8 bg-[#0D1B3E] rounded-3xl border border-amber-400/30 hover:border-amber-400/70 shadow-xl space-y-6 transition-colors">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="editorial-card p-5 sm:p-8 bg-[#091328] rounded-3xl border border-amber-400/30 hover:border-amber-400/70 shadow-xl space-y-5 sm:space-y-6 transition-colors">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="font-sans text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                <h3 className="font-heading text-xl sm:text-3xl font-extrabold text-white tracking-tight">
                   {data.totalContributions} Contributions in the Past Year
                 </h3>
                 {data.isLive && (
@@ -138,8 +138,8 @@ export function GithubSection() {
               </p>
             </div>
 
-            <div className="flex items-center gap-4 text-xs font-mono shrink-0">
-              <div className="flex items-center gap-1.5 text-blue-950 bg-gradient-to-r from-amber-400 to-yellow-500 px-3.5 py-1.5 rounded-full border border-amber-300 shadow-md font-extrabold">
+            <div className="flex items-center gap-3 text-xs font-mono shrink-0">
+              <div className="flex items-center gap-1.5 text-blue-950 bg-gradient-to-r from-amber-400 to-yellow-500 px-3.5 py-1.5 rounded-full border border-amber-300 shadow-md font-extrabold text-xs">
                 <Flame className="w-3.5 h-3.5 text-blue-950 fill-current" />
                 <span>Streak: {data.currentStreak}</span>
               </div>
@@ -149,9 +149,15 @@ export function GithubSection() {
             </div>
           </div>
 
+          {/* Mobile swipe helper text */}
+          <div className="sm:hidden flex items-center justify-between text-[10px] font-mono text-amber-300/80 pt-1">
+            <span>← Swipe horizontally to see 365 days →</span>
+            <span>{data.weeks ? data.weeks.length * 7 : 365} days</span>
+          </div>
+
           {/* 52-Week Matrix Grid with Scroll Container */}
-          <div className="overflow-x-auto pb-3 pt-1 no-scrollbar border-y border-[#1E2E5D] py-4">
-            <div className="min-w-[720px] flex gap-[3.5px]">
+          <div className="overflow-x-auto pb-3 pt-1 no-scrollbar border-y border-white/10 py-3 sm:py-4">
+            <div className="min-w-[700px] flex gap-[3.5px]">
               {data.weeks && data.weeks.map((week, wIdx) => (
                 <div key={wIdx} className="flex flex-col gap-[3.5px]">
                   {week.map((day, dIdx) => (
@@ -178,18 +184,18 @@ export function GithubSection() {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-mono text-slate-300 pt-1">
             <div className="min-h-[20px] flex items-center">
               {hoveredDay ? (
-                <span className="text-amber-300 font-bold bg-[#070E20] px-2.5 py-1 rounded-md border border-amber-400/40 inline-flex items-center gap-1.5">
+                <span className="text-amber-300 font-bold bg-[#050B1A] px-2.5 py-1 rounded-md border border-amber-400/40 inline-flex items-center gap-1.5">
                   <span className="w-2 h-2 rounded-full bg-amber-400" />
                   {hoveredDay.count} {hoveredDay.count === 1 ? "contribution" : "contributions"} on {formatDateLabel(hoveredDay.date)}
                 </span>
               ) : (
-                <span className="text-slate-400">Hover over squares to inspect daily velocity</span>
+                <span className="text-slate-400">Tap / hover squares to inspect daily velocity</span>
               )}
             </div>
 
             <div className="flex items-center gap-2 text-[11px] self-end sm:self-auto font-mono">
               <span className="text-slate-400">Less</span>
-              <span className="w-2.5 h-2.5 rounded-[2px] bg-[#070E20] border border-[#1E2E5D]" title="0 contributions" />
+              <span className="w-2.5 h-2.5 rounded-[2px] bg-[#050B1A] border border-white/10" title="0 contributions" />
               <span className="w-2.5 h-2.5 rounded-[2px] bg-blue-900/80" title="1-3 contributions" />
               <span className="w-2.5 h-2.5 rounded-[2px] bg-blue-600" title="4-6 contributions" />
               <span className="w-2.5 h-2.5 rounded-[2px] bg-amber-600" title="7-9 contributions" />
@@ -200,7 +206,7 @@ export function GithubSection() {
         </div>
 
         {/* Repositories & Languages 2-Column Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
           {/* Featured Repositories (7 cols) */}
           <div className="lg:col-span-7 space-y-4">
             <div className="flex items-center justify-between">
@@ -209,7 +215,7 @@ export function GithubSection() {
               </h3>
               <span className="text-[11px] font-mono text-slate-400">Sorted by recent pushes</span>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
               {data.featuredRepositories.map((repo, idx) => (
                 <a
                   key={idx}
@@ -218,22 +224,22 @@ export function GithubSection() {
                   rel="noopener noreferrer"
                   onClick={() => soundManager.playClick()}
                   onMouseEnter={() => soundManager.playHover()}
-                  className="p-5 rounded-2xl bg-[#0D1B3E] border border-[#1E2E5D] hover:border-amber-400 hover:shadow-xl hover:shadow-blue-950/50 transition-all duration-300 flex flex-col justify-between group"
+                  className="p-4 sm:p-5 rounded-2xl bg-[#091328] border border-amber-400/30 hover:border-amber-400 hover:shadow-xl hover:shadow-amber-400/10 transition-all duration-300 flex flex-col justify-between group"
                   data-cursor="pointer"
                 >
                   <div className="space-y-2">
-                    <div className="flex items-center justify-between">
-                      <span className="font-mono text-xs font-bold text-white group-hover:text-amber-300 transition-colors truncate max-w-[180px]">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="font-mono text-xs font-bold text-white group-hover:text-amber-300 transition-colors truncate">
                         {repo.name}
                       </span>
-                      <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-amber-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                      <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-amber-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0" />
                     </div>
                     <p className="text-xs text-slate-200 line-clamp-2 leading-relaxed">
                       {repo.description}
                     </p>
                   </div>
 
-                  <div className="flex items-center justify-between pt-4 border-t border-[#1E2E5D] font-mono text-[11px] text-slate-300 mt-3">
+                  <div className="flex items-center justify-between pt-3 sm:pt-4 border-t border-white/10 font-mono text-[11px] text-slate-300 mt-3">
                     <div className="flex items-center gap-1.5">
                       <span
                         className="w-2.5 h-2.5 rounded-full"
@@ -258,9 +264,9 @@ export function GithubSection() {
           </div>
 
           {/* Top Languages & Recent Activity (5 cols) */}
-          <div className="lg:col-span-5 space-y-6">
+          <div className="lg:col-span-5 space-y-4 sm:space-y-6">
             {/* Languages breakdown */}
-            <div className="p-6 rounded-2xl bg-[#0D1B3E] border border-[#1E2E5D] space-y-4 shadow-xl">
+            <div className="p-5 sm:p-6 rounded-2xl bg-[#091328] border border-amber-400/30 space-y-4 shadow-xl">
               <div className="flex items-center justify-between">
                 <h4 className="font-mono text-xs uppercase tracking-wider text-amber-400 font-bold">
                   Language Distribution
@@ -268,7 +274,7 @@ export function GithubSection() {
                 <span className="text-[10px] font-mono text-slate-400">Across {data.publicRepos} Repos</span>
               </div>
               {/* Stacked bar */}
-              <div className="w-full h-2.5 rounded-full overflow-hidden flex bg-[#070E20]">
+              <div className="w-full h-2.5 rounded-full overflow-hidden flex bg-[#050B1A]">
                 {data.topLanguages.map((lang, idx) => (
                   <div
                     key={idx}
@@ -281,7 +287,7 @@ export function GithubSection() {
                 ))}
               </div>
               {/* Labels list */}
-              <div className="grid grid-cols-2 gap-2.5 text-xs font-mono">
+              <div className="grid grid-cols-2 gap-2 text-xs font-mono">
                 {data.topLanguages.map((lang, idx) => (
                   <div key={idx} className="flex items-center gap-2">
                     <span
@@ -296,7 +302,7 @@ export function GithubSection() {
             </div>
 
             {/* Recent Activity Mini Feed */}
-            <div className="p-6 rounded-2xl bg-[#0D1B3E] border border-[#1E2E5D] space-y-3.5 shadow-xl">
+            <div className="p-5 sm:p-6 rounded-2xl bg-[#091328] border border-amber-400/30 space-y-3.5 shadow-xl">
               <div className="flex items-center justify-between">
                 <h4 className="font-mono text-xs uppercase tracking-wider text-amber-400 font-bold">
                   Recent Git Commits

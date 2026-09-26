@@ -7,30 +7,30 @@ import { soundManager } from "../utils/sound";
 
 export function HeroSection({ onOpenResume }) {
   return (
-    <section className="relative min-h-[92vh] sm:min-h-screen pt-28 sm:pt-32 pb-16 px-4 sm:px-6 md:px-12 flex flex-col justify-center overflow-hidden bg-transparent">
+    <section className="relative min-h-[90vh] sm:min-h-screen pt-24 sm:pt-32 pb-12 sm:pb-16 px-4 sm:px-6 md:px-12 flex flex-col justify-center overflow-hidden bg-transparent">
       {/* Massive Low-Opacity Background Watermark Typography */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-heading text-[18vw] font-black tracking-tighter text-blue-500/[0.03] select-none pointer-events-none watermark-text z-0">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-heading text-[16vw] sm:text-[18vw] font-black tracking-tighter text-blue-500/[0.03] select-none pointer-events-none watermark-text z-0">
         DAKSH
       </div>
 
       {/* Subtle Radial Glow Follower Background */}
-      <div className="absolute top-1/4 left-1/4 w-[450px] h-[450px] bg-blue-600/15 rounded-full blur-[130px] pointer-events-none -z-10" />
-      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-amber-500/12 rounded-full blur-[130px] pointer-events-none -z-10" />
+      <div className="absolute top-1/4 left-1/4 w-[320px] sm:w-[450px] h-[320px] sm:h-[450px] bg-blue-600/15 rounded-full blur-[100px] sm:blur-[130px] pointer-events-none -z-10" />
+      <div className="absolute bottom-1/4 right-1/4 w-[280px] sm:w-[400px] h-[280px] sm:h-[400px] bg-amber-500/12 rounded-full blur-[100px] sm:blur-[130px] pointer-events-none -z-10" />
 
-      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center relative z-10">
+      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-8 items-center relative z-10">
         {/* Left Editorial Content */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="lg:col-span-7 flex flex-col items-start space-y-6 sm:space-y-8"
+          className="lg:col-span-7 flex flex-col items-start space-y-5 sm:space-y-7"
         >
           {/* Eyebrow Pill */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#091328]/90 border border-amber-400/40 shadow-lg backdrop-blur-md"
+            className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-[#091328]/90 border border-amber-400/40 shadow-lg backdrop-blur-md"
           >
             <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
             <span className="font-mono text-[10px] sm:text-xs tracking-wider text-amber-300 font-bold uppercase">
@@ -39,8 +39,8 @@ export function HeroSection({ onOpenResume }) {
           </motion.div>
 
           {/* Headline */}
-          <div className="space-y-2">
-            <h1 className="text-4xl sm:text-6xl md:text-7xl font-heading font-extrabold text-white tracking-tight leading-[1.08]">
+          <div className="space-y-1 sm:space-y-2">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-extrabold text-white tracking-tight leading-[1.1]">
               Hi, I'm <span className="text-white">Daksh.</span>
               <br />
               I build <span className="gradient-text-gold">digital experiences</span>
@@ -50,17 +50,17 @@ export function HeroSection({ onOpenResume }) {
           </div>
 
           {/* Supporting Paragraph */}
-          <p className="text-base sm:text-lg md:text-xl text-slate-300 max-w-xl font-normal leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg text-slate-300 max-w-xl font-normal leading-relaxed">
             I'm a Computer Science Engineering student and full-stack developer passionate about building scalable software, AI-powered products, and meaningful digital experiences.
           </p>
 
           {/* Action CTAs */}
-          <div className="flex flex-wrap items-center gap-3 sm:gap-4 pt-2">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto pt-1 sm:pt-2">
             <a
               href="#projects"
               onClick={() => soundManager.playClick()}
               onMouseEnter={() => soundManager.playHover()}
-              className="px-7 py-3.5 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-blue-950 text-sm font-extrabold border border-yellow-300 shadow-lg shadow-amber-500/25 transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:shadow-amber-500/40 flex items-center gap-2 group"
+              className="px-6 sm:px-7 py-3 sm:py-3.5 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-blue-950 text-xs sm:text-sm font-extrabold border border-yellow-300 shadow-lg shadow-amber-500/25 transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:shadow-amber-500/40 flex items-center justify-center gap-2 group"
               data-cursor="pointer"
             >
               <span>View My Work</span>
@@ -71,7 +71,7 @@ export function HeroSection({ onOpenResume }) {
               href="#contact"
               onClick={() => soundManager.playClick()}
               onMouseEnter={() => soundManager.playHover()}
-              className="px-7 py-3.5 rounded-full bg-[#091328]/95 border border-amber-400/40 text-white text-sm font-semibold hover:border-amber-400 hover:text-amber-300 hover:bg-[#0E1D3E] transition-all duration-300 hover:scale-[1.03] flex items-center gap-2 shadow-md backdrop-blur-md"
+              className="px-6 sm:px-7 py-3 sm:py-3.5 rounded-full bg-[#091328]/95 border border-amber-400/40 text-white text-xs sm:text-sm font-semibold hover:border-amber-400 hover:text-amber-300 hover:bg-[#0E1D3E] transition-all duration-300 hover:scale-[1.03] flex items-center justify-center gap-2 shadow-md backdrop-blur-md"
               data-cursor="pointer"
             >
               <span>Let's Connect</span>
@@ -79,13 +79,13 @@ export function HeroSection({ onOpenResume }) {
           </div>
 
           {/* Availability Status Indicator */}
-          <div className="flex items-center gap-3 pt-3 border-t border-white/10 text-xs text-slate-300">
-            <div className="flex items-center gap-2 bg-[#091328] px-3.5 py-1 rounded-full border border-amber-400/30">
+          <div className="flex items-center gap-2.5 pt-2 sm:pt-3 border-t border-white/10 text-xs text-slate-300 w-full">
+            <div className="flex items-center gap-2 bg-[#091328] px-3 py-1 rounded-full border border-amber-400/30 shrink-0">
               <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
-              <span className="font-mono text-amber-300 font-semibold">{profileData.status}</span>
+              <span className="font-mono text-[11px] sm:text-xs text-amber-300 font-semibold">{profileData.status}</span>
             </div>
-            <span className="hidden sm:inline text-xs font-mono text-slate-400">
-              • Open for innovation & engineering roles
+            <span className="text-[11px] sm:text-xs font-mono text-slate-400 truncate">
+              • Open for innovation & engineering
             </span>
           </div>
         </motion.div>
@@ -95,14 +95,14 @@ export function HeroSection({ onOpenResume }) {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="lg:col-span-5 flex justify-center"
+          className="lg:col-span-5 flex justify-center w-full"
         >
           <HeroVisual3D />
         </motion.div>
       </div>
 
       {/* Scroll Down Indicator */}
-      <div className="relative mt-8 sm:mt-12 flex flex-col items-center justify-center pointer-events-none">
+      <div className="relative mt-6 sm:mt-12 flex flex-col items-center justify-center pointer-events-none">
         <a
           href="#about"
           className="pointer-events-auto flex flex-col items-center gap-1 text-[11px] font-mono text-slate-400 hover:text-amber-400 transition-colors"

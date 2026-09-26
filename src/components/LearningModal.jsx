@@ -67,7 +67,7 @@ export function LearningModal({ isOpen, onClose }) {
       {isOpen && (
         <div
           data-lenis-prevent="true"
-          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 md:p-8 overscroll-contain select-none"
+          className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-5 md:p-8 overscroll-contain select-none"
         >
           {/* Backdrop Blur Overlay */}
           <motion.div
@@ -78,7 +78,7 @@ export function LearningModal({ isOpen, onClose }) {
               soundManager.playClick();
               onClose();
             }}
-            className="fixed inset-0 bg-[#040814]/85 backdrop-blur-md"
+            className="fixed inset-0 bg-[#02040A]/90 backdrop-blur-md"
           />
 
           {/* Main Modal Card Container */}
@@ -89,39 +89,39 @@ export function LearningModal({ isOpen, onClose }) {
             transition={{ duration: 0.25, ease: "easeOut" }}
             onClick={(e) => e.stopPropagation()}
             data-lenis-prevent="true"
-            className="relative w-full max-w-6xl h-[90vh] max-h-[860px] bg-[#0D1B3E] rounded-[28px] sm:rounded-3xl border border-amber-400/40 shadow-2xl shadow-blue-950/80 overflow-hidden z-10 flex flex-col overscroll-contain text-white"
+            className="relative w-full max-w-6xl h-[92vh] sm:h-[90vh] max-h-[860px] bg-[#091328] rounded-[24px] sm:rounded-3xl border border-amber-400/40 shadow-2xl shadow-blue-950/80 overflow-hidden z-10 flex flex-col overscroll-contain text-white"
           >
             {/* Modal Header */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-6 sm:px-8 py-4.5 border-b border-[#1E2E5D] bg-[#070E20] shrink-0 shadow-xs z-20">
-              <div className="flex items-center gap-3.5">
-                <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-amber-400 to-yellow-500 text-blue-950 border border-amber-300 flex items-center justify-center shadow-md font-bold shrink-0">
-                  <BookOpen className="w-5 h-5 text-blue-950 stroke-[2.5]" />
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-4 sm:px-8 py-3.5 sm:py-4.5 border-b border-white/10 bg-[#050B1A] shrink-0 shadow-xs z-20">
+              <div className="flex items-center gap-3">
+                <div className="w-9 sm:w-10 h-9 sm:h-10 rounded-2xl bg-gradient-to-br from-amber-400 to-yellow-500 text-blue-950 border border-amber-300 flex items-center justify-center shadow-md font-bold shrink-0">
+                  <BookOpen className="w-4 sm:w-5 h-4 sm:h-5 text-blue-950 stroke-[2.5]" />
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
-                    <h2 className="font-sans text-xl sm:text-2xl font-extrabold text-white tracking-tight">
-                      Continuous Learning & Specializations
+                    <h2 className="font-heading text-lg sm:text-2xl font-extrabold text-white tracking-tight">
+                      Curriculum & Honors
                     </h2>
                     <span className="hidden md:inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-amber-400/15 text-amber-300 border border-amber-400/40 font-bold">
                       <Sparkles className="w-3 h-3 text-amber-400" />
-                      <span>Curriculum & Honors</span>
+                      <span>7 Pillars</span>
                     </span>
                   </div>
-                  <p className="text-xs font-mono text-slate-300 mt-0.5">
-                    Engineering Roadmap, Academic Specializations & Verified Credentials
+                  <p className="text-[11px] sm:text-xs font-mono text-slate-300 mt-0.5">
+                    Engineering Roadmap & Verified Credentials
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 self-end sm:self-auto">
+              <div className="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto">
                 {/* Tab Switcher Pills */}
-                <div className="flex items-center bg-[#070E20] p-1 rounded-full border border-[#1E2E5D]">
+                <div className="flex items-center bg-[#050B1A] p-1 rounded-full border border-white/10">
                   <button
                     onClick={() => {
                       soundManager.playClick();
                       setActiveTab("roadmap");
                     }}
-                    className={`px-4 py-1.5 rounded-full text-xs font-mono font-bold transition-all ${
+                    className={`px-3 sm:px-4 py-1.5 rounded-full text-xs font-mono font-bold transition-all ${
                       activeTab === "roadmap"
                         ? "bg-gradient-to-r from-amber-400 to-yellow-500 text-blue-950 shadow-md font-black"
                         : "text-slate-300 hover:text-white"
@@ -135,7 +135,7 @@ export function LearningModal({ isOpen, onClose }) {
                       soundManager.playClick();
                       setActiveTab("credentials");
                     }}
-                    className={`px-4 py-1.5 rounded-full text-xs font-mono font-bold transition-all ${
+                    className={`px-3 sm:px-4 py-1.5 rounded-full text-xs font-mono font-bold transition-all ${
                       activeTab === "credentials"
                         ? "bg-gradient-to-r from-amber-400 to-yellow-500 text-blue-950 shadow-md font-black"
                         : "text-slate-300 hover:text-white"
@@ -152,7 +152,7 @@ export function LearningModal({ isOpen, onClose }) {
                     soundManager.playClick();
                     onClose();
                   }}
-                  className="w-9 h-9 rounded-full bg-[#070E20] hover:bg-[#122452] border border-[#1E2E5D] flex items-center justify-center text-slate-300 hover:text-white transition-all"
+                  className="w-8 sm:w-9 h-8 sm:h-9 rounded-full bg-[#050B1A] hover:bg-[#0E1D3E] border border-white/15 flex items-center justify-center text-slate-300 hover:text-white transition-all shrink-0"
                   aria-label="Close"
                   data-cursor="pointer"
                 >
@@ -164,28 +164,28 @@ export function LearningModal({ isOpen, onClose }) {
             {/* Modal Body Container */}
             <div
               data-lenis-prevent="true"
-              className="overflow-y-auto overscroll-contain modal-scrollbar p-6 sm:p-8 space-y-8 flex-1"
+              className="overflow-y-auto overscroll-contain modal-scrollbar p-4 sm:p-8 space-y-6 sm:space-y-8 flex-1"
             >
               {activeTab === "roadmap" ? (
                 /* Tab 1: Interactive Engineering Roadmap */
                 <div className="space-y-6">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-[#1E2E5D]">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 sm:pb-4 border-b border-white/10">
                     <div>
-                      <h3 className="font-sans text-xl sm:text-2xl font-bold text-white">
+                      <h3 className="font-heading text-lg sm:text-2xl font-bold text-white">
                         CSE Curriculum & Architectural Roadmap
                       </h3>
                       <p className="text-xs font-mono text-slate-300 mt-0.5">
-                        Select an engineering domain on the left to inspect detailed curriculum & focus areas
+                        Select an engineering domain to inspect detailed focus areas
                       </p>
                     </div>
-                    <span className="text-xs font-mono text-blue-950 font-black bg-gradient-to-r from-amber-400 to-yellow-500 px-3 py-1 rounded-full border border-amber-300 shrink-0">
+                    <span className="text-xs font-mono text-blue-950 font-black bg-gradient-to-r from-amber-400 to-yellow-500 px-3 py-1 rounded-full border border-amber-300 shrink-0 self-start sm:self-auto">
                       7 Core Pillars
                     </span>
                   </div>
 
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
                     {/* Left Roadmap Selector List */}
-                    <div className="lg:col-span-5 space-y-2.5">
+                    <div className="lg:col-span-5 space-y-2">
                       {learningRoadmapData.map((node) => {
                         const Icon = iconMap[node.icon] || Sparkles;
                         const isSelected = selectedTopic?.id === node.id;
@@ -197,29 +197,29 @@ export function LearningModal({ isOpen, onClose }) {
                               setSelectedTopic(node);
                             }}
                             onMouseEnter={() => soundManager.playHover()}
-                            className={`w-full text-left p-4 rounded-2xl border transition-all duration-200 flex items-center justify-between group ${
+                            className={`w-full text-left p-3.5 sm:p-4 rounded-2xl border transition-all duration-200 flex items-center justify-between group ${
                               isSelected
-                                ? "bg-gradient-to-r from-[#122452] via-[#1A367C] to-[#0D1B3E] text-white border-amber-400 shadow-md scale-[1.01]"
-                                : "bg-[#070E20] border-[#1E2E5D] hover:border-amber-400/80 text-white hover:bg-[#122452]"
+                                ? "bg-gradient-to-r from-[#0E1D3E] via-[#122452] to-[#091328] text-white border-amber-400 shadow-md scale-[1.01]"
+                                : "bg-[#050B1A] border-white/10 hover:border-amber-400/80 text-white hover:bg-[#0E1D3E]"
                             }`}
                             data-cursor="pointer"
                           >
-                            <div className="flex items-center gap-3">
+                            <div className="flex items-center gap-3 min-w-0">
                               <div
-                                className={`w-9 h-9 rounded-xl flex items-center justify-center transition-colors shrink-0 ${
+                                className={`w-8 sm:w-9 h-8 sm:h-9 rounded-xl flex items-center justify-center transition-colors shrink-0 ${
                                   isSelected
                                     ? "bg-amber-400 text-blue-950 font-black shadow-xs"
-                                    : "bg-[#0D1B3E] text-amber-400 group-hover:bg-amber-400 group-hover:text-blue-950"
+                                    : "bg-[#091328] text-amber-400 group-hover:bg-amber-400 group-hover:text-blue-950"
                                 }`}
                               >
                                 <Icon className="w-4 h-4" />
                               </div>
                               <div className="min-w-0">
-                                <h4 className="font-sans text-base font-bold truncate text-white">
+                                <h4 className="font-heading text-sm sm:text-base font-bold truncate text-white">
                                   {node.title}
                                 </h4>
                                 <p
-                                  className={`text-[11px] font-mono truncate ${
+                                  className={`text-[10px] sm:text-[11px] font-mono truncate ${
                                     isSelected ? "text-amber-300 font-semibold" : "text-slate-300"
                                   }`}
                                 >
@@ -245,10 +245,10 @@ export function LearningModal({ isOpen, onClose }) {
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.2 }}
-                          className="editorial-card p-6 sm:p-8 bg-[#070E20] space-y-6 rounded-3xl border border-amber-400/40 shadow-xl"
+                          className="editorial-card p-5 sm:p-8 bg-[#050B1A] space-y-5 sm:space-y-6 rounded-3xl border border-amber-400/40 shadow-xl"
                         >
                           {/* Header */}
-                          <div className="space-y-3 pb-6 border-b border-[#1E2E5D]">
+                          <div className="space-y-2.5 sm:space-y-3 pb-5 sm:pb-6 border-b border-white/10">
                             <div className="flex items-center justify-between flex-wrap gap-2">
                               <span className="px-3 py-1 rounded-full bg-amber-400/15 text-amber-300 border border-amber-400/40 font-mono text-xs font-bold">
                                 {selectedTopic.category}
@@ -258,25 +258,25 @@ export function LearningModal({ isOpen, onClose }) {
                               </span>
                             </div>
 
-                            <h3 className="text-2xl sm:text-3xl font-sans font-extrabold text-white">
+                            <h3 className="text-xl sm:text-3xl font-heading font-extrabold text-white">
                               {selectedTopic.title}
                             </h3>
 
-                            <p className="text-sm text-slate-200 leading-relaxed font-sans font-normal">
+                            <p className="text-xs sm:text-sm text-slate-200 leading-relaxed font-sans font-normal">
                               {selectedTopic.summary}
                             </p>
                           </div>
 
                           {/* Subtopic Modules */}
-                          <div className="space-y-4">
+                          <div className="space-y-3 sm:space-y-4">
                             <h4 className="font-mono text-xs uppercase tracking-wider text-amber-400 font-bold">
                               Key Topics & Practical Focus Areas:
                             </h4>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
                               {selectedTopic.topics.map((topic, tIdx) => (
                                 <div
                                   key={tIdx}
-                                  className="p-3.5 rounded-xl bg-[#0D1B3E] border border-[#1E2E5D] text-xs text-slate-200 font-medium flex items-start gap-2.5 hover:border-amber-400 transition-colors"
+                                  className="p-3 sm:p-3.5 rounded-xl bg-[#091328] border border-white/10 text-xs text-slate-200 font-medium flex items-start gap-2.5 hover:border-amber-400 transition-colors"
                                 >
                                   <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
                                   <span>{topic}</span>
@@ -286,12 +286,12 @@ export function LearningModal({ isOpen, onClose }) {
                           </div>
 
                           {/* Growth Commitment Callout */}
-                          <div className="p-4 rounded-2xl bg-[#0D1B3E] border border-amber-400/40 flex items-center justify-between text-xs font-mono text-amber-300 shadow-md">
+                          <div className="p-3.5 sm:p-4 rounded-2xl bg-[#091328] border border-amber-400/30 flex items-center justify-between text-xs font-mono text-amber-300 shadow-md">
                             <div className="flex items-center gap-2">
-                              <Sparkles className="w-4 h-4 text-amber-400" />
-                              <span>Applied directly in production & hackathons.</span>
+                              <Sparkles className="w-4 h-4 text-amber-400 shrink-0" />
+                              <span className="text-[11px] sm:text-xs">Applied directly in production & hackathons.</span>
                             </div>
-                            <span className="font-bold text-amber-400">2026 ROADMAP</span>
+                            <span className="font-bold text-amber-400 shrink-0 ml-2">2026 ROADMAP</span>
                           </div>
                         </motion.div>
                       )}
@@ -301,9 +301,9 @@ export function LearningModal({ isOpen, onClose }) {
               ) : (
                 /* Tab 2: Verified Credentials & Specializations Gallery */
                 <div className="space-y-6">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#1E2E5D]">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 sm:pb-4 border-b border-white/10">
                     <div>
-                      <h3 className="font-sans text-xl sm:text-2xl font-bold text-white">
+                      <h3 className="font-heading text-lg sm:text-2xl font-bold text-white">
                         Verified Specializations & Credentials
                       </h3>
                       <p className="text-xs font-mono text-slate-300 mt-0.5">
@@ -319,17 +319,17 @@ export function LearningModal({ isOpen, onClose }) {
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         placeholder="Search credentials..."
-                        className="w-full pl-9 pr-3 py-2 rounded-full text-xs font-mono bg-[#070E20] border border-[#1E2E5D] text-white focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 placeholder:text-slate-500"
+                        className="w-full pl-9 pr-3 py-2 rounded-full text-base sm:text-xs font-mono bg-[#050B1A] border border-white/15 text-white focus:outline-hidden focus:border-amber-400 focus:ring-1 focus:ring-amber-400 placeholder:text-slate-500"
                       />
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                     {filteredCerts.map((cert) => (
                       <div
                         key={cert.id}
                         onMouseEnter={() => soundManager.playHover()}
-                        className="editorial-card p-5 bg-[#070E20] flex flex-col justify-between border border-[#1E2E5D] rounded-2xl relative group overflow-hidden shadow-xl hover:border-amber-400 hover:shadow-2xl transition-all duration-300"
+                        className="editorial-card p-4 sm:p-5 bg-[#050B1A] flex flex-col justify-between border border-white/10 rounded-2xl relative group overflow-hidden shadow-xl hover:border-amber-400 hover:shadow-2xl transition-all duration-300"
                       >
                         <div className="space-y-3">
                           {/* Thumbnail Preview with Inspect Button */}
@@ -338,7 +338,7 @@ export function LearningModal({ isOpen, onClose }) {
                               soundManager.playClick();
                               setActiveCertDetail(cert);
                             }}
-                            className="relative aspect-[16/10] w-full rounded-xl overflow-hidden bg-[#0D1B3E] border border-[#1E2E5D] cursor-pointer group/thumb shadow-inner"
+                            className="relative aspect-[16/10] w-full rounded-xl overflow-hidden bg-[#091328] border border-white/10 cursor-pointer group/thumb shadow-inner"
                             data-cursor="pointer"
                           >
                             <img
@@ -347,7 +347,7 @@ export function LearningModal({ isOpen, onClose }) {
                               className="w-full h-full object-cover object-top group-hover/thumb:scale-105 transition-transform duration-500"
                               loading="lazy"
                             />
-                            <div className="absolute inset-0 bg-[#070E20]/85 opacity-0 group-hover/thumb:opacity-100 transition-opacity flex items-center justify-center gap-2 text-amber-300 font-mono text-xs font-bold">
+                            <div className="absolute inset-0 bg-[#050B1A]/85 opacity-0 group-hover/thumb:opacity-100 transition-opacity flex items-center justify-center gap-2 text-amber-300 font-mono text-xs font-bold">
                               <Eye className="w-4 h-4 text-amber-400" />
                               <span>Inspect Certificate</span>
                             </div>
@@ -367,7 +367,7 @@ export function LearningModal({ isOpen, onClose }) {
                                 soundManager.playClick();
                                 setActiveCertDetail(cert);
                               }}
-                              className="font-sans text-base sm:text-lg font-bold text-white group-hover:text-amber-300 transition-colors cursor-pointer leading-snug"
+                              className="font-heading text-sm sm:text-base font-bold text-white group-hover:text-amber-300 transition-colors cursor-pointer leading-snug"
                             >
                               {cert.title}
                             </h4>
@@ -381,13 +381,13 @@ export function LearningModal({ isOpen, onClose }) {
                           </p>
                         </div>
 
-                        <div className="pt-3 mt-3 border-t border-[#1E2E5D] grid grid-cols-2 gap-2">
+                        <div className="pt-3 mt-3 border-t border-white/10 grid grid-cols-2 gap-2">
                           <button
                             onClick={() => {
                               soundManager.playClick();
                               setActiveCertDetail(cert);
                             }}
-                            className="py-2 px-2.5 rounded-xl bg-[#0D1B3E] hover:bg-[#122452] border border-[#1E2E5D] hover:border-amber-400 text-slate-200 hover:text-amber-300 font-mono text-[11px] font-bold flex items-center justify-center gap-1 transition-all"
+                            className="py-2 px-2.5 rounded-xl bg-[#091328] hover:bg-[#0E1D3E] border border-white/10 hover:border-amber-400 text-slate-200 hover:text-amber-300 font-mono text-[11px] font-bold flex items-center justify-center gap-1 transition-all"
                             data-cursor="pointer"
                           >
                             <Eye className="w-3 h-3" />
@@ -427,7 +427,7 @@ export function LearningModal({ isOpen, onClose }) {
                     soundManager.playClick();
                     setActiveCertDetail(null);
                   }}
-                  className="fixed inset-0 bg-[#040814]/85 backdrop-blur-md"
+                  className="fixed inset-0 bg-[#02040A]/90 backdrop-blur-md"
                 />
 
                 <motion.div
@@ -436,18 +436,18 @@ export function LearningModal({ isOpen, onClose }) {
                   exit={{ opacity: 0, scale: 0.95, y: 15 }}
                   onClick={(e) => e.stopPropagation()}
                   data-lenis-prevent="true"
-                  className="relative w-full max-w-4xl bg-[#0D1B3E] rounded-3xl border border-amber-400/50 shadow-2xl overflow-hidden z-20 max-h-[90vh] flex flex-col overscroll-contain text-white"
+                  className="relative w-full max-w-4xl bg-[#091328] rounded-3xl border border-amber-400/50 shadow-2xl overflow-hidden z-20 max-h-[90vh] flex flex-col overscroll-contain text-white"
                 >
-                  <div className="flex items-center justify-between px-6 py-4 border-b border-[#1E2E5D] bg-[#070E20] shrink-0">
-                    <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-400 to-yellow-500 text-blue-950 border border-amber-300 flex items-center justify-center font-bold">
-                        <Award className="w-5 h-5 text-blue-950 stroke-[2.5]" />
+                  <div className="flex items-center justify-between px-4 sm:px-6 py-3.5 sm:py-4 border-b border-white/10 bg-[#050B1A] shrink-0">
+                    <div className="flex items-center gap-2.5 min-w-0">
+                      <div className="w-8 sm:w-9 h-8 sm:h-9 rounded-xl bg-gradient-to-br from-amber-400 to-yellow-500 text-blue-950 border border-amber-300 flex items-center justify-center font-bold shrink-0">
+                        <Award className="w-4 sm:w-5 h-4 sm:h-5 text-blue-950 stroke-[2.5]" />
                       </div>
-                      <div>
-                        <h3 className="font-sans text-lg font-bold text-white">
+                      <div className="min-w-0">
+                        <h3 className="font-heading text-sm sm:text-base font-bold text-white truncate">
                           {activeCertDetail.title}
                         </h3>
-                        <p className="font-mono text-xs text-amber-300 font-bold">
+                        <p className="font-mono text-xs text-amber-300 font-bold truncate">
                           {activeCertDetail.organization} • {activeCertDetail.instructor}
                         </p>
                       </div>
@@ -458,29 +458,29 @@ export function LearningModal({ isOpen, onClose }) {
                         soundManager.playClick();
                         setActiveCertDetail(null);
                       }}
-                      className="p-1.5 rounded-full bg-[#070E20] hover:bg-[#122452] text-slate-300 hover:text-white border border-[#1E2E5D]"
+                      className="p-1.5 rounded-full bg-[#050B1A] hover:bg-[#0E1D3E] text-slate-300 hover:text-white border border-white/15 shrink-0 ml-2"
                       aria-label="Close"
                       data-cursor="pointer"
                     >
-                      <X className="w-5 h-5" />
+                      <X className="w-4 h-4" />
                     </button>
                   </div>
 
                   <div
                     data-lenis-prevent="true"
-                    className="overflow-y-auto modal-scrollbar p-6 space-y-6 flex-1"
+                    className="overflow-y-auto modal-scrollbar p-4 sm:p-6 space-y-4 sm:space-y-6 flex-1"
                   >
                     {activeCertDetail.imagePreview && (
-                      <div className="rounded-2xl overflow-hidden border border-[#1E2E5D] shadow-md bg-[#070E20]">
+                      <div className="rounded-2xl overflow-hidden border border-white/10 shadow-md bg-[#050B1A]">
                         <img
                           src={activeCertDetail.imagePreview}
                           alt={`${activeCertDetail.title} Certificate`}
-                          className="w-full max-h-[50vh] object-contain mx-auto"
+                          className="w-full max-h-[48vh] sm:max-h-[50vh] object-contain mx-auto"
                         />
                       </div>
                     )}
 
-                    <div className="p-4 rounded-xl bg-[#070E20] border border-amber-400/30 space-y-1">
+                    <div className="p-3.5 sm:p-4 rounded-xl bg-[#050B1A] border border-amber-400/30 space-y-1">
                       <span className="font-mono text-[10px] uppercase tracking-wider text-amber-400 font-bold">
                         Specialization Capstone Deliverable
                       </span>
@@ -489,13 +489,13 @@ export function LearningModal({ isOpen, onClose }) {
                       </p>
                     </div>
 
-                    <div className="flex items-center justify-between font-mono text-xs pt-2">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 font-mono text-xs pt-2">
                       <span className="text-slate-400">ID: {activeCertDetail.credentialId}</span>
                       <a
                         href={activeCertDetail.verifyUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-500 text-blue-950 font-bold flex items-center gap-1.5 shadow-md shadow-amber-500/20 hover:scale-105 transition-all"
+                        className="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-500 text-blue-950 font-bold flex items-center justify-center gap-1.5 shadow-md shadow-amber-500/20 hover:scale-105 transition-all text-xs"
                         data-cursor="pointer"
                       >
                         <span>Verify Credential Online</span>

@@ -24,7 +24,7 @@ export function BlogModal({ post, onClose }) {
     <AnimatePresence>
       <div
         data-lenis-prevent="true"
-        className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 md:p-8 overflow-y-auto overscroll-contain"
+        className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-6 md:p-8 overflow-y-auto overscroll-contain"
       >
         {/* Backdrop */}
         <motion.div
@@ -35,7 +35,7 @@ export function BlogModal({ post, onClose }) {
             soundManager.playClick();
             onClose();
           }}
-          className="fixed inset-0 bg-[#040814]/85 backdrop-blur-md"
+          className="fixed inset-0 bg-[#02040A]/90 backdrop-blur-md"
         />
 
         {/* Modal Container */}
@@ -46,10 +46,10 @@ export function BlogModal({ post, onClose }) {
           transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
           onClick={(e) => e.stopPropagation()}
           data-lenis-prevent="true"
-          className="relative w-full max-w-3xl bg-[#0D1B3E] rounded-3xl border border-amber-400/50 shadow-2xl shadow-blue-950/80 overflow-hidden z-10 max-h-[90vh] flex flex-col overscroll-contain text-white"
+          className="relative w-full max-w-3xl bg-[#091328] rounded-3xl border border-amber-400/50 shadow-2xl shadow-blue-950/80 overflow-hidden z-10 max-h-[90vh] flex flex-col overscroll-contain text-white"
         >
           {/* Top Bar */}
-          <div className="flex items-center justify-between px-6 py-4 border-b border-[#1E2E5D] bg-[#070E20] shrink-0">
+          <div className="flex items-center justify-between px-4 sm:px-6 py-3.5 sm:py-4 border-b border-white/10 bg-[#050B1A] shrink-0">
             <button
               onClick={() => {
                 soundManager.playClick();
@@ -64,7 +64,7 @@ export function BlogModal({ post, onClose }) {
             <div className="flex items-center gap-2">
               <button
                 onClick={handleShare}
-                className="p-2 rounded-full bg-[#0D1B3E] hover:bg-[#122452] border border-[#1E2E5D] text-slate-300 hover:text-amber-300 transition-colors"
+                className="p-2 rounded-full bg-[#091328] hover:bg-[#0E1D3E] border border-white/15 text-slate-300 hover:text-amber-300 transition-colors"
                 title="Share article"
                 data-cursor="pointer"
               >
@@ -75,7 +75,7 @@ export function BlogModal({ post, onClose }) {
                   soundManager.playClick();
                   onClose();
                 }}
-                className="p-2 rounded-full bg-[#0D1B3E] hover:bg-[#122452] border border-[#1E2E5D] text-slate-300 hover:text-white transition-colors"
+                className="p-2 rounded-full bg-[#091328] hover:bg-[#0E1D3E] border border-white/15 text-slate-300 hover:text-white transition-colors"
                 data-cursor="pointer"
                 aria-label="Close"
               >
@@ -87,10 +87,10 @@ export function BlogModal({ post, onClose }) {
           {/* Article Scroll Body */}
           <div
             data-lenis-prevent="true"
-            className="overflow-y-auto modal-scrollbar p-6 sm:p-10 space-y-6 flex-1"
+            className="overflow-y-auto modal-scrollbar p-4 sm:p-10 space-y-5 sm:space-y-6 flex-1"
           >
-            <div className="space-y-3 pb-6 border-b border-[#1E2E5D]">
-              <div className="flex items-center gap-3">
+            <div className="space-y-3 pb-5 sm:pb-6 border-b border-white/10">
+              <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                 <span className="px-3 py-1 rounded-full bg-gradient-to-r from-amber-400 to-yellow-500 text-blue-950 font-mono text-xs font-black shadow-xs">
                   {post.category}
                 </span>
@@ -103,10 +103,10 @@ export function BlogModal({ post, onClose }) {
                   <span>{post.readTime}</span>
                 </div>
               </div>
-              <h1 className="text-3xl sm:text-4xl font-sans font-extrabold text-white leading-tight">
+              <h1 className="text-2xl sm:text-4xl font-heading font-extrabold text-white leading-tight">
                 {post.title}
               </h1>
-              <p className="text-base text-slate-200 italic font-serif">
+              <p className="text-sm sm:text-base text-slate-200 italic font-serif">
                 "{post.excerpt}"
               </p>
             </div>
@@ -116,7 +116,7 @@ export function BlogModal({ post, onClose }) {
               {post.content.split("\n\n").map((paragraph, index) => {
                 if (paragraph.startsWith("### ")) {
                   return (
-                    <h3 key={index} className="text-xl font-sans font-extrabold text-amber-300 pt-4">
+                    <h3 key={index} className="text-lg sm:text-xl font-heading font-extrabold text-amber-300 pt-3 sm:pt-4">
                       {paragraph.replace("### ", "")}
                     </h3>
                   );
@@ -124,13 +124,13 @@ export function BlogModal({ post, onClose }) {
                 if (paragraph.startsWith("```")) {
                   const cleanedCode = paragraph.replace(/```[a-z]*/g, "").trim();
                   return (
-                    <pre key={index} className="p-4 rounded-xl bg-[#050A17] text-amber-300 font-mono text-xs overflow-x-auto my-3 border border-amber-400/30">
+                    <pre key={index} className="p-3.5 sm:p-4 rounded-xl bg-[#050A17] text-amber-300 font-mono text-xs overflow-x-auto my-3 border border-amber-400/30">
                       <code>{cleanedCode}</code>
                     </pre>
                   );
                 }
                 return (
-                  <p key={index} className="leading-relaxed font-normal text-slate-200">
+                  <p key={index} className="leading-relaxed font-normal text-slate-200 text-xs sm:text-base">
                     {paragraph}
                   </p>
                 );
@@ -138,9 +138,9 @@ export function BlogModal({ post, onClose }) {
             </div>
 
             {/* Author Footer */}
-            <div className="mt-8 p-6 rounded-2xl bg-[#070E20] border border-amber-400/30 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-yellow-500 text-blue-950 border border-amber-300 flex items-center justify-center font-sans font-black text-base shadow-md">
+            <div className="mt-6 sm:mt-8 p-4 sm:p-6 rounded-2xl bg-[#050B1A] border border-amber-400/30 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-3 w-full sm:w-auto">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-yellow-500 text-blue-950 border border-amber-300 flex items-center justify-center font-heading font-black text-base shadow-md shrink-0">
                   DS
                 </div>
                 <div>
@@ -151,7 +151,7 @@ export function BlogModal({ post, onClose }) {
               <a
                 href="#contact"
                 onClick={() => onClose()}
-                className="px-5 py-2 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-blue-950 text-xs font-black shadow-md shadow-amber-500/20 hover:scale-105 transition-all font-mono"
+                className="w-full sm:w-auto text-center px-5 py-2.5 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-blue-950 text-xs font-black shadow-md shadow-amber-500/20 hover:scale-105 transition-all font-mono"
               >
                 Discuss Topic →
               </a>

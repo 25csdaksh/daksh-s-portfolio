@@ -11,26 +11,26 @@ export function Footer({ onOpenLearning }) {
   };
 
   return (
-    <footer className="bg-[#02040A]/95 backdrop-blur-md text-white pt-16 pb-12 px-4 sm:px-6 md:px-12 relative overflow-hidden border-t border-amber-400/20">
+    <footer className="bg-[#02040A]/95 backdrop-blur-md text-white pt-12 sm:pt-16 pb-10 sm:pb-12 px-4 sm:px-6 md:px-12 relative overflow-hidden border-t border-white/10">
       {/* Subtle Background Watermark */}
-      <div className="absolute -bottom-10 right-0 font-sans text-[14vw] font-black text-white/5 select-none pointer-events-none">
+      <div className="absolute -bottom-10 right-0 font-heading text-[14vw] font-black text-white/5 select-none pointer-events-none">
         SONI
       </div>
 
-      <div className="max-w-7xl mx-auto space-y-12 relative z-10">
+      <div className="max-w-7xl mx-auto space-y-10 sm:space-y-12 relative z-10">
         {/* Top Footer Tier */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start justify-between pb-12 border-b border-[#1E2E5D]">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start justify-between pb-8 sm:pb-12 border-b border-white/10">
           {/* Brand Info */}
           <div className="md:col-span-6 space-y-3">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-yellow-500 text-blue-950 border border-amber-300 flex items-center justify-center font-sans text-sm font-black shadow-md shadow-amber-500/20">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-yellow-500 text-blue-950 border border-amber-300 flex items-center justify-center font-heading text-sm font-black shadow-md shadow-amber-500/20">
                 DS
               </div>
-              <span className="font-sans text-2xl font-extrabold tracking-tight text-white">
+              <span className="font-heading text-2xl font-extrabold tracking-tight text-white">
                 Daksh Soni
               </span>
             </div>
-            <p className="font-serif italic text-base text-amber-300">
+            <p className="font-serif italic text-sm sm:text-base text-amber-300">
               "Building. Learning. Creating."
             </p>
             <p className="text-xs text-slate-300 font-mono max-w-sm leading-relaxed">
@@ -60,15 +60,6 @@ export function Footer({ onOpenLearning }) {
                   data-cursor="pointer"
                 >
                   Featured Projects
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#skills"
-                  className="text-slate-300 hover:text-amber-300 transition-colors"
-                  data-cursor="pointer"
-                >
-                  Skills & Analytics
                 </a>
               </li>
               <li>
@@ -120,12 +111,12 @@ export function Footer({ onOpenLearning }) {
             <span className="font-mono text-[10px] uppercase tracking-widest text-amber-400 font-bold">
               SOCIAL CHANNELS
             </span>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2.5 sm:gap-3">
               <a
                 href={profileData.socials.github}
                 target="_blank"
                 rel="noreferrer"
-                className="p-2.5 rounded-full bg-[#0D1B3E] border border-[#1E2E5D] hover:bg-[#122452] hover:border-amber-400 text-slate-200 hover:text-amber-300 transition-colors shadow-sm"
+                className="p-2.5 rounded-full bg-[#091328] border border-white/10 hover:bg-[#0E1D3E] hover:border-amber-400 text-slate-200 hover:text-amber-300 transition-colors shadow-sm"
                 title="GitHub"
                 data-cursor="pointer"
               >
@@ -135,7 +126,7 @@ export function Footer({ onOpenLearning }) {
                 href={profileData.socials.linkedin}
                 target="_blank"
                 rel="noreferrer"
-                className="p-2.5 rounded-full bg-[#0D1B3E] border border-[#1E2E5D] hover:bg-[#122452] hover:border-amber-400 text-slate-200 hover:text-amber-300 transition-colors shadow-sm"
+                className="p-2.5 rounded-full bg-[#091328] border border-white/10 hover:bg-[#0E1D3E] hover:border-amber-400 text-slate-200 hover:text-amber-300 transition-colors shadow-sm"
                 title="LinkedIn"
                 data-cursor="pointer"
               >
@@ -145,7 +136,7 @@ export function Footer({ onOpenLearning }) {
                 href={profileData.socials.instagram}
                 target="_blank"
                 rel="noreferrer"
-                className="p-2.5 rounded-full bg-[#0D1B3E] border border-[#1E2E5D] hover:bg-[#122452] hover:border-amber-400 text-slate-200 hover:text-amber-300 transition-colors shadow-sm"
+                className="p-2.5 rounded-full bg-[#091328] border border-white/10 hover:bg-[#0E1D3E] hover:border-amber-400 text-slate-200 hover:text-amber-300 transition-colors shadow-sm"
                 title="Instagram"
                 data-cursor="pointer"
               >
@@ -153,7 +144,7 @@ export function Footer({ onOpenLearning }) {
               </a>
               <a
                 href={`mailto:${profileData.email}`}
-                className="p-2.5 rounded-full bg-[#0D1B3E] border border-[#1E2E5D] hover:bg-[#122452] hover:border-amber-400 text-slate-200 hover:text-amber-300 transition-colors shadow-sm"
+                className="p-2.5 rounded-full bg-[#091328] border border-white/10 hover:bg-[#0E1D3E] hover:border-amber-400 text-slate-200 hover:text-amber-300 transition-colors shadow-sm"
                 title="Email"
                 data-cursor="pointer"
               >
@@ -163,7 +154,7 @@ export function Footer({ onOpenLearning }) {
 
             <button
               onClick={scrollToTop}
-              className="mt-4 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-blue-950 text-xs font-mono font-black transition-all shadow-md shadow-amber-500/20 hover:scale-105"
+              className="mt-2 sm:mt-4 inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-blue-950 text-xs font-mono font-black transition-all shadow-md shadow-amber-500/20 hover:scale-105"
               data-cursor="pointer"
             >
               <span>Back to Top</span>
@@ -173,7 +164,7 @@ export function Footer({ onOpenLearning }) {
         </div>
 
         {/* Bottom Tier: Copyright & Meta */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-400 pt-2">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-slate-400 pt-2">
           <div>
             © {new Date().getFullYear()} Daksh Soni. All rights reserved.
           </div>

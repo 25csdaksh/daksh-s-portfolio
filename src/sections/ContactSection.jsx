@@ -63,7 +63,7 @@ export function ContactSection() {
             particleCount: 90,
             spread: 80,
             origin: { y: 0.6 },
-            colors: ["#F59E0B", "#FBBF24", "#FDE047", "#0D1B3E", "#FFFFFF"],
+            colors: ["#F59E0B", "#FBBF24", "#FDE047", "#091328", "#FFFFFF"],
           });
         } catch (err) {
           // Ignore confetti failure
@@ -81,47 +81,47 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-24 sm:py-32 px-4 sm:px-6 md:px-12 relative bg-[#02040A]/80 backdrop-blur-xs text-white">
-      <div className="max-w-7xl mx-auto space-y-16">
+    <section id="contact" className="py-20 sm:py-32 px-4 sm:px-6 md:px-12 relative bg-[#02040A]/80 backdrop-blur-xs text-white">
+      <div className="max-w-7xl mx-auto space-y-12 sm:space-y-16">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-[#1E2E5D]">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 pb-6 sm:pb-8 border-b border-white/10">
           <div>
             <div className="flex items-center gap-2 mb-2 font-mono text-xs uppercase tracking-widest text-amber-400 font-bold">
               <Mail className="w-4 h-4 text-amber-400" />
               <span>08 // Initiation & Partnership</span>
             </div>
-            <h2 className="text-4xl sm:text-6xl md:text-7xl font-sans font-extrabold text-white tracking-tight leading-[1.05]">
+            <h2 className="text-3xl sm:text-5xl md:text-6xl font-heading font-extrabold text-white tracking-tight leading-[1.1]">
               Have an idea?
               <br />
               <span className="gradient-text-gold">Let's build it.</span>
             </h2>
           </div>
-          <p className="text-sm sm:text-base text-slate-200 max-w-sm font-sans font-normal leading-relaxed">
+          <p className="text-xs sm:text-sm text-slate-200 max-w-sm font-sans font-normal leading-relaxed">
             Whether it's an enterprise software project, hackathon collaboration, research, or simply an ambitious conversation — let's connect.
           </p>
         </div>
 
         {/* 2-Column Contact Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 items-start">
           {/* Left: Contact Info & Channels */}
-          <div className="lg:col-span-5 space-y-8">
-            <div className="p-6 sm:p-8 rounded-3xl bg-[#0D1B3E] border border-amber-400/40 shadow-xl space-y-6">
+          <div className="lg:col-span-5 space-y-6 sm:space-y-8">
+            <div className="p-5 sm:p-8 rounded-3xl bg-[#091328] border border-amber-400/30 shadow-xl space-y-5 sm:space-y-6">
               <div>
                 <span className="font-mono text-[10px] uppercase tracking-widest text-amber-400 font-bold">
                   DIRECT CONTACT CHANNEL
                 </span>
-                <div className="flex items-center justify-between mt-2 pt-2 border-t border-[#1E2E5D]">
-                  <span className="font-sans text-base sm:text-lg font-bold text-white truncate">
+                <div className="flex items-center justify-between mt-2 pt-2 border-t border-white/10 gap-2">
+                  <span className="font-sans text-sm sm:text-lg font-bold text-white truncate min-w-0">
                     {profileData.email}
                   </span>
                   <button
                     onClick={handleCopyEmail}
-                    className="p-2 px-3.5 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-500 text-blue-950 transition-all flex items-center gap-1.5 text-xs font-mono font-black shadow-md hover:scale-105"
+                    className="p-2 px-3 sm:px-3.5 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-500 text-blue-950 transition-all flex items-center gap-1 text-xs font-mono font-black shadow-md hover:scale-105 shrink-0"
                     title="Copy Email"
                     data-cursor="pointer"
                   >
-                    {copiedEmail ? <Check className="w-4 h-4 stroke-[3]" /> : <Copy className="w-4 h-4" />}
-                    <span>{copiedEmail ? "Copied!" : "Copy"}</span>
+                    {copiedEmail ? <Check className="w-3.5 h-3.5 stroke-[3]" /> : <Copy className="w-3.5 h-3.5" />}
+                    <span>{copiedEmail ? "Copied" : "Copy"}</span>
                   </button>
                 </div>
               </div>
@@ -131,13 +131,13 @@ export function ContactSection() {
                 <span className="font-mono text-[10px] uppercase tracking-widest text-slate-400 font-bold">
                   CONNECTED NETWORKS
                 </span>
-                <div className="grid grid-cols-2 gap-2.5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   <a
                     href={profileData.socials.github}
                     target="_blank"
                     rel="noreferrer"
                     onMouseEnter={() => soundManager.playHover()}
-                    className="p-3 rounded-xl bg-[#070E20] border border-[#1E2E5D] hover:border-amber-400 hover:bg-[#122452] flex items-center justify-between text-xs font-mono font-bold text-white group transition-all"
+                    className="p-3 rounded-xl bg-[#050B1A] border border-white/10 hover:border-amber-400 hover:bg-[#0E1D3E] flex items-center justify-between text-xs font-mono font-bold text-white group transition-all"
                     data-cursor="pointer"
                   >
                     <div className="flex items-center gap-2">
@@ -152,7 +152,7 @@ export function ContactSection() {
                     target="_blank"
                     rel="noreferrer"
                     onMouseEnter={() => soundManager.playHover()}
-                    className="p-3 rounded-xl bg-[#070E20] border border-[#1E2E5D] hover:border-amber-400 hover:bg-[#122452] flex items-center justify-between text-xs font-mono font-bold text-white group transition-all"
+                    className="p-3 rounded-xl bg-[#050B1A] border border-white/10 hover:border-amber-400 hover:bg-[#0E1D3E] flex items-center justify-between text-xs font-mono font-bold text-white group transition-all"
                     data-cursor="pointer"
                   >
                     <div className="flex items-center gap-2">
@@ -167,7 +167,7 @@ export function ContactSection() {
                     target="_blank"
                     rel="noreferrer"
                     onMouseEnter={() => soundManager.playHover()}
-                    className="p-3 rounded-xl bg-[#070E20] border border-[#1E2E5D] hover:border-amber-400 hover:bg-[#122452] flex items-center justify-between text-xs font-mono font-bold text-white group transition-all"
+                    className="p-3 rounded-xl bg-[#050B1A] border border-white/10 hover:border-amber-400 hover:bg-[#0E1D3E] flex items-center justify-between text-xs font-mono font-bold text-white group transition-all"
                     data-cursor="pointer"
                   >
                     <div className="flex items-center gap-2">
@@ -180,7 +180,7 @@ export function ContactSection() {
                   <a
                     href={`mailto:${profileData.email}`}
                     onMouseEnter={() => soundManager.playHover()}
-                    className="p-3 rounded-xl bg-[#070E20] border border-[#1E2E5D] hover:border-amber-400 hover:bg-[#122452] flex items-center justify-between text-xs font-mono font-bold text-white group transition-all"
+                    className="p-3 rounded-xl bg-[#050B1A] border border-white/10 hover:border-amber-400 hover:bg-[#0E1D3E] flex items-center justify-between text-xs font-mono font-bold text-white group transition-all"
                     data-cursor="pointer"
                   >
                     <div className="flex items-center gap-2">
@@ -193,7 +193,7 @@ export function ContactSection() {
               </div>
 
               {/* Status Note */}
-              <div className="p-4 rounded-2xl bg-[#070E20] text-white text-xs space-y-1 border border-amber-400/40 shadow-md">
+              <div className="p-3.5 sm:p-4 rounded-2xl bg-[#050B1A] text-white text-xs space-y-1 border border-amber-400/30 shadow-md">
                 <div className="flex items-center gap-2 font-mono font-bold text-amber-300">
                   <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
                   <span>Availability & Engagement Status</span>
@@ -207,9 +207,9 @@ export function ContactSection() {
 
           {/* Right: Contact Form */}
           <div className="lg:col-span-7">
-            <div className="editorial-card p-6 sm:p-10 bg-[#0D1B3E] border border-amber-400/40 rounded-3xl shadow-xl space-y-6">
+            <div className="editorial-card p-5 sm:p-10 bg-[#091328] border border-amber-400/30 rounded-3xl shadow-xl space-y-5 sm:space-y-6">
               <div className="space-y-1">
-                <h3 className="text-2xl font-sans font-extrabold text-white">
+                <h3 className="text-xl sm:text-2xl font-heading font-extrabold text-white">
                   Send a Message
                 </h3>
                 <p className="text-xs text-slate-300 font-mono">
@@ -221,12 +221,12 @@ export function ContactSection() {
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="p-8 rounded-2xl bg-[#070E20] border border-amber-400 text-center space-y-4 shadow-xl"
+                  className="p-6 sm:p-8 rounded-2xl bg-[#050B1A] border border-amber-400 text-center space-y-4 shadow-xl"
                 >
                   <div className="w-12 h-12 rounded-full bg-gradient-to-br from-amber-400 to-yellow-500 text-blue-950 mx-auto flex items-center justify-center shadow-md font-bold">
                     <Check className="w-6 h-6 stroke-[3]" />
                   </div>
-                  <h4 className="text-lg sm:text-xl font-sans font-extrabold text-white">
+                  <h4 className="text-lg sm:text-xl font-heading font-extrabold text-white">
                     Message Dispatched to dakshsoni1023@gmail.com!
                   </h4>
                   <p className="text-xs sm:text-sm text-slate-200 max-w-sm mx-auto leading-relaxed">
@@ -257,7 +257,7 @@ export function ContactSection() {
                         value={formData.name}
                         onChange={handleChange}
                         placeholder="e.g. Alex Miller"
-                        className="w-full px-4 py-3 rounded-xl bg-[#070E20] border border-[#1E2E5D] focus:border-amber-400 focus:ring-2 focus:ring-amber-400/30 focus:outline-hidden text-sm text-white placeholder:text-slate-500 transition-all"
+                        className="w-full px-4 py-3 rounded-xl bg-[#050B1A] border border-white/15 focus:border-amber-400 focus:ring-2 focus:ring-amber-400/30 focus:outline-hidden text-base sm:text-sm text-white placeholder:text-slate-500 transition-all"
                       />
                     </div>
 
@@ -272,7 +272,7 @@ export function ContactSection() {
                         value={formData.email}
                         onChange={handleChange}
                         placeholder="e.g. alex@company.com"
-                        className="w-full px-4 py-3 rounded-xl bg-[#070E20] border border-[#1E2E5D] focus:border-amber-400 focus:ring-2 focus:ring-amber-400/30 focus:outline-hidden text-sm text-white placeholder:text-slate-500 transition-all"
+                        className="w-full px-4 py-3 rounded-xl bg-[#050B1A] border border-white/15 focus:border-amber-400 focus:ring-2 focus:ring-amber-400/30 focus:outline-hidden text-base sm:text-sm text-white placeholder:text-slate-500 transition-all"
                       />
                     </div>
                   </div>
@@ -287,7 +287,7 @@ export function ContactSection() {
                       value={formData.subject}
                       onChange={handleChange}
                       placeholder="e.g. Full-Stack / AI Collaboration or Product Inquiry"
-                      className="w-full px-4 py-3 rounded-xl bg-[#070E20] border border-[#1E2E5D] focus:border-amber-400 focus:ring-2 focus:ring-amber-400/30 focus:outline-hidden text-sm text-white placeholder:text-slate-500 transition-all"
+                      className="w-full px-4 py-3 rounded-xl bg-[#050B1A] border border-white/15 focus:border-amber-400 focus:ring-2 focus:ring-amber-400/30 focus:outline-hidden text-base sm:text-sm text-white placeholder:text-slate-500 transition-all"
                     />
                   </div>
 
@@ -297,19 +297,19 @@ export function ContactSection() {
                     </label>
                     <textarea
                       name="message"
-                      rows={5}
+                      rows={4}
                       required
                       value={formData.message}
                       onChange={handleChange}
                       placeholder="Describe the opportunity, idea, or questions..."
-                      className="w-full px-4 py-3 rounded-xl bg-[#070E20] border border-[#1E2E5D] focus:border-amber-400 focus:ring-2 focus:ring-amber-400/30 focus:outline-hidden text-sm text-white placeholder:text-slate-500 transition-all resize-none"
+                      className="w-full px-4 py-3 rounded-xl bg-[#050B1A] border border-white/15 focus:border-amber-400 focus:ring-2 focus:ring-amber-400/30 focus:outline-hidden text-base sm:text-sm text-white placeholder:text-slate-500 transition-all resize-none"
                     />
                   </div>
 
                   <button
                     type="submit"
                     disabled={formStatus === "submitting"}
-                    className="w-full py-4 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-blue-950 border border-amber-300 text-sm font-black hover:shadow-lg hover:shadow-amber-500/25 transition-all flex items-center justify-center gap-2 group disabled:opacity-50 hover:scale-[1.01]"
+                    className="w-full py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-blue-950 border border-amber-300 text-xs sm:text-sm font-black hover:shadow-lg hover:shadow-amber-500/25 transition-all flex items-center justify-center gap-2 group disabled:opacity-50 hover:scale-[1.01]"
                     data-cursor="pointer"
                   >
                     {formStatus === "submitting" ? (

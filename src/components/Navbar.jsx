@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Volume2, VolumeX, Menu, X, ArrowUpRight, Sparkles, BookOpen } from "lucide-react";
+import { Volume2, VolumeX, Menu, X, ArrowUpRight, Sparkles, BookOpen, FileText } from "lucide-react";
 import { soundManager } from "../utils/sound";
 import { profileData } from "../data/profile";
 
@@ -50,12 +50,12 @@ export function Navbar({ activeSection, onNavigate, onOpenResume, onOpenLearning
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-4 sm:px-6 md:px-10 py-4 sm:py-5">
+    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-3 sm:px-6 md:px-10 py-3 sm:py-5">
       <div
-        className={`max-w-7xl mx-auto rounded-full transition-all duration-400 px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between ${
+        className={`max-w-7xl mx-auto rounded-full transition-all duration-400 px-3.5 sm:px-6 py-2 sm:py-3 flex items-center justify-between ${
           isScrolled
-            ? "bg-[#0D1B3E]/95 backdrop-blur-xl border border-amber-400/50 shadow-2xl shadow-black/60"
-            : "bg-[#0D1B3E]/85 backdrop-blur-md border border-amber-400/30 shadow-lg shadow-black/30"
+            ? "bg-[#091328]/95 backdrop-blur-xl border border-amber-400/45 shadow-2xl shadow-black/80"
+            : "bg-[#091328]/85 backdrop-blur-md border border-amber-400/30 shadow-lg shadow-black/50"
         }`}
       >
         {/* Brand Monogram & Name */}
@@ -66,14 +66,14 @@ export function Navbar({ activeSection, onNavigate, onOpenResume, onOpenLearning
             soundManager.playClick();
             window.scrollTo({ top: 0, behavior: "smooth" });
           }}
-          className="flex items-center gap-3 group"
+          className="flex items-center gap-2.5 sm:gap-3 group"
           data-cursor="pointer"
         >
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-900 via-blue-950 to-slate-950 text-amber-400 border-2 border-amber-400 flex items-center justify-center font-sans text-xs font-black shadow-md transition-transform duration-300 group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(245,158,11,0.6)]">
+          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gradient-to-br from-blue-900 via-blue-950 to-slate-950 text-amber-400 border-2 border-amber-400 flex items-center justify-center font-sans text-xs font-black shadow-md transition-transform duration-300 group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(245,158,11,0.6)]">
             DS
           </div>
           <div className="flex flex-col">
-            <span className="font-sans text-base sm:text-lg font-bold tracking-tight text-white group-hover:text-amber-400 transition-colors">
+            <span className="font-heading text-sm sm:text-lg font-bold tracking-tight text-white group-hover:text-amber-400 transition-colors">
               Daksh Soni
             </span>
             <span className="hidden sm:inline-block font-mono text-[9px] tracking-widest text-amber-400/90 font-bold uppercase">
@@ -103,33 +103,34 @@ export function Navbar({ activeSection, onNavigate, onOpenResume, onOpenLearning
         </nav>
 
         {/* Right Action Cluster */}
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex items-center gap-1.5 sm:gap-3">
           {/* Audio Feedback Toggle */}
           <button
             onClick={handleSoundToggle}
             onMouseEnter={() => soundManager.playHover()}
-            title={soundEnabled ? "Mute interactive audio" : "Enable tactile sound feedback"}
-            className="p-2 rounded-full border border-amber-400/30 text-amber-300 hover:text-white hover:border-amber-400 hover:bg-amber-400/20 transition-colors"
+            title={soundEnabled ? "Mute audio" : "Enable sound"}
+            className="p-1.5 sm:p-2 rounded-full border border-amber-400/30 text-amber-300 hover:text-white hover:border-amber-400 hover:bg-amber-400/20 transition-colors"
             data-cursor="pointer"
           >
             {soundEnabled ? <Volume2 className="w-3.5 h-3.5 text-amber-400" /> : <VolumeX className="w-3.5 h-3.5" />}
           </button>
 
-          {/* Resume CTA */}
+          {/* Resume CTA (Visible on Mobile & Desktop) */}
           <button
             onClick={() => {
               soundManager.playClick();
               if (onOpenResume) onOpenResume();
             }}
             onMouseEnter={() => soundManager.playHover()}
-            className="hidden sm:flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold border border-amber-400/40 text-amber-300 bg-amber-400/10 hover:bg-amber-400 hover:text-blue-950 transition-all duration-200"
+            className="flex items-center gap-1 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-bold border border-amber-400/40 text-amber-300 bg-amber-400/10 hover:bg-amber-400 hover:text-blue-950 transition-all duration-200"
             data-cursor="pointer"
+            title="Open Resume Document"
           >
             <span>Resume</span>
             <ArrowUpRight className="w-3 h-3 text-amber-400" />
           </button>
 
-          {/* Primary Let's Talk CTA (Golden Yellow 30%) */}
+          {/* Primary Let's Talk CTA (Desktop Only) */}
           <a
             href="#contact"
             onClick={(e) => {
@@ -151,7 +152,7 @@ export function Navbar({ activeSection, onNavigate, onOpenResume, onOpenLearning
               soundManager.playClick();
               setMobileMenuOpen(!mobileMenuOpen);
             }}
-            className="lg:hidden p-2 rounded-full text-amber-300 hover:bg-white/10"
+            className="lg:hidden p-1.5 sm:p-2 rounded-full text-amber-300 hover:bg-white/10"
             data-cursor="pointer"
             aria-label="Toggle menu"
           >
@@ -168,19 +169,19 @@ export function Navbar({ activeSection, onNavigate, onOpenResume, onOpenLearning
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -20, scale: 0.98 }}
             transition={{ duration: 0.2 }}
-            className="lg:hidden mt-2 max-w-7xl mx-auto bg-[#0D1B3E] border border-amber-400/50 rounded-3xl p-6 shadow-2xl backdrop-blur-2xl text-white"
+            className="lg:hidden mt-2 max-w-7xl mx-auto bg-[#091328]/95 border border-amber-400/50 rounded-3xl p-5 sm:p-6 shadow-2xl backdrop-blur-2xl text-white"
           >
             <div className="flex flex-col gap-3">
               <div className="flex items-center gap-2 pb-3 border-b border-white/10">
                 <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
                 <span className="font-mono text-xs text-amber-300 font-semibold">{profileData.status}</span>
               </div>
-              <div className="grid grid-cols-2 gap-2 py-2">
+              <div className="grid grid-cols-2 gap-2 py-1">
                 {navItems.map((item) => (
                   <button
                     key={item.label}
                     onClick={() => handleItemClick(item)}
-                    className="p-2.5 rounded-xl text-left text-sm font-medium text-slate-200 hover:bg-white/10 hover:text-amber-300 transition-colors flex items-center justify-between"
+                    className="p-2.5 rounded-xl text-left text-xs sm:text-sm font-medium text-slate-200 hover:bg-white/10 hover:text-amber-300 transition-colors flex items-center justify-between"
                   >
                     <span>{item.label}</span>
                     {item.isAction && <Sparkles className="w-3 h-3 text-amber-400" />}
@@ -205,7 +206,7 @@ export function Navbar({ activeSection, onNavigate, onOpenResume, onOpenLearning
                   }}
                   className="w-full py-2.5 rounded-full border border-amber-400/40 text-white hover:bg-amber-400 hover:text-blue-950 text-xs font-bold flex items-center justify-center gap-1.5"
                 >
-                  <span>View Complete Resume</span>
+                  <span>View Resume Document</span>
                   <ArrowUpRight className="w-3.5 h-3.5 text-amber-400" />
                 </button>
                 <a

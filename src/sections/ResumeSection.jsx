@@ -14,7 +14,7 @@ export function ResumeSection({ onOpenResume }) {
   };
 
   return (
-    <section className="py-24 sm:py-32 px-4 sm:px-6 md:px-12 relative bg-[#070E20] text-white border-t border-b border-[#1E2E5D]">
+    <section className="py-24 sm:py-32 px-4 sm:px-6 md:px-12 relative bg-[#050B1A]/80 backdrop-blur-sm text-white border-t border-b border-[#1E2E5D]">
       <div className="max-w-6xl mx-auto space-y-12 sm:space-y-16">
         {/* Section Heading */}
         <div className="text-center max-w-2xl mx-auto space-y-4">

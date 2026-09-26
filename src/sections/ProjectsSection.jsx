@@ -7,7 +7,7 @@ import { soundManager } from "../utils/sound";
 
 export function ProjectsSection({ onSelectProject }) {
   return (
-    <section id="projects" className="py-24 sm:py-32 px-4 sm:px-6 md:px-12 relative bg-[#0B1528] text-white border-t border-b border-amber-400/20">
+    <section id="projects" className="py-24 sm:py-32 px-4 sm:px-6 md:px-12 relative bg-[#050B1A]/80 backdrop-blur-sm text-white border-t border-b border-amber-400/20">
       <div className="max-w-7xl mx-auto space-y-16">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-white/10">

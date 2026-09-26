@@ -8,7 +8,7 @@ export function HackathonsSection({ onSelectProject }) {
   const [activeCertificate, setActiveCertificate] = useState(null);
 
   return (
-    <section id="hackathons" className="py-24 sm:py-32 px-4 sm:px-6 md:px-12 relative bg-[#070E20] text-white">
+    <section id="hackathons" className="py-24 sm:py-32 px-4 sm:px-6 md:px-12 relative bg-[#02040A]/75 backdrop-blur-xs text-white">
       <div className="max-w-7xl mx-auto space-y-16">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-[#1E2E5D]">

@@ -112,7 +112,7 @@ export function AboutSection() {
   };
 
   return (
-    <section id="about" className="py-24 sm:py-32 px-4 sm:px-6 md:px-12 bg-[#0B1528] relative border-t border-b border-amber-400/20 text-white">
+    <section id="about" className="py-24 sm:py-32 px-4 sm:px-6 md:px-12 bg-[#050B1A]/80 backdrop-blur-sm relative border-t border-b border-amber-400/20 text-white">
       <div className="max-w-7xl mx-auto space-y-16 sm:space-y-20">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-white/10">

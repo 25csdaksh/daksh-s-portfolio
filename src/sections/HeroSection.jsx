@@ -7,7 +7,7 @@ import { soundManager } from "../utils/sound";
 
 export function HeroSection({ onOpenResume }) {
   return (
-    <section className="relative min-h-[92vh] sm:min-h-screen pt-28 sm:pt-32 pb-16 px-4 sm:px-6 md:px-12 flex flex-col justify-center overflow-hidden bg-[#070E20]">
+    <section className="relative min-h-[92vh] sm:min-h-screen pt-28 sm:pt-32 pb-16 px-4 sm:px-6 md:px-12 flex flex-col justify-center overflow-hidden bg-transparent">
       {/* Massive Low-Opacity Background Watermark Typography */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-sans text-[18vw] font-black tracking-tighter text-blue-500/[0.04] select-none pointer-events-none watermark-text z-0">
         DAKSH

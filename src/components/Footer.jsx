@@ -11,7 +11,7 @@ export function Footer({ onOpenLearning }) {
   };
 
   return (
-    <footer className="bg-[#050A17] text-white pt-16 pb-12 px-4 sm:px-6 md:px-12 relative overflow-hidden border-t border-[#1E2E5D]">
+    <footer className="bg-[#02040A]/95 backdrop-blur-md text-white pt-16 pb-12 px-4 sm:px-6 md:px-12 relative overflow-hidden border-t border-amber-400/20">
       {/* Subtle Background Watermark */}
       <div className="absolute -bottom-10 right-0 font-sans text-[14vw] font-black text-white/5 select-none pointer-events-none">
         SONI

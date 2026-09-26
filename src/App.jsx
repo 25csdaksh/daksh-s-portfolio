@@ -3,6 +3,7 @@ import Lenis from "lenis";
 import { CustomCursor } from "./components/CustomCursor";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
+import { SpaceBackground } from "./components/SpaceBackground";
 import { ProjectModal } from "./components/ProjectModal";
 import { BlogModal } from "./components/BlogModal";
 import { ResumeModal } from "./components/ResumeModal";
@@ -73,9 +74,11 @@ export default function App() {
     }
   }, [selectedProject, selectedPost, resumeOpen, learningOpen]);
 
-
   return (
-    <div className="relative min-h-screen bg-[#070E20] text-white overflow-x-hidden selection:bg-[#F59E0B] selection:text-[#070E20]">
+    <div className="relative min-h-screen bg-[#02040A] text-white overflow-x-hidden selection:bg-[#F59E0B] selection:text-[#02040A]">
+      {/* Deep Space Animated Starfield Background */}
+      <SpaceBackground />
+
       {/* Floating Header / Navbar */}
       <Navbar
         onOpenResume={() => setResumeOpen(true)}
@@ -83,7 +86,7 @@ export default function App() {
       />
 
       {/* Main Sections */}
-      <main className="relative">
+      <main className="relative z-10">
         <HeroSection
           onOpenResume={() => setResumeOpen(true)}
           onOpenLearning={() => setLearningOpen(true)}
@@ -125,4 +128,3 @@ export default function App() {
     </div>
   );
 }
-

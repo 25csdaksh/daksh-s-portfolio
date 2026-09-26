@@ -2,11 +2,11 @@
 
 @layer base {
   :root {
-    /* 60% Dominant: Royal Dark Blue Foundation */
-    --bg-primary: #070E20;
-    --bg-secondary: #0D1B3E;
-    --bg-surface: #122452;
-    --bg-surface-elevated: #172D66;
+    /* 60% Dominant: Deep Space Black & Royal Navy Foundation */
+    --bg-primary: #02040A;
+    --bg-secondary: #050B1A;
+    --bg-surface: #091328;
+    --bg-surface-elevated: #0E1D3E;
     
     /* 30% Secondary: Radiant Golden Yellow Accents */
     --accent-gold: #F59E0B;
@@ -32,8 +32,8 @@
     --border-subtle: rgba(245, 158, 11, 0.2);
     --border-medium: rgba(245, 158, 11, 0.4);
     
-    --card-shadow: 0 8px 30px -4px rgba(7, 14, 32, 0.8), 0 2px 10px -2px rgba(245, 158, 11, 0.08);
-    --card-shadow-hover: 0 20px 40px -10px rgba(7, 14, 32, 0.9), 0 0 25px rgba(245, 158, 11, 0.25);
+    --card-shadow: 0 8px 30px -4px rgba(2, 4, 10, 0.9), 0 2px 10px -2px rgba(245, 158, 11, 0.08);
+    --card-shadow-hover: 0 20px 40px -10px rgba(2, 4, 10, 0.95), 0 0 25px rgba(245, 158, 11, 0.25);
     --font-serif: "Instrument Serif", Georgia, serif;
     --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     --font-mono: "JetBrains Mono", monospace;
@@ -110,7 +110,7 @@
 
 /* Royal Dark Blue 60% & Golden 30% Pro Card */
 .editorial-card, .pro-card {
-  background: rgba(13, 27, 62, 0.75);
+  background: rgba(9, 19, 40, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(245, 158, 11, 0.25);
@@ -123,7 +123,7 @@
 .editorial-card:hover, .pro-card:hover {
   box-shadow: var(--card-shadow-hover);
   border-color: rgba(245, 158, 11, 0.7);
-  background: rgba(18, 36, 82, 0.85);
+  background: rgba(14, 29, 62, 0.9);
   transform: translateY(-2px);
 }
 
@@ -133,13 +133,13 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #070E20;
+  background: #02040A;
 }
 
 ::-webkit-scrollbar-thumb {
   background: #1E3A8A;
   border-radius: 9999px;
-  border: 2px solid #070E20;
+  border: 2px solid #02040A;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -149,7 +149,7 @@
 /* Custom Selection */
 ::selection {
   background-color: #F59E0B;
-  color: #070E20;
+  color: #02040A;
 }
 
 /* Magnetic Button Utility */
@@ -171,7 +171,7 @@
   font-family: var(--font-sans);
   user-select: none;
   pointer-events: none;
-  opacity: 0.04;
+  opacity: 0.03;
 }
 
 /* Sleek Modal Scrollbar */
@@ -197,7 +197,7 @@
 .btn-gold {
   background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 50%, #D97706 100%);
   border: 1px solid #FDE047;
-  color: #070E20;
+  color: #02040A;
   font-weight: 700;
   box-shadow: 0 4px 15px -2px rgba(245, 158, 11, 0.4);
   transition: all 0.3s ease;
@@ -211,18 +211,18 @@
 
 /* Royal Blue & Gold Button Effect */
 .btn-royal-gold {
-  background: linear-gradient(135deg, #122452 0%, #0D1B3E 100%);
+  background: linear-gradient(135deg, #0E1D3E 0%, #091328 100%);
   border: 1px solid rgba(245, 158, 11, 0.5);
   color: #FFFFFF;
-  box-shadow: 0 4px 15px -3px rgba(7, 14, 32, 0.6), 0 2px 6px -2px rgba(245, 158, 11, 0.2);
+  box-shadow: 0 4px 15px -3px rgba(2, 4, 10, 0.7), 0 2px 6px -2px rgba(245, 158, 11, 0.2);
   transition: all 0.3s ease;
 }
 
 .btn-royal-gold:hover {
-  background: linear-gradient(135deg, #172D66 0%, #122452 100%);
+  background: linear-gradient(135deg, #142854 0%, #0E1D3E 100%);
   border-color: #FBBF24;
   color: #FEF08A;
-  box-shadow: 0 8px 25px -4px rgba(7, 14, 32, 0.8), 0 0 14px rgba(245, 158, 11, 0.4);
+  box-shadow: 0 8px 25px -4px rgba(2, 4, 10, 0.85), 0 0 14px rgba(245, 158, 11, 0.4);
   transform: translateY(-1px);
 }
 
@@ -237,4 +237,3 @@
     scroll-behavior: auto !important;
   }
 }
-

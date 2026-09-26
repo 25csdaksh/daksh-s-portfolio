@@ -78,7 +78,7 @@ export function LearningModal({ isOpen, onClose }) {
               soundManager.playClick();
               onClose();
             }}
-            className="fixed inset-0 bg-slate-950/70 backdrop-blur-md"
+            className="fixed inset-0 bg-[#040814]/85 backdrop-blur-md"
           />
 
           {/* Main Modal Card Container */}
@@ -89,25 +89,25 @@ export function LearningModal({ isOpen, onClose }) {
             transition={{ duration: 0.25, ease: "easeOut" }}
             onClick={(e) => e.stopPropagation()}
             data-lenis-prevent="true"
-            className="relative w-full max-w-6xl h-[90vh] max-h-[860px] bg-white rounded-[28px] sm:rounded-3xl border border-amber-200/60 shadow-2xl overflow-hidden z-10 flex flex-col overscroll-contain"
+            className="relative w-full max-w-6xl h-[90vh] max-h-[860px] bg-[#0D1B3E] rounded-[28px] sm:rounded-3xl border border-amber-400/40 shadow-2xl shadow-blue-950/80 overflow-hidden z-10 flex flex-col overscroll-contain text-white"
           >
             {/* Modal Header */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-6 sm:px-8 py-4.5 border-b border-slate-200 bg-slate-50 shrink-0 shadow-xs z-20">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-6 sm:px-8 py-4.5 border-b border-[#1E2E5D] bg-[#070E20] shrink-0 shadow-xs z-20">
               <div className="flex items-center gap-3.5">
-                <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-blue-950 via-blue-900 to-indigo-950 text-amber-300 border border-amber-400/50 flex items-center justify-center shadow-sm shrink-0">
-                  <BookOpen className="w-5 h-5 text-amber-300" />
+                <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-amber-400 to-yellow-500 text-blue-950 border border-amber-300 flex items-center justify-center shadow-md font-bold shrink-0">
+                  <BookOpen className="w-5 h-5 text-blue-950 stroke-[2.5]" />
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
-                    <h2 className="font-sans text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
+                    <h2 className="font-sans text-xl sm:text-2xl font-extrabold text-white tracking-tight">
                       Continuous Learning & Specializations
                     </h2>
-                    <span className="hidden md:inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-amber-50 text-amber-900 border border-amber-300 font-bold">
-                      <Sparkles className="w-3 h-3 text-amber-600" />
+                    <span className="hidden md:inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-amber-400/15 text-amber-300 border border-amber-400/40 font-bold">
+                      <Sparkles className="w-3 h-3 text-amber-400" />
                       <span>Curriculum & Honors</span>
                     </span>
                   </div>
-                  <p className="text-xs font-mono text-slate-500 mt-0.5">
+                  <p className="text-xs font-mono text-slate-300 mt-0.5">
                     Engineering Roadmap, Academic Specializations & Verified Credentials
                   </p>
                 </div>
@@ -115,7 +115,7 @@ export function LearningModal({ isOpen, onClose }) {
 
               <div className="flex items-center gap-3 self-end sm:self-auto">
                 {/* Tab Switcher Pills */}
-                <div className="flex items-center bg-slate-100 p-1 rounded-full border border-slate-200">
+                <div className="flex items-center bg-[#070E20] p-1 rounded-full border border-[#1E2E5D]">
                   <button
                     onClick={() => {
                       soundManager.playClick();
@@ -123,8 +123,8 @@ export function LearningModal({ isOpen, onClose }) {
                     }}
                     className={`px-4 py-1.5 rounded-full text-xs font-mono font-bold transition-all ${
                       activeTab === "roadmap"
-                        ? "bg-gradient-to-r from-blue-950 via-blue-900 to-indigo-950 text-amber-300 border border-amber-400/40 shadow-sm"
-                        : "text-slate-600 hover:text-slate-900"
+                        ? "bg-gradient-to-r from-amber-400 to-yellow-500 text-blue-950 shadow-md font-black"
+                        : "text-slate-300 hover:text-white"
                     }`}
                     data-cursor="pointer"
                   >
@@ -137,8 +137,8 @@ export function LearningModal({ isOpen, onClose }) {
                     }}
                     className={`px-4 py-1.5 rounded-full text-xs font-mono font-bold transition-all ${
                       activeTab === "credentials"
-                        ? "bg-gradient-to-r from-blue-950 via-blue-900 to-indigo-950 text-amber-300 border border-amber-400/40 shadow-sm"
-                        : "text-slate-600 hover:text-slate-900"
+                        ? "bg-gradient-to-r from-amber-400 to-yellow-500 text-blue-950 shadow-md font-black"
+                        : "text-slate-300 hover:text-white"
                     }`}
                     data-cursor="pointer"
                   >
@@ -152,7 +152,7 @@ export function LearningModal({ isOpen, onClose }) {
                     soundManager.playClick();
                     onClose();
                   }}
-                  className="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 border border-slate-200 flex items-center justify-center text-slate-700 transition-all"
+                  className="w-9 h-9 rounded-full bg-[#070E20] hover:bg-[#122452] border border-[#1E2E5D] flex items-center justify-center text-slate-300 hover:text-white transition-all"
                   aria-label="Close"
                   data-cursor="pointer"
                 >
@@ -169,16 +169,16 @@ export function LearningModal({ isOpen, onClose }) {
               {activeTab === "roadmap" ? (
                 /* Tab 1: Interactive Engineering Roadmap */
                 <div className="space-y-6">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-slate-200">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-[#1E2E5D]">
                     <div>
-                      <h3 className="font-sans text-xl sm:text-2xl font-bold text-slate-900">
+                      <h3 className="font-sans text-xl sm:text-2xl font-bold text-white">
                         CSE Curriculum & Architectural Roadmap
                       </h3>
-                      <p className="text-xs font-mono text-slate-500 mt-0.5">
+                      <p className="text-xs font-mono text-slate-300 mt-0.5">
                         Select an engineering domain on the left to inspect detailed curriculum & focus areas
                       </p>
                     </div>
-                    <span className="text-xs font-mono text-amber-800 font-bold bg-amber-50 px-3 py-1 rounded-full border border-amber-300 shrink-0">
+                    <span className="text-xs font-mono text-blue-950 font-black bg-gradient-to-r from-amber-400 to-yellow-500 px-3 py-1 rounded-full border border-amber-300 shrink-0">
                       7 Core Pillars
                     </span>
                   </div>
@@ -199,8 +199,8 @@ export function LearningModal({ isOpen, onClose }) {
                             onMouseEnter={() => soundManager.playHover()}
                             className={`w-full text-left p-4 rounded-2xl border transition-all duration-200 flex items-center justify-between group ${
                               isSelected
-                                ? "bg-gradient-to-r from-blue-950 via-blue-900 to-indigo-950 text-amber-200 border-amber-400/60 shadow-md scale-[1.01]"
-                                : "bg-white border-slate-200 hover:border-amber-300 text-slate-900 hover:bg-slate-50"
+                                ? "bg-gradient-to-r from-[#122452] via-[#1A367C] to-[#0D1B3E] text-white border-amber-400 shadow-md scale-[1.01]"
+                                : "bg-[#070E20] border-[#1E2E5D] hover:border-amber-400/80 text-white hover:bg-[#122452]"
                             }`}
                             data-cursor="pointer"
                           >
@@ -208,19 +208,19 @@ export function LearningModal({ isOpen, onClose }) {
                               <div
                                 className={`w-9 h-9 rounded-xl flex items-center justify-center transition-colors shrink-0 ${
                                   isSelected
-                                    ? "bg-amber-400 text-slate-950 font-bold shadow-xs"
-                                    : "bg-amber-50 text-amber-800 group-hover:bg-blue-900 group-hover:text-amber-300"
+                                    ? "bg-amber-400 text-blue-950 font-black shadow-xs"
+                                    : "bg-[#0D1B3E] text-amber-400 group-hover:bg-amber-400 group-hover:text-blue-950"
                                 }`}
                               >
                                 <Icon className="w-4 h-4" />
                               </div>
                               <div className="min-w-0">
-                                <h4 className="font-sans text-base font-bold truncate">
+                                <h4 className="font-sans text-base font-bold truncate text-white">
                                   {node.title}
                                 </h4>
                                 <p
                                   className={`text-[11px] font-mono truncate ${
-                                    isSelected ? "text-amber-300/90" : "text-slate-500"
+                                    isSelected ? "text-amber-300 font-semibold" : "text-slate-300"
                                   }`}
                                 >
                                   {node.category}
@@ -229,7 +229,7 @@ export function LearningModal({ isOpen, onClose }) {
                             </div>
                             <ChevronRight
                               className={`w-4 h-4 shrink-0 transition-transform ${
-                                isSelected ? "translate-x-1 text-amber-400" : "text-slate-400 group-hover:translate-x-1 group-hover:text-amber-600"
+                                isSelected ? "translate-x-1 text-amber-400" : "text-slate-400 group-hover:translate-x-1 group-hover:text-amber-400"
                               }`}
                             />
                           </button>
@@ -245,40 +245,40 @@ export function LearningModal({ isOpen, onClose }) {
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.2 }}
-                          className="editorial-card p-6 sm:p-8 bg-white space-y-6 rounded-3xl border border-amber-200/60 shadow-md"
+                          className="editorial-card p-6 sm:p-8 bg-[#070E20] space-y-6 rounded-3xl border border-amber-400/40 shadow-xl"
                         >
                           {/* Header */}
-                          <div className="space-y-3 pb-6 border-b border-slate-200">
+                          <div className="space-y-3 pb-6 border-b border-[#1E2E5D]">
                             <div className="flex items-center justify-between flex-wrap gap-2">
-                              <span className="px-3 py-1 rounded-full bg-blue-50 text-blue-900 border border-blue-200 font-mono text-xs font-bold">
+                              <span className="px-3 py-1 rounded-full bg-amber-400/15 text-amber-300 border border-amber-400/40 font-mono text-xs font-bold">
                                 {selectedTopic.category}
                               </span>
-                              <span className="px-2.5 py-0.5 rounded text-[11px] font-mono bg-amber-50 text-amber-900 border border-amber-300 font-bold">
+                              <span className="px-2.5 py-0.5 rounded text-[11px] font-mono bg-gradient-to-r from-amber-400 to-yellow-500 text-blue-950 font-black">
                                 {selectedTopic.status}
                               </span>
                             </div>
 
-                            <h3 className="text-2xl sm:text-3xl font-sans font-extrabold text-slate-900">
+                            <h3 className="text-2xl sm:text-3xl font-sans font-extrabold text-white">
                               {selectedTopic.title}
                             </h3>
 
-                            <p className="text-sm text-slate-600 leading-relaxed font-sans">
+                            <p className="text-sm text-slate-200 leading-relaxed font-sans font-normal">
                               {selectedTopic.summary}
                             </p>
                           </div>
 
                           {/* Subtopic Modules */}
                           <div className="space-y-4">
-                            <h4 className="font-mono text-xs uppercase tracking-wider text-amber-800 font-bold">
+                            <h4 className="font-mono text-xs uppercase tracking-wider text-amber-400 font-bold">
                               Key Topics & Practical Focus Areas:
                             </h4>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                               {selectedTopic.topics.map((topic, tIdx) => (
                                 <div
                                   key={tIdx}
-                                  className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-800 font-medium flex items-start gap-2.5 hover:border-amber-300 transition-colors"
+                                  className="p-3.5 rounded-xl bg-[#0D1B3E] border border-[#1E2E5D] text-xs text-slate-200 font-medium flex items-start gap-2.5 hover:border-amber-400 transition-colors"
                                 >
-                                  <CheckCircle2 className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                                  <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
                                   <span>{topic}</span>
                                 </div>
                               ))}
@@ -286,7 +286,7 @@ export function LearningModal({ isOpen, onClose }) {
                           </div>
 
                           {/* Growth Commitment Callout */}
-                          <div className="p-4 rounded-2xl bg-gradient-to-r from-blue-950 via-slate-900 to-blue-950 border border-amber-400/40 flex items-center justify-between text-xs font-mono text-amber-200 shadow-sm">
+                          <div className="p-4 rounded-2xl bg-[#0D1B3E] border border-amber-400/40 flex items-center justify-between text-xs font-mono text-amber-300 shadow-md">
                             <div className="flex items-center gap-2">
                               <Sparkles className="w-4 h-4 text-amber-400" />
                               <span>Applied directly in production & hackathons.</span>
@@ -301,25 +301,25 @@ export function LearningModal({ isOpen, onClose }) {
               ) : (
                 /* Tab 2: Verified Credentials & Specializations Gallery */
                 <div className="space-y-6">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-200">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#1E2E5D]">
                     <div>
-                      <h3 className="font-sans text-xl sm:text-2xl font-bold text-slate-900">
+                      <h3 className="font-sans text-xl sm:text-2xl font-bold text-white">
                         Verified Specializations & Credentials
                       </h3>
-                      <p className="text-xs font-mono text-slate-500 mt-0.5">
+                      <p className="text-xs font-mono text-slate-300 mt-0.5">
                         University of London, Meta, Cisco & Udemy accredited credentials
                       </p>
                     </div>
 
                     {/* Search Input */}
                     <div className="relative w-full sm:w-64">
-                      <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                      <Search className="w-3.5 h-3.5 text-amber-400 absolute left-3 top-1/2 -translate-y-1/2" />
                       <input
                         type="text"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         placeholder="Search credentials..."
-                        className="w-full pl-9 pr-3 py-2 rounded-full text-xs font-mono bg-white border border-slate-300 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-400"
+                        className="w-full pl-9 pr-3 py-2 rounded-full text-xs font-mono bg-[#070E20] border border-[#1E2E5D] text-white focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 placeholder:text-slate-500"
                       />
                     </div>
                   </div>
@@ -329,7 +329,7 @@ export function LearningModal({ isOpen, onClose }) {
                       <div
                         key={cert.id}
                         onMouseEnter={() => soundManager.playHover()}
-                        className="editorial-card p-5 bg-white flex flex-col justify-between border border-slate-200 rounded-2xl relative group overflow-hidden shadow-xs hover:border-amber-400 hover:shadow-lg transition-all duration-300"
+                        className="editorial-card p-5 bg-[#070E20] flex flex-col justify-between border border-[#1E2E5D] rounded-2xl relative group overflow-hidden shadow-xl hover:border-amber-400 hover:shadow-2xl transition-all duration-300"
                       >
                         <div className="space-y-3">
                           {/* Thumbnail Preview with Inspect Button */}
@@ -338,7 +338,7 @@ export function LearningModal({ isOpen, onClose }) {
                               soundManager.playClick();
                               setActiveCertDetail(cert);
                             }}
-                            className="relative aspect-[16/10] w-full rounded-xl overflow-hidden bg-slate-50 border border-slate-200 cursor-pointer group/thumb shadow-inner"
+                            className="relative aspect-[16/10] w-full rounded-xl overflow-hidden bg-[#0D1B3E] border border-[#1E2E5D] cursor-pointer group/thumb shadow-inner"
                             data-cursor="pointer"
                           >
                             <img
@@ -347,11 +347,11 @@ export function LearningModal({ isOpen, onClose }) {
                               className="w-full h-full object-cover object-top group-hover/thumb:scale-105 transition-transform duration-500"
                               loading="lazy"
                             />
-                            <div className="absolute inset-0 bg-slate-950/80 opacity-0 group-hover/thumb:opacity-100 transition-opacity flex items-center justify-center gap-2 text-amber-300 font-mono text-xs font-bold">
+                            <div className="absolute inset-0 bg-[#070E20]/85 opacity-0 group-hover/thumb:opacity-100 transition-opacity flex items-center justify-center gap-2 text-amber-300 font-mono text-xs font-bold">
                               <Eye className="w-4 h-4 text-amber-400" />
                               <span>Inspect Certificate</span>
                             </div>
-                            <span className="absolute top-2 left-2 px-2.5 py-0.5 rounded bg-blue-900 text-amber-300 border border-amber-400/40 font-mono text-[9px] font-bold shadow-xs">
+                            <span className="absolute top-2 left-2 px-2.5 py-0.5 rounded bg-gradient-to-r from-amber-400 to-yellow-500 text-blue-950 font-mono text-[9px] font-black shadow-sm">
                               {cert.badge}
                             </span>
                           </div>
@@ -359,7 +359,7 @@ export function LearningModal({ isOpen, onClose }) {
                           {/* Info */}
                           <div>
                             <div className="flex items-center justify-between text-[11px] font-mono text-slate-400 mb-1">
-                              <span className="text-amber-800 font-bold">✓ Verified</span>
+                              <span className="text-amber-300 font-bold">✓ Verified</span>
                               <span>{cert.date}</span>
                             </div>
                             <h4
@@ -367,27 +367,27 @@ export function LearningModal({ isOpen, onClose }) {
                                 soundManager.playClick();
                                 setActiveCertDetail(cert);
                               }}
-                              className="font-sans text-base sm:text-lg font-bold text-slate-900 group-hover:text-blue-700 transition-colors cursor-pointer leading-snug"
+                              className="font-sans text-base sm:text-lg font-bold text-white group-hover:text-amber-300 transition-colors cursor-pointer leading-snug"
                             >
                               {cert.title}
                             </h4>
-                            <p className="font-mono text-xs font-bold text-blue-700 mt-0.5">
+                            <p className="font-mono text-xs font-bold text-amber-400 mt-0.5">
                               {cert.organization}
                             </p>
                           </div>
 
-                          <p className="text-xs text-slate-600 leading-relaxed line-clamp-2">
+                          <p className="text-xs text-slate-200 leading-relaxed line-clamp-2 font-normal">
                             {cert.capstone}
                           </p>
                         </div>
 
-                        <div className="pt-3 mt-3 border-t border-slate-100 grid grid-cols-2 gap-2">
+                        <div className="pt-3 mt-3 border-t border-[#1E2E5D] grid grid-cols-2 gap-2">
                           <button
                             onClick={() => {
                               soundManager.playClick();
                               setActiveCertDetail(cert);
                             }}
-                            className="py-2 px-2.5 rounded-xl bg-slate-100 hover:bg-amber-50 hover:text-amber-900 border border-transparent hover:border-amber-300 text-slate-800 font-mono text-[11px] font-bold flex items-center justify-center gap-1 transition-all"
+                            className="py-2 px-2.5 rounded-xl bg-[#0D1B3E] hover:bg-[#122452] border border-[#1E2E5D] hover:border-amber-400 text-slate-200 hover:text-amber-300 font-mono text-[11px] font-bold flex items-center justify-center gap-1 transition-all"
                             data-cursor="pointer"
                           >
                             <Eye className="w-3 h-3" />
@@ -397,11 +397,11 @@ export function LearningModal({ isOpen, onClose }) {
                             href={cert.verifyUrl}
                             target="_blank"
                             rel="noreferrer"
-                            className="py-2 px-2.5 rounded-xl bg-blue-900 hover:bg-blue-800 text-amber-300 border border-amber-400/40 font-mono text-[11px] font-bold flex items-center justify-center gap-1 shadow-xs shadow-blue-900/20 transition-colors"
+                            className="py-2 px-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-500 text-blue-950 font-mono text-[11px] font-black flex items-center justify-center gap-1 shadow-md shadow-amber-500/20 hover:scale-105 transition-all"
                             data-cursor="pointer"
                           >
                             <span>Verify ↗</span>
-                            <ExternalLink className="w-3 h-3" />
+                            <ExternalLink className="w-3 h-3 text-blue-950 stroke-[2.5]" />
                           </a>
                         </div>
                       </div>
@@ -427,7 +427,7 @@ export function LearningModal({ isOpen, onClose }) {
                     soundManager.playClick();
                     setActiveCertDetail(null);
                   }}
-                  className="fixed inset-0 bg-slate-950/80 backdrop-blur-md"
+                  className="fixed inset-0 bg-[#040814]/85 backdrop-blur-md"
                 />
 
                 <motion.div
@@ -436,18 +436,18 @@ export function LearningModal({ isOpen, onClose }) {
                   exit={{ opacity: 0, scale: 0.95, y: 15 }}
                   onClick={(e) => e.stopPropagation()}
                   data-lenis-prevent="true"
-                  className="relative w-full max-w-4xl bg-white rounded-3xl border border-amber-300 shadow-2xl overflow-hidden z-20 max-h-[90vh] flex flex-col overscroll-contain"
+                  className="relative w-full max-w-4xl bg-[#0D1B3E] rounded-3xl border border-amber-400/50 shadow-2xl overflow-hidden z-20 max-h-[90vh] flex flex-col overscroll-contain text-white"
                 >
-                  <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 bg-slate-50 shrink-0">
+                  <div className="flex items-center justify-between px-6 py-4 border-b border-[#1E2E5D] bg-[#070E20] shrink-0">
                     <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-xl bg-blue-900 text-amber-300 border border-amber-400/40 flex items-center justify-center">
-                        <Award className="w-5 h-5 text-amber-400" />
+                      <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-400 to-yellow-500 text-blue-950 border border-amber-300 flex items-center justify-center font-bold">
+                        <Award className="w-5 h-5 text-blue-950 stroke-[2.5]" />
                       </div>
                       <div>
-                        <h3 className="font-sans text-lg font-bold text-slate-900">
+                        <h3 className="font-sans text-lg font-bold text-white">
                           {activeCertDetail.title}
                         </h3>
-                        <p className="font-mono text-xs text-blue-700 font-bold">
+                        <p className="font-mono text-xs text-amber-300 font-bold">
                           {activeCertDetail.organization} • {activeCertDetail.instructor}
                         </p>
                       </div>
@@ -458,7 +458,7 @@ export function LearningModal({ isOpen, onClose }) {
                         soundManager.playClick();
                         setActiveCertDetail(null);
                       }}
-                      className="p-1.5 rounded-full hover:bg-slate-200 text-slate-700 transition-colors"
+                      className="p-1.5 rounded-full bg-[#070E20] hover:bg-[#122452] text-slate-300 hover:text-white border border-[#1E2E5D]"
                       aria-label="Close"
                       data-cursor="pointer"
                     >
@@ -471,7 +471,7 @@ export function LearningModal({ isOpen, onClose }) {
                     className="overflow-y-auto modal-scrollbar p-6 space-y-6 flex-1"
                   >
                     {activeCertDetail.imagePreview && (
-                      <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-md bg-slate-50">
+                      <div className="rounded-2xl overflow-hidden border border-[#1E2E5D] shadow-md bg-[#070E20]">
                         <img
                           src={activeCertDetail.imagePreview}
                           alt={`${activeCertDetail.title} Certificate`}
@@ -480,26 +480,26 @@ export function LearningModal({ isOpen, onClose }) {
                       </div>
                     )}
 
-                    <div className="p-4 rounded-xl bg-amber-50/40 border border-amber-200 space-y-1">
-                      <span className="font-mono text-[10px] uppercase tracking-wider text-amber-800 font-bold">
+                    <div className="p-4 rounded-xl bg-[#070E20] border border-amber-400/30 space-y-1">
+                      <span className="font-mono text-[10px] uppercase tracking-wider text-amber-400 font-bold">
                         Specialization Capstone Deliverable
                       </span>
-                      <p className="text-xs sm:text-sm text-slate-800 leading-relaxed">
+                      <p className="text-xs sm:text-sm text-slate-200 leading-relaxed font-normal">
                         {activeCertDetail.capstone}
                       </p>
                     </div>
 
                     <div className="flex items-center justify-between font-mono text-xs pt-2">
-                      <span className="text-slate-500">ID: {activeCertDetail.credentialId}</span>
+                      <span className="text-slate-400">ID: {activeCertDetail.credentialId}</span>
                       <a
                         href={activeCertDetail.verifyUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="px-4 py-2 rounded-xl bg-blue-900 hover:bg-blue-800 text-amber-300 border border-amber-400/40 font-bold flex items-center gap-1.5 transition-colors shadow-sm"
+                        className="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-500 text-blue-950 font-bold flex items-center gap-1.5 shadow-md shadow-amber-500/20 hover:scale-105 transition-all"
                         data-cursor="pointer"
                       >
                         <span>Verify Credential Online</span>
-                        <ExternalLink className="w-3.5 h-3.5 text-amber-400" />
+                        <ExternalLink className="w-3.5 h-3.5 text-blue-950 stroke-[2.5]" />
                       </a>
                     </div>
                   </div>

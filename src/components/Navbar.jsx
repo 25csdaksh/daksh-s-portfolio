@@ -54,8 +54,8 @@ export function Navbar({ activeSection, onNavigate, onOpenResume, onOpenLearning
       <div
         className={`max-w-7xl mx-auto rounded-full transition-all duration-400 px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between ${
           isScrolled
-            ? "bg-white/95 backdrop-blur-xl border border-amber-200/80 shadow-lg shadow-blue-950/5"
-            : "bg-white/85 backdrop-blur-md border border-slate-200/90 shadow-xs"
+            ? "bg-[#0D1B3E]/95 backdrop-blur-xl border border-amber-400/50 shadow-2xl shadow-black/60"
+            : "bg-[#0D1B3E]/85 backdrop-blur-md border border-amber-400/30 shadow-lg shadow-black/30"
         }`}
       >
         {/* Brand Monogram & Name */}
@@ -69,14 +69,14 @@ export function Navbar({ activeSection, onNavigate, onOpenResume, onOpenLearning
           className="flex items-center gap-3 group"
           data-cursor="pointer"
         >
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-700 via-blue-800 to-slate-900 text-amber-300 border border-amber-400/80 flex items-center justify-center font-sans text-xs font-black shadow-sm transition-transform duration-300 group-hover:scale-110 group-hover:border-amber-400 group-hover:shadow-[0_0_12px_rgba(212,175,55,0.4)]">
+          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-900 via-blue-950 to-slate-950 text-amber-400 border-2 border-amber-400 flex items-center justify-center font-sans text-xs font-black shadow-md transition-transform duration-300 group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(245,158,11,0.6)]">
             DS
           </div>
           <div className="flex flex-col">
-            <span className="font-sans text-base sm:text-lg font-bold tracking-tight text-slate-900 group-hover:text-blue-700 transition-colors">
+            <span className="font-sans text-base sm:text-lg font-bold tracking-tight text-white group-hover:text-amber-400 transition-colors">
               Daksh Soni
             </span>
-            <span className="hidden sm:inline-block font-mono text-[9px] tracking-widest text-amber-700/80 font-semibold uppercase">
+            <span className="hidden sm:inline-block font-mono text-[9px] tracking-widest text-amber-400/90 font-bold uppercase">
               Engineer • AI & Full Stack
             </span>
           </div>
@@ -91,12 +91,12 @@ export function Navbar({ activeSection, onNavigate, onOpenResume, onOpenLearning
               onMouseEnter={() => soundManager.playHover()}
               className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-200 flex items-center gap-1.5 ${
                 item.isAction
-                  ? "text-blue-900 bg-amber-50 hover:bg-blue-700 hover:text-amber-200 font-semibold border border-amber-300/80 shadow-2xs"
-                  : "text-slate-600 hover:text-blue-700 hover:bg-blue-50/60"
+                  ? "text-amber-300 bg-amber-400/15 hover:bg-amber-400 hover:text-blue-950 font-bold border border-amber-400/50 shadow-xs"
+                  : "text-slate-200 hover:text-amber-300 hover:bg-white/10"
               }`}
               data-cursor="pointer"
             >
-              {item.isAction && <BookOpen className="w-3.5 h-3.5 text-amber-600" />}
+              {item.isAction && <BookOpen className="w-3.5 h-3.5 text-amber-400" />}
               <span>{item.label}</span>
             </button>
           ))}
@@ -109,10 +109,10 @@ export function Navbar({ activeSection, onNavigate, onOpenResume, onOpenLearning
             onClick={handleSoundToggle}
             onMouseEnter={() => soundManager.playHover()}
             title={soundEnabled ? "Mute interactive audio" : "Enable tactile sound feedback"}
-            className="p-2 rounded-full border border-slate-200 text-slate-600 hover:text-blue-700 hover:border-amber-300 hover:bg-amber-50/40 transition-colors"
+            className="p-2 rounded-full border border-amber-400/30 text-amber-300 hover:text-white hover:border-amber-400 hover:bg-amber-400/20 transition-colors"
             data-cursor="pointer"
           >
-            {soundEnabled ? <Volume2 className="w-3.5 h-3.5 text-blue-700" /> : <VolumeX className="w-3.5 h-3.5" />}
+            {soundEnabled ? <Volume2 className="w-3.5 h-3.5 text-amber-400" /> : <VolumeX className="w-3.5 h-3.5" />}
           </button>
 
           {/* Resume CTA */}
@@ -122,14 +122,14 @@ export function Navbar({ activeSection, onNavigate, onOpenResume, onOpenLearning
               if (onOpenResume) onOpenResume();
             }}
             onMouseEnter={() => soundManager.playHover()}
-            className="hidden sm:flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold border border-amber-300/80 text-slate-800 bg-amber-50/30 hover:border-blue-600 hover:text-blue-700 hover:bg-blue-50/50 transition-all duration-200"
+            className="hidden sm:flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold border border-amber-400/40 text-amber-300 bg-amber-400/10 hover:bg-amber-400 hover:text-blue-950 transition-all duration-200"
             data-cursor="pointer"
           >
             <span>Resume</span>
-            <ArrowUpRight className="w-3 h-3 text-amber-600" />
+            <ArrowUpRight className="w-3 h-3 text-amber-400" />
           </button>
 
-          {/* Primary Let's Talk CTA */}
+          {/* Primary Let's Talk CTA (Golden Yellow 30%) */}
           <a
             href="#contact"
             onClick={(e) => {
@@ -139,7 +139,7 @@ export function Navbar({ activeSection, onNavigate, onOpenResume, onOpenLearning
               if (target) target.scrollIntoView({ behavior: "smooth" });
             }}
             onMouseEnter={() => soundManager.playHover()}
-            className="hidden sm:inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-gradient-to-r from-blue-700 via-blue-800 to-indigo-900 text-white text-xs font-semibold border border-amber-400/60 shadow-md shadow-blue-900/20 transition-all duration-200 hover:shadow-lg hover:shadow-blue-900/30 hover:border-amber-300 hover:scale-[1.02]"
+            className="hidden sm:inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-blue-950 text-xs font-extrabold border border-yellow-300 shadow-md shadow-amber-500/20 transition-all duration-200 hover:shadow-lg hover:shadow-amber-500/40 hover:scale-[1.03]"
             data-cursor="pointer"
           >
             <span>Let's Connect</span>
@@ -151,7 +151,7 @@ export function Navbar({ activeSection, onNavigate, onOpenResume, onOpenLearning
               soundManager.playClick();
               setMobileMenuOpen(!mobileMenuOpen);
             }}
-            className="lg:hidden p-2 rounded-full text-slate-800 hover:bg-slate-100"
+            className="lg:hidden p-2 rounded-full text-amber-300 hover:bg-white/10"
             data-cursor="pointer"
             aria-label="Toggle menu"
           >
@@ -168,34 +168,34 @@ export function Navbar({ activeSection, onNavigate, onOpenResume, onOpenLearning
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -20, scale: 0.98 }}
             transition={{ duration: 0.2 }}
-            className="lg:hidden mt-2 max-w-7xl mx-auto bg-white border border-amber-200/80 rounded-3xl p-6 shadow-2xl backdrop-blur-2xl"
+            className="lg:hidden mt-2 max-w-7xl mx-auto bg-[#0D1B3E] border border-amber-400/50 rounded-3xl p-6 shadow-2xl backdrop-blur-2xl text-white"
           >
             <div className="flex flex-col gap-3">
-              <div className="flex items-center gap-2 pb-3 border-b border-slate-100">
-                <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
-                <span className="font-mono text-xs text-slate-800 font-semibold">{profileData.status}</span>
+              <div className="flex items-center gap-2 pb-3 border-b border-white/10">
+                <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+                <span className="font-mono text-xs text-amber-300 font-semibold">{profileData.status}</span>
               </div>
               <div className="grid grid-cols-2 gap-2 py-2">
                 {navItems.map((item) => (
                   <button
                     key={item.label}
                     onClick={() => handleItemClick(item)}
-                    className="p-2.5 rounded-xl text-left text-sm font-medium text-slate-800 hover:bg-blue-50 hover:text-blue-700 transition-colors flex items-center justify-between"
+                    className="p-2.5 rounded-xl text-left text-sm font-medium text-slate-200 hover:bg-white/10 hover:text-amber-300 transition-colors flex items-center justify-between"
                   >
                     <span>{item.label}</span>
-                    {item.isAction && <Sparkles className="w-3 h-3 text-amber-500" />}
+                    {item.isAction && <Sparkles className="w-3 h-3 text-amber-400" />}
                   </button>
                 ))}
               </div>
-              <div className="pt-3 border-t border-slate-100 flex flex-col gap-2">
+              <div className="pt-3 border-t border-white/10 flex flex-col gap-2">
                 <button
                   onClick={() => {
                     setMobileMenuOpen(false);
                     if (onOpenLearning) onOpenLearning();
                   }}
-                  className="w-full py-2.5 rounded-full bg-amber-50 text-blue-900 border border-amber-300 text-xs font-semibold flex items-center justify-center gap-1.5"
+                  className="w-full py-2.5 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/50 text-xs font-bold flex items-center justify-center gap-1.5"
                 >
-                  <BookOpen className="w-3.5 h-3.5 text-amber-600" />
+                  <BookOpen className="w-3.5 h-3.5 text-amber-400" />
                   <span>Open Learning & Specializations</span>
                 </button>
                 <button
@@ -203,10 +203,10 @@ export function Navbar({ activeSection, onNavigate, onOpenResume, onOpenLearning
                     setMobileMenuOpen(false);
                     if (onOpenResume) onOpenResume();
                   }}
-                  className="w-full py-2.5 rounded-full border border-slate-300 text-slate-700 hover:border-blue-700 hover:text-blue-700 text-xs font-semibold flex items-center justify-center gap-1.5"
+                  className="w-full py-2.5 rounded-full border border-amber-400/40 text-white hover:bg-amber-400 hover:text-blue-950 text-xs font-bold flex items-center justify-center gap-1.5"
                 >
                   <span>View Complete Resume</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 text-amber-600" />
+                  <ArrowUpRight className="w-3.5 h-3.5 text-amber-400" />
                 </button>
                 <a
                   href="#contact"
@@ -216,7 +216,7 @@ export function Navbar({ activeSection, onNavigate, onOpenResume, onOpenLearning
                     const target = document.querySelector("#contact");
                     if (target) target.scrollIntoView({ behavior: "smooth" });
                   }}
-                  className="w-full py-2.5 rounded-full bg-gradient-to-r from-blue-700 via-blue-800 to-indigo-900 text-white text-xs font-semibold text-center shadow-md border border-amber-400/50 shadow-blue-900/20"
+                  className="w-full py-2.5 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-blue-950 text-xs font-extrabold text-center shadow-md border border-yellow-300"
                 >
                   Let's Connect →
                 </a>

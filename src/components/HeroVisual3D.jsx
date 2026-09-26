@@ -125,7 +125,7 @@ export function HeroVisual3D() {
 
           if (dist < radius * 1.5) {
             const alpha = Math.max(0.04, 0.28 - dist / (radius * 1.5));
-            ctx.strokeStyle = i % 2 === 0 ? `rgba(29, 78, 216, ${alpha})` : `rgba(212, 175, 55, ${alpha * 1.1})`;
+            ctx.strokeStyle = i % 2 === 0 ? `rgba(59, 130, 246, ${alpha})` : `rgba(245, 158, 11, ${alpha * 1.2})`;
             ctx.beginPath();
             ctx.moveTo(projected[i].x, projected[i].y);
             ctx.lineTo(projected[j].x, projected[j].y);
@@ -137,7 +137,7 @@ export function HeroVisual3D() {
       // Draw projected nodes
       projected.forEach((p, idx) => {
         const nodeAlpha = Math.min(1, Math.max(0.3, (p.z + radius) / (2 * radius)));
-        ctx.fillStyle = idx % 2 === 0 ? `rgba(29, 78, 216, ${nodeAlpha})` : `rgba(212, 175, 55, ${nodeAlpha})`;
+        ctx.fillStyle = idx % 2 === 0 ? `rgba(96, 165, 250, ${nodeAlpha})` : `rgba(251, 191, 36, ${nodeAlpha})`;
         ctx.beginPath();
         ctx.arc(p.x, p.y, Math.max(0.8, 3.4 * p.scale), 0, Math.PI * 2);
         ctx.fill();
@@ -149,7 +149,7 @@ export function HeroVisual3D() {
         pt.y += Math.cos(rotY) * 0.4;
         const pProj = project([pt.x, pt.y, pt.z]);
         const pAlpha = Math.min(1, Math.max(0.02, 0.22 * pProj.scale));
-        ctx.fillStyle = idx % 2 === 0 ? `rgba(29, 78, 216, ${pAlpha})` : `rgba(212, 175, 55, ${pAlpha})`;
+        ctx.fillStyle = idx % 2 === 0 ? `rgba(96, 165, 250, ${pAlpha})` : `rgba(251, 191, 36, ${pAlpha})`;
         ctx.beginPath();
         ctx.arc(pProj.x, pProj.y, Math.max(0.5, pt.size * pProj.scale), 0, Math.PI * 2);
         ctx.fill();
@@ -182,22 +182,21 @@ export function HeroVisual3D() {
       className="relative w-full aspect-square max-w-[540px] mx-auto flex items-center justify-center select-none"
     >
       {/* Subtle background ambient glow */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/10 via-amber-500/5 to-indigo-900/10 rounded-3xl blur-2xl -z-10" />
+      <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 via-amber-500/15 to-indigo-900/30 rounded-3xl blur-3xl -z-10" />
 
       {/* Decorative Grid Frame */}
-      <div className="absolute inset-4 rounded-3xl border border-amber-200/70 bg-white/80 backdrop-blur-xs pointer-events-none -z-10 overflow-hidden shadow-md">
-        <div className="absolute inset-0 bg-noise opacity-50" />
-        <div className="absolute top-4 left-4 font-mono text-[10px] tracking-widest text-blue-800 font-bold uppercase">
+      <div className="absolute inset-4 rounded-3xl border border-amber-400/40 bg-[#0B1528]/80 backdrop-blur-md pointer-events-none -z-10 overflow-hidden shadow-2xl shadow-blue-950/80">
+        <div className="absolute top-4 left-4 font-mono text-[10px] tracking-widest text-amber-400 font-bold uppercase">
           SYS.ID // DAKSH.ENGINEERING
         </div>
-        <div className="absolute top-4 right-4 flex items-center gap-1.5 font-mono text-[10px] text-slate-800">
-          <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
-          <span>{currentTime || "IST / LIVE"}</span>
+        <div className="absolute top-4 right-4 flex items-center gap-1.5 font-mono text-[10px] text-slate-200">
+          <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+          <span className="text-amber-300 font-bold">{currentTime || "IST / LIVE"}</span>
         </div>
-        <div className="absolute bottom-4 left-4 font-mono text-[9px] text-slate-600">
+        <div className="absolute bottom-4 left-4 font-mono text-[9px] text-slate-300">
           LATENCY: &lt;14ms • AI_CORE: ACTIVE
         </div>
-        <div className="absolute bottom-4 right-4 font-mono text-[9px] text-amber-800 font-semibold">
+        <div className="absolute bottom-4 right-4 font-mono text-[9px] text-amber-400 font-bold">
           2026.PRO
         </div>
       </div>
@@ -223,17 +222,17 @@ export function HeroVisual3D() {
           x: { duration: 0.2 },
         }}
         onMouseEnter={() => soundManager.playHover()}
-        className="absolute -top-3 -right-2 md:top-6 md:-right-4 bg-white/95 backdrop-blur-md px-3.5 py-2.5 rounded-xl border border-amber-300/80 shadow-xl shadow-blue-950/5 flex items-center gap-3 z-10"
+        className="absolute -top-3 -right-2 md:top-6 md:-right-4 bg-[#0D1B3E]/95 backdrop-blur-md px-3.5 py-2.5 rounded-xl border border-amber-400/50 shadow-2xl flex items-center gap-3 z-10 text-white"
       >
-        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-700 to-indigo-900 text-amber-300 border border-amber-400/50 flex items-center justify-center shadow-xs">
-          <ShieldCheck className="w-4 h-4 text-amber-300" />
+        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-amber-400 to-yellow-500 text-blue-950 border border-amber-300 flex items-center justify-center font-bold shadow-xs">
+          <ShieldCheck className="w-4 h-4 text-blue-950 stroke-[2.5]" />
         </div>
         <div>
           <div className="flex items-center gap-1.5">
-            <span className="font-mono text-[10px] tracking-wider text-blue-900 font-bold">Netram AI</span>
-            <span className="px-1.5 py-0.5 rounded text-[9px] font-mono bg-amber-50 text-amber-900 font-bold border border-amber-300">98.2% Acc</span>
+            <span className="font-mono text-[10px] tracking-wider text-amber-400 font-bold">Netram AI</span>
+            <span className="px-1.5 py-0.5 rounded text-[9px] font-mono bg-amber-400/15 text-amber-300 font-bold border border-amber-400/40">98.2% Acc</span>
           </div>
-          <p className="text-[11px] text-slate-600">Deepfake Detection & AI Defense</p>
+          <p className="text-[11px] text-slate-200 font-normal">Deepfake Detection & AI Defense</p>
         </div>
       </motion.div>
 
@@ -248,21 +247,21 @@ export function HeroVisual3D() {
           x: { duration: 0.2 },
         }}
         onMouseEnter={() => soundManager.playHover()}
-        className="absolute -bottom-4 -left-2 md:bottom-6 md:-left-6 bg-slate-950 text-slate-100 p-3.5 rounded-xl border border-amber-500/30 shadow-2xl font-mono text-[11px] max-w-[240px] z-10"
+        className="absolute -bottom-4 -left-2 md:bottom-6 md:-left-6 bg-[#050A17] text-slate-100 p-3.5 rounded-xl border border-amber-400/40 shadow-2xl font-mono text-[11px] max-w-[240px] z-10"
       >
-        <div className="flex items-center justify-between pb-2 border-b border-slate-800 mb-2">
+        <div className="flex items-center justify-between pb-2 border-b border-[#1E2E5D] mb-2">
           <div className="flex items-center gap-1.5">
             <span className="w-2 h-2 rounded-full bg-red-400" />
             <span className="w-2 h-2 rounded-full bg-amber-400" />
             <span className="w-2 h-2 rounded-full bg-blue-400" />
           </div>
-          <span className="text-[9px] text-amber-400/90 font-semibold">daksh.architecture()</span>
+          <span className="text-[9px] text-amber-400 font-bold">daksh.architecture()</span>
         </div>
         <div className="text-blue-300 text-[10px] leading-tight">
-          <span className="text-amber-300">const</span> product = <span className="text-blue-400">await</span> build({`{`}
-          <div className="pl-3 text-slate-300">
-            craft: <span className="text-amber-200">"Production"</span>,
-            impact: <span className="text-blue-300">"High Precision"</span>
+          <span className="text-amber-400 font-bold">const</span> product = <span className="text-sky-400">await</span> build({`{`}
+          <div className="pl-3 text-slate-200">
+            craft: <span className="text-amber-300">"Production"</span>,
+            impact: <span className="text-amber-300">"High Precision"</span>
           </div>
           {`}`});
         </div>
@@ -279,21 +278,21 @@ export function HeroVisual3D() {
           x: { duration: 0.2 },
         }}
         onMouseEnter={() => soundManager.playHover()}
-        className="absolute top-1/2 -left-4 md:-left-8 -translate-y-1/2 bg-white/95 backdrop-blur-md px-3 py-2 rounded-lg border border-amber-300/80 shadow-lg flex items-center gap-2 z-10"
+        className="absolute top-1/2 -left-4 md:-left-8 -translate-y-1/2 bg-[#0D1B3E]/95 backdrop-blur-md px-3 py-2 rounded-lg border border-amber-400/50 shadow-xl flex items-center gap-2 z-10 text-white"
       >
-        <span className="w-2 h-2 rounded-full bg-amber-500 animate-ping" />
+        <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
         <div>
-          <p className="font-mono text-[9px] tracking-wider text-blue-900 font-bold uppercase">SIH 2026</p>
-          <p className="text-[10px] font-semibold text-slate-900">Team Leader • 36h Sprint</p>
+          <p className="font-mono text-[9px] tracking-wider text-amber-400 font-bold uppercase">SIH 2026</p>
+          <p className="text-[10px] font-bold text-white">Team Leader • 36h Sprint</p>
         </div>
       </motion.div>
 
       {/* Center Avatar Badge / Monogram */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-gradient-to-br from-blue-700 via-blue-900 to-slate-950 text-amber-300 border-2 border-amber-400/80 shadow-2xl shadow-blue-950/40 flex flex-col items-center justify-center pointer-events-none group">
-        <span className="font-sans text-3xl md:text-4xl font-black tracking-tighter text-amber-300 drop-shadow-sm">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-gradient-to-br from-amber-400 via-amber-500 to-yellow-500 text-blue-950 border-2 border-amber-300 shadow-2xl shadow-amber-500/30 flex flex-col items-center justify-center pointer-events-none group">
+        <span className="font-sans text-3xl md:text-4xl font-black tracking-tighter text-blue-950 drop-shadow-xs">
           DS
         </span>
-        <span className="text-[8px] tracking-widest font-mono text-amber-200/90 uppercase font-bold">
+        <span className="text-[8px] tracking-widest font-mono text-blue-950 uppercase font-black">
           ENGINEER
         </span>
       </div>

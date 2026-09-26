@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { X, ExternalLink, CheckCircle2, Copy, Check, Terminal, Play, ShieldAlert, Cpu, Sparkles, AlertCircle } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { X, ExternalLink, CheckCircle2, Copy, Check, Terminal, Play, Sparkles, AlertCircle } from "lucide-react";
 import { Github } from "./Icons";
 import { soundManager } from "../utils/sound";
 
@@ -113,7 +114,7 @@ export function ProjectModal({ project, onClose }) {
             soundManager.playClick();
             onClose();
           }}
-          className="fixed inset-0 bg-slate-950/70 backdrop-blur-md"
+          className="fixed inset-0 bg-[#040814]/85 backdrop-blur-md"
         />
 
         {/* Modal Container */}
@@ -124,15 +125,15 @@ export function ProjectModal({ project, onClose }) {
           transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
           onClick={(e) => e.stopPropagation()}
           data-lenis-prevent="true"
-          className="relative w-full max-w-4xl bg-white rounded-3xl border border-amber-200/80 shadow-2xl overflow-hidden z-10 max-h-[92vh] flex flex-col overscroll-contain"
+          className="relative w-full max-w-4xl bg-[#0D1B3E] rounded-3xl border border-amber-400/40 shadow-2xl shadow-blue-950/80 overflow-hidden z-10 max-h-[92vh] flex flex-col overscroll-contain text-white"
         >
           {/* Header Bar */}
-          <div className="flex items-center justify-between px-5 sm:px-6 py-4 sm:py-5 border-b border-slate-200 bg-slate-50 shrink-0">
+          <div className="flex items-center justify-between px-5 sm:px-6 py-4 sm:py-5 border-b border-[#1E2E5D] bg-[#070E20] shrink-0">
             <div className="flex items-center gap-2 sm:gap-3">
-              <span className="px-3 py-1 rounded-full bg-gradient-to-r from-blue-700 to-indigo-950 text-amber-200 border border-amber-400/50 font-mono text-xs font-semibold">
+              <span className="px-3 py-1 rounded-full bg-gradient-to-r from-amber-400 to-yellow-500 text-blue-950 font-mono text-xs font-bold shadow-xs">
                 {project.category}
               </span>
-              <span className="font-mono text-xs text-slate-500 hidden sm:inline">{project.year}</span>
+              <span className="font-mono text-xs text-amber-300/80 hidden sm:inline">{project.year}</span>
             </div>
 
             <div className="flex items-center gap-2 sm:gap-3">
@@ -147,11 +148,11 @@ export function ProjectModal({ project, onClose }) {
                     window.open(project.liveUrl, "_blank", "noopener,noreferrer");
                   }}
                   onMouseEnter={() => soundManager.playHover()}
-                  className="px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-gradient-to-r from-blue-700 via-blue-800 to-indigo-950 text-white border border-amber-400/50 hover:border-amber-300 font-mono text-xs font-bold flex items-center gap-1.5 shadow-sm shadow-blue-900/20 transition-all hover:scale-105"
+                  className="px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-blue-950 font-mono text-xs font-extrabold flex items-center gap-1.5 shadow-md shadow-amber-500/20 hover:shadow-amber-400/30 transition-all hover:scale-105"
                   title="Launch Live Project in New Tab"
                 >
                   <span>Launch Live App</span>
-                  <ExternalLink className="w-3.5 h-3.5 text-amber-300" />
+                  <ExternalLink className="w-3.5 h-3.5 text-blue-950 stroke-[2.5]" />
                 </a>
               )}
 
@@ -166,7 +167,7 @@ export function ProjectModal({ project, onClose }) {
                     window.open(project.githubUrl, "_blank", "noopener,noreferrer");
                   }}
                   onMouseEnter={() => soundManager.playHover()}
-                  className="p-2 rounded-xl border border-slate-300 hover:bg-slate-100 text-slate-700 transition-colors hidden sm:flex items-center"
+                  className="p-2 rounded-xl border border-[#1E2E5D] bg-[#070E20] hover:bg-[#122452] hover:border-amber-400/60 text-slate-300 hover:text-amber-300 transition-colors hidden sm:flex items-center"
                   title="View Source on GitHub"
                 >
                   <Github className="w-4 h-4" />
@@ -179,7 +180,7 @@ export function ProjectModal({ project, onClose }) {
                   onClose();
                 }}
                 onMouseEnter={() => soundManager.playHover()}
-                className="p-2 rounded-full hover:bg-slate-200 text-slate-700 transition-colors"
+                className="p-2 rounded-full bg-[#070E20] hover:bg-[#122452] text-slate-300 hover:text-white border border-[#1E2E5D] transition-colors"
                 data-cursor="pointer"
                 aria-label="Close modal"
               >
@@ -196,34 +197,34 @@ export function ProjectModal({ project, onClose }) {
             {/* Title & Tagline */}
             <div>
               <div className="flex items-center gap-2 mb-2">
-                <span className="text-xs font-mono uppercase tracking-widest text-blue-800 font-bold">
+                <span className="text-xs font-mono uppercase tracking-widest text-amber-400 font-bold">
                   Role: {project.role}
                 </span>
                 {project.featuredBadge && (
-                  <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-amber-50 text-amber-900 font-bold border border-amber-300">
+                  <span className="px-2.5 py-0.5 rounded text-[10px] font-mono bg-amber-400/15 text-amber-300 font-bold border border-amber-400/40">
                     {project.featuredBadge}
                   </span>
                 )}
               </div>
-              <h2 className="text-3xl sm:text-4xl font-sans font-extrabold text-slate-900 tracking-tight">
+              <h2 className="text-3xl sm:text-4xl font-sans font-extrabold text-white tracking-tight">
                 {project.title}
               </h2>
-              <p className="text-base text-slate-600 mt-2 font-sans font-medium">
+              <p className="text-base text-slate-200 mt-2 font-sans font-normal leading-relaxed">
                 {project.tagline}
               </p>
             </div>
 
             {/* Navigation Tabs */}
-            <div className="flex items-center gap-2 border-b border-slate-200 pb-2">
+            <div className="flex items-center gap-2 border-b border-[#1E2E5D] pb-3">
               <button
                 onClick={() => {
                   soundManager.playClick();
                   setActiveTab("overview");
                 }}
-                className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
+                className={`px-4 py-2 rounded-xl text-xs font-bold font-mono transition-all ${
                   activeTab === "overview"
-                    ? "bg-gradient-to-r from-blue-700 to-indigo-950 text-white border border-amber-400/50 shadow-sm"
-                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
+                    ? "bg-gradient-to-r from-amber-400 to-yellow-500 text-blue-950 shadow-md shadow-amber-500/20"
+                    : "text-slate-300 hover:text-white hover:bg-white/5"
                 }`}
                 data-cursor="pointer"
               >
@@ -234,10 +235,10 @@ export function ProjectModal({ project, onClose }) {
                   soundManager.playClick();
                   setActiveTab("architecture");
                 }}
-                className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
+                className={`px-4 py-2 rounded-xl text-xs font-bold font-mono transition-all ${
                   activeTab === "architecture"
-                    ? "bg-gradient-to-r from-blue-700 to-indigo-950 text-white border border-amber-400/50 shadow-sm"
-                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
+                    ? "bg-gradient-to-r from-amber-400 to-yellow-500 text-blue-950 shadow-md shadow-amber-500/20"
+                    : "text-slate-300 hover:text-white hover:bg-white/5"
                 }`}
                 data-cursor="pointer"
               >
@@ -248,14 +249,14 @@ export function ProjectModal({ project, onClose }) {
                   soundManager.playClick();
                   setActiveTab("liveSimulator");
                 }}
-                className={`px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all ${
+                className={`px-4 py-2 rounded-xl text-xs font-bold font-mono flex items-center gap-1.5 transition-all ${
                   activeTab === "liveSimulator"
-                    ? "bg-gradient-to-r from-blue-700 to-indigo-950 text-amber-200 border border-amber-400/50 shadow-sm"
-                    : "text-blue-900 bg-amber-50 hover:bg-amber-100 border border-amber-300"
+                    ? "bg-gradient-to-r from-amber-400 to-yellow-500 text-blue-950 shadow-md shadow-amber-500/20"
+                    : "text-amber-300 bg-amber-400/10 hover:bg-amber-400/20 border border-amber-400/30"
                 }`}
                 data-cursor="pointer"
               >
-                <Play className="w-3 h-3 fill-current text-amber-600" />
+                <Play className="w-3 h-3 fill-current text-amber-400 group-hover:text-blue-950" />
                 <span>Live Interactive Sandbox</span>
               </button>
             </div>
@@ -265,15 +266,15 @@ export function ProjectModal({ project, onClose }) {
               <div className="space-y-6">
                 {/* Full Width Project High-Res Cover Preview */}
                 {project.coverImage && (
-                  <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden border border-slate-200 shadow-md bg-slate-900 group">
+                  <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden border border-[#1E2E5D] shadow-xl bg-[#070E20] group">
                     <img
                       src={project.coverImage}
                       alt={`${project.title} Cover`}
                       className="w-full h-full object-cover object-top"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#070E20]/90 via-transparent to-transparent pointer-events-none" />
                     <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-white font-mono text-xs">
-                      <span className="bg-slate-900/75 backdrop-blur-md px-3 py-1 rounded-lg border border-white/10">
+                      <span className="bg-[#070E20]/85 backdrop-blur-md px-3 py-1 rounded-lg border border-amber-400/30 text-amber-300 font-bold">
                         {project.title} • Production Interface
                       </span>
                       {project.liveUrl && (
@@ -286,7 +287,7 @@ export function ProjectModal({ project, onClose }) {
                             soundManager.playClick();
                             window.open(project.liveUrl, "_blank", "noopener,noreferrer");
                           }}
-                          className="bg-blue-600 hover:bg-blue-700 text-white px-3.5 py-1.5 rounded-lg flex items-center gap-1.5 shadow-sm transition-all hover:scale-105 font-mono text-xs font-semibold"
+                          className="bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-blue-950 font-extrabold px-3.5 py-1.5 rounded-lg flex items-center gap-1.5 shadow-md hover:scale-105 font-mono text-xs transition-all"
                         >
                           <span>Open Live Site</span>
                           <ExternalLink className="w-3.5 h-3.5" />
@@ -298,22 +299,22 @@ export function ProjectModal({ project, onClose }) {
 
                 {/* Problem vs Solution Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="p-5 rounded-2xl bg-red-50/50 border border-red-200 shadow-xs">
-                    <div className="flex items-center gap-2 text-red-700 font-mono text-xs font-bold uppercase tracking-wider mb-2">
-                      <AlertCircle className="w-4 h-4" />
+                  <div className="p-5 rounded-2xl bg-red-950/20 border border-red-800/40 shadow-xs">
+                    <div className="flex items-center gap-2 text-rose-400 font-mono text-xs font-bold uppercase tracking-wider mb-2">
+                      <AlertCircle className="w-4 h-4 text-rose-400" />
                       <span>The Problem</span>
                     </div>
-                    <p className="text-sm text-slate-700 leading-relaxed">
+                    <p className="text-sm text-slate-200 leading-relaxed font-sans">
                       {project.problemSolved}
                     </p>
                   </div>
 
-                  <div className="p-5 rounded-2xl bg-blue-50/50 border border-blue-200 shadow-xs">
-                    <div className="flex items-center gap-2 text-blue-700 font-mono text-xs font-bold uppercase tracking-wider mb-2">
-                      <Sparkles className="w-4 h-4 text-blue-600" />
+                  <div className="p-5 rounded-2xl bg-[#122452]/70 border border-amber-400/40 shadow-xs">
+                    <div className="flex items-center gap-2 text-amber-300 font-mono text-xs font-bold uppercase tracking-wider mb-2">
+                      <Sparkles className="w-4 h-4 text-amber-400" />
                       <span>The Engineered Solution</span>
                     </div>
-                    <p className="text-sm text-slate-700 leading-relaxed">
+                    <p className="text-sm text-slate-200 leading-relaxed font-sans">
                       {project.solution}
                     </p>
                   </div>
@@ -322,16 +323,16 @@ export function ProjectModal({ project, onClose }) {
                 {/* Key Features List */}
                 {project.keyFeatures && (
                   <div>
-                    <h3 className="text-xs font-mono uppercase tracking-wider text-blue-600 font-bold mb-3">
+                    <h3 className="text-xs font-mono uppercase tracking-wider text-amber-400 font-bold mb-3">
                       Core Capabilities & Features
                     </h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {project.keyFeatures.map((feat, idx) => (
                         <div
                           key={idx}
-                          className="flex items-start gap-2.5 p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-800 font-medium"
+                          className="flex items-start gap-2.5 p-3.5 rounded-xl bg-[#070E20] border border-[#1E2E5D] text-xs text-slate-200 font-medium"
                         >
-                          <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+                          <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
                           <span>{feat}</span>
                         </div>
                       ))}
@@ -342,14 +343,14 @@ export function ProjectModal({ project, onClose }) {
                 {/* Tech Stack Badges */}
                 {project.technologies && (
                   <div>
-                    <h3 className="text-xs font-mono uppercase tracking-wider text-blue-600 font-bold mb-3">
+                    <h3 className="text-xs font-mono uppercase tracking-wider text-amber-400 font-bold mb-3">
                       Technology Stack
                     </h3>
                     <div className="flex flex-wrap gap-2">
                       {project.technologies.map((tech) => (
                         <span
                           key={tech}
-                          className="px-3 py-1.5 rounded-lg bg-slate-50 border border-slate-200 font-mono text-xs font-semibold text-slate-700"
+                          className="px-3 py-1.5 rounded-lg bg-[#070E20] border border-amber-400/30 font-mono text-xs font-bold text-amber-300"
                         >
                           {tech}
                         </span>
@@ -363,28 +364,28 @@ export function ProjectModal({ project, onClose }) {
             {/* Tab 2: Architecture & Code Snippet */}
             {activeTab === "architecture" && (
               <div className="space-y-6">
-                <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200">
-                  <h3 className="text-xs font-mono uppercase tracking-wider text-blue-600 font-bold mb-2">
+                <div className="p-5 rounded-2xl bg-[#070E20] border border-[#1E2E5D]">
+                  <h3 className="text-xs font-mono uppercase tracking-wider text-amber-400 font-bold mb-2">
                     System Architecture & Design Decisions
                   </h3>
-                  <p className="text-sm text-slate-700 leading-relaxed">
+                  <p className="text-sm text-slate-200 leading-relaxed font-sans">
                     {project.summary}
                   </p>
                 </div>
 
                 {/* Code Terminal */}
                 {project.codeSnippet && (
-                  <div className="rounded-2xl bg-slate-900 text-slate-100 overflow-hidden border border-slate-800 shadow-xl">
-                    <div className="flex items-center justify-between px-4 py-3 border-b border-slate-800 bg-slate-950/60">
+                  <div className="rounded-2xl bg-[#050A17] text-slate-100 overflow-hidden border border-amber-400/30 shadow-xl">
+                    <div className="flex items-center justify-between px-4 py-3 border-b border-[#1E2E5D] bg-[#070E20]">
                       <div className="flex items-center gap-2">
-                        <Terminal className="w-4 h-4 text-sky-400" />
-                        <span className="font-mono text-xs text-slate-400">
+                        <Terminal className="w-4 h-4 text-amber-400" />
+                        <span className="font-mono text-xs text-amber-300 font-semibold">
                           {project.title.toLowerCase().replace(/\s+/g, "-")}.core
                         </span>
                       </div>
                       <button
                         onClick={handleCopyCode}
-                        className="flex items-center gap-1.5 px-2.5 py-1 rounded text-[11px] font-mono bg-white/10 hover:bg-white/20 text-white transition-colors"
+                        className="flex items-center gap-1.5 px-2.5 py-1 rounded text-[11px] font-mono bg-amber-400/15 hover:bg-amber-400/25 text-amber-300 border border-amber-400/40 transition-colors"
                         data-cursor="pointer"
                       >
                         {copiedCode ? (
@@ -400,7 +401,7 @@ export function ProjectModal({ project, onClose }) {
                         )}
                       </button>
                     </div>
-                    <pre className="p-5 text-xs font-mono text-sky-300 overflow-x-auto leading-relaxed">
+                    <pre className="p-5 text-xs font-mono text-amber-200 overflow-x-auto leading-relaxed">
                       <code>{project.codeSnippet}</code>
                     </pre>
                   </div>
@@ -410,25 +411,25 @@ export function ProjectModal({ project, onClose }) {
 
             {/* Tab 3: Live Simulator Sandbox */}
             {activeTab === "liveSimulator" && (
-              <div className="p-6 rounded-2xl bg-white border border-slate-200 space-y-5">
-                <div className="flex items-center justify-between">
+              <div className="p-6 rounded-2xl bg-[#070E20] border border-amber-400/40 space-y-5">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div>
-                    <h3 className="text-sm font-bold text-slate-900">
+                    <h3 className="text-sm font-bold text-white">
                       Interactive {project.title} Engine Simulator
                     </h3>
-                    <p className="text-xs text-slate-500">
+                    <p className="text-xs text-slate-300">
                       Execute a simulated payload to observe the algorithmic evaluation pipeline in real time.
                     </p>
                   </div>
                   <button
                     onClick={runSimulation}
                     disabled={simulationState.running}
-                    className="px-4 py-2 rounded-xl bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 disabled:opacity-50 flex items-center gap-2 shadow-sm shadow-blue-500/20"
+                    className="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-blue-950 text-xs font-extrabold disabled:opacity-50 flex items-center gap-2 shadow-md shadow-amber-500/20"
                     data-cursor="pointer"
                   >
                     {simulationState.running ? (
                       <>
-                        <span className="w-3.5 h-3.5 rounded-full border-2 border-white/20 border-t-white animate-spin" />
+                        <span className="w-3.5 h-3.5 rounded-full border-2 border-blue-950/30 border-t-blue-950 animate-spin" />
                         <span>Evaluating...</span>
                       </>
                     ) : (
@@ -441,38 +442,38 @@ export function ProjectModal({ project, onClose }) {
                 </div>
 
                 {/* Simulation Output Window */}
-                <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 font-mono text-xs">
+                <div className="p-4 rounded-xl bg-[#050A17] border border-[#1E2E5D] font-mono text-xs">
                   {simulationState.running ? (
                     <div className="space-y-2 py-4">
-                      <div className="flex items-center gap-2 text-blue-600">
-                        <span className="w-2 h-2 rounded-full bg-blue-600 animate-ping" />
+                      <div className="flex items-center gap-2 text-amber-400">
+                        <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
                         <span>Step {simulationState.step}/3: Parsing ingested payload & running model inference...</span>
                       </div>
-                      <div className="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden">
-                        <div className="h-full bg-blue-600 animate-pulse w-3/4 rounded-full" />
+                      <div className="w-full h-1.5 bg-[#0D1B3E] rounded-full overflow-hidden">
+                        <div className="h-full bg-gradient-to-r from-amber-400 to-yellow-500 animate-pulse w-3/4 rounded-full" />
                       </div>
                     </div>
                   ) : simulationState.output ? (
                     <div className="space-y-3">
-                      <div className="flex items-center justify-between pb-2 border-b border-slate-200 text-emerald-700 font-bold">
+                      <div className="flex items-center justify-between pb-2 border-b border-[#1E2E5D] text-emerald-400 font-bold">
                         <span>● STATUS: {simulationState.output.status}</span>
-                        <span className="text-[10px] text-slate-500 font-medium">LIVE RESULT</span>
+                        <span className="text-[10px] text-amber-300 font-medium">LIVE RESULT</span>
                       </div>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px]">
                         {Object.entries(simulationState.output).map(([key, val]) => {
                           if (key === "status") return null;
                           return (
-                            <div key={key} className="p-2 rounded bg-white border border-slate-200">
-                              <span className="text-slate-500 capitalize">{key.replace(/([A-Z])/g, " $1")}: </span>
-                              <span className="font-semibold text-slate-900">{Array.isArray(val) ? val.join(", ") : val}</span>
+                            <div key={key} className="p-2.5 rounded-lg bg-[#070E20] border border-[#1E2E5D]">
+                              <span className="text-amber-400/80 capitalize">{key.replace(/([A-Z])/g, " $1")}: </span>
+                              <span className="font-semibold text-white">{Array.isArray(val) ? val.join(", ") : val}</span>
                             </div>
                           );
                         })}
                       </div>
                     </div>
                   ) : (
-                    <p className="text-slate-500 py-3 text-center">
-                      Click <strong className="text-blue-600">"Run Live Pipeline"</strong> to test model response and API data pipeline.
+                    <p className="text-slate-400 py-3 text-center">
+                      Click <strong className="text-amber-400">"Run Live Pipeline"</strong> to test model response and API data pipeline.
                     </p>
                   )}
                 </div>
@@ -481,9 +482,9 @@ export function ProjectModal({ project, onClose }) {
           </div>
 
           {/* Footer Actions */}
-          <div className="flex items-center justify-between px-6 py-4 border-t border-slate-200 bg-slate-50">
-            <div className="text-xs text-slate-500">
-              Designed & Engineered by <span className="font-semibold text-slate-900">Daksh Soni</span>
+          <div className="flex items-center justify-between px-6 py-4 border-t border-[#1E2E5D] bg-[#070E20]">
+            <div className="text-xs text-slate-300 font-mono">
+              Designed & Engineered by <span className="font-bold text-amber-300">Daksh Soni</span>
             </div>
             <div className="flex items-center gap-3">
               {project.githubUrl && (
@@ -497,7 +498,7 @@ export function ProjectModal({ project, onClose }) {
                     window.open(project.githubUrl, "_blank", "noopener,noreferrer");
                   }}
                   onMouseEnter={() => soundManager.playHover()}
-                  className="flex items-center gap-1.5 px-4 py-2 rounded-full border border-slate-300 text-xs font-semibold text-slate-800 hover:bg-slate-100 transition-colors"
+                  className="flex items-center gap-1.5 px-4 py-2 rounded-full border border-[#1E2E5D] bg-[#0D1B3E] text-xs font-bold text-slate-200 hover:text-amber-300 hover:border-amber-400 transition-colors font-mono"
                 >
                   <Github className="w-3.5 h-3.5" />
                   <span>GitHub</span>
@@ -514,7 +515,7 @@ export function ProjectModal({ project, onClose }) {
                     window.open(project.liveUrl, "_blank", "noopener,noreferrer");
                   }}
                   onMouseEnter={() => soundManager.playHover()}
-                  className="flex items-center gap-1.5 px-5 py-2 rounded-full bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 shadow-sm shadow-blue-500/20 transition-all hover:scale-105"
+                  className="flex items-center gap-1.5 px-5 py-2 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-blue-950 text-xs font-extrabold shadow-md shadow-amber-500/20 hover:scale-105 transition-all font-mono"
                 >
                   <span>Launch Live Demo</span>
                   <ExternalLink className="w-3.5 h-3.5" />

@@ -112,20 +112,20 @@ export function AboutSection() {
   };
 
   return (
-    <section id="about" className="py-24 sm:py-32 px-4 sm:px-6 md:px-12 bg-white relative border-t border-b border-slate-200">
+    <section id="about" className="py-24 sm:py-32 px-4 sm:px-6 md:px-12 bg-[#0B1528] relative border-t border-b border-amber-400/20 text-white">
       <div className="max-w-7xl mx-auto space-y-16 sm:space-y-20">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-slate-200">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-white/10">
           <div>
-            <div className="flex items-center gap-2 mb-2 font-mono text-xs uppercase tracking-widest text-blue-800 font-bold">
-              <span className="w-2 h-2 rounded-full bg-amber-500" />
+            <div className="flex items-center gap-2 mb-2 font-mono text-xs uppercase tracking-widest text-amber-400 font-bold">
+              <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
               <span>01 // About & Identity</span>
             </div>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-sans font-extrabold text-slate-900 tracking-tight">
-              More than <span className="gradient-text-royal-gold">just code.</span>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-sans font-extrabold text-white tracking-tight">
+              More than <span className="gradient-text-gold">just code.</span>
             </h2>
           </div>
-          <p className="text-sm font-mono text-slate-500 max-w-xs">
+          <p className="text-sm font-mono text-slate-300 max-w-xs">
             TRANSFORMING ALGORITHMIC RIGOR INTO COMPELLING DIGITAL PRODUCTS.
           </p>
         </div>
@@ -133,27 +133,27 @@ export function AboutSection() {
         {/* Narrative & Philosophy Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           {/* Left: Deep Narrative Story */}
-          <div className="lg:col-span-7 space-y-6 text-base sm:text-lg text-slate-600 leading-relaxed font-sans">
+          <div className="lg:col-span-7 space-y-6 text-base sm:text-lg text-slate-200 leading-relaxed font-sans">
             <p>
               My path in technology is rooted in a simple belief: computer science isn't merely an academic study of data structures and algorithms—it is the ultimate lever for constructing tools that elevate human capability.
             </p>
             <p>
-              As a <strong>Computer Science Engineering student</strong>, I spend my days pushing beyond classroom theory. Whether architecting high-throughput backend services in Node.js and NestJS, designing fluid client-side interfaces in React, or training and serving AI anomaly detection models in Python, I strive to master the full engineering stack.
+              As a <strong className="text-amber-300">Computer Science Engineering student</strong>, I spend my days pushing beyond classroom theory. Whether architecting high-throughput backend services in Node.js and NestJS, designing fluid client-side interfaces in React, or training and serving AI anomaly detection models in Python, I strive to master the full engineering stack.
             </p>
             <p>
               Leading hackathon squads through grueling 36-hour sprints taught me how to architect under constraints, bridge cross-functional talents, and pitch solutions with uncompromising clarity. My ultimate ambition is software entrepreneurship—crafting enduring digital products that solve genuine real-world friction.
             </p>
 
             {/* Editorial Philosophy Quote Block */}
-            <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-amber-50/60 to-blue-50/40 border-l-4 border-amber-400 border border-amber-200/80 shadow-xs my-6">
-              <span className="font-mono text-[10px] tracking-widest uppercase text-blue-900 font-bold block mb-2">
+            <div className="p-6 sm:p-8 rounded-2xl bg-[#0D1B3E] border-l-4 border-amber-400 border border-amber-400/40 shadow-xl my-6">
+              <span className="font-mono text-[10px] tracking-widest uppercase text-amber-400 font-bold block mb-2">
                 CORE PHILOSOPHY
               </span>
-              <blockquote className="font-serif italic text-2xl sm:text-3xl text-slate-900 leading-snug">
+              <blockquote className="font-serif italic text-2xl sm:text-3xl text-white leading-snug">
                 "{profileData.philosophy}"
               </blockquote>
-              <div className="mt-3 flex items-center gap-2 text-xs font-mono text-slate-600">
-                <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+              <div className="mt-3 flex items-center gap-2 text-xs font-mono text-amber-300">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
                 <span>Daksh Soni • Engineering Mindset</span>
               </div>
             </div>
@@ -167,29 +167,29 @@ export function AboutSection() {
                   key={idx}
                   whileHover={{ y: -4 }}
                   onMouseEnter={() => soundManager.playHover()}
-                  className="p-5 sm:p-6 rounded-2xl bg-white border border-slate-200 shadow-xs hover:border-amber-400 hover:shadow-lg hover:shadow-blue-950/5 transition-all duration-300 flex flex-col justify-between group"
+                  className="p-5 sm:p-6 rounded-2xl bg-[#0D1B3E] border border-amber-400/30 shadow-lg hover:border-amber-400 hover:shadow-2xl hover:shadow-amber-400/10 transition-all duration-300 flex flex-col justify-between group"
                   data-cursor="pointer"
                 >
-                  <div className="font-sans text-3xl sm:text-4xl font-extrabold text-blue-800 group-hover:text-blue-700 transition-colors">
+                  <div className="font-sans text-3xl sm:text-4xl font-black text-amber-400 group-hover:text-yellow-300 transition-colors">
                     <StatCounter value={stat.value} suffix={stat.suffix} />
                   </div>
                   <div className="mt-3">
-                    <h3 className="font-sans font-bold text-sm text-slate-900">{stat.label}</h3>
-                    <p className="text-xs text-slate-500 font-mono mt-0.5">{stat.detail}</p>
+                    <h3 className="font-sans font-bold text-sm text-white">{stat.label}</h3>
+                    <p className="text-xs text-slate-300 font-mono mt-0.5">{stat.detail}</p>
                   </div>
                 </motion.div>
               ))}
             </div>
 
             {/* Quick Pillars Box */}
-            <div className="p-6 rounded-2xl bg-gradient-to-br from-blue-950 via-slate-900 to-slate-950 text-white space-y-4 shadow-xl border border-amber-400/30">
+            <div className="p-6 rounded-2xl bg-[#132247] text-white space-y-4 shadow-xl border border-amber-400/40">
               <div className="flex items-center justify-between">
                 <span className="font-mono text-[11px] tracking-wider uppercase text-amber-300 font-bold">
                   Core Engineering Pillars
                 </span>
                 <Sparkles className="w-4 h-4 text-amber-400" />
               </div>
-              <ul className="space-y-2 text-xs font-mono text-slate-300">
+              <ul className="space-y-2 text-xs font-mono text-slate-200">
                 <li className="flex items-center gap-2">
                   <span className="text-amber-400 font-bold">01.</span> Algorithmic Efficiency (C++ / DSA)
                 </li>
@@ -208,13 +208,13 @@ export function AboutSection() {
         </div>
 
         {/* Evolutionary Journey Flow Timeline */}
-        <div className="space-y-5 pt-8 border-t border-slate-200">
+        <div className="space-y-5 pt-8 border-t border-white/10">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <h3 className="font-mono text-xs uppercase tracking-widest text-blue-800 font-bold">
+              <h3 className="font-mono text-xs uppercase tracking-widest text-amber-400 font-bold">
                 The Evolution: Journey Pipeline
               </h3>
-              <p className="text-xs font-mono text-slate-500 mt-0.5">
+              <p className="text-xs font-mono text-slate-400 mt-0.5">
                 End-to-End Progression
               </p>
             </div>
@@ -224,7 +224,7 @@ export function AboutSection() {
               <button
                 onClick={() => handleScroll("left")}
                 aria-label="Scroll left"
-                className="w-8 h-8 rounded-full border border-slate-300 flex items-center justify-center text-slate-700 hover:bg-blue-800 hover:text-amber-200 hover:border-blue-800 transition-all duration-200"
+                className="w-8 h-8 rounded-full border border-amber-400/40 flex items-center justify-center text-amber-300 hover:bg-amber-400 hover:text-blue-950 transition-all duration-200"
                 data-cursor="pointer"
               >
                 <ChevronLeft className="w-3.5 h-3.5" />
@@ -232,7 +232,7 @@ export function AboutSection() {
               <button
                 onClick={() => handleScroll("right")}
                 aria-label="Scroll right"
-                className="w-8 h-8 rounded-full border border-slate-300 flex items-center justify-center text-slate-700 hover:bg-blue-800 hover:text-amber-200 hover:border-blue-800 transition-all duration-200"
+                className="w-8 h-8 rounded-full border border-amber-400/40 flex items-center justify-center text-amber-300 hover:bg-amber-400 hover:text-blue-950 transition-all duration-200"
                 data-cursor="pointer"
               >
                 <ChevronRight className="w-3.5 h-3.5" />
@@ -269,29 +269,29 @@ export function AboutSection() {
                   <div
                     key={idx}
                     onMouseEnter={() => soundManager.playHover()}
-                    className="relative flex-shrink-0 w-[210px] sm:w-[230px] p-4 sm:p-5 rounded-2xl bg-white border border-slate-200 flex flex-col justify-between group hover:border-amber-400 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                    className="relative flex-shrink-0 w-[210px] sm:w-[230px] p-4 sm:p-5 rounded-2xl bg-[#0D1B3E] border border-amber-400/30 flex flex-col justify-between group hover:border-amber-400 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
                     data-cursor="pointer"
                   >
                     {/* Top Row: Icon & Step Number */}
                     <div className="flex items-center justify-between mb-3">
-                      <div className="w-9 h-9 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-blue-900 shadow-2xs group-hover:bg-blue-800 group-hover:text-amber-300 group-hover:border-blue-800 transition-all duration-300">
+                      <div className="w-9 h-9 rounded-xl bg-amber-400/20 border border-amber-400/40 flex items-center justify-center text-amber-300 shadow-2xs group-hover:bg-amber-400 group-hover:text-blue-950 transition-all duration-300">
                         <Icon className="w-4 h-4" />
                       </div>
 
                       <div className="flex items-center gap-1.5">
-                        <span className="font-mono text-xs text-slate-400 font-bold group-hover:text-blue-800 transition-colors">
+                        <span className="font-mono text-xs text-amber-400 font-bold">
                           {step.step}
                         </span>
-                        <span className="w-1.5 h-1.5 rounded-full bg-slate-200 group-hover:bg-amber-400 transition-all" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-amber-400/40 group-hover:bg-amber-400 transition-all" />
                       </div>
                     </div>
 
                     {/* Bottom: Title & Label */}
                     <div>
-                      <h4 className="font-sans font-bold text-sm sm:text-base text-slate-900 group-hover:text-blue-800 transition-colors">
+                      <h4 className="font-sans font-bold text-sm sm:text-base text-white group-hover:text-amber-300 transition-colors">
                         {step.title}
                       </h4>
-                      <p className="text-[11px] font-mono text-slate-500 group-hover:text-slate-700 font-medium mt-1 leading-snug">
+                      <p className="text-[11px] font-mono text-slate-300 font-medium mt-1 leading-snug">
                         {step.label}
                       </p>
                     </div>
@@ -302,9 +302,9 @@ export function AboutSection() {
           </div>
 
           {/* Progress Bar Track */}
-          <div className="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
+          <div className="w-full bg-[#070E20] h-1.5 rounded-full overflow-hidden border border-amber-400/20">
             <div
-              className="bg-gradient-to-r from-blue-700 via-blue-800 to-amber-500 h-full transition-all duration-100 rounded-full"
+              className="bg-gradient-to-r from-blue-600 via-amber-400 to-yellow-400 h-full transition-all duration-100 rounded-full"
               style={{ width: `${Math.max(10, scrollProgress)}%` }}
             />
           </div>

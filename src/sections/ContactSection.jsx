@@ -35,7 +35,6 @@ export function ContactSection() {
     setErrorMessage("");
 
     try {
-      // Send real email via FormSubmit AJAX endpoint directly to dakshsoni1023@gmail.com
       const response = await fetch(`https://formsubmit.co/ajax/${profileData.email}`, {
         method: "POST",
         headers: {
@@ -59,49 +58,46 @@ export function ContactSection() {
         setFormStatus("success");
         soundManager.playChime();
 
-        // Trigger celebration confetti
         try {
           confetti({
-            particleCount: 80,
-            spread: 70,
+            particleCount: 90,
+            spread: 80,
             origin: { y: 0.6 },
-            colors: ["#123C2F", "#D4AF37", "#1A5442", "#FAF5E6"],
+            colors: ["#1D4ED8", "#D4AF37", "#F59E0B", "#1E3A8A", "#FEF9C3"],
           });
         } catch (err) {
           // Ignore confetti failure
         }
       } else {
-        // Fallback to mailto if service rate limits
         console.warn("FormSubmit response:", result);
         setFormStatus("success");
         soundManager.playChime();
       }
     } catch (err) {
       console.error("Email dispatch error:", err);
-      // Fallback
       setFormStatus("success");
       soundManager.playChime();
     }
   };
 
   return (
-    <section id="contact" className="py-24 sm:py-32 px-4 sm:px-6 md:px-12 relative bg-[#F7F7F3]">
+    <section id="contact" className="py-24 sm:py-32 px-4 sm:px-6 md:px-12 relative bg-slate-50/60">
       <div className="max-w-7xl mx-auto space-y-16">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-[#123C2F]/10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-slate-200">
           <div>
-            <div className="flex items-center gap-2 mb-2 font-mono text-xs uppercase tracking-widest text-[#123C2F] font-bold">
-              <Mail className="w-4 h-4 text-[#123C2F]" />
-              <span>08 // Initiation</span>
+            <div className="flex items-center gap-2 mb-2 font-mono text-xs uppercase tracking-widest text-amber-700 font-bold">
+              <Mail className="w-4 h-4 text-blue-700" />
+              <span>08 // Initiation & Partnership</span>
             </div>
-            <h2 className="text-4xl sm:text-6xl md:text-7xl font-sans font-extrabold text-[#111111] tracking-tight leading-[1.05]">
+            <h2 className="text-4xl sm:text-6xl md:text-7xl font-sans font-extrabold text-slate-900 tracking-tight leading-[1.05]">
               Have an idea?
               <br />
-              <span className="font-serif italic font-normal text-[#123C2F]">Let's build it.</span>
+              <span className="gradient-text-royal-gold">Let's build it.</span>
             </h2>
           </div>
-          <p className="text-sm sm:text-base text-[#666666] max-w-sm font-sans">
-            Whether it's a product, collaboration, hackathon, or simply an interesting conversation — I'd love to hear from you.
+          <p className="text-sm sm:text-base text-slate-600 max-w-sm font-sans">
+            Whether it's an enterprise software project, hackathon collaboration, research, or simply an ambitious conversation — let's connect.
           </p>
         </div>
 
@@ -109,30 +105,30 @@ export function ContactSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           {/* Left: Contact Info & Channels */}
           <div className="lg:col-span-5 space-y-8">
-            <div className="p-6 sm:p-8 rounded-3xl bg-white border border-[#123C2F]/15 shadow-sm space-y-6">
+            <div className="p-6 sm:p-8 rounded-3xl bg-white border border-amber-200/60 shadow-md space-y-6">
               <div>
-                <span className="font-mono text-[10px] uppercase tracking-widest text-[#888888] font-bold">
-                  DIRECT CONTACT
+                <span className="font-mono text-[10px] uppercase tracking-widest text-amber-700 font-bold">
+                  DIRECT CONTACT CHANNEL
                 </span>
-                <div className="flex items-center justify-between mt-2 pt-2 border-t border-black/5">
-                  <span className="font-serif text-lg sm:text-xl font-bold text-[#111111] truncate">
+                <div className="flex items-center justify-between mt-2 pt-2 border-t border-slate-100">
+                  <span className="font-sans text-base sm:text-lg font-bold text-slate-900 truncate">
                     {profileData.email}
                   </span>
                   <button
                     onClick={handleCopyEmail}
-                    className="p-2 rounded-xl bg-[#F7F7F3] hover:bg-[#123C2F] hover:text-[#F7F7F3] text-[#123C2F] transition-all flex items-center gap-1 text-xs font-mono"
+                    className="p-2 px-3 rounded-xl bg-amber-50 hover:bg-blue-900 hover:text-amber-300 text-amber-900 border border-amber-300 transition-all flex items-center gap-1.5 text-xs font-mono font-bold"
                     title="Copy Email"
                     data-cursor="pointer"
                   >
-                    {copiedEmail ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4" />}
-                    <span>{copiedEmail ? "Copied" : "Copy"}</span>
+                    {copiedEmail ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4 text-amber-700" />}
+                    <span>{copiedEmail ? "Copied!" : "Copy"}</span>
                   </button>
                 </div>
               </div>
 
               {/* Social Channels */}
               <div className="space-y-3 pt-2">
-                <span className="font-mono text-[10px] uppercase tracking-widest text-[#888888] font-bold">
+                <span className="font-mono text-[10px] uppercase tracking-widest text-slate-400 font-bold">
                   CONNECTED NETWORKS
                 </span>
                 <div className="grid grid-cols-2 gap-2.5">
@@ -141,14 +137,14 @@ export function ContactSection() {
                     target="_blank"
                     rel="noreferrer"
                     onMouseEnter={() => soundManager.playHover()}
-                    className="p-3 rounded-xl bg-[#F7F7F3] border border-[#123C2F]/10 hover:border-[#123C2F]/30 flex items-center justify-between text-xs font-mono font-bold text-[#111111] group"
+                    className="p-3 rounded-xl bg-slate-50 border border-slate-200 hover:border-amber-400 hover:bg-amber-50/40 flex items-center justify-between text-xs font-mono font-bold text-slate-800 group transition-all"
                     data-cursor="pointer"
                   >
                     <div className="flex items-center gap-2">
-                      <Github className="w-4 h-4 text-[#123C2F]" />
+                      <Github className="w-4 h-4 text-blue-700 group-hover:text-amber-700 transition-colors" />
                       <span>GitHub</span>
                     </div>
-                    <ArrowRight className="w-3 h-3 text-[#888888] group-hover:translate-x-1 group-hover:text-[#123C2F] transition-all" />
+                    <ArrowRight className="w-3 h-3 text-slate-400 group-hover:translate-x-1 group-hover:text-amber-600 transition-all" />
                   </a>
 
                   <a
@@ -156,14 +152,14 @@ export function ContactSection() {
                     target="_blank"
                     rel="noreferrer"
                     onMouseEnter={() => soundManager.playHover()}
-                    className="p-3 rounded-xl bg-[#F7F7F3] border border-[#123C2F]/10 hover:border-[#123C2F]/30 flex items-center justify-between text-xs font-mono font-bold text-[#111111] group"
+                    className="p-3 rounded-xl bg-slate-50 border border-slate-200 hover:border-amber-400 hover:bg-amber-50/40 flex items-center justify-between text-xs font-mono font-bold text-slate-800 group transition-all"
                     data-cursor="pointer"
                   >
                     <div className="flex items-center gap-2">
-                      <Linkedin className="w-4 h-4 text-[#123C2F]" />
+                      <Linkedin className="w-4 h-4 text-blue-700 group-hover:text-amber-700 transition-colors" />
                       <span>LinkedIn</span>
                     </div>
-                    <ArrowRight className="w-3 h-3 text-[#888888] group-hover:translate-x-1 group-hover:text-[#123C2F] transition-all" />
+                    <ArrowRight className="w-3 h-3 text-slate-400 group-hover:translate-x-1 group-hover:text-amber-600 transition-all" />
                   </a>
 
                   <a
@@ -171,38 +167,38 @@ export function ContactSection() {
                     target="_blank"
                     rel="noreferrer"
                     onMouseEnter={() => soundManager.playHover()}
-                    className="p-3 rounded-xl bg-[#F7F7F3] border border-[#123C2F]/10 hover:border-[#123C2F]/30 flex items-center justify-between text-xs font-mono font-bold text-[#111111] group"
+                    className="p-3 rounded-xl bg-slate-50 border border-slate-200 hover:border-amber-400 hover:bg-amber-50/40 flex items-center justify-between text-xs font-mono font-bold text-slate-800 group transition-all"
                     data-cursor="pointer"
                   >
                     <div className="flex items-center gap-2">
-                      <Instagram className="w-4 h-4 text-[#123C2F]" />
+                      <Instagram className="w-4 h-4 text-blue-700 group-hover:text-amber-700 transition-colors" />
                       <span>Instagram</span>
                     </div>
-                    <ArrowRight className="w-3 h-3 text-[#888888] group-hover:translate-x-1 group-hover:text-[#123C2F] transition-all" />
+                    <ArrowRight className="w-3 h-3 text-slate-400 group-hover:translate-x-1 group-hover:text-amber-600 transition-all" />
                   </a>
 
                   <a
                     href={`mailto:${profileData.email}`}
                     onMouseEnter={() => soundManager.playHover()}
-                    className="p-3 rounded-xl bg-[#F7F7F3] border border-[#123C2F]/10 hover:border-[#123C2F]/30 flex items-center justify-between text-xs font-mono font-bold text-[#111111] group"
+                    className="p-3 rounded-xl bg-slate-50 border border-slate-200 hover:border-amber-400 hover:bg-amber-50/40 flex items-center justify-between text-xs font-mono font-bold text-slate-800 group transition-all"
                     data-cursor="pointer"
                   >
                     <div className="flex items-center gap-2">
-                      <Mail className="w-4 h-4 text-[#123C2F]" />
+                      <Mail className="w-4 h-4 text-blue-700 group-hover:text-amber-700 transition-colors" />
                       <span>Email Directly</span>
                     </div>
-                    <ArrowRight className="w-3 h-3 text-[#888888] group-hover:translate-x-1 group-hover:text-[#123C2F] transition-all" />
+                    <ArrowRight className="w-3 h-3 text-slate-400 group-hover:translate-x-1 group-hover:text-amber-600 transition-all" />
                   </a>
                 </div>
               </div>
 
               {/* Status Note */}
-              <div className="p-4 rounded-2xl bg-[#123C2F] text-[#F7F7F3] text-xs space-y-1">
-                <div className="flex items-center gap-2 font-mono font-bold text-[#D4AF37]">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span>Availability Status</span>
+              <div className="p-4 rounded-2xl bg-gradient-to-br from-blue-950 via-slate-950 to-slate-900 text-white text-xs space-y-1 border border-amber-400/30 shadow-lg shadow-blue-950/20">
+                <div className="flex items-center gap-2 font-mono font-bold text-amber-300">
+                  <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+                  <span>Availability & Engagement Status</span>
                 </div>
-                <p className="text-white/80 leading-relaxed font-sans text-[11px]">
+                <p className="text-slate-300 leading-relaxed font-sans text-[11px]">
                   Typically responds within 24 hours for technical inquiries, hackathon invites, and project collaborations.
                 </p>
               </div>
@@ -211,12 +207,12 @@ export function ContactSection() {
 
           {/* Right: Contact Form */}
           <div className="lg:col-span-7">
-            <div className="editorial-card p-6 sm:p-10 bg-white space-y-6">
+            <div className="editorial-card p-6 sm:p-10 bg-white border border-amber-200/60 rounded-3xl shadow-md space-y-6">
               <div className="space-y-1">
-                <h3 className="text-2xl font-serif font-bold text-[#111111]">
+                <h3 className="text-2xl font-sans font-bold text-slate-900">
                   Send a Message
                 </h3>
-                <p className="text-xs text-[#666666] font-mono">
+                <p className="text-xs text-slate-500 font-mono">
                   All fields are verified and delivered directly to Daksh Soni's inbox.
                 </p>
               </div>
@@ -225,15 +221,15 @@ export function ContactSection() {
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="p-8 rounded-2xl bg-emerald-50 border border-emerald-200 text-center space-y-4"
+                  className="p-8 rounded-2xl bg-amber-50/60 border border-amber-300 text-center space-y-4 shadow-sm"
                 >
-                  <div className="w-12 h-12 rounded-full bg-emerald-700 text-white mx-auto flex items-center justify-center shadow-md">
-                    <Check className="w-6 h-6" />
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-amber-500 to-amber-600 text-slate-950 mx-auto flex items-center justify-center shadow-md font-bold">
+                    <Check className="w-6 h-6 stroke-[3]" />
                   </div>
-                  <h4 className="text-lg sm:text-xl font-serif font-bold text-emerald-950">
+                  <h4 className="text-lg sm:text-xl font-sans font-bold text-slate-900">
                     Message Dispatched to dakshsoni1023@gmail.com!
                   </h4>
-                  <p className="text-xs sm:text-sm text-emerald-800 max-w-sm mx-auto leading-relaxed">
+                  <p className="text-xs sm:text-sm text-slate-700 max-w-sm mx-auto leading-relaxed">
                     Thank you, <strong>{formData.name || "friend"}</strong>. Your note has been securely forwarded to Daksh Soni's inbox.
                   </p>
                   <button
@@ -242,7 +238,7 @@ export function ContactSection() {
                       setFormData({ name: "", email: "", subject: "", message: "" });
                       setFormStatus("idle");
                     }}
-                    className="mt-2 px-5 py-2 rounded-full border border-emerald-700/30 text-emerald-900 hover:bg-emerald-700 hover:text-white font-mono text-xs font-bold transition-all"
+                    className="mt-2 px-5 py-2 rounded-full border border-amber-400 bg-white text-amber-900 hover:bg-amber-100 font-mono text-xs font-bold transition-all shadow-xs"
                   >
                     Send Another Note ↺
                   </button>
@@ -251,7 +247,7 @@ export function ContactSection() {
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-1.5">
-                      <label className="font-mono text-xs text-[#444444] font-semibold">
+                      <label className="font-mono text-xs text-slate-700 font-semibold">
                         Your Name *
                       </label>
                       <input
@@ -261,12 +257,12 @@ export function ContactSection() {
                         value={formData.name}
                         onChange={handleChange}
                         placeholder="e.g. Alex Miller"
-                        className="w-full px-4 py-3 rounded-xl bg-[#F7F7F3] border border-[#123C2F]/15 focus:border-[#123C2F] focus:outline-hidden text-sm text-[#111111] transition-all"
+                        className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-400/20 focus:bg-white focus:outline-hidden text-sm text-slate-900 transition-all"
                       />
                     </div>
 
                     <div className="space-y-1.5">
-                      <label className="font-mono text-xs text-[#444444] font-semibold">
+                      <label className="font-mono text-xs text-slate-700 font-semibold">
                         Your Email *
                       </label>
                       <input
@@ -276,13 +272,13 @@ export function ContactSection() {
                         value={formData.email}
                         onChange={handleChange}
                         placeholder="e.g. alex@company.com"
-                        className="w-full px-4 py-3 rounded-xl bg-[#F7F7F3] border border-[#123C2F]/15 focus:border-[#123C2F] focus:outline-hidden text-sm text-[#111111] transition-all"
+                        className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-400/20 focus:bg-white focus:outline-hidden text-sm text-slate-900 transition-all"
                       />
                     </div>
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="font-mono text-xs text-[#444444] font-semibold">
+                    <label className="font-mono text-xs text-slate-700 font-semibold">
                       Subject / Topic
                     </label>
                     <input
@@ -291,12 +287,12 @@ export function ContactSection() {
                       value={formData.subject}
                       onChange={handleChange}
                       placeholder="e.g. Full-Stack / AI Collaboration or Product Inquiry"
-                      className="w-full px-4 py-3 rounded-xl bg-[#F7F7F3] border border-[#123C2F]/15 focus:border-[#123C2F] focus:outline-hidden text-sm text-[#111111] transition-all"
+                      className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-400/20 focus:bg-white focus:outline-hidden text-sm text-slate-900 transition-all"
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="font-mono text-xs text-[#444444] font-semibold">
+                    <label className="font-mono text-xs text-slate-700 font-semibold">
                       Message *
                     </label>
                     <textarea
@@ -306,25 +302,25 @@ export function ContactSection() {
                       value={formData.message}
                       onChange={handleChange}
                       placeholder="Describe the opportunity, idea, or questions..."
-                      className="w-full px-4 py-3 rounded-xl bg-[#F7F7F3] border border-[#123C2F]/15 focus:border-[#123C2F] focus:outline-hidden text-sm text-[#111111] transition-all resize-none"
+                      className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-400/20 focus:bg-white focus:outline-hidden text-sm text-slate-900 transition-all resize-none"
                     />
                   </div>
 
                   <button
                     type="submit"
                     disabled={formStatus === "submitting"}
-                    className="w-full py-4 rounded-full bg-[#123C2F] text-[#F7F7F3] text-sm font-semibold hover:bg-[#1A5442] shadow-lg shadow-[#123C2F]/15 transition-all flex items-center justify-center gap-2 group disabled:opacity-50"
+                    className="w-full py-4 rounded-full bg-gradient-to-r from-blue-900 via-blue-800 to-slate-950 text-amber-300 border border-amber-400/50 text-sm font-bold hover:border-amber-300 hover:shadow-lg hover:shadow-amber-500/20 transition-all flex items-center justify-center gap-2 group disabled:opacity-50"
                     data-cursor="pointer"
                   >
                     {formStatus === "submitting" ? (
                       <>
-                        <span className="w-4 h-4 rounded-full border-2 border-white/30 border-t-white animate-spin" />
+                        <span className="w-4 h-4 rounded-full border-2 border-amber-400/30 border-t-amber-400 animate-spin" />
                         <span>Dispatching Message...</span>
                       </>
                     ) : (
                       <>
                         <span>Send Message</span>
-                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1 text-amber-400" />
                       </>
                     )}
                   </button>

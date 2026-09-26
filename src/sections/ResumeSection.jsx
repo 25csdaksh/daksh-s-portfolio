@@ -14,18 +14,18 @@ export function ResumeSection({ onOpenResume }) {
   };
 
   return (
-    <section className="py-24 sm:py-32 px-4 sm:px-6 md:px-12 relative bg-white/80 border-t border-b border-[#123C2F]/10">
+    <section className="py-24 sm:py-32 px-4 sm:px-6 md:px-12 relative bg-white border-t border-b border-slate-200">
       <div className="max-w-6xl mx-auto space-y-12 sm:space-y-16">
         {/* Section Heading */}
         <div className="text-center max-w-2xl mx-auto space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#123C2F]/10 text-[#123C2F] font-mono text-xs font-bold uppercase tracking-widest">
-            <FileText className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-50 text-amber-900 border border-amber-300 font-mono text-xs font-bold uppercase tracking-widest">
+            <FileText className="w-3.5 h-3.5 text-amber-600" />
             <span>07 // Verified Credentials</span>
           </div>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-[#111111] tracking-tight">
-            Want the <span className="italic font-normal text-[#123C2F]">complete story?</span>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-sans font-extrabold text-slate-900 tracking-tight">
+            Want the <span className="gradient-text-royal-gold">complete story?</span>
           </h2>
-          <p className="text-base text-[#666666] font-sans">
+          <p className="text-base text-slate-600 font-sans">
             A comprehensive overview of academic records, technical proficiencies, production engineering milestones, and hackathon leadership.
           </p>
 
@@ -37,9 +37,9 @@ export function ResumeSection({ onOpenResume }) {
                 onOpenResume();
               }}
               onMouseEnter={() => soundManager.playHover()}
-              className="px-7 py-3.5 rounded-full bg-[#123C2F] text-[#F7F7F3] text-xs sm:text-sm font-semibold hover:bg-[#1A5442] shadow-lg shadow-[#123C2F]/15 transition-all flex items-center gap-2"
+              className="px-7 py-3.5 rounded-full bg-gradient-to-r from-blue-700 via-blue-800 to-indigo-950 text-white border border-amber-400/50 hover:border-amber-300 text-xs sm:text-sm font-semibold shadow-lg shadow-blue-900/20 hover:scale-105 transition-all flex items-center gap-2"
             >
-              <Eye className="w-4 h-4" />
+              <Eye className="w-4 h-4 text-amber-300" />
               <span>View Interactive Resume</span>
             </button>
 
@@ -48,9 +48,9 @@ export function ResumeSection({ onOpenResume }) {
               download="Daksh_Soni_Resume.pdf"
               onClick={() => soundManager.playClick()}
               onMouseEnter={() => soundManager.playHover()}
-              className="px-7 py-3.5 rounded-full bg-white border border-[#123C2F]/20 text-[#111111] text-xs sm:text-sm font-semibold hover:bg-[#123C2F]/5 transition-all flex items-center gap-2 shadow-xs"
+              className="px-7 py-3.5 rounded-full bg-white border border-amber-300/80 text-slate-800 text-xs sm:text-sm font-semibold hover:bg-amber-50/40 hover:border-amber-400 hover:text-blue-900 transition-all flex items-center gap-2 shadow-xs"
             >
-              <Download className="w-4 h-4 text-[#123C2F]" />
+              <Download className="w-4 h-4 text-amber-600" />
               <span>Download Official PDF</span>
             </a>
           </div>
@@ -64,49 +64,49 @@ export function ResumeSection({ onOpenResume }) {
             onOpenResume();
           }}
           onMouseEnter={() => soundManager.playHover()}
-          className="editorial-card p-6 sm:p-10 bg-[#F7F7F3] max-w-4xl mx-auto space-y-6 cursor-pointer group"
+          className="editorial-card p-6 sm:p-10 bg-slate-50/70 hover:bg-white border border-slate-200 hover:border-amber-400 hover:shadow-xl hover:shadow-blue-950/5 rounded-2xl max-w-4xl mx-auto space-y-6 cursor-pointer group transition-all duration-300"
         >
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-[#123C2F]/10 gap-3">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-slate-200 gap-3">
             <div>
-              <span className="font-serif text-2xl sm:text-3xl font-bold text-[#111111] group-hover:text-[#123C2F] transition-colors">
+              <span className="font-sans text-2xl sm:text-3xl font-bold text-slate-900 group-hover:text-blue-800 transition-colors">
                 {resumeData.personal.name}
               </span>
-              <p className="text-xs font-mono text-[#123C2F] font-semibold mt-0.5">
+              <p className="text-xs font-mono text-amber-700 font-bold mt-0.5">
                 {resumeData.personal.title}
               </p>
             </div>
-            <div className="flex items-center gap-2 font-mono text-xs text-[#123C2F] font-bold group-hover:underline">
+            <div className="flex items-center gap-2 font-mono text-xs text-blue-800 font-bold group-hover:underline">
               <span>EXPAND FULL RESUME</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-4 h-4 text-amber-600 group-hover:translate-x-1 transition-transform" />
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs">
-            <div className="space-y-2 p-4 rounded-xl bg-white border border-black/5">
-              <div className="flex items-center gap-2 font-bold text-[#111111]">
-                <GraduationCap className="w-4 h-4 text-[#123C2F]" />
+            <div className="space-y-2 p-4 rounded-xl bg-white border border-slate-200 shadow-2xs">
+              <div className="flex items-center gap-2 font-bold text-slate-900">
+                <GraduationCap className="w-4 h-4 text-blue-800" />
                 <span>Education</span>
               </div>
-              <p className="text-[#555555]">B.Tech in Computer Science & Engineering</p>
-              <p className="font-mono text-emerald-800 font-semibold">CHARUSAT University (2026–2029)</p>
+              <p className="text-slate-600">B.Tech in Computer Science & Engineering</p>
+              <p className="font-mono text-amber-800 font-semibold">CHARUSAT University (2026–2029)</p>
             </div>
 
-            <div className="space-y-2 p-4 rounded-xl bg-white border border-black/5">
-              <div className="flex items-center gap-2 font-bold text-[#111111]">
-                <Award className="w-4 h-4 text-[#123C2F]" />
+            <div className="space-y-2 p-4 rounded-xl bg-white border border-slate-200 shadow-2xs">
+              <div className="flex items-center gap-2 font-bold text-slate-900">
+                <Award className="w-4 h-4 text-amber-600" />
                 <span>Leadership</span>
               </div>
-              <p className="text-[#555555]">Smart India Hackathon 2026 (Lead)</p>
-              <p className="font-mono text-emerald-800 font-semibold">IBM BoB Hackathon (TrialGuard Lead)</p>
+              <p className="text-slate-600">Smart India Hackathon 2026 (Lead)</p>
+              <p className="font-mono text-amber-800 font-semibold">IBM BoB Hackathon (TrialGuard Lead)</p>
             </div>
 
-            <div className="space-y-2 p-4 rounded-xl bg-white border border-black/5">
-              <div className="flex items-center gap-2 font-bold text-[#111111]">
-                <Code className="w-4 h-4 text-[#123C2F]" />
+            <div className="space-y-2 p-4 rounded-xl bg-white border border-slate-200 shadow-2xs">
+              <div className="flex items-center gap-2 font-bold text-slate-900">
+                <Code className="w-4 h-4 text-blue-800" />
                 <span>Full Stack & AI</span>
               </div>
-              <p className="text-[#555555]">FastAPI, React, NestJS, Node.js</p>
-              <p className="font-mono text-emerald-800 font-semibold">PyTorch, Gemini, PostgreSQL</p>
+              <p className="text-slate-600">FastAPI, React, NestJS, Node.js</p>
+              <p className="font-mono text-amber-800 font-semibold">PyTorch, Gemini, PostgreSQL</p>
             </div>
           </div>
         </motion.div>

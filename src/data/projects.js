@@ -93,7 +93,7 @@ async def websocket_endpoint(websocket: WebSocket):
       "Parent communication hub for institutional announcements and fee reminders"
     ],
     technologies: ["React", "Node.js", "Express.js", "MongoDB", "JWT Auth", "Tailwind CSS", "REST APIs"],
-    accentColor: "#123C2F",
+    accentColor: "#2563EB",
     githubUrl: "https://github.com/25csdaksh/dakshkumar-school-management-system",
     liveUrl: "https://shreejeeeducation.vercel.app/login",
     coverImage: "/projects/shreejee-education-cover.jpg",

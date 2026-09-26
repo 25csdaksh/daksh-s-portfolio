@@ -113,7 +113,7 @@ export function ProjectModal({ project, onClose }) {
             soundManager.playClick();
             onClose();
           }}
-          className="fixed inset-0 bg-[#111111]/70 backdrop-blur-md"
+          className="fixed inset-0 bg-slate-950/70 backdrop-blur-md"
         />
 
         {/* Modal Container */}
@@ -124,15 +124,15 @@ export function ProjectModal({ project, onClose }) {
           transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
           onClick={(e) => e.stopPropagation()}
           data-lenis-prevent="true"
-          className="relative w-full max-w-4xl bg-[#F7F7F3] rounded-3xl border border-[#123C2F]/20 shadow-2xl overflow-hidden z-10 max-h-[92vh] flex flex-col overscroll-contain"
+          className="relative w-full max-w-4xl bg-white rounded-3xl border border-amber-200/80 shadow-2xl overflow-hidden z-10 max-h-[92vh] flex flex-col overscroll-contain"
         >
           {/* Header Bar */}
-          <div className="flex items-center justify-between px-5 sm:px-6 py-4 sm:py-5 border-b border-[#123C2F]/10 bg-white/90 backdrop-blur-md shrink-0">
+          <div className="flex items-center justify-between px-5 sm:px-6 py-4 sm:py-5 border-b border-slate-200 bg-slate-50 shrink-0">
             <div className="flex items-center gap-2 sm:gap-3">
-              <span className="px-3 py-1 rounded-full bg-[#123C2F] text-[#F7F7F3] font-mono text-xs font-semibold">
+              <span className="px-3 py-1 rounded-full bg-gradient-to-r from-blue-700 to-indigo-950 text-amber-200 border border-amber-400/50 font-mono text-xs font-semibold">
                 {project.category}
               </span>
-              <span className="font-mono text-xs text-[#666666] hidden sm:inline">{project.year}</span>
+              <span className="font-mono text-xs text-slate-500 hidden sm:inline">{project.year}</span>
             </div>
 
             <div className="flex items-center gap-2 sm:gap-3">
@@ -147,11 +147,11 @@ export function ProjectModal({ project, onClose }) {
                     window.open(project.liveUrl, "_blank", "noopener,noreferrer");
                   }}
                   onMouseEnter={() => soundManager.playHover()}
-                  className="px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-[#123C2F] hover:bg-[#1A5442] text-[#F7F7F3] font-mono text-xs font-bold flex items-center gap-1.5 shadow-sm transition-all hover:scale-105"
+                  className="px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-gradient-to-r from-blue-700 via-blue-800 to-indigo-950 text-white border border-amber-400/50 hover:border-amber-300 font-mono text-xs font-bold flex items-center gap-1.5 shadow-sm shadow-blue-900/20 transition-all hover:scale-105"
                   title="Launch Live Project in New Tab"
                 >
                   <span>Launch Live App</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
+                  <ExternalLink className="w-3.5 h-3.5 text-amber-300" />
                 </a>
               )}
 
@@ -166,7 +166,7 @@ export function ProjectModal({ project, onClose }) {
                     window.open(project.githubUrl, "_blank", "noopener,noreferrer");
                   }}
                   onMouseEnter={() => soundManager.playHover()}
-                  className="p-2 rounded-xl border border-[#123C2F]/20 hover:bg-[#123C2F]/10 text-[#123C2F] transition-colors hidden sm:flex items-center"
+                  className="p-2 rounded-xl border border-slate-300 hover:bg-slate-100 text-slate-700 transition-colors hidden sm:flex items-center"
                   title="View Source on GitHub"
                 >
                   <Github className="w-4 h-4" />
@@ -179,7 +179,7 @@ export function ProjectModal({ project, onClose }) {
                   onClose();
                 }}
                 onMouseEnter={() => soundManager.playHover()}
-                className="p-2 rounded-full hover:bg-[#123C2F]/10 text-[#111111] transition-colors"
+                className="p-2 rounded-full hover:bg-slate-200 text-slate-700 transition-colors"
                 data-cursor="pointer"
                 aria-label="Close modal"
               >
@@ -196,25 +196,25 @@ export function ProjectModal({ project, onClose }) {
             {/* Title & Tagline */}
             <div>
               <div className="flex items-center gap-2 mb-2">
-                <span className="text-xs font-mono uppercase tracking-widest text-[#123C2F] font-semibold">
+                <span className="text-xs font-mono uppercase tracking-widest text-blue-800 font-bold">
                   Role: {project.role}
                 </span>
                 {project.featuredBadge && (
-                  <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-[#D4AF37]/20 text-[#8A7114] font-semibold">
+                  <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-amber-50 text-amber-900 font-bold border border-amber-300">
                     {project.featuredBadge}
                   </span>
                 )}
               </div>
-              <h2 className="text-3xl sm:text-4xl font-serif font-bold text-[#111111] tracking-tight">
+              <h2 className="text-3xl sm:text-4xl font-sans font-extrabold text-slate-900 tracking-tight">
                 {project.title}
               </h2>
-              <p className="text-base text-[#666666] mt-2 font-sans font-medium">
+              <p className="text-base text-slate-600 mt-2 font-sans font-medium">
                 {project.tagline}
               </p>
             </div>
 
             {/* Navigation Tabs */}
-            <div className="flex items-center gap-2 border-b border-[#123C2F]/10 pb-2">
+            <div className="flex items-center gap-2 border-b border-slate-200 pb-2">
               <button
                 onClick={() => {
                   soundManager.playClick();
@@ -222,8 +222,8 @@ export function ProjectModal({ project, onClose }) {
                 }}
                 className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
                   activeTab === "overview"
-                    ? "bg-[#123C2F] text-[#F7F7F3] shadow-sm"
-                    : "text-[#666666] hover:text-[#111111] hover:bg-black/5"
+                    ? "bg-gradient-to-r from-blue-700 to-indigo-950 text-white border border-amber-400/50 shadow-sm"
+                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
                 }`}
                 data-cursor="pointer"
               >
@@ -236,8 +236,8 @@ export function ProjectModal({ project, onClose }) {
                 }}
                 className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
                   activeTab === "architecture"
-                    ? "bg-[#123C2F] text-[#F7F7F3] shadow-sm"
-                    : "text-[#666666] hover:text-[#111111] hover:bg-black/5"
+                    ? "bg-gradient-to-r from-blue-700 to-indigo-950 text-white border border-amber-400/50 shadow-sm"
+                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
                 }`}
                 data-cursor="pointer"
               >
@@ -250,12 +250,12 @@ export function ProjectModal({ project, onClose }) {
                 }}
                 className={`px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all ${
                   activeTab === "liveSimulator"
-                    ? "bg-[#123C2F] text-[#F7F7F3] shadow-sm"
-                    : "text-[#123C2F] bg-[#123C2F]/10 hover:bg-[#123C2F]/15"
+                    ? "bg-gradient-to-r from-blue-700 to-indigo-950 text-amber-200 border border-amber-400/50 shadow-sm"
+                    : "text-blue-900 bg-amber-50 hover:bg-amber-100 border border-amber-300"
                 }`}
                 data-cursor="pointer"
               >
-                <Play className="w-3 h-3 fill-current" />
+                <Play className="w-3 h-3 fill-current text-amber-600" />
                 <span>Live Interactive Sandbox</span>
               </button>
             </div>
@@ -265,15 +265,15 @@ export function ProjectModal({ project, onClose }) {
               <div className="space-y-6">
                 {/* Full Width Project High-Res Cover Preview */}
                 {project.coverImage && (
-                  <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden border border-[#123C2F]/20 shadow-md bg-stone-900 group">
+                  <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden border border-slate-200 shadow-md bg-slate-900 group">
                     <img
                       src={project.coverImage}
                       alt={`${project.title} Cover`}
                       className="w-full h-full object-cover object-top"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent pointer-events-none" />
                     <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-white font-mono text-xs">
-                      <span className="bg-black/60 backdrop-blur-md px-3 py-1 rounded-lg border border-white/10">
+                      <span className="bg-slate-900/75 backdrop-blur-md px-3 py-1 rounded-lg border border-white/10">
                         {project.title} • Production Interface
                       </span>
                       {project.liveUrl && (
@@ -286,7 +286,7 @@ export function ProjectModal({ project, onClose }) {
                             soundManager.playClick();
                             window.open(project.liveUrl, "_blank", "noopener,noreferrer");
                           }}
-                          className="bg-[#123C2F] hover:bg-[#1A5442] text-white px-3.5 py-1.5 rounded-lg flex items-center gap-1.5 shadow-sm transition-all hover:scale-105 font-mono text-xs font-semibold"
+                          className="bg-blue-600 hover:bg-blue-700 text-white px-3.5 py-1.5 rounded-lg flex items-center gap-1.5 shadow-sm transition-all hover:scale-105 font-mono text-xs font-semibold"
                         >
                           <span>Open Live Site</span>
                           <ExternalLink className="w-3.5 h-3.5" />
@@ -298,22 +298,22 @@ export function ProjectModal({ project, onClose }) {
 
                 {/* Problem vs Solution Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="p-5 rounded-2xl bg-white border border-red-500/20 shadow-xs">
+                  <div className="p-5 rounded-2xl bg-red-50/50 border border-red-200 shadow-xs">
                     <div className="flex items-center gap-2 text-red-700 font-mono text-xs font-bold uppercase tracking-wider mb-2">
                       <AlertCircle className="w-4 h-4" />
                       <span>The Problem</span>
                     </div>
-                    <p className="text-sm text-[#444444] leading-relaxed">
+                    <p className="text-sm text-slate-700 leading-relaxed">
                       {project.problemSolved}
                     </p>
                   </div>
 
-                  <div className="p-5 rounded-2xl bg-white border border-[#123C2F]/20 shadow-xs">
-                    <div className="flex items-center gap-2 text-[#123C2F] font-mono text-xs font-bold uppercase tracking-wider mb-2">
-                      <Sparkles className="w-4 h-4 text-[#D4AF37]" />
+                  <div className="p-5 rounded-2xl bg-blue-50/50 border border-blue-200 shadow-xs">
+                    <div className="flex items-center gap-2 text-blue-700 font-mono text-xs font-bold uppercase tracking-wider mb-2">
+                      <Sparkles className="w-4 h-4 text-blue-600" />
                       <span>The Engineered Solution</span>
                     </div>
-                    <p className="text-sm text-[#444444] leading-relaxed">
+                    <p className="text-sm text-slate-700 leading-relaxed">
                       {project.solution}
                     </p>
                   </div>
@@ -322,16 +322,16 @@ export function ProjectModal({ project, onClose }) {
                 {/* Key Features List */}
                 {project.keyFeatures && (
                   <div>
-                    <h3 className="text-xs font-mono uppercase tracking-wider text-[#123C2F] font-bold mb-3">
+                    <h3 className="text-xs font-mono uppercase tracking-wider text-blue-600 font-bold mb-3">
                       Core Capabilities & Features
                     </h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {project.keyFeatures.map((feat, idx) => (
                         <div
                           key={idx}
-                          className="flex items-start gap-2.5 p-3.5 rounded-xl bg-white/70 border border-[#123C2F]/10 text-xs text-[#222222] font-medium"
+                          className="flex items-start gap-2.5 p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-800 font-medium"
                         >
-                          <CheckCircle2 className="w-4 h-4 text-[#123C2F] shrink-0 mt-0.5" />
+                          <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
                           <span>{feat}</span>
                         </div>
                       ))}
@@ -342,14 +342,14 @@ export function ProjectModal({ project, onClose }) {
                 {/* Tech Stack Badges */}
                 {project.technologies && (
                   <div>
-                    <h3 className="text-xs font-mono uppercase tracking-wider text-[#123C2F] font-bold mb-3">
+                    <h3 className="text-xs font-mono uppercase tracking-wider text-blue-600 font-bold mb-3">
                       Technology Stack
                     </h3>
                     <div className="flex flex-wrap gap-2">
                       {project.technologies.map((tech) => (
                         <span
                           key={tech}
-                          className="px-3 py-1.5 rounded-lg bg-white border border-[#123C2F]/15 font-mono text-xs font-semibold text-[#123C2F]"
+                          className="px-3 py-1.5 rounded-lg bg-slate-50 border border-slate-200 font-mono text-xs font-semibold text-slate-700"
                         >
                           {tech}
                         </span>
@@ -363,22 +363,22 @@ export function ProjectModal({ project, onClose }) {
             {/* Tab 2: Architecture & Code Snippet */}
             {activeTab === "architecture" && (
               <div className="space-y-6">
-                <div className="p-5 rounded-2xl bg-white border border-[#123C2F]/15">
-                  <h3 className="text-xs font-mono uppercase tracking-wider text-[#123C2F] font-bold mb-2">
+                <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200">
+                  <h3 className="text-xs font-mono uppercase tracking-wider text-blue-600 font-bold mb-2">
                     System Architecture & Design Decisions
                   </h3>
-                  <p className="text-sm text-[#444444] leading-relaxed">
+                  <p className="text-sm text-slate-700 leading-relaxed">
                     {project.summary}
                   </p>
                 </div>
 
                 {/* Code Terminal */}
                 {project.codeSnippet && (
-                  <div className="rounded-2xl bg-[#111111] text-[#F7F7F3] overflow-hidden border border-white/10 shadow-xl">
-                    <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 bg-black/40">
+                  <div className="rounded-2xl bg-slate-900 text-slate-100 overflow-hidden border border-slate-800 shadow-xl">
+                    <div className="flex items-center justify-between px-4 py-3 border-b border-slate-800 bg-slate-950/60">
                       <div className="flex items-center gap-2">
-                        <Terminal className="w-4 h-4 text-[#D4AF37]" />
-                        <span className="font-mono text-xs text-white/70">
+                        <Terminal className="w-4 h-4 text-sky-400" />
+                        <span className="font-mono text-xs text-slate-400">
                           {project.title.toLowerCase().replace(/\s+/g, "-")}.core
                         </span>
                       </div>
@@ -400,7 +400,7 @@ export function ProjectModal({ project, onClose }) {
                         )}
                       </button>
                     </div>
-                    <pre className="p-5 text-xs font-mono text-emerald-300 overflow-x-auto leading-relaxed">
+                    <pre className="p-5 text-xs font-mono text-sky-300 overflow-x-auto leading-relaxed">
                       <code>{project.codeSnippet}</code>
                     </pre>
                   </div>
@@ -410,20 +410,20 @@ export function ProjectModal({ project, onClose }) {
 
             {/* Tab 3: Live Simulator Sandbox */}
             {activeTab === "liveSimulator" && (
-              <div className="p-6 rounded-2xl bg-white border border-[#123C2F]/20 space-y-5">
+              <div className="p-6 rounded-2xl bg-white border border-slate-200 space-y-5">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="text-sm font-bold text-[#111111]">
+                    <h3 className="text-sm font-bold text-slate-900">
                       Interactive {project.title} Engine Simulator
                     </h3>
-                    <p className="text-xs text-[#666666]">
+                    <p className="text-xs text-slate-500">
                       Execute a simulated payload to observe the algorithmic evaluation pipeline in real time.
                     </p>
                   </div>
                   <button
                     onClick={runSimulation}
                     disabled={simulationState.running}
-                    className="px-4 py-2 rounded-xl bg-[#123C2F] text-[#F7F7F3] text-xs font-semibold hover:bg-[#1A5442] disabled:opacity-50 flex items-center gap-2 shadow-md"
+                    className="px-4 py-2 rounded-xl bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 disabled:opacity-50 flex items-center gap-2 shadow-sm shadow-blue-500/20"
                     data-cursor="pointer"
                   >
                     {simulationState.running ? (
@@ -441,38 +441,38 @@ export function ProjectModal({ project, onClose }) {
                 </div>
 
                 {/* Simulation Output Window */}
-                <div className="p-4 rounded-xl bg-[#F7F7F3] border border-[#123C2F]/10 font-mono text-xs">
+                <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 font-mono text-xs">
                   {simulationState.running ? (
                     <div className="space-y-2 py-4">
-                      <div className="flex items-center gap-2 text-[#123C2F]">
-                        <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
+                      <div className="flex items-center gap-2 text-blue-600">
+                        <span className="w-2 h-2 rounded-full bg-blue-600 animate-ping" />
                         <span>Step {simulationState.step}/3: Parsing ingested payload & running model inference...</span>
                       </div>
-                      <div className="w-full h-1.5 bg-[#123C2F]/10 rounded-full overflow-hidden">
-                        <div className="h-full bg-[#123C2F] animate-pulse w-3/4 rounded-full" />
+                      <div className="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden">
+                        <div className="h-full bg-blue-600 animate-pulse w-3/4 rounded-full" />
                       </div>
                     </div>
                   ) : simulationState.output ? (
                     <div className="space-y-3">
-                      <div className="flex items-center justify-between pb-2 border-b border-[#123C2F]/10 text-emerald-800 font-bold">
+                      <div className="flex items-center justify-between pb-2 border-b border-slate-200 text-emerald-700 font-bold">
                         <span>● STATUS: {simulationState.output.status}</span>
-                        <span className="text-[10px] text-[#666666]">LIVE RESULT</span>
+                        <span className="text-[10px] text-slate-500 font-medium">LIVE RESULT</span>
                       </div>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px]">
                         {Object.entries(simulationState.output).map(([key, val]) => {
                           if (key === "status") return null;
                           return (
-                            <div key={key} className="p-2 rounded bg-white border border-[#123C2F]/10">
-                              <span className="text-[#666666] capitalize">{key.replace(/([A-Z])/g, " $1")}: </span>
-                              <span className="font-semibold text-[#111111]">{Array.isArray(val) ? val.join(", ") : val}</span>
+                            <div key={key} className="p-2 rounded bg-white border border-slate-200">
+                              <span className="text-slate-500 capitalize">{key.replace(/([A-Z])/g, " $1")}: </span>
+                              <span className="font-semibold text-slate-900">{Array.isArray(val) ? val.join(", ") : val}</span>
                             </div>
                           );
                         })}
                       </div>
                     </div>
                   ) : (
-                    <p className="text-[#666666] py-3 text-center">
-                      Click <strong className="text-[#123C2F]">"Run Live Pipeline"</strong> to test model response and API data pipeline.
+                    <p className="text-slate-500 py-3 text-center">
+                      Click <strong className="text-blue-600">"Run Live Pipeline"</strong> to test model response and API data pipeline.
                     </p>
                   )}
                 </div>
@@ -481,9 +481,9 @@ export function ProjectModal({ project, onClose }) {
           </div>
 
           {/* Footer Actions */}
-          <div className="flex items-center justify-between px-6 py-4 border-t border-[#123C2F]/10 bg-white/90">
-            <div className="text-xs text-[#666666]">
-              Designed & Engineered by <span className="font-semibold text-[#111111]">Daksh Soni</span>
+          <div className="flex items-center justify-between px-6 py-4 border-t border-slate-200 bg-slate-50">
+            <div className="text-xs text-slate-500">
+              Designed & Engineered by <span className="font-semibold text-slate-900">Daksh Soni</span>
             </div>
             <div className="flex items-center gap-3">
               {project.githubUrl && (
@@ -497,7 +497,7 @@ export function ProjectModal({ project, onClose }) {
                     window.open(project.githubUrl, "_blank", "noopener,noreferrer");
                   }}
                   onMouseEnter={() => soundManager.playHover()}
-                  className="flex items-center gap-1.5 px-4 py-2 rounded-full border border-[#123C2F]/20 text-xs font-semibold text-[#111111] hover:bg-[#123C2F]/10 transition-colors"
+                  className="flex items-center gap-1.5 px-4 py-2 rounded-full border border-slate-300 text-xs font-semibold text-slate-800 hover:bg-slate-100 transition-colors"
                 >
                   <Github className="w-3.5 h-3.5" />
                   <span>GitHub</span>
@@ -514,7 +514,7 @@ export function ProjectModal({ project, onClose }) {
                     window.open(project.liveUrl, "_blank", "noopener,noreferrer");
                   }}
                   onMouseEnter={() => soundManager.playHover()}
-                  className="flex items-center gap-1.5 px-5 py-2 rounded-full bg-[#123C2F] text-[#F7F7F3] text-xs font-semibold hover:bg-[#1A5442] shadow-sm transition-all hover:scale-105"
+                  className="flex items-center gap-1.5 px-5 py-2 rounded-full bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 shadow-sm shadow-blue-500/20 transition-all hover:scale-105"
                 >
                   <span>Launch Live Demo</span>
                   <ExternalLink className="w-3.5 h-3.5" />

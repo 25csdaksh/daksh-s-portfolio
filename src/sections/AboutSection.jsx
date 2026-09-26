@@ -60,20 +60,18 @@ export function AboutSection() {
   // Continuous Auto-Scroll Engine with seamless looping
   useEffect(() => {
     let animFrameId;
-    const speed = 0.75; // pixels per frame (luxurious gentle glide)
+    const speed = 0.75; // pixels per frame
 
     const loop = () => {
       const el = scrollContainerRef.current;
       if (el && isPlaying && !isHovered && !isDragging) {
         el.scrollLeft += speed;
 
-        // Reset scroll seamlessly when reaching 1/3 of total scrollWidth
         const singleSetWidth = el.scrollWidth / 3;
         if (el.scrollLeft >= singleSetWidth * 2) {
           el.scrollLeft -= singleSetWidth;
         }
 
-        // Calculate progress within the 6-step loop
         const normalizedScroll = el.scrollLeft % singleSetWidth;
         setScrollProgress((normalizedScroll / singleSetWidth) * 100);
       }
@@ -114,20 +112,20 @@ export function AboutSection() {
   };
 
   return (
-    <section id="about" className="py-24 sm:py-32 px-4 sm:px-6 md:px-12 bg-white/70 relative border-t border-b border-[#123C2F]/10">
+    <section id="about" className="py-24 sm:py-32 px-4 sm:px-6 md:px-12 bg-white relative border-t border-b border-slate-200">
       <div className="max-w-7xl mx-auto space-y-16 sm:space-y-20">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-[#123C2F]/10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-slate-200">
           <div>
-            <div className="flex items-center gap-2 mb-2 font-mono text-xs uppercase tracking-widest text-[#123C2F] font-bold">
-              <span className="w-2 h-2 rounded-full bg-[#123C2F]" />
+            <div className="flex items-center gap-2 mb-2 font-mono text-xs uppercase tracking-widest text-blue-800 font-bold">
+              <span className="w-2 h-2 rounded-full bg-amber-500" />
               <span>01 // About & Identity</span>
             </div>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-[#111111] tracking-tight">
-              More than <span className="italic font-normal text-[#123C2F]">just code.</span>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-sans font-extrabold text-slate-900 tracking-tight">
+              More than <span className="gradient-text-royal-gold">just code.</span>
             </h2>
           </div>
-          <p className="text-sm font-mono text-[#666666] max-w-xs">
+          <p className="text-sm font-mono text-slate-500 max-w-xs">
             TRANSFORMING ALGORITHMIC RIGOR INTO COMPELLING DIGITAL PRODUCTS.
           </p>
         </div>
@@ -135,7 +133,7 @@ export function AboutSection() {
         {/* Narrative & Philosophy Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           {/* Left: Deep Narrative Story */}
-          <div className="lg:col-span-7 space-y-6 text-base sm:text-lg text-[#444444] leading-relaxed font-sans">
+          <div className="lg:col-span-7 space-y-6 text-base sm:text-lg text-slate-600 leading-relaxed font-sans">
             <p>
               My path in technology is rooted in a simple belief: computer science isn't merely an academic study of data structures and algorithms—it is the ultimate lever for constructing tools that elevate human capability.
             </p>
@@ -147,15 +145,15 @@ export function AboutSection() {
             </p>
 
             {/* Editorial Philosophy Quote Block */}
-            <div className="p-6 sm:p-8 rounded-2xl bg-[#F7F7F3] border-l-4 border-[#123C2F] shadow-sm my-6">
-              <span className="font-mono text-[10px] tracking-widest uppercase text-[#123C2F] font-bold block mb-2">
+            <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-amber-50/60 to-blue-50/40 border-l-4 border-amber-400 border border-amber-200/80 shadow-xs my-6">
+              <span className="font-mono text-[10px] tracking-widest uppercase text-blue-900 font-bold block mb-2">
                 CORE PHILOSOPHY
               </span>
-              <blockquote className="font-serif italic text-2xl sm:text-3xl text-[#111111] leading-snug">
+              <blockquote className="font-serif italic text-2xl sm:text-3xl text-slate-900 leading-snug">
                 "{profileData.philosophy}"
               </blockquote>
-              <div className="mt-3 flex items-center gap-2 text-xs font-mono text-[#666666]">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
+              <div className="mt-3 flex items-center gap-2 text-xs font-mono text-slate-600">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
                 <span>Daksh Soni • Engineering Mindset</span>
               </div>
             </div>
@@ -169,54 +167,54 @@ export function AboutSection() {
                   key={idx}
                   whileHover={{ y: -4 }}
                   onMouseEnter={() => soundManager.playHover()}
-                  className="p-5 sm:p-6 rounded-2xl bg-[#F7F7F3] border border-[#123C2F]/10 shadow-xs flex flex-col justify-between"
+                  className="p-5 sm:p-6 rounded-2xl bg-white border border-slate-200 shadow-xs hover:border-amber-400 hover:shadow-lg hover:shadow-blue-950/5 transition-all duration-300 flex flex-col justify-between group"
                   data-cursor="pointer"
                 >
-                  <div className="font-serif text-3xl sm:text-4xl font-bold text-[#123C2F]">
+                  <div className="font-sans text-3xl sm:text-4xl font-extrabold text-blue-800 group-hover:text-blue-700 transition-colors">
                     <StatCounter value={stat.value} suffix={stat.suffix} />
                   </div>
                   <div className="mt-3">
-                    <h3 className="font-sans font-bold text-sm text-[#111111]">{stat.label}</h3>
-                    <p className="text-xs text-[#666666] font-mono mt-0.5">{stat.detail}</p>
+                    <h3 className="font-sans font-bold text-sm text-slate-900">{stat.label}</h3>
+                    <p className="text-xs text-slate-500 font-mono mt-0.5">{stat.detail}</p>
                   </div>
                 </motion.div>
               ))}
             </div>
 
             {/* Quick Pillars Box */}
-            <div className="p-6 rounded-2xl bg-[#123C2F] text-[#F7F7F3] space-y-4 shadow-xl">
+            <div className="p-6 rounded-2xl bg-gradient-to-br from-blue-950 via-slate-900 to-slate-950 text-white space-y-4 shadow-xl border border-amber-400/30">
               <div className="flex items-center justify-between">
-                <span className="font-mono text-[11px] tracking-wider uppercase text-[#D4AF37] font-bold">
+                <span className="font-mono text-[11px] tracking-wider uppercase text-amber-300 font-bold">
                   Core Engineering Pillars
                 </span>
-                <Sparkles className="w-4 h-4 text-[#D4AF37]" />
+                <Sparkles className="w-4 h-4 text-amber-400" />
               </div>
-              <ul className="space-y-2 text-xs font-mono text-white/90">
+              <ul className="space-y-2 text-xs font-mono text-slate-300">
                 <li className="flex items-center gap-2">
-                  <span className="text-emerald-400">01.</span> Algorithmic Efficiency (C++ / DSA)
+                  <span className="text-amber-400 font-bold">01.</span> Algorithmic Efficiency (C++ / DSA)
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="text-emerald-400">02.</span> Scalable Distributed Systems (Redis / NestJS)
+                  <span className="text-amber-400 font-bold">02.</span> Scalable Distributed Systems (Redis / NestJS)
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="text-emerald-400">03.</span> Applied Artificial Intelligence (FastAPI / Gemini)
+                  <span className="text-amber-400 font-bold">03.</span> Applied Artificial Intelligence (FastAPI / Gemini)
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="text-emerald-400">04.</span> Product-Led Value & User Empathy
+                  <span className="text-amber-400 font-bold">04.</span> Product-Led Value & User Empathy
                 </li>
               </ul>
             </div>
           </div>
         </div>
 
-        {/* Evolutionary Journey Flow Timeline (Clean Concise Round Auto-Scrolling Pipeline) */}
-        <div className="space-y-5 pt-8 border-t border-[#123C2F]/10">
+        {/* Evolutionary Journey Flow Timeline */}
+        <div className="space-y-5 pt-8 border-t border-slate-200">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <h3 className="font-mono text-xs uppercase tracking-widest text-[#123C2F] font-bold">
+              <h3 className="font-mono text-xs uppercase tracking-widest text-blue-800 font-bold">
                 The Evolution: Journey Pipeline
               </h3>
-              <p className="text-xs font-mono text-[#666666] mt-0.5">
+              <p className="text-xs font-mono text-slate-500 mt-0.5">
                 End-to-End Progression
               </p>
             </div>
@@ -226,7 +224,7 @@ export function AboutSection() {
               <button
                 onClick={() => handleScroll("left")}
                 aria-label="Scroll left"
-                className="w-8 h-8 rounded-full border border-[#123C2F]/20 flex items-center justify-center text-[#123C2F] hover:bg-[#123C2F] hover:text-[#F7F7F3] transition-all duration-200"
+                className="w-8 h-8 rounded-full border border-slate-300 flex items-center justify-center text-slate-700 hover:bg-blue-800 hover:text-amber-200 hover:border-blue-800 transition-all duration-200"
                 data-cursor="pointer"
               >
                 <ChevronLeft className="w-3.5 h-3.5" />
@@ -234,7 +232,7 @@ export function AboutSection() {
               <button
                 onClick={() => handleScroll("right")}
                 aria-label="Scroll right"
-                className="w-8 h-8 rounded-full border border-[#123C2F]/20 flex items-center justify-center text-[#123C2F] hover:bg-[#123C2F] hover:text-[#F7F7F3] transition-all duration-200"
+                className="w-8 h-8 rounded-full border border-slate-300 flex items-center justify-center text-slate-700 hover:bg-blue-800 hover:text-amber-200 hover:border-blue-800 transition-all duration-200"
                 data-cursor="pointer"
               >
                 <ChevronRight className="w-3.5 h-3.5" />
@@ -242,7 +240,7 @@ export function AboutSection() {
             </div>
           </div>
 
-          {/* Curved Edge Mask Container for Smooth Round Carousel Horizon */}
+          {/* Curved Edge Mask Container */}
           <div
             className="relative overflow-hidden py-2"
             style={{
@@ -255,7 +253,7 @@ export function AboutSection() {
               handleMouseLeaveOrUp();
             }}
           >
-            {/* Horizontal Scroll Track Container with Clean Compact Cards */}
+            {/* Horizontal Scroll Track */}
             <div
               ref={scrollContainerRef}
               onMouseDown={handleMouseDown}
@@ -271,29 +269,29 @@ export function AboutSection() {
                   <div
                     key={idx}
                     onMouseEnter={() => soundManager.playHover()}
-                    className="relative flex-shrink-0 w-[210px] sm:w-[230px] p-4 sm:p-5 rounded-2xl bg-[#F7F7F3] border border-[#123C2F]/15 flex flex-col justify-between group hover:border-[#123C2F] hover:shadow-md hover:-translate-y-1 hover:bg-white transition-all duration-300"
+                    className="relative flex-shrink-0 w-[210px] sm:w-[230px] p-4 sm:p-5 rounded-2xl bg-white border border-slate-200 flex flex-col justify-between group hover:border-amber-400 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
                     data-cursor="pointer"
                   >
                     {/* Top Row: Icon & Step Number */}
                     <div className="flex items-center justify-between mb-3">
-                      <div className="w-9 h-9 rounded-xl bg-white border border-[#123C2F]/10 flex items-center justify-center text-[#123C2F] shadow-2xs group-hover:bg-[#123C2F] group-hover:text-white transition-all duration-300">
+                      <div className="w-9 h-9 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-blue-900 shadow-2xs group-hover:bg-blue-800 group-hover:text-amber-300 group-hover:border-blue-800 transition-all duration-300">
                         <Icon className="w-4 h-4" />
                       </div>
 
                       <div className="flex items-center gap-1.5">
-                        <span className="font-mono text-xs text-[#888888] font-bold group-hover:text-[#123C2F] transition-colors">
+                        <span className="font-mono text-xs text-slate-400 font-bold group-hover:text-blue-800 transition-colors">
                           {step.step}
                         </span>
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#123C2F]/20 group-hover:bg-emerald-500 transition-all" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-slate-200 group-hover:bg-amber-400 transition-all" />
                       </div>
                     </div>
 
                     {/* Bottom: Title & Label */}
                     <div>
-                      <h4 className="font-sans font-bold text-sm sm:text-base text-[#111111] group-hover:text-[#123C2F] transition-colors">
+                      <h4 className="font-sans font-bold text-sm sm:text-base text-slate-900 group-hover:text-blue-800 transition-colors">
                         {step.title}
                       </h4>
-                      <p className="text-[11px] font-mono text-[#666666] group-hover:text-[#123C2F] font-medium mt-1 leading-snug">
+                      <p className="text-[11px] font-mono text-slate-500 group-hover:text-slate-700 font-medium mt-1 leading-snug">
                         {step.label}
                       </p>
                     </div>
@@ -304,9 +302,9 @@ export function AboutSection() {
           </div>
 
           {/* Progress Bar Track */}
-          <div className="w-full bg-[#EAEAE4] h-1 rounded-full overflow-hidden">
+          <div className="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
             <div
-              className="bg-[#123C2F] h-full transition-all duration-100 rounded-full"
+              className="bg-gradient-to-r from-blue-700 via-blue-800 to-amber-500 h-full transition-all duration-100 rounded-full"
               style={{ width: `${Math.max(10, scrollProgress)}%` }}
             />
           </div>
@@ -315,6 +313,3 @@ export function AboutSection() {
     </section>
   );
 }
-
-
-

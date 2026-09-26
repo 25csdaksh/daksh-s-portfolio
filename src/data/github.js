@@ -321,7 +321,7 @@ export const fetchLiveGithubData = async (username = "25csdaksh") => {
           .map(([lang, count]) => ({
             name: lang,
             percentage: Math.round((count / totalLangRepos) * 100),
-            color: languageColors[lang] || "#123C2F"
+            color: languageColors[lang] || "#2563EB"
           }));
       }
 
@@ -333,7 +333,7 @@ export const fetchLiveGithubData = async (username = "25csdaksh") => {
           name: r.name,
           description: r.description || repoCuratedDescriptions[r.name] || "Full-stack engineering & algorithmic system repository.",
           language: r.language || "JavaScript",
-          langColor: languageColors[r.language] || "#123C2F",
+          langColor: languageColors[r.language] || "#2563EB",
           stars: r.stargazers_count,
           forks: r.forks_count,
           url: r.html_url

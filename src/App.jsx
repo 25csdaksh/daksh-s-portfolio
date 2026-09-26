@@ -75,7 +75,7 @@ export default function App() {
 
 
   return (
-    <div className="relative min-h-screen bg-[#F7F7F3] text-[#111111] overflow-x-hidden selection:bg-[#123C2F] selection:text-[#F7F7F3]">
+    <div className="relative min-h-screen bg-[#F8FAFC] text-[#0F172A] overflow-x-hidden selection:bg-[#2563EB] selection:text-white">
       {/* Floating Header / Navbar */}
       <Navbar
         onOpenResume={() => setResumeOpen(true)}

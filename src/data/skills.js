@@ -11,7 +11,7 @@ export const skillsData = [
     projects: ["TrialGuard AI", "KrishiSeva", "Hospital ERP", "School ERP", "KshetraPal"],
     experience: "Component lifecycle, custom hooks, context state management, performance memoization, and reactive UI architectures.",
     featured: true,
-    accentColor: "#123C2F",
+    accentColor: "#2563EB",
     certifications: ["University of Michigan Web Specialization"]
   },
   {
@@ -133,7 +133,7 @@ export const skillsData = [
     projects: ["All Backend Systems"],
     experience: "HTTP status hygiene, idempotency, pagination contracts, rate-limiting headers, webhook receivers.",
     featured: true,
-    accentColor: "#123C2F",
+    accentColor: "#2563EB",
     certifications: ["Meta Back-End Developer Certificate"]
   },
   {

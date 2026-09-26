@@ -91,17 +91,14 @@ export function HeroVisual3D() {
 
       // Rotate vertex helper
       const project = ([vx, vy, vz]) => {
-        // Y-axis rotation
         let x1 = vx * cosY + vz * sinY;
         let y1 = vy;
         let z1 = -vx * sinY + vz * cosY;
 
-        // X-axis rotation
         let x2 = x1;
         let y2 = y1 * cosX - z1 * sinX;
         let z2 = y1 * sinX + z1 * cosX;
 
-        // Z-axis rotation
         let x3 = x2 * cosZ - y2 * sinZ;
         let y3 = x2 * sinZ + y2 * cosZ;
         let z3 = z2;
@@ -118,7 +115,7 @@ export function HeroVisual3D() {
 
       const projected = vertices.map(project);
 
-      // Draw subtle connections between vertices
+      // Draw subtle connections between vertices in Royal Blue & Gold
       ctx.lineWidth = 1;
       for (let i = 0; i < projected.length; i++) {
         for (let j = i + 1; j < projected.length; j++) {
@@ -127,8 +124,8 @@ export function HeroVisual3D() {
           const dist = Math.sqrt(dx * dx + dy * dy);
 
           if (dist < radius * 1.5) {
-            const alpha = Math.max(0.04, 0.22 - dist / (radius * 1.5));
-            ctx.strokeStyle = `rgba(18, 60, 47, ${alpha})`;
+            const alpha = Math.max(0.04, 0.28 - dist / (radius * 1.5));
+            ctx.strokeStyle = i % 2 === 0 ? `rgba(29, 78, 216, ${alpha})` : `rgba(212, 175, 55, ${alpha * 1.1})`;
             ctx.beginPath();
             ctx.moveTo(projected[i].x, projected[i].y);
             ctx.lineTo(projected[j].x, projected[j].y);
@@ -139,20 +136,20 @@ export function HeroVisual3D() {
 
       // Draw projected nodes
       projected.forEach((p, idx) => {
-        const nodeAlpha = Math.min(1, Math.max(0.2, (p.z + radius) / (2 * radius)));
-        ctx.fillStyle = idx % 2 === 0 ? `rgba(18, 60, 47, ${nodeAlpha})` : `rgba(212, 175, 55, ${nodeAlpha})`;
+        const nodeAlpha = Math.min(1, Math.max(0.3, (p.z + radius) / (2 * radius)));
+        ctx.fillStyle = idx % 2 === 0 ? `rgba(29, 78, 216, ${nodeAlpha})` : `rgba(212, 175, 55, ${nodeAlpha})`;
         ctx.beginPath();
-        ctx.arc(p.x, p.y, Math.max(0.5, 3 * p.scale), 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, Math.max(0.8, 3.4 * p.scale), 0, Math.PI * 2);
         ctx.fill();
       });
 
       // Draw floating subtle ambient particles
-      particles.forEach((pt) => {
+      particles.forEach((pt, idx) => {
         pt.x += Math.sin(rotX) * 0.4;
         pt.y += Math.cos(rotY) * 0.4;
         const pProj = project([pt.x, pt.y, pt.z]);
-        const pAlpha = Math.min(1, Math.max(0.02, 0.15 * pProj.scale));
-        ctx.fillStyle = `rgba(18, 60, 47, ${pAlpha})`;
+        const pAlpha = Math.min(1, Math.max(0.02, 0.22 * pProj.scale));
+        ctx.fillStyle = idx % 2 === 0 ? `rgba(29, 78, 216, ${pAlpha})` : `rgba(212, 175, 55, ${pAlpha})`;
         ctx.beginPath();
         ctx.arc(pProj.x, pProj.y, Math.max(0.5, pt.size * pProj.scale), 0, Math.PI * 2);
         ctx.fill();
@@ -185,23 +182,23 @@ export function HeroVisual3D() {
       className="relative w-full aspect-square max-w-[540px] mx-auto flex items-center justify-center select-none"
     >
       {/* Subtle background ambient glow */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-[#123C2F]/5 via-transparent to-[#D4AF37]/10 rounded-3xl blur-2xl -z-10" />
+      <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/10 via-amber-500/5 to-indigo-900/10 rounded-3xl blur-2xl -z-10" />
 
       {/* Decorative Grid Frame */}
-      <div className="absolute inset-4 rounded-3xl border border-[#123C2F]/10 bg-white/40 backdrop-blur-xs pointer-events-none -z-10 overflow-hidden">
-        <div className="absolute inset-0 bg-noise opacity-40" />
-        <div className="absolute top-4 left-4 font-mono text-[10px] tracking-widest text-[#123C2F]/60 uppercase">
+      <div className="absolute inset-4 rounded-3xl border border-amber-200/70 bg-white/80 backdrop-blur-xs pointer-events-none -z-10 overflow-hidden shadow-md">
+        <div className="absolute inset-0 bg-noise opacity-50" />
+        <div className="absolute top-4 left-4 font-mono text-[10px] tracking-widest text-blue-800 font-bold uppercase">
           SYS.ID // DAKSH.ENGINEERING
         </div>
-        <div className="absolute top-4 right-4 flex items-center gap-1.5 font-mono text-[10px] text-[#123C2F]/70">
-          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+        <div className="absolute top-4 right-4 flex items-center gap-1.5 font-mono text-[10px] text-slate-800">
+          <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
           <span>{currentTime || "IST / LIVE"}</span>
         </div>
-        <div className="absolute bottom-4 left-4 font-mono text-[9px] text-[#666666]/60">
-          LATENCY: &lt;14ms • ML_CORE: ACTIVE
+        <div className="absolute bottom-4 left-4 font-mono text-[9px] text-slate-600">
+          LATENCY: &lt;14ms • AI_CORE: ACTIVE
         </div>
-        <div className="absolute bottom-4 right-4 font-mono text-[9px] text-[#666666]/60">
-          2026.V1
+        <div className="absolute bottom-4 right-4 font-mono text-[9px] text-amber-800 font-semibold">
+          2026.PRO
         </div>
       </div>
 
@@ -226,17 +223,17 @@ export function HeroVisual3D() {
           x: { duration: 0.2 },
         }}
         onMouseEnter={() => soundManager.playHover()}
-        className="absolute -top-3 -right-2 md:top-6 md:-right-4 bg-white/95 backdrop-blur-md px-3.5 py-2.5 rounded-xl border border-[#123C2F]/15 shadow-xl shadow-[#123C2F]/5 flex items-center gap-3 z-10"
+        className="absolute -top-3 -right-2 md:top-6 md:-right-4 bg-white/95 backdrop-blur-md px-3.5 py-2.5 rounded-xl border border-amber-300/80 shadow-xl shadow-blue-950/5 flex items-center gap-3 z-10"
       >
-        <div className="w-8 h-8 rounded-lg bg-[#123C2F] text-[#F7F7F3] flex items-center justify-center shadow-inner">
-          <ShieldCheck className="w-4 h-4 text-[#D4AF37]" />
+        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-700 to-indigo-900 text-amber-300 border border-amber-400/50 flex items-center justify-center shadow-xs">
+          <ShieldCheck className="w-4 h-4 text-amber-300" />
         </div>
         <div>
           <div className="flex items-center gap-1.5">
-            <span className="font-mono text-[10px] tracking-wider text-[#123C2F] font-bold">Netram God's Eye</span>
-            <span className="px-1.5 py-0.5 rounded text-[9px] font-mono bg-emerald-100 text-emerald-800 font-semibold">98.2% Acc</span>
+            <span className="font-mono text-[10px] tracking-wider text-blue-900 font-bold">Netram AI</span>
+            <span className="px-1.5 py-0.5 rounded text-[9px] font-mono bg-amber-50 text-amber-900 font-bold border border-amber-300">98.2% Acc</span>
           </div>
-          <p className="text-[11px] text-[#666666]">Real-time Deepfake Defense</p>
+          <p className="text-[11px] text-slate-600">Deepfake Detection & AI Defense</p>
         </div>
       </motion.div>
 
@@ -251,21 +248,21 @@ export function HeroVisual3D() {
           x: { duration: 0.2 },
         }}
         onMouseEnter={() => soundManager.playHover()}
-        className="absolute -bottom-4 -left-2 md:bottom-6 md:-left-6 bg-[#111111] text-[#F7F7F3] p-3.5 rounded-xl border border-white/10 shadow-2xl shadow-black/20 font-mono text-[11px] max-w-[240px] z-10"
+        className="absolute -bottom-4 -left-2 md:bottom-6 md:-left-6 bg-slate-950 text-slate-100 p-3.5 rounded-xl border border-amber-500/30 shadow-2xl font-mono text-[11px] max-w-[240px] z-10"
       >
-        <div className="flex items-center justify-between pb-2 border-b border-white/10 mb-2">
+        <div className="flex items-center justify-between pb-2 border-b border-slate-800 mb-2">
           <div className="flex items-center gap-1.5">
             <span className="w-2 h-2 rounded-full bg-red-400" />
-            <span className="w-2 h-2 rounded-full bg-yellow-400" />
-            <span className="w-2 h-2 rounded-full bg-emerald-400" />
+            <span className="w-2 h-2 rounded-full bg-amber-400" />
+            <span className="w-2 h-2 rounded-full bg-blue-400" />
           </div>
-          <span className="text-[9px] text-white/40">daksh.architecture()</span>
+          <span className="text-[9px] text-amber-400/90 font-semibold">daksh.architecture()</span>
         </div>
-        <div className="text-emerald-400 text-[10px] leading-tight">
-          <span className="text-purple-300">const</span> product = <span className="text-yellow-300">await</span> build({`{`}
-          <div className="pl-3 text-white/80">
-            craft: <span className="text-emerald-300">"Production"</span>,
-            impact: <span className="text-yellow-300">"Unforgettable"</span>
+        <div className="text-blue-300 text-[10px] leading-tight">
+          <span className="text-amber-300">const</span> product = <span className="text-blue-400">await</span> build({`{`}
+          <div className="pl-3 text-slate-300">
+            craft: <span className="text-amber-200">"Production"</span>,
+            impact: <span className="text-blue-300">"High Precision"</span>
           </div>
           {`}`});
         </div>
@@ -282,21 +279,21 @@ export function HeroVisual3D() {
           x: { duration: 0.2 },
         }}
         onMouseEnter={() => soundManager.playHover()}
-        className="absolute top-1/2 -left-4 md:-left-8 -translate-y-1/2 bg-white/95 backdrop-blur-md px-3 py-2 rounded-lg border border-[#123C2F]/15 shadow-lg flex items-center gap-2 z-10"
+        className="absolute top-1/2 -left-4 md:-left-8 -translate-y-1/2 bg-white/95 backdrop-blur-md px-3 py-2 rounded-lg border border-amber-300/80 shadow-lg flex items-center gap-2 z-10"
       >
-        <span className="w-2 h-2 rounded-full bg-[#D4AF37] animate-ping" />
+        <span className="w-2 h-2 rounded-full bg-amber-500 animate-ping" />
         <div>
-          <p className="font-mono text-[9px] tracking-wider text-[#123C2F] font-bold uppercase">SIH 2026</p>
-          <p className="text-[10px] font-medium text-[#111111]">Team Leader • 36h Sprint</p>
+          <p className="font-mono text-[9px] tracking-wider text-blue-900 font-bold uppercase">SIH 2026</p>
+          <p className="text-[10px] font-semibold text-slate-900">Team Leader • 36h Sprint</p>
         </div>
       </motion.div>
 
       {/* Center Avatar Badge / Monogram */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-gradient-to-br from-[#123C2F] to-[#0A231B] text-[#F7F7F3] border-2 border-[#D4AF37]/40 shadow-2xl flex flex-col items-center justify-center pointer-events-none group">
-        <span className="font-serif italic text-3xl md:text-4xl font-bold tracking-tighter text-[#F7F7F3]">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-gradient-to-br from-blue-700 via-blue-900 to-slate-950 text-amber-300 border-2 border-amber-400/80 shadow-2xl shadow-blue-950/40 flex flex-col items-center justify-center pointer-events-none group">
+        <span className="font-sans text-3xl md:text-4xl font-black tracking-tighter text-amber-300 drop-shadow-sm">
           DS
         </span>
-        <span className="text-[8px] tracking-widest font-mono text-[#D4AF37] uppercase">
+        <span className="text-[8px] tracking-widest font-mono text-amber-200/90 uppercase font-bold">
           ENGINEER
         </span>
       </div>

@@ -204,7 +204,7 @@ export function HackathonsSection({ onSelectProject }) {
                       {activeCertificate.title}
                     </h3>
                     <p className="font-mono text-[10px] text-purple-300 font-semibold truncate">
-                      Recipient: Daksh Rakeshbhai Soni • Team KrishiSeva
+                      Recipient: Daksh Soni • {activeCertificate.organization}
                     </p>
                   </div>
                 </div>
@@ -212,7 +212,7 @@ export function HackathonsSection({ onSelectProject }) {
                 <div className="flex items-center gap-2 shrink-0 ml-2">
                   <a
                     href={activeCertificate.certificateImage}
-                    download="Daksh-Soni-Tech-For-Agriculture-Certificate.jpg"
+                    download={`${activeCertificate.id}-certificate.jpg`}
                     onClick={() => soundManager.playClick()}
                     className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-amber-400 to-yellow-500 text-purple-950 border border-amber-300 font-mono text-xs font-black hover:scale-105 transition-all shadow-sm"
                   >
@@ -237,7 +237,7 @@ export function HackathonsSection({ onSelectProject }) {
                 <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-purple-400/40 max-w-full">
                   <img
                     src={activeCertificate.certificateImage}
-                    alt="Certificate of Achievement - Daksh Rakeshbhai Soni"
+                    alt={`${activeCertificate.title} - Daksh Soni`}
                     className="w-full max-h-[52vh] sm:max-h-[62vh] object-contain"
                   />
                 </div>
@@ -249,14 +249,18 @@ export function HackathonsSection({ onSelectProject }) {
                       OFFICIAL ACCREDITATION
                     </span>
                     <div className="flex flex-wrap gap-2 text-slate-200 font-medium">
-                      <span>• JAIN University</span>
-                      <span>• ACM Chapter</span>
-                      <span>• Innovation Council</span>
-                      <span>• IBM Co-Sponsored</span>
+                      {activeCertificate.accreditations?.map((acc, aIdx) => (
+                        <span key={aIdx}>• {acc}</span>
+                      )) || (
+                        <>
+                          <span>• {activeCertificate.organization}</span>
+                          <span>• Verified Credential</span>
+                        </>
+                      )}
                     </div>
                   </div>
                   <div className="px-3 py-1 rounded-full bg-purple-500/20 text-purple-200 font-bold text-[11px] border border-purple-400/40 shrink-0">
-                    ✓ Verified Credential
+                    ✓ {activeCertificate.badge || "Verified Credential"}
                   </div>
                 </div>
               </div>

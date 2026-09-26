@@ -178,6 +178,27 @@ export const verifiedCertifications = [
     ]
   },
   {
+    id: "spark-tank-charusat",
+    title: "Spark Tank 2.0 — Pitching Competition",
+    organization: "E-Cell CHARUSAT, CSIC & IIC (Ministry of Education)",
+    instructor: "Dr. Jaimin N Undavia (Convener) & Dr. Binit Patel (Registrar)",
+    date: "Aug 20, 2026",
+    coursesCount: "Certificate of Appreciation",
+    credentialId: "CHARUSAT-ECELL-ST2-2026",
+    verifyUrl: "/certificates/spark-tank-charusat-certificate.jpg",
+    pdfUrl: "/certificates/spark-tank-charusat-certificate.jpg",
+    imagePreview: "/certificates/spark-tank-charusat-certificate.jpg",
+    badge: "Pitching Competition",
+    category: "Entrepreneurship & Startup Pitching",
+    capstone: "Actively participated in Spark Tank 2.0 Pitching Competition organized by E-Cell CHARUSAT and CSIC under the Institution's Innovation Council. Commended for innovation, active involvement, and pitch presentation.",
+    courses: [
+      "Startup Business Pitching & Value Proposition",
+      "E-Cell CHARUSAT & CSIC Incubation Framework",
+      "Innovation Evaluation & Market Feasibility",
+      "Live Jury Presentation to Startup Mentors"
+    ]
+  },
+  {
     id: "cisco-packet-tracer",
     title: "Getting Started with Cisco Packet Tracer",
     organization: "Cisco Networking Academy",

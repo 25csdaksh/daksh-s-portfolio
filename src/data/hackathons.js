@@ -62,6 +62,27 @@ export const hackathonsData = [
     accreditations: ["BITSoM (BITS School of Management)", "BITSVERTISE Marketing Club", "Xplor", "Business Valley"]
   },
   {
+    id: "spark-tank-2026",
+    title: "Spark Tank 2.0 — Pitching Competition",
+    organization: "E-Cell CHARUSAT, CSIC & IIC (Ministry of Education)",
+    role: "Startup Pitch Presenter & Product Architect",
+    date: "2026",
+    tag: "Pitching Competition",
+    badge: "Certificate of Appreciation",
+    description: "Actively participated in Spark Tank 2.0 Pitching Competition organized by E-Cell CHARUSAT and CSIC (CHARUSAT Startup & Innovation Centre) under the Institution's Innovation Council (Ministry of Education Initiative).",
+    impact: "Pitched a high-impact innovative digital product solution to startup mentors, faculty conveners, and incubator jury panels.",
+    highlights: [
+      "Awarded official Certificate of Appreciation for spirit of innovation and active participation",
+      "Organized by E-Cell CHARUSAT, CSIC & Ministry of Education Innovation Council (IIC)",
+      "Evaluated by Dr. Jaimin N Undavia (Convener), Mr. Martin Parmar (Mentor) & Dr. Binit Patel (Registrar)",
+      "Presented startup value proposition, prototype walkthrough, and revenue model"
+    ],
+    technologies: ["Startup Strategy", "Product Pitching", "Business Model Canvas", "Prototype Demonstration", "Unit Economics"],
+    status: "Certificate of Appreciation",
+    certificateImage: "/certificates/spark-tank-charusat-certificate.jpg",
+    accreditations: ["E-Cell CHARUSAT", "CSIC (CHARUSAT Startup & Innovation Centre)", "Institution's Innovation Council", "Ministry of Education Initiative"]
+  },
+  {
     id: "sih-2026",
     title: "Smart India Hackathon (SIH 2026)",
     organization: "Ministry of Education & AICTE",
@@ -102,6 +123,6 @@ export const hackathonsData = [
 export const hackathonStats = [
   { number: "🏆 3rd", label: "Winner Podium", sub: "Hackorbit • GDG CHARUSAT" },
   { number: "Top 37", label: "National Standing", sub: "Tech for Agri • IBM & ACM" },
-  { number: "05+", label: "Hackathons & Sprints", sub: "Engineering & Strategy" },
+  { number: "06+", label: "Hackathons & Sprints", sub: "Engineering & Pitching" },
   { number: "36h+", label: "Rapid Prototyping", sub: "Zero to MVP mastery" }
 ];

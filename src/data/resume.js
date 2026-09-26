@@ -90,6 +90,11 @@ export const resumeData = {
   ],
   hackathonsAndLeadership: [
     {
+      title: "Spark Tank 2.0 Pitching Competition — Certificate of Appreciation",
+      organization: "E-Cell CHARUSAT, CSIC & Institution's Innovation Council",
+      description: "Recognized for active participation, enthusiasm, and spirit of innovation presenting startup pitch to mentor panels."
+    },
+    {
       title: "Smart India Hackathon 2026 — Team Leader",
       organization: "Institute Level Selection",
       description: "Selected through the institute-level process; led problem identification, project planning, and solution development."

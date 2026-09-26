@@ -138,6 +138,28 @@ export const certificatesData = [
     accreditations: ["BITSoM (BITS School of Management)", "BITSVERTISE", "Xplor", "Business Valley"]
   },
   {
+    id: "spark-tank-charusat",
+    title: "Spark Tank 2.0 — Pitching Competition",
+    organization: "E-Cell CHARUSAT, CSIC & IIC (Ministry of Education)",
+    instructor: "Dr. Jaimin N Undavia (Convener) & Dr. Binit Patel (Registrar)",
+    date: "Aug 20, 2026",
+    type: "business",
+    badge: "E-Cell Pitching Competition",
+    credentialId: "CHARUSAT-ECELL-ST2-2026",
+    verifyUrl: "/certificates/spark-tank-charusat-certificate.jpg",
+    imagePreview: "/certificates/spark-tank-charusat-certificate.jpg",
+    pdfUrl: "/certificates/spark-tank-charusat-certificate.jpg",
+    category: "Entrepreneurship & Startup Pitching",
+    capstone: "Actively participated in Spark Tank 2.0 Pitching Competition organized by E-Cell CHARUSAT and CSIC under the Institution's Innovation Council. Commended for innovation, active involvement, and pitch presentation.",
+    courses: [
+      "Startup Business Pitching & Value Proposition",
+      "E-Cell CHARUSAT & CSIC Incubation Framework",
+      "Innovation Evaluation & Market Feasibility",
+      "Live Jury Presentation to Startup Mentors"
+    ],
+    accreditations: ["E-Cell CHARUSAT", "CSIC (CHARUSAT Startup & Innovation Centre)", "Institution's Innovation Council", "Ministry of Education Initiative"]
+  },
+  {
     id: "cisco-packet-tracer",
     title: "Getting Started with Cisco Packet Tracer",
     organization: "Cisco Networking Academy",
@@ -184,8 +206,8 @@ export const certificatesData = [
 ];
 
 export const certificateStats = [
-  { value: "08", label: "Verified Credentials", detail: "University, Meta, Cisco & Awards" },
-  { value: "27+", label: "Academic Courses", detail: "Completed across disciplines" },
+  { value: "09", label: "Verified Credentials", detail: "University, Meta, E-Cell & Cisco" },
+  { value: "30+", label: "Academic Courses", detail: "Completed across disciplines" },
   { value: "100%", label: "Verified & Documented", detail: "Official IDs & Image Records" },
   { value: "🏆 3rd", label: "Podium Hackathon Win", detail: "Google Developer Groups (GDG)" }
 ];

@@ -11,15 +11,15 @@ export function Footer({ onOpenLearning }) {
   };
 
   return (
-    <footer className="bg-[#02040A]/95 backdrop-blur-md text-white pt-12 sm:pt-16 pb-10 sm:pb-12 px-4 sm:px-6 md:px-12 relative overflow-hidden border-t border-white/10">
+    <footer className="bg-[#030014]/95 backdrop-blur-md text-white pt-12 sm:pt-16 pb-10 sm:pb-12 px-4 sm:px-6 md:px-12 relative overflow-hidden border-t border-purple-500/20">
       {/* Subtle Background Watermark */}
-      <div className="absolute -bottom-10 right-0 font-heading text-[14vw] font-black text-white/5 select-none pointer-events-none">
+      <div className="absolute -bottom-10 right-0 font-heading text-[14vw] font-black text-purple-400/5 select-none pointer-events-none">
         SONI
       </div>
 
       <div className="max-w-7xl mx-auto space-y-10 sm:space-y-12 relative z-10">
         {/* Top Footer Tier */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start justify-between pb-8 sm:pb-12 border-b border-white/10">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start justify-between pb-8 sm:pb-12 border-b border-purple-500/15">
           {/* Brand Info */}
           <div className="md:col-span-6 space-y-3">
             <div className="flex items-center gap-3">
@@ -116,7 +116,7 @@ export function Footer({ onOpenLearning }) {
                 href={profileData.socials.github}
                 target="_blank"
                 rel="noreferrer"
-                className="p-2.5 rounded-full bg-[#091328] border border-white/10 hover:bg-[#0E1D3E] hover:border-amber-400 text-slate-200 hover:text-amber-300 transition-colors shadow-sm"
+                className="p-2.5 rounded-full bg-[#0f072e] border border-purple-500/20 hover:bg-[#170c43] hover:border-amber-400 text-slate-200 hover:text-amber-300 transition-colors shadow-sm"
                 title="GitHub"
                 data-cursor="pointer"
               >
@@ -126,7 +126,7 @@ export function Footer({ onOpenLearning }) {
                 href={profileData.socials.linkedin}
                 target="_blank"
                 rel="noreferrer"
-                className="p-2.5 rounded-full bg-[#091328] border border-white/10 hover:bg-[#0E1D3E] hover:border-amber-400 text-slate-200 hover:text-amber-300 transition-colors shadow-sm"
+                className="p-2.5 rounded-full bg-[#0f072e] border border-purple-500/20 hover:bg-[#170c43] hover:border-amber-400 text-slate-200 hover:text-amber-300 transition-colors shadow-sm"
                 title="LinkedIn"
                 data-cursor="pointer"
               >
@@ -136,7 +136,7 @@ export function Footer({ onOpenLearning }) {
                 href={profileData.socials.instagram}
                 target="_blank"
                 rel="noreferrer"
-                className="p-2.5 rounded-full bg-[#091328] border border-white/10 hover:bg-[#0E1D3E] hover:border-amber-400 text-slate-200 hover:text-amber-300 transition-colors shadow-sm"
+                className="p-2.5 rounded-full bg-[#0f072e] border border-purple-500/20 hover:bg-[#170c43] hover:border-amber-400 text-slate-200 hover:text-amber-300 transition-colors shadow-sm"
                 title="Instagram"
                 data-cursor="pointer"
               >
@@ -144,7 +144,7 @@ export function Footer({ onOpenLearning }) {
               </a>
               <a
                 href={`mailto:${profileData.email}`}
-                className="p-2.5 rounded-full bg-[#091328] border border-white/10 hover:bg-[#0E1D3E] hover:border-amber-400 text-slate-200 hover:text-amber-300 transition-colors shadow-sm"
+                className="p-2.5 rounded-full bg-[#0f072e] border border-purple-500/20 hover:bg-[#170c43] hover:border-amber-400 text-slate-200 hover:text-amber-300 transition-colors shadow-sm"
                 title="Email"
                 data-cursor="pointer"
               >
@@ -169,7 +169,7 @@ export function Footer({ onOpenLearning }) {
             © {new Date().getFullYear()} Daksh Soni. All rights reserved.
           </div>
           <div className="flex items-center gap-2">
-            <span>Architected with React & 60:30:10 Design Tokens</span>
+            <span>Architected with React & Cosmic Purple Space Engine</span>
             <span>•</span>
             <span className="text-amber-400 font-bold">India (IST)</span>
           </div>

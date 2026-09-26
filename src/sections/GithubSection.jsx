@@ -47,15 +47,15 @@ export function GithubSection() {
   const getHeatmapColor = (level) => {
     switch (level) {
       case 1:
-        return "bg-blue-900/80 hover:bg-blue-800 border border-blue-700/40";
+        return "bg-purple-900/80 hover:bg-purple-800 border border-purple-700/40";
       case 2:
-        return "bg-blue-600 hover:bg-blue-500 border border-blue-400/50";
+        return "bg-purple-600 hover:bg-purple-500 border border-purple-400/50 shadow-xs shadow-purple-500/20";
       case 3:
-        return "bg-amber-600 hover:bg-amber-500 border border-amber-400/60";
+        return "bg-amber-500 hover:bg-amber-400 border border-amber-300/60";
       case 4:
-        return "bg-amber-400 hover:bg-yellow-300 shadow-xs ring-1 ring-amber-300";
+        return "bg-amber-400 hover:bg-yellow-300 shadow-xs ring-1 ring-yellow-300";
       default:
-        return "bg-[#050B1A] hover:bg-[#0E1D3E] border border-white/10";
+        return "bg-[#080321] hover:bg-[#170c43] border border-purple-500/20";
     }
   };
 
@@ -71,21 +71,24 @@ export function GithubSection() {
   };
 
   return (
-    <section className="py-20 sm:py-32 px-4 sm:px-6 md:px-12 relative bg-[#02040A]/80 backdrop-blur-xs text-white">
-      <div className="max-w-7xl mx-auto space-y-12 sm:space-y-16">
+    <section className="py-20 sm:py-32 px-4 sm:px-6 md:px-12 relative bg-[#080321]/80 backdrop-blur-xs text-white border-t border-b border-purple-500/20">
+      {/* Background Cosmic Purple Ambiance */}
+      <div className="absolute top-1/4 left-1/4 w-[380px] h-[380px] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none -z-10" />
+
+      <div className="max-w-7xl mx-auto space-y-12 sm:space-y-16 relative z-10">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 pb-6 sm:pb-8 border-b border-white/10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 pb-6 sm:pb-8 border-b border-purple-400/15">
           <div>
-            <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-2 font-mono text-xs uppercase tracking-widest text-amber-400 font-bold">
-              <Github className="w-4 h-4 text-amber-400" />
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-2 font-mono text-xs uppercase tracking-widest text-purple-300 font-bold">
+              <Github className="w-4 h-4 text-purple-400" />
               <span>06 // Open Source & Telemetry</span>
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-amber-400/15 text-amber-300 border border-amber-400/40 font-bold">
-                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping" />
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-purple-500/20 text-purple-200 border border-purple-400/40 font-bold">
+                <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-ping" />
                 <span>LIVE SYNC // @{data.username}</span>
               </span>
             </div>
             <h2 className="text-3xl sm:text-5xl md:text-6xl font-heading font-extrabold text-white tracking-tight leading-[1.1]">
-              Developer <span className="gradient-text-gold">Activity.</span>
+              Developer <span className="gradient-text-cosmic">Activity.</span>
             </h2>
           </div>
 
@@ -97,10 +100,10 @@ export function GithubSection() {
               }}
               disabled={isRefreshing}
               title="Refresh live GitHub telemetry"
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full border border-white/15 bg-[#091328] text-xs font-mono font-bold text-slate-200 hover:bg-[#0E1D3E] hover:border-amber-400 hover:text-amber-300 transition-all disabled:opacity-50"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full border border-purple-400/30 bg-[#0f072e] text-xs font-mono font-bold text-slate-200 hover:bg-[#170c43] hover:border-purple-400 hover:text-purple-200 transition-all disabled:opacity-50"
               data-cursor="pointer"
             >
-              <RefreshCw className={`w-3.5 h-3.5 ${isRefreshing ? "animate-spin text-amber-400" : "text-amber-400"}`} />
+              <RefreshCw className={`w-3.5 h-3.5 ${isRefreshing ? "animate-spin text-purple-400" : "text-purple-400"}`} />
               <span className="inline">{isRefreshing ? "Syncing..." : "Refresh"}</span>
             </button>
 
@@ -110,17 +113,17 @@ export function GithubSection() {
               rel="noopener noreferrer"
               onClick={() => soundManager.playClick()}
               onMouseEnter={() => soundManager.playHover()}
-              className="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-4 py-2 rounded-full border border-amber-400 bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-blue-950 text-xs font-mono font-extrabold shadow-md shadow-amber-500/20 hover:scale-105 transition-all"
+              className="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-4 py-2 rounded-full border border-amber-400 bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-purple-950 text-xs font-mono font-extrabold shadow-md shadow-amber-500/20 hover:scale-105 transition-all"
               data-cursor="pointer"
             >
               <span>github.com/{data.username}</span>
-              <ArrowUpRight className="w-3.5 h-3.5 text-blue-950 stroke-[2.5]" />
+              <ArrowUpRight className="w-3.5 h-3.5 text-purple-950 stroke-[2.5]" />
             </a>
           </div>
         </div>
 
         {/* GitHub Heatmap Card */}
-        <div className="editorial-card p-5 sm:p-8 bg-[#091328] rounded-3xl border border-amber-400/30 hover:border-amber-400/70 shadow-xl space-y-5 sm:space-y-6 transition-colors">
+        <div className="editorial-card p-5 sm:p-8 bg-[#0f072e] rounded-3xl border border-purple-500/25 hover:border-purple-400/70 shadow-xl space-y-5 sm:space-y-6 transition-colors">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
             <div>
               <div className="flex items-center gap-2">
@@ -128,8 +131,8 @@ export function GithubSection() {
                   {data.totalContributions} Contributions in the Past Year
                 </h3>
                 {data.isLive && (
-                  <span className="hidden sm:inline-flex items-center gap-1 text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-amber-400/15 text-amber-300 border border-amber-400/40">
-                    <CheckCircle2 className="w-3 h-3 text-amber-400" /> Live
+                  <span className="hidden sm:inline-flex items-center gap-1 text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-200 border border-purple-400/40">
+                    <CheckCircle2 className="w-3 h-3 text-purple-400" /> Live
                   </span>
                 )}
               </div>
@@ -139,24 +142,24 @@ export function GithubSection() {
             </div>
 
             <div className="flex items-center gap-3 text-xs font-mono shrink-0">
-              <div className="flex items-center gap-1.5 text-blue-950 bg-gradient-to-r from-amber-400 to-yellow-500 px-3.5 py-1.5 rounded-full border border-amber-300 shadow-md font-extrabold text-xs">
-                <Flame className="w-3.5 h-3.5 text-blue-950 fill-current" />
+              <div className="flex items-center gap-1.5 text-purple-950 bg-gradient-to-r from-amber-400 to-yellow-500 px-3.5 py-1.5 rounded-full border border-amber-300 shadow-md font-extrabold text-xs">
+                <Flame className="w-3.5 h-3.5 text-purple-950 fill-current" />
                 <span>Streak: {data.currentStreak}</span>
               </div>
-              <div className="text-amber-300/90 hidden sm:block font-bold">
+              <div className="text-purple-300/90 hidden sm:block font-bold">
                 Longest: {data.longestStreak}
               </div>
             </div>
           </div>
 
           {/* Mobile swipe helper text */}
-          <div className="sm:hidden flex items-center justify-between text-[10px] font-mono text-amber-300/80 pt-1">
+          <div className="sm:hidden flex items-center justify-between text-[10px] font-mono text-purple-300/80 pt-1">
             <span>← Swipe horizontally to see 365 days →</span>
             <span>{data.weeks ? data.weeks.length * 7 : 365} days</span>
           </div>
 
           {/* 52-Week Matrix Grid with Scroll Container */}
-          <div className="overflow-x-auto pb-3 pt-1 no-scrollbar border-y border-white/10 py-3 sm:py-4">
+          <div className="overflow-x-auto pb-3 pt-1 no-scrollbar border-y border-purple-400/15 py-3 sm:py-4">
             <div className="min-w-[700px] flex gap-[3.5px]">
               {data.weeks && data.weeks.map((week, wIdx) => (
                 <div key={wIdx} className="flex flex-col gap-[3.5px]">
@@ -170,7 +173,7 @@ export function GithubSection() {
                       onMouseLeave={() => setHoveredDay(null)}
                       className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-[2.5px] transition-all duration-150 cursor-pointer ${getHeatmapColor(
                         day.level
-                      )} ${hoveredDay?.date === day.date ? "scale-135 ring-2 ring-amber-400 z-10" : "hover:scale-125"}`}
+                      )} ${hoveredDay?.date === day.date ? "scale-135 ring-2 ring-purple-400 z-10" : "hover:scale-125"}`}
                       data-cursor="pointer"
                       title={`${day.count} contributions on ${day.date}`}
                     />
@@ -184,8 +187,8 @@ export function GithubSection() {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-mono text-slate-300 pt-1">
             <div className="min-h-[20px] flex items-center">
               {hoveredDay ? (
-                <span className="text-amber-300 font-bold bg-[#050B1A] px-2.5 py-1 rounded-md border border-amber-400/40 inline-flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-amber-400" />
+                <span className="text-purple-200 font-bold bg-[#080321] px-2.5 py-1 rounded-md border border-purple-400/40 inline-flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-purple-400" />
                   {hoveredDay.count} {hoveredDay.count === 1 ? "contribution" : "contributions"} on {formatDateLabel(hoveredDay.date)}
                 </span>
               ) : (
@@ -195,10 +198,10 @@ export function GithubSection() {
 
             <div className="flex items-center gap-2 text-[11px] self-end sm:self-auto font-mono">
               <span className="text-slate-400">Less</span>
-              <span className="w-2.5 h-2.5 rounded-[2px] bg-[#050B1A] border border-white/10" title="0 contributions" />
-              <span className="w-2.5 h-2.5 rounded-[2px] bg-blue-900/80" title="1-3 contributions" />
-              <span className="w-2.5 h-2.5 rounded-[2px] bg-blue-600" title="4-6 contributions" />
-              <span className="w-2.5 h-2.5 rounded-[2px] bg-amber-600" title="7-9 contributions" />
+              <span className="w-2.5 h-2.5 rounded-[2px] bg-[#080321] border border-purple-500/20" title="0 contributions" />
+              <span className="w-2.5 h-2.5 rounded-[2px] bg-purple-900/80" title="1-3 contributions" />
+              <span className="w-2.5 h-2.5 rounded-[2px] bg-purple-600" title="4-6 contributions" />
+              <span className="w-2.5 h-2.5 rounded-[2px] bg-amber-500" title="7-9 contributions" />
               <span className="w-2.5 h-2.5 rounded-[2px] bg-amber-400" title="10+ contributions (Gold Peak)" />
               <span className="text-slate-400">More</span>
             </div>
@@ -210,7 +213,7 @@ export function GithubSection() {
           {/* Featured Repositories (7 cols) */}
           <div className="lg:col-span-7 space-y-4">
             <div className="flex items-center justify-between">
-              <h3 className="font-mono text-xs uppercase tracking-wider text-amber-400 font-bold">
+              <h3 className="font-mono text-xs uppercase tracking-wider text-purple-300 font-bold">
                 Live Repositories ({data.publicRepos} Total)
               </h3>
               <span className="text-[11px] font-mono text-slate-400">Sorted by recent pushes</span>
@@ -224,22 +227,22 @@ export function GithubSection() {
                   rel="noopener noreferrer"
                   onClick={() => soundManager.playClick()}
                   onMouseEnter={() => soundManager.playHover()}
-                  className="p-4 sm:p-5 rounded-2xl bg-[#091328] border border-amber-400/30 hover:border-amber-400 hover:shadow-xl hover:shadow-amber-400/10 transition-all duration-300 flex flex-col justify-between group"
+                  className="p-4 sm:p-5 rounded-2xl bg-[#0f072e] border border-purple-400/30 hover:border-purple-400 hover:shadow-xl hover:shadow-purple-400/20 transition-all duration-300 flex flex-col justify-between group"
                   data-cursor="pointer"
                 >
                   <div className="space-y-2">
                     <div className="flex items-center justify-between gap-2">
-                      <span className="font-mono text-xs font-bold text-white group-hover:text-amber-300 transition-colors truncate">
+                      <span className="font-mono text-xs font-bold text-white group-hover:text-purple-300 transition-colors truncate">
                         {repo.name}
                       </span>
-                      <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-amber-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0" />
+                      <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-purple-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0" />
                     </div>
                     <p className="text-xs text-slate-200 line-clamp-2 leading-relaxed">
                       {repo.description}
                     </p>
                   </div>
 
-                  <div className="flex items-center justify-between pt-3 sm:pt-4 border-t border-white/10 font-mono text-[11px] text-slate-300 mt-3">
+                  <div className="flex items-center justify-between pt-3 sm:pt-4 border-t border-purple-400/15 font-mono text-[11px] text-slate-300 mt-3">
                     <div className="flex items-center gap-1.5">
                       <span
                         className="w-2.5 h-2.5 rounded-full"
@@ -266,15 +269,15 @@ export function GithubSection() {
           {/* Top Languages & Recent Activity (5 cols) */}
           <div className="lg:col-span-5 space-y-4 sm:space-y-6">
             {/* Languages breakdown */}
-            <div className="p-5 sm:p-6 rounded-2xl bg-[#091328] border border-amber-400/30 space-y-4 shadow-xl">
+            <div className="p-5 sm:p-6 rounded-2xl bg-[#0f072e] border border-purple-400/30 space-y-4 shadow-xl">
               <div className="flex items-center justify-between">
-                <h4 className="font-mono text-xs uppercase tracking-wider text-amber-400 font-bold">
+                <h4 className="font-mono text-xs uppercase tracking-wider text-purple-300 font-bold">
                   Language Distribution
                 </h4>
                 <span className="text-[10px] font-mono text-slate-400">Across {data.publicRepos} Repos</span>
               </div>
               {/* Stacked bar */}
-              <div className="w-full h-2.5 rounded-full overflow-hidden flex bg-[#050B1A]">
+              <div className="w-full h-2.5 rounded-full overflow-hidden flex bg-[#080321]">
                 {data.topLanguages.map((lang, idx) => (
                   <div
                     key={idx}
@@ -302,23 +305,23 @@ export function GithubSection() {
             </div>
 
             {/* Recent Activity Mini Feed */}
-            <div className="p-5 sm:p-6 rounded-2xl bg-[#091328] border border-amber-400/30 space-y-3.5 shadow-xl">
+            <div className="p-5 sm:p-6 rounded-2xl bg-[#0f072e] border border-purple-400/30 space-y-3.5 shadow-xl">
               <div className="flex items-center justify-between">
-                <h4 className="font-mono text-xs uppercase tracking-wider text-amber-400 font-bold">
+                <h4 className="font-mono text-xs uppercase tracking-wider text-purple-300 font-bold">
                   Recent Git Commits
                 </h4>
-                <span className="text-[10px] font-mono text-amber-300 bg-amber-400/15 px-2 py-0.5 rounded-full border border-amber-400/40 font-bold">
+                <span className="text-[10px] font-mono text-purple-200 bg-purple-500/20 px-2 py-0.5 rounded-full border border-purple-400/40 font-bold">
                   Live Feed
                 </span>
               </div>
               <div className="space-y-3">
                 {data.recentActivity && data.recentActivity.slice(0, 4).map((act, idx) => (
                   <div key={idx} className="text-xs font-mono flex items-start gap-2.5 text-slate-200">
-                    <GitCommit className="w-3.5 h-3.5 text-amber-400 shrink-0 mt-0.5" />
+                    <GitCommit className="w-3.5 h-3.5 text-purple-400 shrink-0 mt-0.5" />
                     <div className="min-w-0 flex-1">
                       <p className="text-white font-medium leading-tight truncate">{act.message}</p>
                       <div className="flex items-center gap-2 text-[10px] text-slate-400 mt-0.5">
-                        <span className="text-amber-400 font-bold truncate">{act.repo}</span>
+                        <span className="text-purple-300 font-bold truncate">{act.repo}</span>
                         <span>•</span>
                         <span>{act.time}</span>
                       </div>

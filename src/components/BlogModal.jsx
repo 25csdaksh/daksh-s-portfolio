@@ -35,7 +35,7 @@ export function BlogModal({ post, onClose }) {
             soundManager.playClick();
             onClose();
           }}
-          className="fixed inset-0 bg-[#02040A]/90 backdrop-blur-md"
+          className="fixed inset-0 bg-[#030014]/90 backdrop-blur-md"
         />
 
         {/* Modal Container */}
@@ -46,10 +46,10 @@ export function BlogModal({ post, onClose }) {
           transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
           onClick={(e) => e.stopPropagation()}
           data-lenis-prevent="true"
-          className="relative w-full max-w-3xl bg-[#091328] rounded-3xl border border-amber-400/50 shadow-2xl shadow-blue-950/80 overflow-hidden z-10 max-h-[90vh] flex flex-col overscroll-contain text-white"
+          className="relative w-full max-w-3xl bg-[#0f072e] rounded-3xl border border-purple-500/40 shadow-2xl shadow-purple-950/80 overflow-hidden z-10 max-h-[90vh] flex flex-col overscroll-contain text-white"
         >
           {/* Top Bar */}
-          <div className="flex items-center justify-between px-4 sm:px-6 py-3.5 sm:py-4 border-b border-white/10 bg-[#050B1A] shrink-0">
+          <div className="flex items-center justify-between px-4 sm:px-6 py-3.5 sm:py-4 border-b border-purple-500/20 bg-[#080321] shrink-0">
             <button
               onClick={() => {
                 soundManager.playClick();
@@ -64,7 +64,7 @@ export function BlogModal({ post, onClose }) {
             <div className="flex items-center gap-2">
               <button
                 onClick={handleShare}
-                className="p-2 rounded-full bg-[#091328] hover:bg-[#0E1D3E] border border-white/15 text-slate-300 hover:text-amber-300 transition-colors"
+                className="p-2 rounded-full bg-[#0f072e] hover:bg-[#170c43] border border-purple-500/20 text-slate-300 hover:text-amber-300 transition-colors"
                 title="Share article"
                 data-cursor="pointer"
               >
@@ -75,7 +75,7 @@ export function BlogModal({ post, onClose }) {
                   soundManager.playClick();
                   onClose();
                 }}
-                className="p-2 rounded-full bg-[#091328] hover:bg-[#0E1D3E] border border-white/15 text-slate-300 hover:text-white transition-colors"
+                className="p-2 rounded-full bg-[#0f072e] hover:bg-[#170c43] border border-purple-500/20 text-slate-300 hover:text-white transition-colors"
                 data-cursor="pointer"
                 aria-label="Close"
               >
@@ -89,16 +89,16 @@ export function BlogModal({ post, onClose }) {
             data-lenis-prevent="true"
             className="overflow-y-auto modal-scrollbar p-4 sm:p-10 space-y-5 sm:space-y-6 flex-1"
           >
-            <div className="space-y-3 pb-5 sm:pb-6 border-b border-white/10">
+            <div className="space-y-3 pb-5 sm:pb-6 border-b border-purple-500/20">
               <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                 <span className="px-3 py-1 rounded-full bg-gradient-to-r from-amber-400 to-yellow-500 text-blue-950 font-mono text-xs font-black shadow-xs">
                   {post.category}
                 </span>
-                <div className="flex items-center gap-1 font-mono text-xs text-slate-300">
+                <div className="flex items-center gap-1 font-mono text-xs text-purple-300">
                   <Calendar className="w-3.5 h-3.5 text-amber-400" />
                   <span>{post.date}</span>
                 </div>
-                <div className="flex items-center gap-1 font-mono text-xs text-slate-300">
+                <div className="flex items-center gap-1 font-mono text-xs text-purple-300">
                   <Clock className="w-3.5 h-3.5 text-amber-400" />
                   <span>{post.readTime}</span>
                 </div>
@@ -124,7 +124,7 @@ export function BlogModal({ post, onClose }) {
                 if (paragraph.startsWith("```")) {
                   const cleanedCode = paragraph.replace(/```[a-z]*/g, "").trim();
                   return (
-                    <pre key={index} className="p-3.5 sm:p-4 rounded-xl bg-[#050A17] text-amber-300 font-mono text-xs overflow-x-auto my-3 border border-amber-400/30">
+                    <pre key={index} className="p-3.5 sm:p-4 rounded-xl bg-[#050117] text-amber-300 font-mono text-xs overflow-x-auto my-3 border border-purple-500/30">
                       <code>{cleanedCode}</code>
                     </pre>
                   );
@@ -138,7 +138,7 @@ export function BlogModal({ post, onClose }) {
             </div>
 
             {/* Author Footer */}
-            <div className="mt-6 sm:mt-8 p-4 sm:p-6 rounded-2xl bg-[#050B1A] border border-amber-400/30 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="mt-6 sm:mt-8 p-4 sm:p-6 rounded-2xl bg-[#080321] border border-purple-500/30 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="flex items-center gap-3 w-full sm:w-auto">
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-yellow-500 text-blue-950 border border-amber-300 flex items-center justify-center font-heading font-black text-base shadow-md shrink-0">
                   DS

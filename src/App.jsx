@@ -75,8 +75,8 @@ export default function App() {
   }, [selectedProject, selectedPost, resumeOpen, learningOpen]);
 
   return (
-    <div className="relative min-h-screen bg-[#02040A] text-white overflow-x-hidden selection:bg-[#F59E0B] selection:text-[#02040A]">
-      {/* Deep Space Animated Starfield Background */}
+    <div className="relative min-h-screen bg-[#030014] text-white overflow-x-hidden selection:bg-[#A855F7] selection:text-white">
+      {/* Deep Space Animated Starfield Background with Cosmic Purple Nebulae */}
       <SpaceBackground />
 
       {/* Floating Header / Navbar */}

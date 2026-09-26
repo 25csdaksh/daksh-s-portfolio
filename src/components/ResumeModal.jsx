@@ -53,7 +53,7 @@ export function ResumeModal({ isOpen, onClose }) {
             soundManager.playClick();
             onClose();
           }}
-          className="fixed inset-0 bg-[#02040A]/90 backdrop-blur-md"
+          className="fixed inset-0 bg-[#030014]/90 backdrop-blur-md"
         />
 
         {/* Modal Window */}
@@ -64,10 +64,10 @@ export function ResumeModal({ isOpen, onClose }) {
           transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
           onClick={(e) => e.stopPropagation()}
           data-lenis-prevent="true"
-          className="relative w-full max-w-5xl bg-[#091328] rounded-3xl border border-amber-400/50 shadow-2xl shadow-blue-950/90 overflow-hidden z-10 max-h-[94vh] flex flex-col overscroll-contain text-white"
+          className="relative w-full max-w-5xl bg-[#0f072e] rounded-3xl border border-purple-500/40 shadow-2xl shadow-purple-950/90 overflow-hidden z-10 max-h-[94vh] flex flex-col overscroll-contain text-white"
         >
           {/* Action Header */}
-          <div className="flex flex-wrap items-center justify-between gap-3 px-4 sm:px-6 py-3 border-b border-white/10 bg-[#050B1A] shrink-0">
+          <div className="flex flex-wrap items-center justify-between gap-3 px-4 sm:px-6 py-3 border-b border-purple-500/20 bg-[#080321] shrink-0">
             {/* Title & Mode Switcher */}
             <div className="flex flex-wrap items-center gap-2 sm:gap-3">
               <span className="font-heading text-sm sm:text-base font-bold text-white flex items-center gap-2">
@@ -76,7 +76,7 @@ export function ResumeModal({ isOpen, onClose }) {
               </span>
               
               {/* Tab Selector */}
-              <div className="flex items-center bg-[#091328] p-1 rounded-xl border border-amber-400/30 text-xs font-mono">
+              <div className="flex items-center bg-[#080321] p-1 rounded-xl border border-purple-500/30 text-xs font-mono">
                 <button
                   onClick={() => {
                     soundManager.playClick();
@@ -129,7 +129,7 @@ export function ResumeModal({ isOpen, onClose }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => soundManager.playClick()}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-amber-400/40 bg-[#091328] text-xs font-mono font-bold text-amber-300 hover:bg-amber-400 hover:text-blue-950 transition-all shadow-sm"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-purple-500/30 bg-[#080321] text-xs font-mono font-bold text-amber-300 hover:bg-amber-400 hover:text-blue-950 transition-all shadow-sm"
                 title="Open PDF directly in new browser tab"
               >
                 <ExternalLink className="w-3.5 h-3.5" />
@@ -138,7 +138,7 @@ export function ResumeModal({ isOpen, onClose }) {
 
               <button
                 onClick={handlePrint}
-                className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-white/10 bg-[#091328] text-xs font-mono font-bold text-slate-200 hover:text-amber-300 hover:border-amber-400/40 transition-colors"
+                className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-purple-500/20 bg-[#080321] text-xs font-mono font-bold text-slate-200 hover:text-amber-300 hover:border-amber-400/40 transition-colors"
               >
                 <Printer className="w-3.5 h-3.5 text-amber-400" />
                 <span>Print</span>
@@ -159,7 +159,7 @@ export function ResumeModal({ isOpen, onClose }) {
                   soundManager.playClick();
                   onClose();
                 }}
-                className="p-1.5 rounded-full bg-[#091328] hover:bg-[#122452] text-slate-300 hover:text-white border border-white/10 transition-colors"
+                className="p-1.5 rounded-full bg-[#080321] hover:bg-[#170c43] text-slate-300 hover:text-white border border-purple-500/20 transition-colors"
                 aria-label="Close"
               >
                 <X className="w-5 h-5" />
@@ -170,20 +170,20 @@ export function ResumeModal({ isOpen, onClose }) {
           {/* Modal Body */}
           {viewMode === "pdf" ? (
             /* 1. EMBEDDED REAL PDF VIEWER */
-            <div className="flex-1 w-full h-[78vh] bg-[#02040A] p-2 sm:p-4 flex flex-col">
+            <div className="flex-1 w-full h-[78vh] bg-[#030014] p-2 sm:p-4 flex flex-col">
               <iframe
                 src="/Daksh_Soni_Resume.pdf#toolbar=1&navpanes=0&view=FitH"
                 title="Daksh Soni Resume PDF Document"
-                className="w-full h-full rounded-2xl bg-white border border-amber-400/30 shadow-inner"
+                className="w-full h-full rounded-2xl bg-white border border-purple-500/30 shadow-inner"
               />
             </div>
           ) : viewMode === "image" ? (
             /* 2. HIGH-RESOLUTION DOCUMENT PAGE VIEW */
             <div
               data-lenis-prevent="true"
-              className="flex-1 overflow-y-auto modal-scrollbar bg-[#02040A] p-4 sm:p-8 flex justify-center items-start"
+              className="flex-1 overflow-y-auto modal-scrollbar bg-[#030014] p-4 sm:p-8 flex justify-center items-start"
             >
-              <div className="max-w-3xl w-full bg-white rounded-2xl overflow-hidden shadow-2xl shadow-blue-950/80 border border-amber-400/40">
+              <div className="max-w-3xl w-full bg-white rounded-2xl overflow-hidden shadow-2xl shadow-purple-950/80 border border-purple-500/40">
                 <img
                   src="/resume-preview.png"
                   alt="Daksh Soni Resume Document"
@@ -195,7 +195,7 @@ export function ResumeModal({ isOpen, onClose }) {
             /* 3. INTERACTIVE WEB RESUME DOCUMENT */
             <div
               data-lenis-prevent="true"
-              className="overflow-y-auto modal-scrollbar p-6 sm:p-10 text-white space-y-7 font-sans bg-[#091328] print:bg-white print:text-slate-900 print:p-0 flex-1"
+              className="overflow-y-auto modal-scrollbar p-6 sm:p-10 text-white space-y-7 font-sans bg-[#0f072e] print:bg-white print:text-slate-900 print:p-0 flex-1"
             >
               {/* Header / Personal Info */}
               <div className="border-b border-amber-400/40 pb-5">

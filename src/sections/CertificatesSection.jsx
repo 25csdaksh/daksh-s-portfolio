@@ -23,20 +23,24 @@ export function CertificatesSection({ onOpenLearning }) {
   const [activeCertificate, setActiveCertificate] = useState(null);
 
   return (
-    <section id="certificates" className="py-20 sm:py-32 px-4 sm:px-6 md:px-12 relative bg-[#02040A]/75 backdrop-blur-xs text-white">
-      <div className="max-w-7xl mx-auto space-y-12 sm:space-y-16">
+    <section id="certificates" className="py-20 sm:py-32 px-4 sm:px-6 md:px-12 relative bg-[#080321]/80 backdrop-blur-xs text-white border-t border-b border-purple-500/20">
+      {/* Background Cosmic Purple Ambiance */}
+      <div className="absolute top-1/4 left-1/3 w-[400px] h-[400px] bg-purple-600/12 rounded-full blur-[130px] pointer-events-none -z-10" />
+      <div className="absolute bottom-1/4 right-1/4 w-[320px] h-[320px] bg-indigo-600/10 rounded-full blur-[110px] pointer-events-none -z-10" />
+
+      <div className="max-w-7xl mx-auto space-y-12 sm:space-y-16 relative z-10">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 pb-6 sm:pb-8 border-b border-white/10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 pb-6 sm:pb-8 border-b border-purple-400/15">
           <div>
-            <div className="flex items-center gap-2 mb-2 font-mono text-xs uppercase tracking-widest text-amber-400 font-bold">
-              <Award className="w-4 h-4 text-amber-400" />
+            <div className="flex items-center gap-2 mb-2 font-mono text-xs uppercase tracking-widest text-purple-300 font-bold">
+              <Award className="w-4 h-4 text-purple-400" />
               <span>02 // Verified Credentials & Honors</span>
             </div>
             <h2 className="text-3xl sm:text-5xl md:text-6xl font-heading font-extrabold text-white tracking-tight">
-              Certifications & <span className="gradient-text-gold">Achievements.</span>
+              Certifications & <span className="gradient-text-cosmic">Achievements.</span>
             </h2>
           </div>
-          <p className="text-xs sm:text-sm font-mono text-slate-300 max-w-xs leading-relaxed">
+          <p className="text-xs sm:text-sm font-mono text-purple-200/80 max-w-xs leading-relaxed">
             RIGOROUS ACADEMIC SPECIALIZATIONS, META CERTIFICATES & PODIUM AWARDS.
           </p>
         </div>
@@ -46,7 +50,7 @@ export function CertificatesSection({ onOpenLearning }) {
           {certificateStats.map((stat, idx) => (
             <div
               key={idx}
-              className="p-4 sm:p-5 rounded-2xl bg-[#091328] border border-amber-400/30 hover:border-amber-400 shadow-lg transition-all flex flex-col justify-between"
+              className="p-4 sm:p-5 rounded-2xl bg-[#0f072e] border border-purple-400/30 hover:border-purple-400 shadow-lg transition-all flex flex-col justify-between"
             >
               <span className="font-heading text-2xl sm:text-4xl font-black text-amber-400">
                 {stat.value}
@@ -74,12 +78,12 @@ export function CertificatesSection({ onOpenLearning }) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.35, delay: idx * 0.05 }}
-                className="editorial-card p-5 sm:p-7 bg-[#091328] flex flex-col justify-between space-y-5 sm:space-y-6 border border-amber-400/30 hover:border-amber-400 hover:shadow-2xl hover:shadow-amber-400/10 transition-all duration-300 group relative overflow-hidden rounded-2xl text-white"
+                className="editorial-card p-5 sm:p-7 bg-[#0f072e] flex flex-col justify-between space-y-5 sm:space-y-6 border border-purple-500/25 hover:border-purple-400 hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-300 group relative overflow-hidden rounded-2xl text-white"
               >
                 <div className="space-y-4">
                   {/* Top Badge & Date */}
                   <div className="flex items-center justify-between">
-                    <span className="px-3 py-1 rounded-full bg-amber-400/15 text-amber-300 border border-amber-400/50 font-mono text-[10px] font-bold">
+                    <span className="px-3 py-1 rounded-full bg-purple-500/20 text-purple-200 border border-purple-400/40 font-mono text-[10px] font-bold">
                       {cert.badge}
                     </span>
                     <span className="font-mono text-xs text-slate-400">{cert.date}</span>
@@ -91,7 +95,7 @@ export function CertificatesSection({ onOpenLearning }) {
                       soundManager.playClick();
                       setActiveCertificate(cert);
                     }}
-                    className="relative rounded-xl overflow-hidden border border-amber-400/30 group/thumb cursor-pointer bg-[#050B1A] p-1 shadow-inner"
+                    className="relative rounded-xl overflow-hidden border border-purple-400/30 group/thumb cursor-pointer bg-[#080321] p-1 shadow-inner"
                     data-cursor="pointer"
                   >
                     <img
@@ -99,15 +103,15 @@ export function CertificatesSection({ onOpenLearning }) {
                       alt={`${cert.title} Certificate`}
                       className="w-full h-40 sm:h-48 object-cover object-top rounded-lg group-hover/thumb:scale-[1.02] transition-transform duration-300"
                     />
-                    <div className="absolute inset-0 bg-slate-950/80 opacity-0 group-hover/thumb:opacity-100 transition-opacity flex items-center justify-center gap-2 text-amber-300 font-mono text-xs font-bold rounded-lg backdrop-blur-xs">
-                      <Eye className="w-4 h-4 text-amber-400" />
+                    <div className="absolute inset-0 bg-[#030014]/85 opacity-0 group-hover/thumb:opacity-100 transition-opacity flex items-center justify-center gap-2 text-purple-300 font-mono text-xs font-bold rounded-lg backdrop-blur-xs">
+                      <Eye className="w-4 h-4 text-purple-400" />
                       <span>Inspect Certificate</span>
                     </div>
                   </div>
 
                   {/* Title & Organization */}
                   <div>
-                    <h3 className="font-heading text-lg sm:text-2xl font-bold text-white group-hover:text-amber-300 transition-colors leading-tight">
+                    <h3 className="font-heading text-lg sm:text-2xl font-bold text-white group-hover:text-purple-300 transition-colors leading-tight">
                       {cert.title}
                     </h3>
                     <p className="font-mono text-xs font-bold text-amber-400 mt-1">
@@ -124,8 +128,8 @@ export function CertificatesSection({ onOpenLearning }) {
                   </p>
 
                   {/* Courses List Preview */}
-                  <div className="pt-2 border-t border-white/10">
-                    <span className="font-mono text-[10px] uppercase tracking-wider text-amber-400/80 block mb-1 font-semibold">
+                  <div className="pt-2 border-t border-purple-400/15">
+                    <span className="font-mono text-[10px] uppercase tracking-wider text-purple-300/80 block mb-1 font-semibold">
                       Key Modules ({cert.courses.length}):
                     </span>
                     <p className="font-mono text-[11px] text-slate-300 truncate">
@@ -135,11 +139,11 @@ export function CertificatesSection({ onOpenLearning }) {
                 </div>
 
                 {/* Footer Action Bar */}
-                <div className="pt-4 border-t border-white/10 space-y-2.5">
+                <div className="pt-4 border-t border-purple-400/15 space-y-2.5">
                   <div className="flex items-center justify-between text-[11px] font-mono">
                     <span className="text-slate-400 truncate max-w-[150px]">ID: {cert.credentialId}</span>
-                    <span className="text-amber-400 font-bold flex items-center gap-1">
-                      <ShieldCheck className="w-3.5 h-3.5 text-amber-400" /> Verified
+                    <span className="text-purple-300 font-bold flex items-center gap-1">
+                      <ShieldCheck className="w-3.5 h-3.5 text-purple-400" /> Verified
                     </span>
                   </div>
 
@@ -149,7 +153,7 @@ export function CertificatesSection({ onOpenLearning }) {
                         soundManager.playClick();
                         setActiveCertificate(cert);
                       }}
-                      className="flex-1 py-2 px-3 rounded-xl bg-amber-400/15 hover:bg-amber-400 hover:text-blue-950 border border-amber-400/40 text-amber-300 text-xs font-bold flex items-center justify-center gap-1.5 transition-all"
+                      className="flex-1 py-2 px-3 rounded-xl bg-purple-500/20 hover:bg-purple-500 hover:text-white border border-purple-400/40 text-purple-200 text-xs font-bold flex items-center justify-center gap-1.5 transition-all"
                       data-cursor="pointer"
                     >
                       <Eye className="w-3.5 h-3.5" />
@@ -161,7 +165,7 @@ export function CertificatesSection({ onOpenLearning }) {
                         href={cert.verifyUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="py-2 px-3 rounded-xl bg-[#050B1A] hover:bg-[#0E1D3E] border border-white/10 text-slate-300 hover:text-white text-xs font-bold flex items-center justify-center gap-1 transition-all"
+                        className="py-2 px-3 rounded-xl bg-[#080321] hover:bg-[#170c43] border border-purple-400/20 text-slate-300 hover:text-purple-200 text-xs font-bold flex items-center justify-center gap-1 transition-all"
                         title="Verify Live Credential on Coursera"
                         data-cursor="pointer"
                       >
@@ -176,10 +180,10 @@ export function CertificatesSection({ onOpenLearning }) {
         </div>
 
         {/* Bottom Banner Calling Learning & Specializations Modal */}
-        <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-[#091328] via-[#0E1D3E] to-[#091328] border border-amber-400/40 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl text-center md:text-left">
+        <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-[#0f072e] via-[#170c43] to-[#0f072e] border border-purple-400/40 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl text-center md:text-left">
           <div className="space-y-1.5">
-            <div className="flex items-center justify-center md:justify-start gap-2 text-xs font-mono text-amber-300 font-bold">
-              <Sparkles className="w-4 h-4 text-amber-400" />
+            <div className="flex items-center justify-center md:justify-start gap-2 text-xs font-mono text-purple-300 font-bold">
+              <Sparkles className="w-4 h-4 text-purple-400" />
               <span>CONTINUOUS ENGINEERING EXCELLENCE</span>
             </div>
             <h3 className="text-xl sm:text-2xl font-heading font-bold text-white">
@@ -195,10 +199,10 @@ export function CertificatesSection({ onOpenLearning }) {
               soundManager.playClick();
               if (onOpenLearning) onOpenLearning();
             }}
-            className="px-6 py-3 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-blue-950 font-sans text-xs sm:text-sm font-extrabold shadow-lg shadow-amber-500/25 hover:scale-105 transition-all flex items-center gap-2 shrink-0 border border-yellow-300"
+            className="px-6 py-3 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-purple-950 font-sans text-xs sm:text-sm font-extrabold shadow-lg shadow-amber-500/25 hover:scale-105 transition-all flex items-center gap-2 shrink-0 border border-yellow-300"
             data-cursor="pointer"
           >
-            <BookOpen className="w-4 h-4 text-blue-950" />
+            <BookOpen className="w-4 h-4 text-purple-950" />
             <span>Open Specializations Matrix</span>
           </button>
         </div>
@@ -219,7 +223,7 @@ export function CertificatesSection({ onOpenLearning }) {
                 soundManager.playClick();
                 setActiveCertificate(null);
               }}
-              className="fixed inset-0 bg-slate-950/85 backdrop-blur-md"
+              className="fixed inset-0 bg-[#030014]/90 backdrop-blur-md"
             />
 
             <motion.div
@@ -227,19 +231,19 @@ export function CertificatesSection({ onOpenLearning }) {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ duration: 0.3 }}
-              className="relative w-full max-w-4xl bg-[#091328] rounded-3xl border border-amber-400/60 shadow-2xl overflow-hidden z-10 max-h-[92vh] flex flex-col text-white"
+              className="relative w-full max-w-4xl bg-[#0f072e] rounded-3xl border border-purple-400/60 shadow-2xl overflow-hidden z-10 max-h-[92vh] flex flex-col text-white"
             >
               {/* Modal Header */}
-              <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b border-white/10 bg-[#050B1A]">
+              <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b border-purple-400/15 bg-[#080321]">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-amber-400 to-yellow-500 text-blue-950 flex items-center justify-center shrink-0">
-                    <Award className="w-4 h-4 text-blue-950" />
+                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-amber-400 to-yellow-500 text-purple-950 flex items-center justify-center shrink-0">
+                    <Award className="w-4 h-4 text-purple-950" />
                   </div>
                   <div>
                     <h3 className="font-heading text-sm sm:text-lg font-bold text-white truncate max-w-[200px] sm:max-w-md">
                       {activeCertificate.title}
                     </h3>
-                    <p className="font-mono text-[10px] sm:text-xs text-amber-300 font-semibold">
+                    <p className="font-mono text-[10px] sm:text-xs text-purple-300 font-semibold">
                       {activeCertificate.organization} • {activeCertificate.date}
                     </p>
                   </div>
@@ -250,9 +254,9 @@ export function CertificatesSection({ onOpenLearning }) {
                     href={activeCertificate.pdfUrl || activeCertificate.imagePreview}
                     download
                     onClick={() => soundManager.playClick()}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-400 text-blue-950 font-mono text-xs font-bold hover:bg-yellow-300 transition-colors"
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-amber-400 to-yellow-500 text-purple-950 font-mono text-xs font-bold hover:bg-yellow-300 transition-colors"
                   >
-                    <Download className="w-3.5 h-3.5 text-blue-950" />
+                    <Download className="w-3.5 h-3.5 text-purple-950" />
                     <span className="hidden sm:inline">Download</span>
                   </a>
                   <button
@@ -260,7 +264,7 @@ export function CertificatesSection({ onOpenLearning }) {
                       soundManager.playClick();
                       setActiveCertificate(null);
                     }}
-                    className="p-1.5 rounded-full hover:bg-white/10 text-slate-300"
+                    className="p-1.5 rounded-full hover:bg-purple-500/20 text-slate-300"
                     aria-label="Close"
                   >
                     <X className="w-5 h-5" />
@@ -270,7 +274,7 @@ export function CertificatesSection({ onOpenLearning }) {
 
               {/* Certificate Image View & Curriculum */}
               <div className="overflow-y-auto p-4 sm:p-8 space-y-5 sm:space-y-6 modal-scrollbar">
-                <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-amber-400/30 max-w-full bg-[#050B1A]">
+                <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-purple-400/30 max-w-full bg-[#080321]">
                   <img
                     src={activeCertificate.imagePreview}
                     alt={activeCertificate.title}
@@ -279,17 +283,17 @@ export function CertificatesSection({ onOpenLearning }) {
                 </div>
 
                 {/* Course Modules & Capstone breakdown */}
-                <div className="space-y-3 p-4 sm:p-5 rounded-2xl bg-[#0E1D3E] border border-amber-400/30">
-                  <span className="font-mono text-xs uppercase tracking-wider text-amber-300 font-bold block">
+                <div className="space-y-3 p-4 sm:p-5 rounded-2xl bg-[#170c43] border border-purple-400/30">
+                  <span className="font-mono text-xs uppercase tracking-wider text-purple-200 font-bold block">
                     Curriculum & Course Deliverables:
                   </span>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                     {activeCertificate.courses.map((course, cIdx) => (
                       <div
                         key={cIdx}
-                        className="p-2.5 rounded-xl bg-[#091328] border border-amber-400/20 flex items-center gap-2 text-slate-200 shadow-2xs"
+                        className="p-2.5 rounded-xl bg-[#0f072e] border border-purple-400/20 flex items-center gap-2 text-slate-200 shadow-2xs"
                       >
-                        <CheckCircle2 className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                        <CheckCircle2 className="w-3.5 h-3.5 text-purple-400 shrink-0" />
                         <span>{course}</span>
                       </div>
                     ))}
@@ -297,12 +301,12 @@ export function CertificatesSection({ onOpenLearning }) {
                 </div>
 
                 {/* Accreditations & Verify Link */}
-                <div className="p-4 rounded-2xl bg-[#050B1A] border border-amber-400/30 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+                <div className="p-4 rounded-2xl bg-[#080321] border border-purple-400/30 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
                   <div>
                     <span className="text-[10px] uppercase text-slate-400 font-bold block">
                       VERIFICATION CODE
                     </span>
-                    <span className="font-bold text-amber-300">{activeCertificate.credentialId}</span>
+                    <span className="font-bold text-purple-300">{activeCertificate.credentialId}</span>
                   </div>
 
                   {activeCertificate.verifyUrl.startsWith("http") && (
@@ -310,10 +314,10 @@ export function CertificatesSection({ onOpenLearning }) {
                       href={activeCertificate.verifyUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-blue-950 font-extrabold flex items-center gap-2 shadow-md shadow-amber-500/20 hover:shadow-lg transition-all text-xs"
+                      className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-purple-950 font-extrabold flex items-center gap-2 shadow-md shadow-amber-500/20 hover:shadow-lg transition-all text-xs"
                     >
                       <span>Verify on Coursera</span>
-                      <ExternalLink className="w-3.5 h-3.5 text-blue-950 stroke-[2.5]" />
+                      <ExternalLink className="w-3.5 h-3.5 text-purple-950 stroke-[2.5]" />
                     </a>
                   )}
                 </div>

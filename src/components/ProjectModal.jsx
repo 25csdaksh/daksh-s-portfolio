@@ -114,7 +114,7 @@ export function ProjectModal({ project, onClose }) {
             soundManager.playClick();
             onClose();
           }}
-          className="fixed inset-0 bg-[#02040A]/90 backdrop-blur-md"
+          className="fixed inset-0 bg-[#030014]/90 backdrop-blur-md"
         />
 
         {/* Modal Container */}
@@ -125,15 +125,15 @@ export function ProjectModal({ project, onClose }) {
           transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
           onClick={(e) => e.stopPropagation()}
           data-lenis-prevent="true"
-          className="relative w-full max-w-4xl bg-[#091328] rounded-3xl border border-amber-400/40 shadow-2xl shadow-blue-950/80 overflow-hidden z-10 max-h-[92vh] flex flex-col overscroll-contain text-white"
+          className="relative w-full max-w-4xl bg-[#0f072e] rounded-3xl border border-purple-500/40 shadow-2xl shadow-purple-950/80 overflow-hidden z-10 max-h-[92vh] flex flex-col overscroll-contain text-white"
         >
           {/* Header Bar */}
-          <div className="flex items-center justify-between px-4 sm:px-6 py-3.5 sm:py-4 border-b border-white/10 bg-[#050B1A] shrink-0">
+          <div className="flex items-center justify-between px-4 sm:px-6 py-3.5 sm:py-4 border-b border-purple-500/20 bg-[#080321] shrink-0">
             <div className="flex items-center gap-2 sm:gap-3 min-w-0">
               <span className="px-2.5 sm:px-3 py-1 rounded-full bg-gradient-to-r from-amber-400 to-yellow-500 text-blue-950 font-mono text-[11px] sm:text-xs font-bold shadow-xs shrink-0">
                 {project.category}
               </span>
-              <span className="font-mono text-xs text-amber-300/80 hidden sm:inline">{project.year}</span>
+              <span className="font-mono text-xs text-purple-300 hidden sm:inline">{project.year}</span>
             </div>
 
             <div className="flex items-center gap-2 sm:gap-3 shrink-0">
@@ -168,7 +168,7 @@ export function ProjectModal({ project, onClose }) {
                     window.open(project.githubUrl, "_blank", "noopener,noreferrer");
                   }}
                   onMouseEnter={() => soundManager.playHover()}
-                  className="p-2 rounded-xl border border-white/15 bg-[#091328] hover:bg-[#0E1D3E] hover:border-amber-400 text-slate-200 hover:text-amber-300 transition-colors hidden sm:flex items-center"
+                  className="p-2 rounded-xl border border-purple-500/20 bg-[#080321] hover:bg-[#170c43] hover:border-amber-400 text-slate-200 hover:text-amber-300 transition-colors hidden sm:flex items-center"
                   title="View Source on GitHub"
                 >
                   <Github className="w-4 h-4" />
@@ -181,7 +181,7 @@ export function ProjectModal({ project, onClose }) {
                   onClose();
                 }}
                 onMouseEnter={() => soundManager.playHover()}
-                className="p-2 rounded-full bg-[#091328] hover:bg-[#0E1D3E] text-slate-300 hover:text-white border border-white/15 transition-colors"
+                className="p-2 rounded-full bg-[#080321] hover:bg-[#170c43] text-slate-300 hover:text-white border border-purple-500/20 transition-colors"
                 data-cursor="pointer"
                 aria-label="Close modal"
               >
@@ -267,15 +267,15 @@ export function ProjectModal({ project, onClose }) {
               <div className="space-y-6">
                 {/* Full Width Project High-Res Cover Preview */}
                 {project.coverImage && (
-                  <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden border border-amber-400/30 shadow-xl bg-[#050B1A] group">
+                  <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden border border-purple-500/30 shadow-xl bg-[#080321] group">
                     <img
                       src={project.coverImage}
                       alt={`${project.title} Cover`}
                       className="w-full h-full object-cover object-top"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#050B1A]/90 via-transparent to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#080321]/90 via-transparent to-transparent pointer-events-none" />
                     <div className="absolute bottom-2.5 sm:bottom-3 left-3 sm:left-4 right-3 sm:right-4 flex items-center justify-between text-white font-mono text-xs gap-2">
-                      <span className="bg-[#050B1A]/85 backdrop-blur-md px-2.5 sm:px-3 py-1 rounded-lg border border-amber-400/30 text-amber-300 font-bold text-[11px] truncate">
+                      <span className="bg-[#080321]/85 backdrop-blur-md px-2.5 sm:px-3 py-1 rounded-lg border border-purple-500/30 text-purple-300 font-bold text-[11px] truncate">
                         {project.title} • Production App
                       </span>
                       {project.liveUrl && (
@@ -300,7 +300,7 @@ export function ProjectModal({ project, onClose }) {
 
                 {/* Problem vs Solution Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="p-4 sm:p-5 rounded-2xl bg-red-950/20 border border-red-800/40 shadow-xs">
+                  <div className="p-4 sm:p-5 rounded-2xl bg-rose-950/20 border border-rose-800/40 shadow-xs">
                     <div className="flex items-center gap-2 text-rose-400 font-mono text-xs font-bold uppercase tracking-wider mb-2">
                       <AlertCircle className="w-4 h-4 text-rose-400" />
                       <span>The Problem</span>
@@ -310,8 +310,8 @@ export function ProjectModal({ project, onClose }) {
                     </p>
                   </div>
 
-                  <div className="p-4 sm:p-5 rounded-2xl bg-[#0E1D3E]/80 border border-amber-400/40 shadow-xs">
-                    <div className="flex items-center gap-2 text-amber-300 font-mono text-xs font-bold uppercase tracking-wider mb-2">
+                  <div className="p-4 sm:p-5 rounded-2xl bg-[#170c43]/80 border border-purple-500/40 shadow-xs">
+                    <div className="flex items-center gap-2 text-purple-300 font-mono text-xs font-bold uppercase tracking-wider mb-2">
                       <Sparkles className="w-4 h-4 text-amber-400" />
                       <span>The Engineered Solution</span>
                     </div>
@@ -331,7 +331,7 @@ export function ProjectModal({ project, onClose }) {
                       {project.keyFeatures.map((feat, idx) => (
                         <div
                           key={idx}
-                          className="flex items-start gap-2.5 p-3 rounded-xl bg-[#050B1A] border border-white/10 text-xs text-slate-200 font-medium"
+                          className="flex items-start gap-2.5 p-3 rounded-xl bg-[#080321] border border-purple-500/20 text-xs text-slate-200 font-medium"
                         >
                           <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
                           <span>{feat}</span>
@@ -351,7 +351,7 @@ export function ProjectModal({ project, onClose }) {
                       {project.technologies.map((tech) => (
                         <span
                           key={tech}
-                          className="px-2.5 sm:px-3 py-1 rounded-lg bg-[#050B1A] border border-amber-400/30 font-mono text-xs font-bold text-amber-300"
+                          className="px-2.5 sm:px-3 py-1 rounded-lg bg-[#080321] border border-purple-500/30 font-mono text-xs font-bold text-purple-200"
                         >
                           {tech}
                         </span>
@@ -365,7 +365,7 @@ export function ProjectModal({ project, onClose }) {
             {/* Tab 2: Architecture & Code Snippet */}
             {activeTab === "architecture" && (
               <div className="space-y-6">
-                <div className="p-4 sm:p-5 rounded-2xl bg-[#050B1A] border border-white/10">
+                <div className="p-4 sm:p-5 rounded-2xl bg-[#080321] border border-purple-500/20">
                   <h3 className="text-xs font-mono uppercase tracking-wider text-amber-400 font-bold mb-2">
                     System Architecture & Design Decisions
                   </h3>
@@ -376,17 +376,17 @@ export function ProjectModal({ project, onClose }) {
 
                 {/* Code Terminal */}
                 {project.codeSnippet && (
-                  <div className="rounded-2xl bg-[#050A17] text-slate-100 overflow-hidden border border-amber-400/30 shadow-xl">
-                    <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 bg-[#050B1A]">
+                  <div className="rounded-2xl bg-[#050117] text-slate-100 overflow-hidden border border-purple-500/30 shadow-xl">
+                    <div className="flex items-center justify-between px-4 py-3 border-b border-purple-500/20 bg-[#080321]">
                       <div className="flex items-center gap-2 min-w-0">
-                        <Terminal className="w-4 h-4 text-amber-400 shrink-0" />
-                        <span className="font-mono text-xs text-amber-300 font-semibold truncate">
+                        <Terminal className="w-4 h-4 text-purple-400 shrink-0" />
+                        <span className="font-mono text-xs text-purple-300 font-semibold truncate">
                           {project.title.toLowerCase().replace(/\s+/g, "-")}.core
                         </span>
                       </div>
                       <button
                         onClick={handleCopyCode}
-                        className="flex items-center gap-1.5 px-2.5 py-1 rounded text-[11px] font-mono bg-amber-400/15 hover:bg-amber-400/25 text-amber-300 border border-amber-400/40 transition-colors shrink-0"
+                        className="flex items-center gap-1.5 px-2.5 py-1 rounded text-[11px] font-mono bg-purple-500/15 hover:bg-purple-500/25 text-purple-300 border border-purple-500/40 transition-colors shrink-0"
                         data-cursor="pointer"
                       >
                         {copiedCode ? (
@@ -402,7 +402,7 @@ export function ProjectModal({ project, onClose }) {
                         )}
                       </button>
                     </div>
-                    <pre className="p-4 sm:p-5 text-xs font-mono text-amber-200 overflow-x-auto leading-relaxed">
+                    <pre className="p-4 sm:p-5 text-xs font-mono text-purple-200 overflow-x-auto leading-relaxed">
                       <code>{project.codeSnippet}</code>
                     </pre>
                   </div>
@@ -412,7 +412,7 @@ export function ProjectModal({ project, onClose }) {
 
             {/* Tab 3: Live Simulator Sandbox */}
             {activeTab === "liveSimulator" && (
-              <div className="p-4 sm:p-6 rounded-2xl bg-[#050B1A] border border-amber-400/40 space-y-4 sm:space-y-5">
+              <div className="p-4 sm:p-6 rounded-2xl bg-[#080321] border border-purple-500/40 space-y-4 sm:space-y-5">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div>
                     <h3 className="text-sm font-bold text-white">
@@ -443,20 +443,20 @@ export function ProjectModal({ project, onClose }) {
                 </div>
 
                 {/* Simulation Output Window */}
-                <div className="p-3.5 sm:p-4 rounded-xl bg-[#050A17] border border-white/10 font-mono text-xs">
+                <div className="p-3.5 sm:p-4 rounded-xl bg-[#050117] border border-purple-500/20 font-mono text-xs">
                   {simulationState.running ? (
                     <div className="space-y-2 py-4">
-                      <div className="flex items-center gap-2 text-amber-400">
-                        <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
+                      <div className="flex items-center gap-2 text-purple-400">
+                        <span className="w-2 h-2 rounded-full bg-purple-400 animate-ping" />
                         <span className="text-[11px] sm:text-xs">Step {simulationState.step}/3: Parsing ingested payload & running model inference...</span>
                       </div>
-                      <div className="w-full h-1.5 bg-[#091328] rounded-full overflow-hidden">
+                      <div className="w-full h-1.5 bg-[#0f072e] rounded-full overflow-hidden">
                         <div className="h-full bg-gradient-to-r from-amber-400 to-yellow-500 animate-pulse w-3/4 rounded-full" />
                       </div>
                     </div>
                   ) : simulationState.output ? (
                     <div className="space-y-3">
-                      <div className="flex items-center justify-between pb-2 border-b border-white/10 text-emerald-400 font-bold">
+                      <div className="flex items-center justify-between pb-2 border-b border-purple-500/20 text-emerald-400 font-bold">
                         <span className="text-xs truncate">● STATUS: {simulationState.output.status}</span>
                         <span className="text-[10px] text-amber-300 font-medium shrink-0 ml-2">LIVE RESULT</span>
                       </div>
@@ -464,8 +464,8 @@ export function ProjectModal({ project, onClose }) {
                         {Object.entries(simulationState.output).map(([key, val]) => {
                           if (key === "status") return null;
                           return (
-                            <div key={key} className="p-2.5 rounded-lg bg-[#050B1A] border border-white/10">
-                              <span className="text-amber-400/80 capitalize">{key.replace(/([A-Z])/g, " $1")}: </span>
+                            <div key={key} className="p-2.5 rounded-lg bg-[#080321] border border-purple-500/20">
+                              <span className="text-purple-400/80 capitalize">{key.replace(/([A-Z])/g, " $1")}: </span>
                               <span className="font-semibold text-white">{Array.isArray(val) ? val.join(", ") : val}</span>
                             </div>
                           );
@@ -483,7 +483,7 @@ export function ProjectModal({ project, onClose }) {
           </div>
 
           {/* Footer Actions */}
-          <div className="flex flex-col sm:flex-row items-center justify-between px-4 sm:px-6 py-3.5 sm:py-4 border-t border-white/10 bg-[#050B1A] gap-3">
+          <div className="flex flex-col sm:flex-row items-center justify-between px-4 sm:px-6 py-3.5 sm:py-4 border-t border-purple-500/20 bg-[#080321] gap-3">
             <div className="text-xs text-slate-300 font-mono text-center sm:text-left">
               Designed & Engineered by <span className="font-bold text-amber-300">Daksh Soni</span>
             </div>
@@ -499,7 +499,7 @@ export function ProjectModal({ project, onClose }) {
                     window.open(project.githubUrl, "_blank", "noopener,noreferrer");
                   }}
                   onMouseEnter={() => soundManager.playHover()}
-                  className="flex items-center gap-1.5 px-3.5 sm:px-4 py-2 rounded-full border border-white/15 bg-[#091328] text-xs font-bold text-slate-200 hover:text-amber-300 hover:border-amber-400 transition-colors font-mono"
+                  className="flex items-center gap-1.5 px-3.5 sm:px-4 py-2 rounded-full border border-purple-500/20 bg-[#0f072e] text-xs font-bold text-slate-200 hover:text-amber-300 hover:border-amber-400 transition-colors font-mono"
                 >
                   <Github className="w-3.5 h-3.5" />
                   <span>GitHub</span>

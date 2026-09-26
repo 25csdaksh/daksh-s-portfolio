@@ -6,22 +6,22 @@
 
 export const galaxyConfig = {
   // Particle counts
-  particleCountDesktop: 72000,
-  particleCountMobile: 24000,
+  particleCountDesktop: 75000,
+  particleCountMobile: 26000,
 
   // Spiral geometry
   arms: 5,
-  radius: 9.2,
+  radius: 8.6,
   spiralFactor: 2.85,
-  randomness: 0.36,
-  power: 3.4, // exponential clustering toward the core
-  thickness: 0.65,
-  outerThicknessMultiplier: 1.5, // vertical flaring near outer arms
+  randomness: 0.35,
+  power: 3.2, // exponential clustering toward the core
+  thickness: 0.60,
+  outerThicknessMultiplier: 1.45, // vertical flaring near outer arms
 
   // Rotation & Physics
   rotationSpeed: 0.0012, // Slow cinematic base speed
   twoCycleRotationPeriod: 4 * Math.PI, // 720 degrees in radians
-  differentialSpeed: 0.85, // inner particles orbit faster than outer particles
+  differentialSpeed: 0.82, // inner particles orbit faster than outer particles
   particleDriftSpeed: 0.25,
 
   // Color distribution ratios: 70% white, 20% soft blue, 8% warm gold, 2% cyan
@@ -60,21 +60,21 @@ export const galaxyConfig = {
 
   // Dense glowing core
   core: {
-    particleCount: 8000,
-    radius: 1.7,
-    glowSize: 3.2,
+    particleCount: 8500,
+    radius: 1.6,
+    glowSize: 3.4,
     innerColor: "#FFFFFF",
     haloColor: "#3B82F6",
     coronaColor: "#F59E0B",
-    intensity: 1.8
+    intensity: 2.0
   },
 
   // Cosmic Dust clouds
   dust: {
-    particleCountDesktop: 3500,
-    particleCountMobile: 1200,
-    size: 22.0,
-    opacity: 0.14,
+    particleCountDesktop: 3800,
+    particleCountMobile: 1400,
+    size: 20.0,
+    opacity: 0.15,
     color: "#1E40AF",
     secondaryColor: "#D97706"
   },
@@ -82,20 +82,20 @@ export const galaxyConfig = {
   // Background deep space stars
   backgroundStars: {
     countDesktop: 12000,
-    countMobile: 4000,
-    fieldRadius: 160,
+    countMobile: 4500,
+    fieldRadius: 150,
     minSize: 0.8,
-    maxSize: 2.4,
-    twinkleSpeed: 1.5
+    maxSize: 2.5,
+    twinkleSpeed: 1.6
   },
 
-  // Subtle orbiting planets
+  // Orbiting planets
   planets: [
     {
       name: "Astra-I (Golden Terrestrial)",
-      radius: 5.4,
-      size: 0.14,
-      speed: 0.0035,
+      radius: 5.2,
+      size: 0.15,
+      speed: 0.0032,
       inclination: 0.08,
       color: "#FBBF24",
       glowColor: "#F59E0B",
@@ -103,9 +103,9 @@ export const galaxyConfig = {
     },
     {
       name: "Neptis-Prime (Deep Azure)",
-      radius: 8.2,
+      radius: 7.6,
       size: 0.18,
-      speed: 0.0022,
+      speed: 0.0021,
       inclination: -0.12,
       color: "#3B82F6",
       glowColor: "#60A5FA",
@@ -113,24 +113,24 @@ export const galaxyConfig = {
     },
     {
       name: "Chronos-IV (Outer Gilded Sphere)",
-      radius: 10.8,
-      size: 0.12,
-      speed: 0.0015,
-      inclination: 0.15,
+      radius: 9.8,
+      size: 0.13,
+      speed: 0.0014,
+      inclination: 0.14,
       color: "#FDE047",
       glowColor: "#D97706",
       hasRing: false
     }
   ],
 
-  // Camera settings (35-50 degree inclination perspective)
+  // Camera settings (35-45 degree inclination perspective)
   camera: {
-    fov: 48,
+    fov: 46,
     near: 0.1,
     far: 500,
-    initialPosition: [0, 6.5, 12.0],
+    initialPosition: [0, 5.4, 9.8],
     lookAt: [0, 0, 0],
-    pitchAngleDeg: 38
+    pitchAngleDeg: 40
   },
 
   // Mouse interaction & parallax
@@ -144,14 +144,14 @@ export const galaxyConfig = {
   // Postprocessing Bloom
   bloom: {
     enabled: true,
-    strength: 1.15,
-    radius: 0.8,
-    threshold: 0.25
+    strength: 1.2,
+    radius: 0.75,
+    threshold: 0.2
   },
 
-  // Background color
+  // Background color - matches portfolio Royal Dark Blue seamlessly
   background: {
-    color: "#02060A",
+    color: "#070E20",
     hazeColor: "#0D1B3E"
   }
 };

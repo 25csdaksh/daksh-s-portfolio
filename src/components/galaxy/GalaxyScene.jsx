@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
@@ -10,12 +10,16 @@ import { createGalaxyDust } from "./GalaxyDust";
 import { createBackgroundStars } from "./BackgroundStars";
 import { createGalaxyPlanets } from "./GalaxyPlanets";
 import { soundManager } from "../../utils/sound";
-import { Sparkles, Maximize2, Minimize2, RotateCw, Play, Pause, Eye, Sliders, Shield } from "lucide-react";
+import { Sparkles, Maximize2, Minimize2, RotateCw, Play, Pause, Move3D } from "lucide-react";
 
 /**
  * Interactive 3D Procedural Spiral Galaxy Scene
- * Powered by Three.js BufferGeometry, GPU Shaders, 720° Dual-Cycle Rotation,
- * Mouse Parallax Damping, and Cinematic Post-Processing Bloom.
+ * Features:
+ * - 75,000+ GPU Procedural Particles across 5 Logarithmic Spiral Arms
+ * - 720° Dual-Cycle Smooth Continuous Rotation
+ * - Interactive 3D Mouse Parallax & Drag-to-Rotate with Inertia Damping
+ * - Multi-layer Volumetric Core Glow & Cosmic Dust Nebulae
+ * - Three.js EffectComposer UnrealBloomPass Cinematic Post-Processing
  */
 export function GalaxyScene({
   className = "",
@@ -33,7 +37,10 @@ export function GalaxyScene({
     bloomEnabled: true,
     mouseTarget: { x: 0, y: 0 },
     mouseCurrent: { x: 0, y: 0 },
-    rotationPhaseDeg: 0,
+    dragRotation: { x: 0, y: 0 },
+    dragVelocity: { x: 0, y: 0 },
+    isDragging: false,
+    lastMousePos: { x: 0, y: 0 },
     isFullscreen: false
   });
 
@@ -41,7 +48,6 @@ export function GalaxyScene({
     isPaused: false,
     speedMultiplier: 1.0,
     bloomEnabled: true,
-    rotationDeg: "0°",
     fps: 60,
     particleCount: galaxyConfig.particleCountDesktop,
     isFullscreen: false
@@ -51,7 +57,6 @@ export function GalaxyScene({
     const container = mountRef.current;
     if (!container) return;
 
-    // Detect mobile / low-power devices
     const isMobile = window.innerWidth < 768;
     const particleCount = isMobile
       ? galaxyConfig.particleCountMobile
@@ -68,9 +73,9 @@ export function GalaxyScene({
     // 1. Scene Setup
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(galaxyConfig.background.color);
-    scene.fog = new THREE.FogExp2(galaxyConfig.background.color, 0.008);
+    scene.fog = new THREE.FogExp2(galaxyConfig.background.color, 0.007);
 
-    // 2. Camera Setup (35-45 degree perspective inclination)
+    // 2. Perspective Camera (35-45 degree inclination)
     const aspect = container.clientWidth / container.clientHeight;
     const camera = new THREE.PerspectiveCamera(
       galaxyConfig.camera.fov,
@@ -97,10 +102,10 @@ export function GalaxyScene({
     renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.15;
+    renderer.toneMappingExposure = 1.2;
     container.appendChild(renderer.domElement);
 
-    // 4. Post-Processing: EffectComposer & UnrealBloomPass
+    // 4. Post-Processing: UnrealBloomPass
     let composer = null;
     let bloomPass = null;
     try {
@@ -115,7 +120,7 @@ export function GalaxyScene({
       composer.addPass(renderScene);
       composer.addPass(bloomPass);
     } catch (err) {
-      console.warn("Post-processing bloom fallback active:", err);
+      console.warn("Postprocessing bloom fallback active:", err);
       composer = null;
     }
 
@@ -123,34 +128,36 @@ export function GalaxyScene({
     const galaxyRoot = new THREE.Group();
     scene.add(galaxyRoot);
 
-    // Set initial natural galactic pitch tilt
-    galaxyRoot.rotation.x = THREE.MathUtils.degToRad(18);
-    galaxyRoot.rotation.z = THREE.MathUtils.degToRad(-12);
+    // Initial natural galactic pitch tilt
+    const baseTiltX = THREE.MathUtils.degToRad(galaxyConfig.camera.pitchAngleDeg || 38);
+    galaxyRoot.rotation.x = baseTiltX;
+    galaxyRoot.rotation.z = THREE.MathUtils.degToRad(-10);
 
-    // 6. Spawn Sub-Systems
-    // Main Spiral Particles
+    // 6. Subsystem Instantiation
     const mainParticles = createGalaxyParticles(particleCount);
     galaxyRoot.add(mainParticles.points);
 
-    // Volumetric Glowing Core
     const coreSystem = createGalaxyCore(
       isMobile ? Math.floor(galaxyConfig.core.particleCount * 0.5) : galaxyConfig.core.particleCount
     );
     galaxyRoot.add(coreSystem.group);
 
-    // Cosmic Dust Layer
     const dustSystem = createGalaxyDust(dustCount);
     galaxyRoot.add(dustSystem.points);
 
-    // Deep Space Background Star Field
     const backgroundStars = createBackgroundStars(starCount);
     scene.add(backgroundStars.points);
 
-    // Orbiting Celestial Bodies (Planets)
     const planetsSystem = createGalaxyPlanets();
     galaxyRoot.add(planetsSystem.group);
 
-    // 7. Mouse Parallax Tracking
+    // 7. Interactive Mouse Parallax & Drag-to-Rotate
+    const handleMouseDown = (e) => {
+      if (!interactive) return;
+      sceneStateRef.current.isDragging = true;
+      sceneStateRef.current.lastMousePos = { x: e.clientX, y: e.clientY };
+    };
+
     const handleMouseMove = (e) => {
       if (!interactive) return;
       const rect = container.getBoundingClientRect();
@@ -159,11 +166,35 @@ export function GalaxyScene({
 
       sceneStateRef.current.mouseTarget.x = x * galaxyConfig.mouse.maxTiltX;
       sceneStateRef.current.mouseTarget.y = y * galaxyConfig.mouse.maxTiltY;
+
+      if (sceneStateRef.current.isDragging) {
+        const deltaX = e.clientX - sceneStateRef.current.lastMousePos.x;
+        const deltaY = e.clientY - sceneStateRef.current.lastMousePos.y;
+
+        sceneStateRef.current.dragVelocity.x = deltaX * 0.005;
+        sceneStateRef.current.dragVelocity.y = deltaY * 0.005;
+
+        sceneStateRef.current.dragRotation.y += deltaX * 0.005;
+        sceneStateRef.current.dragRotation.x += deltaY * 0.005;
+
+        sceneStateRef.current.lastMousePos = { x: e.clientX, y: e.clientY };
+      }
+    };
+
+    const handleMouseUp = () => {
+      sceneStateRef.current.isDragging = false;
     };
 
     const handleMouseLeave = () => {
+      sceneStateRef.current.isDragging = false;
       sceneStateRef.current.mouseTarget.x = 0;
       sceneStateRef.current.mouseTarget.y = 0;
+    };
+
+    const handleTouchStart = (e) => {
+      if (!interactive || e.touches.length === 0) return;
+      sceneStateRef.current.isDragging = true;
+      sceneStateRef.current.lastMousePos = { x: e.touches[0].clientX, y: e.touches[0].clientY };
     };
 
     const handleTouchMove = (e) => {
@@ -175,11 +206,29 @@ export function GalaxyScene({
 
       sceneStateRef.current.mouseTarget.x = x * galaxyConfig.mouse.maxTiltX * 0.8;
       sceneStateRef.current.mouseTarget.y = y * galaxyConfig.mouse.maxTiltY * 0.8;
+
+      if (sceneStateRef.current.isDragging) {
+        const deltaX = touch.clientX - sceneStateRef.current.lastMousePos.x;
+        const deltaY = touch.clientY - sceneStateRef.current.lastMousePos.y;
+
+        sceneStateRef.current.dragRotation.y += deltaX * 0.006;
+        sceneStateRef.current.dragRotation.x += deltaY * 0.006;
+
+        sceneStateRef.current.lastMousePos = { x: touch.clientX, y: touch.clientY };
+      }
     };
 
-    container.addEventListener("mousemove", handleMouseMove);
+    const handleTouchEnd = () => {
+      sceneStateRef.current.isDragging = false;
+    };
+
+    container.addEventListener("mousedown", handleMouseDown);
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleMouseUp);
     container.addEventListener("mouseleave", handleMouseLeave);
+    container.addEventListener("touchstart", handleTouchStart, { passive: true });
     container.addEventListener("touchmove", handleTouchMove, { passive: true });
+    container.addEventListener("touchend", handleTouchEnd);
 
     // 8. Resize Handler
     const handleResize = () => {
@@ -197,7 +246,6 @@ export function GalaxyScene({
         composer.setSize(width, height);
       }
 
-      // Update shader uniforms
       const pixelRatio = Math.min(window.devicePixelRatio, 2);
       mainParticles.material.uniforms.uPixelRatio.value = pixelRatio;
       coreSystem.coreMaterial.uniforms.uPixelRatio.value = pixelRatio;
@@ -207,7 +255,7 @@ export function GalaxyScene({
 
     window.addEventListener("resize", handleResize);
 
-    // 9. Animation Loop with 720° Dual-Cycle Rotation
+    // 9. Animation Loop (Continuous 720° Dual Cycle Rotation & Parallax)
     const clock = new THREE.Clock();
     let accumulatedTime = 0;
     let frameCount = 0;
@@ -222,7 +270,7 @@ export function GalaxyScene({
         accumulatedTime += delta * sceneStateRef.current.speedMultiplier;
       }
 
-      // FPS Telemetry
+      // FPS Counter
       frameCount++;
       const now = performance.now();
       if (now - lastFpsUpdate >= 1000) {
@@ -234,7 +282,7 @@ export function GalaxyScene({
         lastFpsUpdate = now;
       }
 
-      // Smooth Mouse Tilt Interpolation (Damping)
+      // Smooth Mouse Parallax Damping
       const mouse = sceneStateRef.current.mouseCurrent;
       const target = sceneStateRef.current.mouseTarget;
       const damp = galaxyConfig.mouse.damping;
@@ -242,15 +290,22 @@ export function GalaxyScene({
       mouse.x += (target.x - mouse.x) * damp;
       mouse.y += (target.y - mouse.y) * damp;
 
-      // 720-Degree Dual Cycle Progression (0 -> 720 degrees seamless loop)
-      const twoPi2 = galaxyConfig.twoCycleRotationPeriod; // 4 * PI
-      const currentRotationRad = (accumulatedTime * galaxyConfig.rotationSpeed * 10.0) % twoPi2;
-      const rotationDegNum = Math.round((currentRotationRad / twoPi2) * 720);
+      // Apply drag inertia
+      if (!sceneStateRef.current.isDragging) {
+        sceneStateRef.current.dragVelocity.x *= 0.95;
+        sceneStateRef.current.dragVelocity.y *= 0.95;
+        sceneStateRef.current.dragRotation.y += sceneStateRef.current.dragVelocity.x;
+        sceneStateRef.current.dragRotation.x += sceneStateRef.current.dragVelocity.y;
+      }
 
-      // Camera parallax tilt
-      camera.position.x = initX + mouse.x * 3.5;
-      camera.position.y = initY - mouse.y * 2.2;
-      camera.lookAt(mouse.x * 0.8, -mouse.y * 0.5, 0);
+      // 720° Dual Cycle Progression (4 * PI)
+      const twoPi2 = galaxyConfig.twoCycleRotationPeriod;
+      const currentRotationRad = (accumulatedTime * galaxyConfig.rotationSpeed * 8.0) % twoPi2;
+
+      // Camera parallax position
+      camera.position.x = initX + mouse.x * 2.8;
+      camera.position.y = initY - mouse.y * 1.8;
+      camera.lookAt(mouse.x * 0.6, -mouse.y * 0.4, 0);
 
       // Update Subsystem Shaders
       mainParticles.material.uniforms.uTime.value = accumulatedTime;
@@ -259,10 +314,11 @@ export function GalaxyScene({
       coreSystem.update(accumulatedTime);
       planetsSystem.update(accumulatedTime);
 
-      // Global subtle galaxy tilt oscillation
-      galaxyRoot.rotation.x = THREE.MathUtils.degToRad(18) + mouse.y * 0.15;
-      galaxyRoot.rotation.y = currentRotationRad * 0.15;
-      galaxyRoot.rotation.z = THREE.MathUtils.degToRad(-12) + mouse.x * 0.15;
+      // Galaxy 3D Orientation
+      const drag = sceneStateRef.current.dragRotation;
+      galaxyRoot.rotation.x = baseTiltX + mouse.y * 0.12 + drag.x;
+      galaxyRoot.rotation.y = currentRotationRad * 0.12 + drag.y;
+      galaxyRoot.rotation.z = THREE.MathUtils.degToRad(-10) + mouse.x * 0.12;
 
       // Render Scene
       if (composer && sceneStateRef.current.bloomEnabled) {
@@ -274,18 +330,21 @@ export function GalaxyScene({
 
     animate();
 
-    // 10. Cleanup
+    // 10. Cleanup on unmount
     return () => {
       if (animationFrameIdRef.current) {
         cancelAnimationFrame(animationFrameIdRef.current);
       }
 
       window.removeEventListener("resize", handleResize);
-      container.removeEventListener("mousemove", handleMouseMove);
+      container.removeEventListener("mousedown", handleMouseDown);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
       container.removeEventListener("mouseleave", handleMouseLeave);
+      container.removeEventListener("touchstart", handleTouchStart);
       container.removeEventListener("touchmove", handleTouchMove);
+      container.removeEventListener("touchend", handleTouchEnd);
 
-      // Dispose geometries and materials
       mainParticles.geometry.dispose();
       mainParticles.material.dispose();
       dustSystem.geometry.dispose();
@@ -302,7 +361,6 @@ export function GalaxyScene({
     };
   }, [interactive]);
 
-  // UI Handlers
   const togglePause = () => {
     soundManager.playClick();
     sceneStateRef.current.isPaused = !sceneStateRef.current.isPaused;
@@ -343,49 +401,35 @@ export function GalaxyScene({
   return (
     <div
       ref={containerRef}
-      className={`relative w-full overflow-hidden select-none bg-[#02060A] ${className}`}
-      style={{ height }}
+      className={`relative w-full h-full overflow-hidden select-none bg-[#070E20] ${className}`}
+      style={{ minHeight: height }}
     >
-      {/* Three.js Canvas Container */}
+      {/* Three.js Canvas */}
       <div ref={mountRef} className="w-full h-full cursor-grab active:cursor-grabbing" />
 
-      {/* Cinematic Top-Left Telemetry Overlay */}
-      {showControls && (
-        <div className="absolute top-4 left-4 z-20 flex flex-col gap-1 pointer-events-none font-mono text-[10px] text-amber-300">
-          <div className="flex items-center gap-2 bg-[#070E20]/80 backdrop-blur-md px-3 py-1.5 rounded-xl border border-amber-400/40 shadow-lg">
-            <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
-            <span className="font-bold tracking-wider uppercase text-white">Milky Way Spiral Matrix</span>
-            <span className="text-slate-400">|</span>
-            <span className="text-amber-300 font-bold">720° Dual-Cycle</span>
-          </div>
+      {/* Subtle Hint */}
+      <div className="absolute top-4 left-4 z-20 pointer-events-none font-mono text-[10px] text-amber-300 flex items-center gap-2 bg-[#0D1B3E]/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-amber-400/40 shadow-lg">
+        <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+        <span className="font-bold tracking-wider uppercase text-white">3D Spiral Galaxy</span>
+        <span className="text-slate-400">|</span>
+        <span className="text-amber-300 hidden sm:inline">Drag to Rotate in 3D</span>
+      </div>
 
-          <div className="hidden sm:flex items-center gap-3 px-3 py-1 text-slate-300 bg-[#070E20]/60 backdrop-blur-xs rounded-lg w-fit border border-[#1E2E5D]/60 mt-1">
-            <span>STARS: {uiState.particleCount.toLocaleString()}</span>
-            <span>•</span>
-            <span>FPS: <strong className="text-emerald-400">{uiState.fps}</strong></span>
-            <span>•</span>
-            <span>ARMS: {galaxyConfig.arms}</span>
-          </div>
-        </div>
-      )}
-
-      {/* Interactive HUD Controls Bar */}
+      {/* HUD Controls Bar */}
       {showControls && (
-        <div className="absolute bottom-4 right-4 z-20 flex items-center gap-2 bg-[#070E20]/85 backdrop-blur-md p-1.5 rounded-2xl border border-amber-400/40 shadow-2xl">
-          {/* Pause / Resume Button */}
+        <div className="absolute bottom-4 right-4 z-20 flex items-center gap-2 bg-[#0D1B3E]/90 backdrop-blur-md p-1.5 rounded-2xl border border-amber-400/40 shadow-2xl">
           <button
             onClick={togglePause}
-            className="p-2 rounded-xl bg-[#0D1B3E] hover:bg-[#122452] border border-[#1E2E5D] text-slate-200 hover:text-amber-300 transition-colors"
+            className="p-2 rounded-xl bg-[#070E20] hover:bg-[#122452] border border-[#1E2E5D] text-slate-200 hover:text-amber-300 transition-colors"
             title={uiState.isPaused ? "Resume Rotation" : "Pause Rotation"}
             data-cursor="pointer"
           >
             {uiState.isPaused ? <Play className="w-3.5 h-3.5 fill-current text-amber-400" /> : <Pause className="w-3.5 h-3.5 text-amber-400" />}
           </button>
 
-          {/* Speed Multiplier Button */}
           <button
             onClick={cycleSpeed}
-            className="px-2.5 py-1.5 rounded-xl bg-[#0D1B3E] hover:bg-[#122452] border border-[#1E2E5D] text-xs font-mono font-bold text-amber-300 hover:border-amber-400 transition-all flex items-center gap-1"
+            className="px-2.5 py-1.5 rounded-xl bg-[#070E20] hover:bg-[#122452] border border-[#1E2E5D] text-xs font-mono font-bold text-amber-300 hover:border-amber-400 transition-all flex items-center gap-1"
             title="Cycle Orbit Velocity"
             data-cursor="pointer"
           >
@@ -393,13 +437,12 @@ export function GalaxyScene({
             <span>{uiState.speedMultiplier}x</span>
           </button>
 
-          {/* Bloom Toggle */}
           <button
             onClick={toggleBloom}
             className={`p-2 rounded-xl border transition-all ${
               uiState.bloomEnabled
-                ? "bg-amber-400/15 border-amber-400/60 text-amber-300"
-                : "bg-[#0D1B3E] border-[#1E2E5D] text-slate-400"
+                ? "bg-amber-400/20 border-amber-400/70 text-amber-300"
+                : "bg-[#070E20] border-[#1E2E5D] text-slate-400"
             }`}
             title="Toggle Cinematic Bloom"
             data-cursor="pointer"
@@ -407,10 +450,9 @@ export function GalaxyScene({
             <Sparkles className="w-3.5 h-3.5" />
           </button>
 
-          {/* Fullscreen Toggle */}
           <button
             onClick={toggleFullscreen}
-            className="p-2 rounded-xl bg-[#0D1B3E] hover:bg-[#122452] border border-[#1E2E5D] text-slate-200 hover:text-amber-300 transition-colors"
+            className="p-2 rounded-xl bg-[#070E20] hover:bg-[#122452] border border-[#1E2E5D] text-slate-200 hover:text-amber-300 transition-colors"
             title="Toggle Fullscreen"
             data-cursor="pointer"
           >

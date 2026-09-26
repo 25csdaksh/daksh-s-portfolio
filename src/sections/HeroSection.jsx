@@ -9,13 +9,13 @@ export function HeroSection({ onOpenResume }) {
   return (
     <section className="relative min-h-[92vh] sm:min-h-screen pt-28 sm:pt-32 pb-16 px-4 sm:px-6 md:px-12 flex flex-col justify-center overflow-hidden bg-transparent">
       {/* Massive Low-Opacity Background Watermark Typography */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-sans text-[18vw] font-black tracking-tighter text-blue-500/[0.04] select-none pointer-events-none watermark-text z-0">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-heading text-[18vw] font-black tracking-tighter text-blue-500/[0.03] select-none pointer-events-none watermark-text z-0">
         DAKSH
       </div>
 
       {/* Subtle Radial Glow Follower Background */}
-      <div className="absolute top-1/4 left-1/4 w-[450px] h-[450px] bg-blue-600/20 rounded-full blur-[120px] pointer-events-none -z-10" />
-      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-amber-500/20 rounded-full blur-[120px] pointer-events-none -z-10" />
+      <div className="absolute top-1/4 left-1/4 w-[450px] h-[450px] bg-blue-600/15 rounded-full blur-[130px] pointer-events-none -z-10" />
+      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-amber-500/12 rounded-full blur-[130px] pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center relative z-10">
         {/* Left Editorial Content */}
@@ -30,7 +30,7 @@ export function HeroSection({ onOpenResume }) {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0D1B3E]/90 border border-amber-400/50 shadow-md backdrop-blur-xs"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#091328]/90 border border-amber-400/40 shadow-lg backdrop-blur-md"
           >
             <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
             <span className="font-mono text-[10px] sm:text-xs tracking-wider text-amber-300 font-bold uppercase">
@@ -40,17 +40,17 @@ export function HeroSection({ onOpenResume }) {
 
           {/* Headline */}
           <div className="space-y-2">
-            <h1 className="text-4xl sm:text-6xl md:text-7xl font-sans font-extrabold text-white tracking-tight leading-[1.08]">
-              Hi, I'm <span className="text-amber-400">Daksh.</span>
+            <h1 className="text-4xl sm:text-6xl md:text-7xl font-heading font-extrabold text-white tracking-tight leading-[1.08]">
+              Hi, I'm <span className="text-white">Daksh.</span>
               <br />
-              I build <span className="gradient-text-gold font-black">digital experiences</span>
+              I build <span className="gradient-text-gold">digital experiences</span>
               <br />
-              that <span className="italic font-serif font-normal text-amber-300">matter.</span>
+              that <span className="text-white">matter.</span>
             </h1>
           </div>
 
           {/* Supporting Paragraph */}
-          <p className="text-base sm:text-lg md:text-xl text-slate-200 max-w-xl font-normal leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-slate-300 max-w-xl font-normal leading-relaxed">
             I'm a Computer Science Engineering student and full-stack developer passionate about building scalable software, AI-powered products, and meaningful digital experiences.
           </p>
 
@@ -71,7 +71,7 @@ export function HeroSection({ onOpenResume }) {
               href="#contact"
               onClick={() => soundManager.playClick()}
               onMouseEnter={() => soundManager.playHover()}
-              className="px-7 py-3.5 rounded-full bg-[#0D1B3E] border border-amber-400/60 text-white text-sm font-bold hover:bg-amber-400 hover:text-blue-950 hover:border-amber-300 transition-all duration-300 hover:scale-[1.03] flex items-center gap-2 shadow-md"
+              className="px-7 py-3.5 rounded-full bg-[#091328]/95 border border-amber-400/40 text-white text-sm font-semibold hover:border-amber-400 hover:text-amber-300 hover:bg-[#0E1D3E] transition-all duration-300 hover:scale-[1.03] flex items-center gap-2 shadow-md backdrop-blur-md"
               data-cursor="pointer"
             >
               <span>Let's Connect</span>
@@ -80,7 +80,7 @@ export function HeroSection({ onOpenResume }) {
 
           {/* Availability Status Indicator */}
           <div className="flex items-center gap-3 pt-3 border-t border-white/10 text-xs text-slate-300">
-            <div className="flex items-center gap-2 bg-[#0D1B3E] px-3.5 py-1 rounded-full border border-amber-400/30">
+            <div className="flex items-center gap-2 bg-[#091328] px-3.5 py-1 rounded-full border border-amber-400/30">
               <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
               <span className="font-mono text-amber-300 font-semibold">{profileData.status}</span>
             </div>

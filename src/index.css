@@ -2,40 +2,41 @@
 
 @layer base {
   :root {
-    /* 60% Dominant: Deep Space Black & Royal Navy Foundation */
+    /* 60% Dominant: Deep Space Black & Obsidian Navy Foundation */
     --bg-primary: #02040A;
     --bg-secondary: #050B1A;
     --bg-surface: #091328;
     --bg-surface-elevated: #0E1D3E;
     
-    /* 30% Secondary: Radiant Golden Yellow Accents */
+    /* 30% Secondary: Refined Metallic Gold & Amber Accents */
     --accent-gold: #F59E0B;
     --accent-gold-light: #FBBF24;
     --accent-gold-vibrant: #FACC15;
-    --accent-gold-subtle: rgba(245, 158, 11, 0.15);
+    --accent-gold-subtle: rgba(245, 158, 11, 0.12);
     --accent-gold-dark: #B45309;
-    --border-gold: rgba(245, 158, 11, 0.35);
-    --border-gold-bright: rgba(251, 191, 36, 0.7);
+    --border-gold: rgba(245, 158, 11, 0.3);
+    --border-gold-bright: rgba(251, 191, 36, 0.65);
     
     /* Royal Blue Spectrum */
     --accent-royal: #1D4ED8;
     --accent-royal-dark: #1E3A8A;
     --accent-royal-light: #3B82F6;
-    --accent-royal-subtle: rgba(29, 78, 216, 0.2);
-    --border-royal: rgba(59, 130, 246, 0.3);
+    --accent-royal-subtle: rgba(29, 78, 216, 0.18);
+    --border-royal: rgba(59, 130, 246, 0.25);
     
     /* 10% Clarity Accent: Crisp White & High-Legibility Silver */
     --text-primary: #FFFFFF;
     --text-secondary: #E2E8F0;
     --text-muted: #94A3B8;
     
-    --border-subtle: rgba(245, 158, 11, 0.2);
-    --border-medium: rgba(245, 158, 11, 0.4);
+    --border-subtle: rgba(245, 158, 11, 0.18);
+    --border-medium: rgba(245, 158, 11, 0.35);
     
     --card-shadow: 0 8px 30px -4px rgba(2, 4, 10, 0.9), 0 2px 10px -2px rgba(245, 158, 11, 0.08);
     --card-shadow-hover: 0 20px 40px -10px rgba(2, 4, 10, 0.95), 0 0 25px rgba(245, 158, 11, 0.25);
-    --font-serif: "Instrument Serif", Georgia, serif;
-    --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    
+    --font-heading: "Outfit", "Plus Jakarta Sans", -apple-system, sans-serif;
+    --font-sans: "Inter", "Plus Jakarta Sans", -apple-system, sans-serif;
     --font-mono: "JetBrains Mono", monospace;
   }
 
@@ -54,12 +55,18 @@
     color: var(--text-primary);
     overflow-x: hidden;
     position: relative;
+    font-family: var(--font-sans);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.025em;
   }
 }
 
 /* Typography Helpers */
-.font-serif {
-  font-family: var(--font-serif);
+.font-heading {
+  font-family: var(--font-heading);
 }
 
 .font-sans {
@@ -70,31 +77,26 @@
   font-family: var(--font-mono);
 }
 
-/* Golden Yellow Signature Gradient Text */
+/* Metallic Champagne Gold Signature Gradient Text */
 .gradient-text-gold {
-  background: linear-gradient(135deg, #FFFBEB 0%, #FDE047 30%, #FBBF24 70%, #F59E0B 100%);
+  background: linear-gradient(135deg, #FFFFFF 0%, #FEF08A 25%, #FBBF24 60%, #F59E0B 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-/* Royal Blue to Golden Yellow Gradient Text */
+/* Royal Celestial to Gold Shimmer Gradient Text */
 .gradient-text-royal-gold {
-  background: linear-gradient(135deg, #93C5FD 0%, #FDE047 50%, #F59E0B 100%);
+  background: linear-gradient(135deg, #BAE6FD 0%, #93C5FD 35%, #FDE047 75%, #F59E0B 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-/* Editorial & Modern Headings */
+/* Clean High-Tech Headings */
 .editorial-heading {
-  font-family: var(--font-sans);
-  letter-spacing: -0.02em;
+  font-family: var(--font-heading);
+  letter-spacing: -0.03em;
   line-height: 1.1;
   font-weight: 800;
-}
-
-.editorial-italic {
-  font-family: var(--font-serif);
-  font-style: italic;
 }
 
 /* Subtle background noise texture with Royal & Gold ambient touch */
@@ -168,7 +170,7 @@
 
 /* Low-opacity large watermark text */
 .watermark-text {
-  font-family: var(--font-sans);
+  font-family: var(--font-heading);
   user-select: none;
   pointer-events: none;
   opacity: 0.03;

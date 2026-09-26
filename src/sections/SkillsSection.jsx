@@ -78,7 +78,7 @@ export function SkillsSection() {
   };
 
   return (
-    <section id="skills" className="py-24 sm:py-32 px-4 sm:px-6 md:px-12 relative bg-slate-50/60">
+    <section id="skills" className="py-24 sm:py-32 px-4 sm:px-6 md:px-12 relative bg-[#F5F3ED]/50">
       <div className="max-w-7xl mx-auto space-y-12">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-slate-200">

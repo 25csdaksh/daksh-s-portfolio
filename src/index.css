@@ -2,9 +2,9 @@
 
 @layer base {
   :root {
-    --bg-primary: #F8FAFC;
+    --bg-primary: #FAF9F6;
     --bg-secondary: #FFFFFF;
-    --bg-surface: #F1F5F9;
+    --bg-surface: #F5F3ED;
     --bg-surface-elevated: #FFFFFF;
     --text-primary: #0F172A;
     --text-secondary: #334155;
@@ -23,8 +23,8 @@
     --accent-gold-dark: #92400E;
     
     --accent-emerald: #10B981;
-    --border-subtle: #E2E8F0;
-    --border-medium: #CBD5E1;
+    --border-subtle: #EAE6DC;
+    --border-medium: #DCD6C8;
     --border-royal: rgba(29, 78, 216, 0.25);
     --border-gold: rgba(212, 175, 55, 0.4);
     

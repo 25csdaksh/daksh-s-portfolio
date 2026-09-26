@@ -1,8 +1,8 @@
 /**
  * galaxyShaders.js
- * High-performance GPU Shaders for the 3D Procedural Spiral Galaxy.
- * Provides realistic circular glowing stars, differential Keplerian orbital dynamics,
- * volumetric core glow, and cosmic dust nebulae.
+ * GPU Shaders for the True 3D Milky Way Spiral Galaxy.
+ * Produces crisp, luminous, circular point stars with intense white-hot cores,
+ * realistic star-forming nebulae, and soft volumetric galactic haze.
  */
 
 export const galaxyParticlesShader = {
@@ -10,86 +10,68 @@ export const galaxyParticlesShader = {
     uniform float uTime;
     uniform float uPixelRatio;
     uniform float uSize;
-    uniform float uRotationSpeed;
-    uniform float uDifferentialSpeed;
 
     attribute float aScale;
     attribute float aBrightness;
-    attribute float aSpeed;
-    attribute float aRandomAngle;
-    attribute float aDistance;
-    attribute vec3 aRandomness;
     attribute float aTwinkleSpeed;
+    attribute float aPhase;
+    attribute vec3 aStreamVector;
 
     varying vec3 vColor;
     varying float vBrightness;
-    varying float vDistance;
     varying float vTwinkle;
 
     void main() {
       vColor = color;
       vBrightness = aBrightness;
-      vDistance = aDistance;
 
-      // Keplerian / Galactic Differential Orbital Velocity
-      // V(r) curve: inner stars rotate faster, outer stars slower with flat rotation curve at edges
-      float radius = length(position.xz);
-      float orbitalVelocity = (uRotationSpeed * 120.0) / (pow(max(radius, 0.45), uDifferentialSpeed) + 0.4);
-      
-      // Continuous orbital revolution
-      float currentAngle = atan(position.z, position.x) + (uTime * orbitalVelocity * aSpeed);
+      // Subtle organic breathing & streamline drift along the spiral arm vector
+      float drift = sin(uTime * 0.6 + aPhase) * 0.035;
+      vec3 displacedPos = position + aStreamVector * drift;
 
-      // Subtle vertical wave oscillation for organic living galaxy feel
-      float waveY = sin(uTime * 0.4 + aRandomAngle + radius * 0.8) * (0.05 * (1.0 + radius * 0.08));
-      float driftRadius = radius + cos(uTime * 0.25 + aRandomAngle) * 0.025;
+      // Subtle vertical wave across the disk
+      displacedPos.y += sin(uTime * 0.4 + aPhase * 2.0) * 0.02;
 
-      vec3 newPosition;
-      newPosition.x = cos(currentAngle) * driftRadius + aRandomness.x;
-      newPosition.z = sin(currentAngle) * driftRadius + aRandomness.z;
-      newPosition.y = position.y + aRandomness.y + waveY;
-
-      vec4 modelPosition = modelMatrix * vec4(newPosition, 1.0);
+      vec4 modelPosition = modelMatrix * vec4(displacedPos, 1.0);
       vec4 viewPosition = viewMatrix * modelPosition;
       vec4 projectedPosition = projectionMatrix * viewPosition;
 
       gl_Position = projectedPosition;
 
-      // Size attenuation based on distance to camera
+      // Size attenuation: larger when close to camera
       gl_PointSize = uSize * aScale * uPixelRatio * (1.0 / -viewPosition.z);
-      gl_PointSize = max(gl_PointSize, 2.0);
+      gl_PointSize = max(gl_PointSize, 1.2);
 
-      // Subtle star twinkle
-      vTwinkle = 0.8 + 0.2 * sin(uTime * aTwinkleSpeed + aRandomAngle * 3.0);
+      // Star twinkling effect
+      vTwinkle = 0.82 + 0.18 * sin(uTime * aTwinkleSpeed + aPhase);
     }
   `,
 
   fragmentShader: `
     varying vec3 vColor;
     varying float vBrightness;
-    varying float vDistance;
     varying float vTwinkle;
 
     void main() {
-      // Distance from center of point sprite (0.0 to 0.5)
       vec2 coord = gl_PointCoord - vec2(0.5);
       float dist = length(coord);
       if (dist > 0.5) discard;
 
-      // Soft circular anti-aliased core
-      float strength = 1.0 - (dist * 2.0);
-      strength = pow(strength, 2.0);
+      // 1. Soft anti-aliased circular disk
+      float disc = 1.0 - (dist * 2.0);
+      disc = pow(disc, 1.8);
 
-      // Intense white-hot center core glow
-      float centerGlow = exp(-dist * 9.0) * 1.1;
+      // 2. Hyper-bright white-hot stellar nucleus
+      float core = exp(-dist * 12.0);
 
-      // Outer soft aura
-      float outerAura = exp(-dist * 4.5) * 0.45;
+      // 3. Subtle outer diffraction corona
+      float corona = exp(-dist * 4.5) * 0.3;
 
-      // Color blending: center is pure white-hot, fading into star color and soft aura
-      vec3 finalColor = mix(vColor, vec3(1.0), clamp(centerGlow, 0.0, 1.0));
-      finalColor += vColor * outerAura;
+      // Blend color towards pure white at the hot center
+      vec3 finalColor = mix(vColor, vec3(1.0), clamp(core * 1.1, 0.0, 1.0));
+      finalColor += vColor * corona;
 
-      float alpha = (strength * 0.7 + centerGlow * 0.6 + outerAura * 0.3) * vBrightness * vTwinkle;
+      float alpha = (disc * 0.55 + core * 0.85 + corona * 0.2) * vBrightness * vTwinkle;
       alpha = clamp(alpha, 0.0, 1.0);
 
       gl_FragColor = vec4(finalColor, alpha);
@@ -107,6 +89,7 @@ export const coreGlowShader = {
   `,
   fragmentShader: `
     uniform vec3 uColorInner;
+    uniform vec3 uColorMid;
     uniform vec3 uColorOuter;
     uniform float uIntensity;
     uniform float uTime;
@@ -116,54 +99,54 @@ export const coreGlowShader = {
       float dist = distance(vUv, vec2(0.5));
       if (dist > 0.5) discard;
 
-      // Smooth exponential volumetric radial falloff
-      float glow = exp(-dist * 4.8);
-      float pulse = 1.0 + sin(uTime * 1.5) * 0.06;
+      // Soft exponential volumetric density falloff (Plummer profile)
+      float glow = exp(-dist * 6.0);
+      float pulse = 1.0 + sin(uTime * 0.9) * 0.03;
       glow *= pulse * uIntensity;
 
-      // Color gradient from white-hot center to celestial blue/gold corona
-      vec3 color = mix(uColorInner, uColorOuter, smoothstep(0.0, 0.45, dist));
-      float alpha = clamp(glow * (1.0 - dist * 2.0), 0.0, 1.0);
+      // 3-stop smooth gradient: Soft White -> Warm Gold -> Deep Cosmic Blue
+      vec3 color;
+      if (dist < 0.22) {
+        color = mix(uColorInner, uColorMid, dist / 0.22);
+      } else {
+        color = mix(uColorMid, uColorOuter, (dist - 0.22) / 0.28);
+      }
+
+      float alpha = clamp(glow * (1.0 - dist * 2.0), 0.0, 1.0) * 0.65;
 
       gl_FragColor = vec4(color * uIntensity, alpha);
     }
   `
 };
 
-export const dustParticlesShader = {
+export const dustCloudShader = {
   vertexShader: `
     uniform float uTime;
     uniform float uPixelRatio;
     uniform float uSize;
-    uniform float uRotationSpeed;
 
     attribute float aScale;
-    attribute float aSpeed;
-    attribute float aRandomAngle;
-    attribute vec3 aRandomness;
+    attribute float aPhase;
+    attribute vec3 aStreamVector;
 
     varying vec3 vColor;
     varying float vAlpha;
 
     void main() {
       vColor = color;
-      
-      float radius = length(position.xz);
-      float orbitalVelocity = (uRotationSpeed * 100.0) / (pow(max(radius, 0.5), 0.75) + 0.4);
-      float currentAngle = atan(position.z, position.x) + (uTime * orbitalVelocity * aSpeed);
 
-      vec3 newPosition;
-      newPosition.x = cos(currentAngle) * radius + aRandomness.x;
-      newPosition.z = sin(currentAngle) * radius + aRandomness.z;
-      newPosition.y = position.y + aRandomness.y + sin(uTime * 0.2 + aRandomAngle) * 0.06;
+      float drift = sin(uTime * 0.35 + aPhase) * 0.025;
+      vec3 displacedPos = position + aStreamVector * drift;
+      displacedPos.y += sin(uTime * 0.25 + aPhase) * 0.03;
 
-      vec4 modelPosition = modelMatrix * vec4(newPosition, 1.0);
+      vec4 modelPosition = modelMatrix * vec4(displacedPos, 1.0);
       vec4 viewPosition = viewMatrix * modelPosition;
       gl_Position = projectionMatrix * viewPosition;
 
       gl_PointSize = uSize * aScale * uPixelRatio * (1.0 / -viewPosition.z);
-      gl_PointSize = max(gl_PointSize, 8.0);
-      vAlpha = 0.16 * aScale;
+      gl_PointSize = max(gl_PointSize, 5.0);
+      
+      vAlpha = 0.14 * aScale;
     }
   `,
   fragmentShader: `
@@ -175,8 +158,8 @@ export const dustParticlesShader = {
       float dist = length(coord);
       if (dist > 0.5) discard;
 
-      // Soft gaussian cloud falloff
-      float cloud = exp(-dist * 3.6) * (1.0 - dist * 2.0);
+      // Gaussian soft cloud falloff
+      float cloud = exp(-dist * 4.2) * (1.0 - dist * 2.0);
       cloud = clamp(cloud, 0.0, 1.0);
 
       gl_FragColor = vec4(vColor, cloud * vAlpha);
@@ -200,14 +183,14 @@ export const backgroundStarsShader = {
 
     void main() {
       vColor = aColor;
-      vTwinkle = 0.55 + 0.45 * sin(uTime * aTwinkleSpeed + aPhase);
+      vTwinkle = 0.5 + 0.5 * sin(uTime * aTwinkleSpeed + aPhase);
 
       vec4 modelPosition = modelMatrix * vec4(position, 1.0);
       vec4 viewPosition = viewMatrix * modelPosition;
       gl_Position = projectionMatrix * viewPosition;
 
       gl_PointSize = uSize * aScale * uPixelRatio * (1.0 / -viewPosition.z);
-      gl_PointSize = max(gl_PointSize, 1.5);
+      gl_PointSize = max(gl_PointSize, 1.0);
     }
   `,
   fragmentShader: `
@@ -219,10 +202,9 @@ export const backgroundStarsShader = {
       float dist = length(coord);
       if (dist > 0.5) discard;
 
-      float strength = 1.0 - (dist * 2.0);
-      strength = pow(strength, 2.0);
+      float strength = pow(1.0 - (dist * 2.0), 2.0);
+      float alpha = strength * vTwinkle * 0.75;
 
-      float alpha = strength * vTwinkle;
       gl_FragColor = vec4(vColor, alpha);
     }
   `

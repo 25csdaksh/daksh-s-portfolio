@@ -1,157 +1,131 @@
 /**
  * galaxyConfig.js
- * Central configuration for the 3D Procedural Spiral Galaxy.
- * Easily tweakable parameters for arms, particle counts, colors, speeds, bloom, and camera.
+ * Central Configuration for the True 3D Milky Way Spiral Galaxy.
+ * Designed according to astronomical grand-design logarithmic spiral specifications.
  */
 
 export const galaxyConfig = {
-  // Particle counts
+  // Star Counts (Adaptive Desktop & Mobile)
   particleCountDesktop: 75000,
   particleCountMobile: 26000,
 
-  // Spiral geometry
-  arms: 5,
-  radius: 8.6,
-  spiralFactor: 2.85,
-  randomness: 0.35,
-  power: 3.2, // exponential clustering toward the core
-  thickness: 0.60,
-  outerThicknessMultiplier: 1.45, // vertical flaring near outer arms
+  // Spiral Arm Geometry
+  arms: 4, // 4 continuous major flowing spiral arms
+  radius: 13.5, // Overall galaxy radius
+  coreRadius: 1.6, // Central galactic bulge (~12% of diameter)
+  spiralTightness: 1.85, // Logarithmic pitch curve
+  armWidthFactor: 0.72, // Arm width control for clean dark inter-arm gaps
+  armCurvature: 1.25, // Sweeping natural curvature
 
+  // 3D Disk Thickness
+  thickness: 0.75, // Core bulge thickness
+  outerThickness: 0.15, // Thinner outer edge (flattened cosmic disk)
+  
   // Rotation & Physics
-  rotationSpeed: 0.0012, // Slow cinematic base speed
-  twoCycleRotationPeriod: 4 * Math.PI, // 720 degrees in radians
-  differentialSpeed: 0.82, // inner particles orbit faster than outer particles
-  particleDriftSpeed: 0.25,
-
-  // Color distribution ratios: 70% white, 20% soft blue, 8% warm gold, 2% cyan
+  rotationSpeed: 0.00065, // Smooth cinematic slow rotation
+  twoCycleRotationPeriod: 4 * Math.PI, // 720 degrees (two full revolutions)
+  
+  // Color Temperature & Palette (Astrophysical Milky Way Spectrum)
   colors: {
-    whiteRatio: 0.70,
-    blueRatio: 0.20,
-    goldRatio: 0.08,
-    cyanRatio: 0.02,
+    whiteRatio: 0.68, // 68% White / Cool White
+    blueRatio: 0.22,  // 22% Soft Blue & Electric Blue
+    goldRatio: 0.08,  // 8% Warm Gold & Soft Orange
+    cyanRatio: 0.02,  // 2% Vibrant Cyan / H-II Star Forming Regions
 
-    whiteColors: [
+    whitePalette: [
       "#FFFFFF",
       "#F8FAFC",
-      "#F0F4FF",
+      "#F1F5F9",
       "#E2E8F0"
     ],
-    blueColors: [
-      "#3B82F6",
-      "#60A5FA",
+    bluePalette: [
       "#93C5FD",
-      "#1D4ED8",
-      "#2563EB"
+      "#60A5FA",
+      "#3B82F6",
+      "#2563EB",
+      "#1D4ED8"
     ],
-    goldColors: [
-      "#F59E0B",
-      "#FBBF24",
+    goldPalette: [
       "#FDE047",
+      "#FBBF24",
+      "#F59E0B",
       "#D97706",
-      "#FEF08A"
+      "#FED7AA"
     ],
-    cyanColors: [
-      "#06B6D4",
+    cyanPalette: [
+      "#67E8F9",
       "#38BDF8",
-      "#67E8F9"
+      "#06B6D4"
     ]
   },
 
-  // Dense glowing core
+  // Central Galactic Bulge
   core: {
-    particleCount: 8500,
+    particleCountDesktop: 7500,
+    particleCountMobile: 2800,
     radius: 1.6,
-    glowSize: 3.4,
+    bulgeHeight: 1.1,
     innerColor: "#FFFFFF",
-    haloColor: "#3B82F6",
-    coronaColor: "#F59E0B",
-    intensity: 2.0
+    midColor: "#FDE047",
+    outerColor: "#60A5FA",
+    glowIntensity: 0.75
   },
 
-  // Cosmic Dust clouds
+  // Cosmic Dust & Nebula Clouds
   dust: {
-    particleCountDesktop: 3800,
-    particleCountMobile: 1400,
-    size: 20.0,
+    particleCountDesktop: 6500,
+    particleCountMobile: 2200,
+    size: 24.0,
     opacity: 0.15,
-    color: "#1E40AF",
-    secondaryColor: "#D97706"
+    darkLaneColor: "#02040A",
+    nebulaBlue: "#1E40AF",
+    nebulaAmber: "#B45309"
   },
 
-  // Background deep space stars
+  // Deep Space Background Stars
   backgroundStars: {
-    countDesktop: 12000,
-    countMobile: 4500,
-    fieldRadius: 150,
-    minSize: 0.8,
-    maxSize: 2.5,
-    twinkleSpeed: 1.6
+    countDesktop: 8000,
+    countMobile: 3000,
+    radius: 200,
+    fieldRadius: 200,
+    twinkleSpeed: 1.0
   },
 
-  // Orbiting planets
-  planets: [
-    {
-      name: "Astra-I (Golden Terrestrial)",
-      radius: 5.2,
-      size: 0.15,
-      speed: 0.0032,
-      inclination: 0.08,
-      color: "#FBBF24",
-      glowColor: "#F59E0B",
-      hasRing: true
-    },
-    {
-      name: "Neptis-Prime (Deep Azure)",
-      radius: 7.6,
-      size: 0.18,
-      speed: 0.0021,
-      inclination: -0.12,
-      color: "#3B82F6",
-      glowColor: "#60A5FA",
-      hasRing: true
-    },
-    {
-      name: "Chronos-IV (Outer Gilded Sphere)",
-      radius: 9.8,
-      size: 0.13,
-      speed: 0.0014,
-      inclination: 0.14,
-      color: "#FDE047",
-      glowColor: "#D97706",
-      hasRing: false
-    }
-  ],
-
-  // Camera settings (35-45 degree inclination perspective)
+  // Camera Settings (30-40 degrees above galactic plane)
   camera: {
-    fov: 46,
+    fov: 42,
     near: 0.1,
-    far: 500,
-    initialPosition: [0, 5.4, 9.8],
-    lookAt: [0, 0, 0],
-    pitchAngleDeg: 40
+    far: 600,
+    initialPosition: [0, 8.2, 16.2], // Angled perspective
+    pitchAngleDeg: 55, // Incline galactic plane ~55° to camera for true 35° view
+    lookAt: [0, 0, 0]
   },
 
-  // Mouse interaction & parallax
+  // Mouse Parallax & Interaction
   mouse: {
-    influence: 0.08,
+    maxTiltX: 0.20,
+    maxTiltY: 0.15,
+    damping: 0.05
+  },
+
+  // Interactive Mouse Drag & Physics
+  interaction: {
+    dragSensitivity: 0.004,
     damping: 0.05,
-    maxTiltX: 0.35,
-    maxTiltY: 0.25
+    autoResumeDelay: 2200,
+    minPitchDeg: 20,
+    maxPitchDeg: 75
   },
 
-  // Postprocessing Bloom
+  // Postprocessing Bloom (Cinematic, stars remain distinct)
   bloom: {
-    enabled: true,
-    strength: 1.2,
-    radius: 0.75,
-    threshold: 0.2
+    strength: 0.65,
+    radius: 0.55,
+    threshold: 0.40
   },
 
-  // Background color - matches portfolio Royal Dark Blue seamlessly
+  // Deep Space Black Background
   background: {
-    color: "#070E20",
-    hazeColor: "#0D1B3E"
+    color: "#02040A"
   }
 };

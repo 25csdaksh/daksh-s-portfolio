@@ -4,6 +4,7 @@ import { backgroundStarsShader } from "./galaxyShaders";
 
 /**
  * Creates the deep space twinkling star field.
+ * Sparse, distant background field stars that provide cosmic depth without distraction.
  *
  * @param {number} count - Background star count
  * @returns {{ points: THREE.Points, material: THREE.ShaderMaterial, geometry: THREE.BufferGeometry }}
@@ -26,17 +27,17 @@ export function createBackgroundStars(count = galaxyConfig.backgroundStars.count
     new THREE.Color("#FED7AA")
   ];
 
-  const maxR = galaxyConfig.backgroundStars.fieldRadius;
+  const maxR = galaxyConfig.backgroundStars.radius || galaxyConfig.backgroundStars.fieldRadius || 180;
 
   for (let i = 0; i < count; i++) {
     const i3 = i * 3;
 
-    // Uniform distribution on a 3D sphere / volume shell
+    // Uniform distribution on a 3D spherical shell
     const u = Math.random();
     const v = Math.random();
     const theta = u * 2.0 * Math.PI;
     const phi = Math.acos(2.0 * v - 1.0);
-    const r = Math.cbrt(Math.random()) * maxR * 0.7 + maxR * 0.3;
+    const r = Math.cbrt(Math.random()) * maxR * 0.65 + maxR * 0.35;
 
     const sinPhi = Math.sin(phi);
     positions[i3] = r * sinPhi * Math.cos(theta);
@@ -48,8 +49,8 @@ export function createBackgroundStars(count = galaxyConfig.backgroundStars.count
     colors[i3 + 1] = c.g;
     colors[i3 + 2] = c.b;
 
-    scales[i] = 0.5 + Math.random() * 1.8;
-    twinkleSpeeds[i] = 0.8 + Math.random() * 2.4;
+    scales[i] = 0.5 + Math.random() * 1.5;
+    twinkleSpeeds[i] = 0.6 + Math.random() * 2.0;
     phases[i] = Math.random() * Math.PI * 2;
   }
 

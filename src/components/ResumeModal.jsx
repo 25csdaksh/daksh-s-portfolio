@@ -16,14 +16,16 @@ import {
   CheckCircle2,
   FileText,
   Sparkles,
-  Layers
+  Layers,
+  FileImage,
+  Eye
 } from "lucide-react";
 import { Github, Linkedin } from "./Icons";
 import { resumeData } from "../data/resume";
 import { soundManager } from "../utils/sound";
 
 export function ResumeModal({ isOpen, onClose }) {
-  const [viewMode, setViewMode] = useState("pdf"); // "pdf" | "web"
+  const [viewMode, setViewMode] = useState("pdf"); // "pdf" | "image" | "web"
 
   if (!isOpen) return null;
 
@@ -51,7 +53,7 @@ export function ResumeModal({ isOpen, onClose }) {
             soundManager.playClick();
             onClose();
           }}
-          className="fixed inset-0 bg-[#02040A]/85 backdrop-blur-md"
+          className="fixed inset-0 bg-[#02040A]/90 backdrop-blur-md"
         />
 
         {/* Modal Window */}
@@ -62,43 +64,60 @@ export function ResumeModal({ isOpen, onClose }) {
           transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
           onClick={(e) => e.stopPropagation()}
           data-lenis-prevent="true"
-          className="relative w-full max-w-5xl bg-[#091328] rounded-3xl border border-amber-400/50 shadow-2xl shadow-blue-950/80 overflow-hidden z-10 max-h-[94vh] flex flex-col overscroll-contain text-white"
+          className="relative w-full max-w-5xl bg-[#091328] rounded-3xl border border-amber-400/50 shadow-2xl shadow-blue-950/90 overflow-hidden z-10 max-h-[94vh] flex flex-col overscroll-contain text-white"
         >
           {/* Action Header */}
-          <div className="flex flex-wrap items-center justify-between gap-3 px-5 sm:px-6 py-3.5 border-b border-white/10 bg-[#050B1A] shrink-0">
+          <div className="flex flex-wrap items-center justify-between gap-3 px-4 sm:px-6 py-3 border-b border-white/10 bg-[#050B1A] shrink-0">
             {/* Title & Mode Switcher */}
-            <div className="flex items-center gap-2 sm:gap-3">
-              <span className="font-heading text-base sm:text-lg font-bold text-white">
-                Daksh Soni — Resume
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+              <span className="font-heading text-sm sm:text-base font-bold text-white flex items-center gap-2">
+                <FileText className="w-4 h-4 text-amber-400" />
+                <span>Daksh Soni — Resume</span>
               </span>
               
               {/* Tab Selector */}
-              <div className="flex items-center bg-[#091328] p-1 rounded-xl border border-amber-400/30">
+              <div className="flex items-center bg-[#091328] p-1 rounded-xl border border-amber-400/30 text-xs font-mono">
                 <button
                   onClick={() => {
                     soundManager.playClick();
                     setViewMode("pdf");
                   }}
-                  className={`px-3 py-1 rounded-lg text-xs font-mono font-bold transition-all ${
+                  className={`px-2.5 sm:px-3 py-1 rounded-lg font-bold transition-all ${
                     viewMode === "pdf"
                       ? "bg-amber-400 text-blue-950 shadow-sm"
                       : "text-slate-300 hover:text-white"
                   }`}
+                  title="Interactive PDF Viewer"
                 >
-                  📄 PDF Document
+                  📄 PDF Viewer
+                </button>
+                <button
+                  onClick={() => {
+                    soundManager.playClick();
+                    setViewMode("image");
+                  }}
+                  className={`px-2.5 sm:px-3 py-1 rounded-lg font-bold transition-all ${
+                    viewMode === "image"
+                      ? "bg-amber-400 text-blue-950 shadow-sm"
+                      : "text-slate-300 hover:text-white"
+                  }`}
+                  title="High-Res Document Page"
+                >
+                  🖼️ Document Page
                 </button>
                 <button
                   onClick={() => {
                     soundManager.playClick();
                     setViewMode("web");
                   }}
-                  className={`px-3 py-1 rounded-lg text-xs font-mono font-bold transition-all ${
+                  className={`hidden sm:inline-block px-2.5 sm:px-3 py-1 rounded-lg font-bold transition-all ${
                     viewMode === "web"
                       ? "bg-amber-400 text-blue-950 shadow-sm"
                       : "text-slate-300 hover:text-white"
                   }`}
+                  title="Interactive Web Profile"
                 >
-                  ⚡ Web Profile
+                  ⚡ Web View
                 </button>
               </div>
             </div>
@@ -106,15 +125,15 @@ export function ResumeModal({ isOpen, onClose }) {
             {/* Action Buttons */}
             <div className="flex items-center gap-2">
               <a
-                href={resumeData.personal.pdfUrl}
+                href="/Daksh_Soni_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => soundManager.playClick()}
-                className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-amber-400/30 bg-[#091328] text-xs font-mono font-bold text-amber-300 hover:bg-amber-400 hover:text-blue-950 transition-all"
-                title="Open PDF in new browser window"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-amber-400/40 bg-[#091328] text-xs font-mono font-bold text-amber-300 hover:bg-amber-400 hover:text-blue-950 transition-all shadow-sm"
+                title="Open PDF directly in new browser tab"
               >
                 <ExternalLink className="w-3.5 h-3.5" />
-                <span>Open in Tab</span>
+                <span className="hidden sm:inline">Open in Tab</span>
               </a>
 
               <button
@@ -126,7 +145,7 @@ export function ResumeModal({ isOpen, onClose }) {
               </button>
 
               <a
-                href={resumeData.personal.pdfUrl}
+                href="/Daksh_Soni_Resume.pdf"
                 download="Daksh_Soni_Resume.pdf"
                 onClick={() => soundManager.playClick()}
                 className="flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-blue-950 font-mono text-xs font-black shadow-md shadow-amber-500/20 hover:scale-105 transition-all"
@@ -148,18 +167,32 @@ export function ResumeModal({ isOpen, onClose }) {
             </div>
           </div>
 
-          {/* Modal Content */}
+          {/* Modal Body */}
           {viewMode === "pdf" ? (
             /* 1. EMBEDDED REAL PDF VIEWER */
-            <div className="flex-1 w-full h-[76vh] bg-[#02040A] p-2 sm:p-4 flex flex-col">
+            <div className="flex-1 w-full h-[78vh] bg-[#02040A] p-2 sm:p-4 flex flex-col">
               <iframe
-                src={`${resumeData.personal.pdfUrl}#toolbar=1&navpanes=0`}
+                src="/Daksh_Soni_Resume.pdf#toolbar=1&navpanes=0&view=FitH"
                 title="Daksh Soni Resume PDF Document"
                 className="w-full h-full rounded-2xl bg-white border border-amber-400/30 shadow-inner"
               />
             </div>
+          ) : viewMode === "image" ? (
+            /* 2. HIGH-RESOLUTION DOCUMENT PAGE VIEW */
+            <div
+              data-lenis-prevent="true"
+              className="flex-1 overflow-y-auto modal-scrollbar bg-[#02040A] p-4 sm:p-8 flex justify-center items-start"
+            >
+              <div className="max-w-3xl w-full bg-white rounded-2xl overflow-hidden shadow-2xl shadow-blue-950/80 border border-amber-400/40">
+                <img
+                  src="/resume-preview.png"
+                  alt="Daksh Soni Resume Document"
+                  className="w-full h-auto object-contain select-none"
+                />
+              </div>
+            </div>
           ) : (
-            /* 2. INTERACTIVE WEB RESUME DOCUMENT */
+            /* 3. INTERACTIVE WEB RESUME DOCUMENT */
             <div
               data-lenis-prevent="true"
               className="overflow-y-auto modal-scrollbar p-6 sm:p-10 text-white space-y-7 font-sans bg-[#091328] print:bg-white print:text-slate-900 print:p-0 flex-1"
@@ -285,7 +318,6 @@ export function ResumeModal({ isOpen, onClose }) {
                     </div>
                     <div className="sm:text-right font-mono text-[11px] text-amber-400 print:text-slate-600 font-semibold shrink-0">
                       <span>{edu.period}</span>
-                      <p className="text-slate-400 print:text-slate-500">{edu.score}</p>
                     </div>
                   </div>
                 ))}
@@ -304,7 +336,7 @@ export function ResumeModal({ isOpen, onClose }) {
                         <span className="font-mono text-[10px] text-amber-300 print:text-slate-600">{p.tech}</span>
                       </div>
                       <p className="text-slate-200 print:text-slate-600 leading-relaxed">
-                        {p.desc}
+                        {p.subtitle}
                       </p>
                     </div>
                   ))}
@@ -322,7 +354,7 @@ export function ResumeModal({ isOpen, onClose }) {
                       <CheckCircle2 className="w-3.5 h-3.5 text-amber-400 shrink-0 mt-0.5" />
                       <div>
                         <strong className="text-white print:text-slate-900">{item.title} </strong>
-                        <span className="text-slate-200 print:text-slate-600">— {item.desc}</span>
+                        <span className="text-slate-200 print:text-slate-600">— {item.description}</span>
                       </div>
                     </div>
                   ))}

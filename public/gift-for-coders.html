@@ -35,9 +35,18 @@
       --text-dim: #334155;
       --accent: #7e22ce;
       --accent-gold: #d97706;
+      --c-accent: #1d4ed8;
+      --html-accent: #c2410c;
+      --css-accent: #0f766e;
+      --js-accent: #b45309;
+      --react-accent: #0284c7;
+    }
+    html.light body {
+      background-color: #f8fafc;
+      color: #0f172a;
     }
     html.light header {
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255, 255, 255, 0.95);
       border-bottom-color: rgba(147, 51, 234, 0.2);
     }
     html.light .brand {
@@ -51,31 +60,52 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
+    html.light .hero p {
+      color: #334155;
+    }
     html.light .hero-badge {
-      background: rgba(243, 232, 255, 0.9);
-      border-color: rgba(147, 51, 234, 0.3);
+      background: rgba(243, 232, 255, 0.95);
+      border-color: rgba(147, 51, 234, 0.35);
       color: #6b21a8;
     }
+    html.light .section-title {
+      color: #0f172a !important;
+    }
+    html.light .card {
+      background: #ffffff !important;
+      border: 1px solid rgba(147, 51, 234, 0.22) !important;
+      box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.08) !important;
+      color: #0f172a !important;
+    }
+    html.light .card:hover {
+      box-shadow: 0 20px 45px -8px rgba(15, 23, 42, 0.14), 0 0 25px rgba(245, 158, 11, 0.25) !important;
+      border-color: rgba(217, 119, 6, 0.8) !important;
+    }
+    html.light .card h3 {
+      color: #0f172a !important;
+    }
+    html.light .card p {
+      color: #334155 !important;
+    }
+    html.light .card-features {
+      color: #1e293b !important;
+    }
+    html.light .card-features li {
+      color: #1e293b !important;
+    }
+    html.light .card-c .card-tag { background: #dbeafe !important; color: #1e40af !important; border: 1px solid #93c5fd !important; }
+    html.light .card-html .card-tag { background: #ffedd5 !important; color: #9a3412 !important; border: 1px solid #fdba74 !important; }
+    html.light .card-css .card-tag { background: #ccfbf1 !important; color: #115e59 !important; border: 1px solid #5eead4 !important; }
+    html.light .card-js .card-tag { background: #fef3c7 !important; color: #92400e !important; border: 1px solid #fde68a !important; }
+    html.light .card-react .card-tag { background: #e0f2fe !important; color: #075985 !important; border: 1px solid #7dd3fc !important; }
     html.light .btn-secondary {
-      background: #f3e8ff;
-      color: #6b21a8;
-      border-color: rgba(147, 51, 234, 0.35);
+      background: #f1f5f9 !important;
+      color: #334155 !important;
+      border: 1px solid #cbd5e1 !important;
     }
     html.light .btn-secondary:hover {
-      background: #e9d5ff;
-      color: #581c87;
-    }
-    html.light .note-card {
-      background: #ffffff;
-      border-color: rgba(147, 51, 234, 0.22);
-      box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.08);
-    }
-    html.light .note-card h3 {
-      color: #0f172a;
-    }
-    html.light .note-card p,
-    html.light .note-card li {
-      color: #334155;
+      background: #e2e8f0 !important;
+      color: #0f172a !important;
     }
     html.light .reader-shell {
       background: #ffffff;
@@ -101,6 +131,77 @@
       background: #f3e8ff;
       color: #6b21a8;
       border-color: #a855f7;
+    }
+
+    /* Cover Page Banners */
+    .card-cover-banner {
+      width: 100%;
+      border-radius: 16px;
+      padding: 14px 16px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transition: all 0.3s ease;
+    }
+    .cover-c {
+      background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #3b82f6 100%);
+      color: #ffffff;
+      box-shadow: 0 6px 18px rgba(37, 99, 235, 0.28);
+    }
+    .cover-html {
+      background: linear-gradient(135deg, #7c2d12 0%, #c2410c 50%, #ea580c 100%);
+      color: #ffffff;
+      box-shadow: 0 6px 18px rgba(234, 88, 12, 0.28);
+    }
+    .cover-css {
+      background: linear-gradient(135deg, #134e4a 0%, #0d9488 50%, #14b8a6 100%);
+      color: #ffffff;
+      box-shadow: 0 6px 18px rgba(13, 148, 136, 0.28);
+    }
+    .cover-js {
+      background: linear-gradient(135deg, #78350f 0%, #d97706 50%, #f59e0b 100%);
+      color: #1e1b4b;
+      box-shadow: 0 6px 18px rgba(217, 119, 6, 0.28);
+    }
+    .cover-react {
+      background: linear-gradient(135deg, #0c4a6e 0%, #0284c7 50%, #0ea5e9 100%);
+      color: #ffffff;
+      box-shadow: 0 6px 18px rgba(2, 132, 199, 0.28);
+    }
+    .cover-icon-wrap {
+      font-size: 24px;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.22);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+    }
+    .cover-meta {
+      display: flex;
+      flex-direction: column;
+    }
+    .cover-title-text {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14.5px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+    .cover-sub-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      opacity: 0.95;
+      margin-top: 3px;
+      font-weight: 600;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -617,6 +718,14 @@
         <!-- Card 1: C Language -->
         <div class="card card-c">
           <div>
+            <!-- Cover Page Banner -->
+            <div class="card-cover-banner cover-c">
+              <div class="cover-icon-wrap">⚙️</div>
+              <div class="cover-meta">
+                <div class="cover-title-text">C Language Master Notes</div>
+                <div class="cover-sub-text">21 Chapters • Memory &amp; Pointers Guide</div>
+              </div>
+            </div>
             <span class="card-tag">Low-Level Mastery · 21 Chapters</span>
             <h3>C Language — Full Short Notes</h3>
             <p>Complete revision cheat sheet from basic data types, control flow, functions to low-level pointers, dynamic memory (malloc/stack/heap), structures, and file I/O.</p>
@@ -646,6 +755,14 @@
         <!-- Card 2: HTML Course -->
         <div class="card card-html">
           <div>
+            <!-- Cover Page Banner -->
+            <div class="card-cover-banner cover-html">
+              <div class="cover-icon-wrap">🌐</div>
+              <div class="cover-meta">
+                <div class="cover-title-text">HTML5 Complete Curriculum</div>
+                <div class="cover-sub-text">32 Full Chapters + Quizzes &amp; Exercises</div>
+              </div>
+            </div>
             <span class="card-tag">32 Full Chapters + Quizzes</span>
             <h3>&lt;Markup/&gt; — Complete HTML Course</h3>
             <p>From your first &lt;p&gt; to shipping accessible, SEO-ready, production-grade markup. Includes interactive collapsible quizzes, coding exercises, and interview Q&amp;A.</p>
@@ -675,6 +792,14 @@
         <!-- Card 3: CSS Notes -->
         <div class="card card-css">
           <div>
+            <!-- Cover Page Banner -->
+            <div class="card-cover-banner cover-css">
+              <div class="cover-icon-wrap">🎨</div>
+              <div class="cover-meta">
+                <div class="cover-title-text">Modern CSS Architecture</div>
+                <div class="cover-sub-text">23 Chapters • Box Model, Flexbox &amp; Grid</div>
+              </div>
+            </div>
             <span class="card-tag">Modern Layouts &amp; Motion · 23 Chapters</span>
             <h3>CSS — Full Short Notes</h3>
             <p>Condensed master reference for modern web design: selectors, specificity priority, visual box model, 1D Flexbox, 2D Grid, transitions, keyframe animations, and media queries.</p>
@@ -704,6 +829,14 @@
         <!-- Card 4: JavaScript Notes -->
         <div class="card card-js">
           <div>
+            <!-- Cover Page Banner -->
+            <div class="card-cover-banner cover-js">
+              <div class="cover-icon-wrap">⚡</div>
+              <div class="cover-meta">
+                <div class="cover-title-text">JavaScript Core Engine</div>
+                <div class="cover-sub-text">22 Chapters • Event Loop, Closures &amp; ES6+</div>
+              </div>
+            </div>
             <span class="card-tag">Core Engine &amp; Async · 22 Chapters</span>
             <h3>JavaScript — Full Short Notes</h3>
             <p>From variables, closures, and scoping to array methods, Promises, async/await, and the Event Loop architecture with practical explanations before every snippet.</p>
@@ -733,6 +866,14 @@
         <!-- Card 5: React.js Notes -->
         <div class="card card-react">
           <div>
+            <!-- Cover Page Banner -->
+            <div class="card-cover-banner cover-react">
+              <div class="cover-icon-wrap">⚛️</div>
+              <div class="cover-meta">
+                <div class="cover-title-text">React.js Architecture &amp; Hooks</div>
+                <div class="cover-sub-text">20 Chapters • State, Router &amp; Patterns</div>
+              </div>
+            </div>
             <span class="card-tag">UI Architecture &amp; Hooks · 20 Chapters</span>
             <h3>React.js — Full Short Notes</h3>
             <p>Complete guide to modern React: JSX, functional components, props, useState, essential Hooks (useEffect, useRef, useMemo, useCallback, useContext), custom hooks, and React Router.</p>

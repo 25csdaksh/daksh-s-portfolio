@@ -32,6 +32,57 @@ export function GiftForCodersSection({ onOpenGiftModal }) {
     return <Layers className="w-6 h-6 text-cyan-600 dark:text-cyan-400" />;
   };
 
+  const getCoverBannerStyle = (id) => {
+    if (id === "c-lang") {
+      return {
+        gradient: "from-blue-600 via-indigo-600 to-blue-500",
+        shadow: "shadow-blue-500/25",
+        border: "border-blue-400/30",
+        text: "C Programming Master Notes",
+        sub: "21 Chapters • Memory & Pointers",
+        emoji: "⚙️"
+      };
+    }
+    if (id === "html-course") {
+      return {
+        gradient: "from-orange-600 via-amber-600 to-red-500",
+        shadow: "shadow-orange-500/25",
+        border: "border-orange-400/30",
+        text: "HTML5 Complete Curriculum",
+        sub: "32 Full Chapters + Quizzes",
+        emoji: "🌐"
+      };
+    }
+    if (id === "css-notes") {
+      return {
+        gradient: "from-teal-600 via-emerald-600 to-cyan-600",
+        shadow: "shadow-teal-500/25",
+        border: "border-teal-400/30",
+        text: "Modern CSS Architecture",
+        sub: "23 Chapters • Flexbox & Grid",
+        emoji: "🎨"
+      };
+    }
+    if (id === "js-notes") {
+      return {
+        gradient: "from-amber-500 via-yellow-500 to-amber-600 text-purple-950",
+        shadow: "shadow-amber-500/25",
+        border: "border-yellow-400/40",
+        text: "JavaScript Core Engine",
+        sub: "22 Chapters • Event Loop & ES6+",
+        emoji: "⚡"
+      };
+    }
+    return {
+      gradient: "from-cyan-600 via-sky-600 to-blue-600",
+      shadow: "shadow-cyan-500/25",
+      border: "border-cyan-400/30",
+      text: "React.js Architecture",
+      sub: "20 Chapters • Hooks & Router",
+      emoji: "⚛️"
+    };
+  };
+
   const getTagStyle = (id) => {
     if (id === "c-lang") {
       return "bg-blue-100 text-blue-900 border-blue-300 dark:bg-blue-500/15 dark:text-blue-300 dark:border-blue-500/30";
@@ -113,55 +164,69 @@ export function GiftForCodersSection({ onOpenGiftModal }) {
 
         {/* 5 Prominent Master Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
-          {giftNotesData.map((note) => (
-            <motion.div
-              key={note.id}
-              whileHover={{ y: -6 }}
-              onMouseEnter={() => soundManager.playHover()}
-              className="editorial-card p-6 sm:p-8 rounded-3xl border border-purple-500/25 hover:border-amber-400/80 transition-all duration-300 flex flex-col justify-between group shadow-xl hover:shadow-2xl relative overflow-hidden"
-            >
-              {/* Subtle Card Header Tone Glow */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/5 rounded-full blur-2xl group-hover:bg-amber-400/10 transition-colors pointer-events-none" />
+          {giftNotesData.map((note) => {
+            const cover = getCoverBannerStyle(note.id);
+            return (
+              <motion.div
+                key={note.id}
+                whileHover={{ y: -6 }}
+                onMouseEnter={() => soundManager.playHover()}
+                className="editorial-card p-6 sm:p-7 rounded-3xl border border-purple-500/25 hover:border-amber-400/80 transition-all duration-300 flex flex-col justify-between group shadow-xl hover:shadow-2xl relative overflow-hidden"
+              >
+                {/* Subtle Card Header Tone Glow */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/5 rounded-full blur-2xl group-hover:bg-amber-400/10 transition-colors pointer-events-none" />
 
-              <div className="space-y-5">
-                {/* Badge & Icon */}
-                <div className="flex items-center justify-between">
-                  <div className="w-12 h-12 rounded-2xl bg-purple-100 dark:bg-[#160b45] border border-purple-300 dark:border-purple-400/30 flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
-                    {getIcon(note.id)}
+                <div className="space-y-4">
+                  {/* Visual Cover Page Banner */}
+                  <div className={`p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r ${cover.gradient} ${cover.shadow} border ${cover.border} text-white shadow-lg flex items-center gap-3.5 relative overflow-hidden group-hover:scale-[1.01] transition-transform`}>
+                    <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center text-xl shrink-0 shadow-xs">
+                      {cover.emoji}
+                    </div>
+                    <div className="flex flex-col min-w-0">
+                      <span className="font-heading text-sm sm:text-base font-bold tracking-tight text-white leading-tight truncate">
+                        {cover.text}
+                      </span>
+                      <span className="font-mono text-[10px] text-white/90 font-medium mt-0.5 truncate">
+                        {cover.sub}
+                      </span>
+                    </div>
                   </div>
-                  <span className={`px-3 py-1 rounded-full font-mono text-[11px] font-bold border ${getTagStyle(note.id)}`}>
-                    {note.badge}
-                  </span>
-                </div>
 
-                {/* Title & Tagline */}
-                <div>
-                  <span className="font-mono text-xs text-amber-600 dark:text-amber-400 font-bold block mb-1">
-                    //{note.tagline}
-                  </span>
-                  <h3 className="font-heading text-xl sm:text-2xl font-bold text-slate-900 dark:text-white group-hover:text-purple-700 dark:group-hover:text-amber-300 transition-colors">
-                    {note.title}
-                  </h3>
-                  <p className="text-xs text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">
-                    {note.subtitle}
-                  </p>
-                </div>
+                  {/* Badge & Tagline */}
+                  <div className="flex items-center justify-between pt-1">
+                    <span className="font-mono text-xs text-amber-600 dark:text-amber-400 font-bold block">
+                      //{note.tagline}
+                    </span>
+                    <span className={`px-3 py-1 rounded-full font-mono text-[11px] font-bold border ${getTagStyle(note.id)}`}>
+                      {note.badge}
+                    </span>
+                  </div>
 
-                {/* Key Features Bullet List */}
-                <div className="space-y-2 pt-2 border-t border-purple-500/20">
-                  <span className="font-mono text-[10px] uppercase tracking-wider text-purple-700 dark:text-purple-300 font-bold block">
-                    What's Included ({note.topicsCount}):
-                  </span>
-                  <ul className="space-y-1.5">
-                    {note.features.slice(0, 4).map((feat, fIdx) => (
-                      <li key={fIdx} className="text-xs text-slate-700 dark:text-slate-200 flex items-start gap-2">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-amber-500 dark:text-amber-400 shrink-0 mt-0.5" />
-                        <span className="line-clamp-2">{feat}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  {/* Title & Subtitle */}
+                  <div>
+                    <h3 className="font-heading text-xl font-bold text-slate-900 dark:text-white group-hover:text-purple-700 dark:group-hover:text-amber-300 transition-colors">
+                      {note.title}
+                    </h3>
+                    <p className="text-xs text-slate-600 dark:text-slate-300 mt-1.5 leading-relaxed">
+                      {note.subtitle}
+                    </p>
+                  </div>
+
+                  {/* Key Features Bullet List */}
+                  <div className="space-y-2 pt-2 border-t border-purple-500/20">
+                    <span className="font-mono text-[10px] uppercase tracking-wider text-purple-700 dark:text-purple-300 font-bold block">
+                      What's Included ({note.topicsCount}):
+                    </span>
+                    <ul className="space-y-1.5">
+                      {note.features.slice(0, 4).map((feat, fIdx) => (
+                        <li key={fIdx} className="text-xs text-slate-700 dark:text-slate-200 flex items-start gap-2">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-amber-500 dark:text-amber-400 shrink-0 mt-0.5" />
+                          <span className="line-clamp-2">{feat}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-              </div>
 
               {/* Action Buttons */}
               <div className="pt-6 mt-6 border-t border-purple-500/20 flex flex-col gap-2.5">
@@ -199,7 +264,8 @@ export function GiftForCodersSection({ onOpenGiftModal }) {
                 </div>
               </div>
             </motion.div>
-          ))}
+          );
+        })}
         </div>
 
         {/* Capstone Box: Quick Explore All 5 Notes */}

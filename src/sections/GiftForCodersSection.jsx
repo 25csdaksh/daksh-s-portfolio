@@ -194,8 +194,8 @@ export function GiftForCodersSection({ onOpenGiftModal }) {
           ))}
         </div>
 
-        {/* Capstone Box: Quick Download All 3 Notes */}
-        <div className="p-6 sm:p-10 rounded-3xl bg-gradient-to-br from-[#12083d] via-[#1a0c54] to-[#0d052d] border border-amber-400/40 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6 text-white">
+        {/* Capstone Box: Quick Explore All 5 Notes */}
+        <div className="editorial-card p-6 sm:p-10 rounded-3xl border border-amber-400/40 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-amber-400 to-yellow-500 text-purple-950 flex items-center justify-center font-black shadow-lg shadow-amber-500/20 shrink-0">
               <Sparkles className="w-7 h-7 stroke-[2.5]" />
@@ -205,7 +205,7 @@ export function GiftForCodersSection({ onOpenGiftModal }) {
                 Share with your classmates & coding buddies
               </h3>
               <p className="text-xs sm:text-sm text-purple-200">
-                All 3 cheat sheets work 100% offline in any browser with zero dependencies or installation.
+                All 5 master cheat sheets work 100% offline in any browser with zero dependencies or installation.
               </p>
             </div>
           </div>
@@ -216,7 +216,7 @@ export function GiftForCodersSection({ onOpenGiftModal }) {
               className="flex-1 md:flex-none px-6 py-3 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-purple-950 font-mono text-xs font-extrabold shadow-lg shadow-amber-500/25 hover:scale-105 transition-all border border-yellow-300 flex items-center justify-center gap-2"
             >
               <Gift className="w-4 h-4" />
-              <span>Explore All Notes</span>
+              <span>Explore All 5 Notes</span>
             </button>
           </div>
         </div>

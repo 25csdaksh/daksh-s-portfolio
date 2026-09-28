@@ -180,7 +180,7 @@ export function CertificatesSection({ onOpenLearning }) {
         </div>
 
         {/* Bottom Banner Calling Learning & Specializations Modal */}
-        <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-[#0f072e] via-[#170c43] to-[#0f072e] border border-purple-400/40 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl text-center md:text-left">
+        <div className="editorial-card p-6 sm:p-8 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl text-center md:text-left border border-purple-400/40">
           <div className="space-y-1.5">
             <div className="flex items-center justify-center md:justify-start gap-2 text-xs font-mono text-purple-300 font-bold">
               <Sparkles className="w-4 h-4 text-purple-400" />

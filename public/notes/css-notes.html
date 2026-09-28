@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSS — Full Short Notes</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap');
+
+  :root{
+    --bg: #0f1115;
+    --bg-panel: #161922;
+    --bg-code: #10131a;
+    --border: #262b38;
+    --text: #dde1ea;
+    --text-dim: #838a9c;
+    --text-faint: #565c6e;
+    --accent: #7dd3c0;       /* teal — like a css var swatch */
+    --accent-soft: #7dd3c033;
+    --amber: #e8b04b;        /* like a unit/value highlight */
+    --pink: #d98ba8;         /* like a selector highlight */
+    --radius: 8px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 15.5px;
+    line-height: 1.65;
+    display: flex;
+    min-height: 100vh;
+  }
+
+  ::selection{ background: var(--accent-soft); color: var(--accent); }
+
+  /* ---------- Sidebar ---------- */
+  .sidebar{
+    width: 260px;
+    flex-shrink: 0;
+    background: var(--bg-panel);
+    border-right: 1px solid var(--border);
+    padding: 28px 20px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  .sidebar::-webkit-scrollbar{ width: 6px; }
+  .sidebar::-webkit-scrollbar-thumb{ background: var(--border); border-radius: 4px; }
+
+  .brand{
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--text);
+    margin-bottom: 2px;
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+  .brand span{ color: var(--accent); }
+  .brand-sub{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-faint);
+    margin-bottom: 26px;
+  }
+
+  .nav-group-title{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-faint);
+    margin: 18px 0 6px;
+  }
+  .nav-group-title:first-of-type{ margin-top: 0; }
+
+  .sidebar a{
+    display: block;
+    font-size: 0.83rem;
+    color: var(--text-dim);
+    text-decoration: none;
+    padding: 5px 8px;
+    border-radius: 6px;
+    border-left: 2px solid transparent;
+    transition: color .15s, background .15s, border-color .15s;
+  }
+  .sidebar a:hover{
+    color: var(--text);
+    background: #1c2029;
+  }
+  .sidebar a.active{
+    color: var(--accent);
+    border-left-color: var(--accent);
+    background: var(--accent-soft);
+  }
+
+  /* ---------- Main ---------- */
+  main{
+    flex: 1;
+    max-width: 900px;
+    padding: 48px 56px 120px;
+  }
+
+  .hero{
+    margin-bottom: 48px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-tag{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .hero-tag::before{ content: "/* "; color: var(--text-faint); }
+  .hero-tag::after{ content: " */"; color: var(--text-faint); }
+  h1.title{
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2.1rem;
+    font-weight: 700;
+    margin: 0 0 10px;
+    letter-spacing: -0.01em;
+  }
+  .hero-desc{ color: var(--text-dim); max-width: 60ch; font-size: 0.95rem; }
+
+  section{
+    margin-bottom: 46px;
+    scroll-margin-top: 24px;
+  }
+
+  .sec-head{
+    display:flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .sec-num{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--text-faint);
+  }
+  h2{
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--text);
+  }
+  h2 .selbrace{ color: var(--text-faint); font-weight: 400; }
+
+  p{ color: var(--text-dim); margin: 0 0 12px; }
+
+  /* code blocks */
+  pre{
+    background: var(--bg-code);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    overflow-x: auto;
+    margin: 10px 0 16px;
+  }
+  code{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    line-height: 1.6;
+  }
+  p code, li code, td code{
+    background: #1c2029;
+    border: 1px solid var(--border);
+    padding: 1px 6px;
+    border-radius: 4px;
+    color: var(--amber);
+    font-size: 0.8rem;
+  }
+  pre code{ color: var(--text); }
+  .prop{ color: var(--accent); }
+  .val{ color: var(--amber); }
+  .sel{ color: var(--pink); }
+  .cmt{ color: var(--text-faint); font-style: italic; }
+  .punc{ color: var(--text-dim); }
+
+  /* tables */
+  table{
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0 16px;
+    font-size: 0.85rem;
+  }
+  th, td{
+    text-align: left;
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  th{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-faint);
+    font-weight: 500;
+  }
+  td{ color: var(--text-dim); }
+  tr:last-child td{ border-bottom: none; }
+
+  ul, ol{ color: var(--text-dim); margin: 0 0 14px; padding-left: 22px; }
+  li{ margin-bottom: 5px; }
+  li strong{ color: var(--text); }
+
+  .callout{
+    display: flex;
+    gap: 10px;
+    background: #1a2420;
+    border: 1px solid #2b4038;
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    font-size: 0.85rem;
+    color: #b8ccc4;
+    margin: 12px 0;
+  }
+
+  /* box model diagram signature element */
+  .box-model{
+    display: flex;
+    justify-content: center;
+    margin: 18px 0 24px;
+  }
+  .bm-layer{
+    display:flex; align-items:center; justify-content:center;
+    font-family:'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.03em;
+    border-radius: 6px;
+  }
+  .bm-margin{ background: #23181c; border: 1px dashed #6b4550; color: #d98ba8; padding: 18px; }
+  .bm-border{ background: #1e2418; border: 1px solid #5c6b3a; color: #c9d98b; padding: 16px; }
+  .bm-padding{ background: #182028; border: 1px solid #3a5266; color: #8bb8d9; padding: 14px; }
+  .bm-content{ background: var(--accent-soft); border: 1px solid var(--accent); color: var(--accent); padding: 20px 30px; font-weight: 600; }
+
+  footer{
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-faint);
+  }
+
+  @media (max-width: 860px){
+    body{ flex-direction: column; }
+    .sidebar{ position: relative; width: 100%; height: auto; border-right:none; border-bottom: 1px solid var(--border); }
+    main{ padding: 32px 22px 80px; }
+  }
+
+  a:focus-visible, button:focus-visible{
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+</style>
+</head>
+<body>
+
+<nav class="sidebar" id="sidebar">
+  <div class="brand"><span>css</span>notes.md</div>
+  <div class="brand-sub">// full reference · dark mode</div>
+
+  <div class="nav-group-title">Foundations</div>
+  <a href="#intro">01 · What is CSS</a>
+  <a href="#syntax">02 · Syntax &amp; Usage</a>
+  <a href="#selectors">03 · Selectors</a>
+  <a href="#pseudo">04 · Pseudo-classes/elements</a>
+  <a href="#specificity">05 · Specificity</a>
+
+  <div class="nav-group-title">Core Concepts</div>
+  <a href="#units">06 · Colors &amp; Units</a>
+  <a href="#boxmodel">07 · Box Model</a>
+  <a href="#display">08 · Display</a>
+  <a href="#position">09 · Position</a>
+
+  <div class="nav-group-title">Layout</div>
+  <a href="#flexbox">10 · Flexbox</a>
+  <a href="#grid">11 · Grid</a>
+  <a href="#float">12 · Float &amp; Clear</a>
+
+  <div class="nav-group-title">Styling</div>
+  <a href="#background">13 · Background</a>
+  <a href="#border">14 · Border &amp; Radius</a>
+  <a href="#typography">15 · Typography</a>
+  <a href="#variables">16 · CSS Variables</a>
+
+  <div class="nav-group-title">Motion &amp; Response</div>
+  <a href="#transitions">17 · Transitions</a>
+  <a href="#transform">18 · Transform</a>
+  <a href="#animation">19 · Animations</a>
+  <a href="#media">20 · Media Queries</a>
+
+  <div class="nav-group-title">Reference</div>
+  <a href="#common">21 · Common Values</a>
+  <a href="#unitref">22 · Units Quick Ref</a>
+  <a href="#practices">23 · Best Practices</a>
+</nav>
+
+<main>
+  <div class="hero">
+    <div class="hero-tag">stylesheet.css</div>
+    <h1 class="title">CSS — Full Short Notes</h1>
+    <p class="hero-desc">A complete, condensed reference for revision: selectors, the box model, layout systems, typography, motion, and responsive design — one page, dark mode, built for quick scanning.</p>
+  </div>
+
+  <section id="intro">
+    <div class="sec-head"><span class="sec-num">01</span><h2>What is CSS <span class="selbrace">{ }</span></h2></div>
+    <p>CSS (Cascading Style Sheets) styles and lays out HTML elements — colors, fonts, spacing, positioning, responsiveness, and animation. "Cascading" refers to the rules that decide which style wins when several apply to the same element.</p>
+  </section>
+
+  <section id="syntax">
+    <div class="sec-head"><span class="sec-num">02</span><h2>Syntax &amp; Usage</h2></div>
+    <pre><code><span class="sel">selector</span> <span class="punc">{</span>
+  <span class="prop">property</span>: <span class="val">value</span>;
+<span class="punc">}</span></code></pre>
+    <table>
+      <tr><th>Method</th><th>Example</th><th>Notes</th></tr>
+      <tr><td>Inline</td><td><code>&lt;p style="color:red;"&gt;</code></td><td>Highest specificity, avoid for large sites</td></tr>
+      <tr><td>Internal</td><td><code>&lt;style&gt;...&lt;/style&gt;</code> in head</td><td>Scoped to one page</td></tr>
+      <tr><td>External</td><td><code>&lt;link rel="stylesheet" href="style.css"&gt;</code></td><td>Best practice — reusable &amp; cacheable</td></tr>
+    </table>
+  </section>
+
+  <section id="selectors">
+    <div class="sec-head"><span class="sec-num">03</span><h2>Selectors</h2></div>
+    <table>
+      <tr><th>Selector</th><th>Example</th><th>Matches</th></tr>
+      <tr><td>Universal</td><td><code>*</code></td><td>All elements</td></tr>
+      <tr><td>Element</td><td><code>p</code></td><td>All &lt;p&gt; tags</td></tr>
+      <tr><td>Class</td><td><code>.box</code></td><td>class="box"</td></tr>
+      <tr><td>ID</td><td><code>#header</code></td><td>id="header"</td></tr>
+      <tr><td>Group</td><td><code>h1, h2</code></td><td>Multiple elements</td></tr>
+      <tr><td>Descendant</td><td><code>div p</code></td><td>&lt;p&gt; anywhere inside &lt;div&gt;</td></tr>
+      <tr><td>Child</td><td><code>div &gt; p</code></td><td>Direct child only</td></tr>
+      <tr><td>Adjacent sibling</td><td><code>h1 + p</code></td><td>Immediately after h1</td></tr>
+      <tr><td>General sibling</td><td><code>h1 ~ p</code></td><td>All siblings after h1</td></tr>
+      <tr><td>Attribute</td><td><code>input[type="text"]</code></td><td>Attribute match</td></tr>
+    </table>
+  </section>
+
+  <section id="pseudo">
+    <div class="sec-head"><span class="sec-num">04</span><h2>Pseudo-classes &amp; Pseudo-elements</h2></div>
+    <ul>
+      <li><strong>State:</strong> <code>:hover</code> <code>:focus</code> <code>:active</code> <code>:visited</code></li>
+      <li><strong>Structural:</strong> <code>:first-child</code> <code>:last-child</code> <code>:nth-child(n)</code></li>
+      <li><strong>Elements:</strong> <code>::before</code> <code>::after</code> <code>::first-line</code> <code>::first-letter</code></li>
+    </ul>
+  </section>
+
+  <section id="specificity">
+    <div class="sec-head"><span class="sec-num">05</span><h2>Specificity</h2></div>
+    <p>Low to high priority:</p>
+    <pre><code><span class="sel">*</span> <span class="cmt">&lt; element &lt; class/attribute/pseudo-class &lt; ID &lt; inline style &lt; !important</span></code></pre>
+    <div class="callout">Keep specificity low overall — it makes overrides and maintenance far easier later.</div>
+  </section>
+
+  <section id="units">
+    <div class="sec-head"><span class="sec-num">06</span><h2>Colors &amp; Units</h2></div>
+    <ul>
+      <li><strong>Colors:</strong> <code>name</code>, <code>#hex</code>, <code>rgb()</code>, <code>rgba()</code>, <code>hsl()</code>, <code>hsla()</code></li>
+      <li><strong>Absolute units:</strong> <code>px</code>, <code>pt</code>, <code>cm</code></li>
+      <li><strong>Relative units:</strong> <code>%</code>, <code>em</code> (parent font), <code>rem</code> (root font), <code>vw</code>/<code>vh</code> (viewport)</li>
+    </ul>
+  </section>
+
+  <section id="boxmodel">
+    <div class="sec-head"><span class="sec-num">07</span><h2>Box Model</h2></div>
+    <div class="box-model">
+      <div class="bm-layer bm-margin">margin
+        <div class="bm-layer bm-border">border
+          <div class="bm-layer bm-padding">padding
+            <div class="bm-layer bm-content">content</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ul>
+      <li><code>width</code> / <code>height</code> — content size</li>
+      <li><code>padding</code> — space inside the border</li>
+      <li><code>border</code> — edge around padding</li>
+      <li><code>margin</code> — space outside the border</li>
+    </ul>
+    <pre><code><span class="prop">box-sizing</span>: <span class="val">border-box</span>; <span class="cmt">/* width/height now include padding & border */</span></code></pre>
+  </section>
+
+  <section id="display">
+    <div class="sec-head"><span class="sec-num">08</span><h2>Display Property</h2></div>
+    <table>
+      <tr><th>Value</th><th>Behavior</th></tr>
+      <tr><td><code>block</code></td><td>Full width, starts on a new line</td></tr>
+      <tr><td><code>inline</code></td><td>Only as wide as content, no new line</td></tr>
+      <tr><td><code>inline-block</code></td><td>Inline flow but accepts width/height</td></tr>
+      <tr><td><code>none</code></td><td>Hidden, removed from layout entirely</td></tr>
+      <tr><td><code>flex</code></td><td>Enables flexbox on children</td></tr>
+      <tr><td><code>grid</code></td><td>Enables grid layout on children</td></tr>
+    </table>
+  </section>
+
+  <section id="position">
+    <div class="sec-head"><span class="sec-num">09</span><h2>Position Property</h2></div>
+    <table>
+      <tr><th>Value</th><th>Behavior</th></tr>
+      <tr><td><code>static</code></td><td>Default, normal document flow</td></tr>
+      <tr><td><code>relative</code></td><td>Offset relative to its own default position</td></tr>
+      <tr><td><code>absolute</code></td><td>Relative to nearest positioned ancestor</td></tr>
+      <tr><td><code>fixed</code></td><td>Relative to viewport, stays put on scroll</td></tr>
+      <tr><td><code>sticky</code></td><td>Toggles relative ↔ fixed on scroll threshold</td></tr>
+    </table>
+    <p>Used with <code>top</code>, <code>right</code>, <code>bottom</code>, <code>left</code>, <code>z-index</code>.</p>
+  </section>
+
+  <section id="flexbox">
+    <div class="sec-head"><span class="sec-num">10</span><h2>Flexbox <span class="selbrace">— 1D layout</span></h2></div>
+    <pre><code><span class="sel">.container</span> <span class="punc">{</span>
+  <span class="prop">display</span>: <span class="val">flex</span>;
+  <span class="prop">flex-direction</span>: <span class="val">row</span> | <span class="val">column</span>;
+  <span class="prop">justify-content</span>: <span class="val">flex-start</span> | <span class="val">center</span> | <span class="val">space-between</span> | <span class="val">space-around</span>;
+  <span class="prop">align-items</span>: <span class="val">stretch</span> | <span class="val">center</span> | <span class="val">flex-start</span> | <span class="val">flex-end</span>;
+  <span class="prop">flex-wrap</span>: <span class="val">wrap</span> | <span class="val">nowrap</span>;
+<span class="punc">}</span>
+<span class="sel">.item</span> <span class="punc">{</span>
+  <span class="prop">flex-grow</span>: <span class="val">1</span>;
+  <span class="prop">flex-shrink</span>: <span class="val">1</span>;
+  <span class="prop">flex-basis</span>: <span class="val">auto</span>;
+<span class="punc">}</span></code></pre>
+  </section>
+
+  <section id="grid">
+    <div class="sec-head"><span class="sec-num">11</span><h2>Grid <span class="selbrace">— 2D layout</span></h2></div>
+    <pre><code><span class="sel">.container</span> <span class="punc">{</span>
+  <span class="prop">display</span>: <span class="val">grid</span>;
+  <span class="prop">grid-template-columns</span>: <span class="val">1fr 1fr 1fr</span>;
+  <span class="prop">grid-template-rows</span>: <span class="val">auto</span>;
+  <span class="prop">gap</span>: <span class="val">10px</span>;
+<span class="punc">}</span>
+<span class="sel">.item</span> <span class="punc">{</span>
+  <span class="prop">grid-column</span>: <span class="val">1 / 3</span>;
+  <span class="prop">grid-row</span>: <span class="val">1 / 2</span>;
+<span class="punc">}</span></code></pre>
+  </section>
+
+  <section id="float">
+    <div class="sec-head"><span class="sec-num">12</span><h2>Float &amp; Clear <span class="selbrace">— legacy layout</span></h2></div>
+    <pre><code><span class="sel">.img</span> <span class="punc">{</span> <span class="prop">float</span>: <span class="val">left</span>; <span class="punc">}</span>
+<span class="sel">.clearfix::after</span> <span class="punc">{</span>
+  <span class="prop">content</span>: <span class="val">""</span>;
+  <span class="prop">display</span>: <span class="val">table</span>;
+  <span class="prop">clear</span>: <span class="val">both</span>;
+<span class="punc">}</span></code></pre>
+  </section>
+
+  <section id="background">
+    <div class="sec-head"><span class="sec-num">13</span><h2>Background</h2></div>
+    <pre><code><span class="prop">background-color</span>: <span class="val">#fff</span>;
+<span class="prop">background-image</span>: <span class="val">url("img.png")</span>;
+<span class="prop">background-repeat</span>: <span class="val">no-repeat</span>;
+<span class="prop">background-size</span>: <span class="val">cover</span> | <span class="val">contain</span>;
+<span class="prop">background-position</span>: <span class="val">center</span>;</code></pre>
+  </section>
+
+  <section id="border">
+    <div class="sec-head"><span class="sec-num">14</span><h2>Border &amp; Border-radius</h2></div>
+    <pre><code><span class="prop">border</span>: <span class="val">2px solid black</span>;
+<span class="prop">border-radius</span>: <span class="val">10px</span>; <span class="cmt">/* rounded corners */</span></code></pre>
+  </section>
+
+  <section id="typography">
+    <div class="sec-head"><span class="sec-num">15</span><h2>Typography</h2></div>
+    <pre><code><span class="prop">font-family</span>: <span class="val">"Arial", sans-serif</span>;
+<span class="prop">font-size</span>: <span class="val">16px</span>;
+<span class="prop">font-weight</span>: <span class="val">bold</span> | <span class="val">normal</span> | <span class="val">100–900</span>;
+<span class="prop">font-style</span>: <span class="val">italic</span>;
+<span class="prop">text-align</span>: <span class="val">center</span> | <span class="val">left</span> | <span class="val">right</span> | <span class="val">justify</span>;
+<span class="prop">text-decoration</span>: <span class="val">underline</span> | <span class="val">none</span>;
+<span class="prop">line-height</span>: <span class="val">1.5</span>;
+<span class="prop">letter-spacing</span>: <span class="val">1px</span>;
+<span class="prop">text-transform</span>: <span class="val">uppercase</span> | <span class="val">lowercase</span> | <span class="val">capitalize</span>;</code></pre>
+  </section>
+
+  <section id="variables">
+    <div class="sec-head"><span class="sec-num">16</span><h2>CSS Variables <span class="selbrace">— custom properties</span></h2></div>
+    <pre><code><span class="sel">:root</span> <span class="punc">{</span>
+  <span class="prop">--main-color</span>: <span class="val">#3498db</span>;
+<span class="punc">}</span>
+<span class="sel">.box</span> <span class="punc">{</span>
+  <span class="prop">color</span>: <span class="val">var(--main-color)</span>;
+<span class="punc">}</span></code></pre>
+  </section>
+
+  <section id="transitions">
+    <div class="sec-head"><span class="sec-num">17</span><h2>Transitions</h2></div>
+    <pre><code><span class="sel">.box</span> <span class="punc">{</span>
+  <span class="prop">transition</span>: <span class="val">all 0.3s ease-in-out</span>;
+<span class="punc">}</span></code></pre>
+  </section>
+
+  <section id="transform">
+    <div class="sec-head"><span class="sec-num">18</span><h2>Transform</h2></div>
+    <pre><code><span class="prop">transform</span>: <span class="val">translate(x, y)</span> | <span class="val">rotate(deg)</span> | <span class="val">scale(n)</span> | <span class="val">skew(deg)</span>;</code></pre>
+  </section>
+
+  <section id="animation">
+    <div class="sec-head"><span class="sec-num">19</span><h2>Animations</h2></div>
+    <pre><code><span class="sel">@keyframes slide</span> <span class="punc">{</span>
+  <span class="sel">from</span> <span class="punc">{</span> <span class="prop">left</span>: <span class="val">0</span>; <span class="punc">}</span>
+  <span class="sel">to</span> <span class="punc">{</span> <span class="prop">left</span>: <span class="val">100px</span>; <span class="punc">}</span>
+<span class="punc">}</span>
+<span class="sel">.box</span> <span class="punc">{</span>
+  <span class="prop">animation</span>: <span class="val">slide 2s infinite alternate</span>;
+<span class="punc">}</span></code></pre>
+  </section>
+
+  <section id="media">
+    <div class="sec-head"><span class="sec-num">20</span><h2>Media Queries <span class="selbrace">— responsive</span></h2></div>
+    <pre><code><span class="sel">@media (max-width: 768px)</span> <span class="punc">{</span>
+  <span class="sel">.container</span> <span class="punc">{</span>
+    <span class="prop">flex-direction</span>: <span class="val">column</span>;
+  <span class="punc">}</span>
+<span class="punc">}</span></code></pre>
+  </section>
+
+  <section id="common">
+    <div class="sec-head"><span class="sec-num">21</span><h2>Common Values</h2></div>
+    <ul>
+      <li><code>visibility: hidden</code> — hides but keeps layout space</li>
+      <li><code>overflow: hidden | scroll | auto</code></li>
+      <li><code>opacity: 0</code> to <code>1</code></li>
+      <li><code>cursor: pointer</code></li>
+      <li><code>box-shadow: 2px 2px 5px rgba(0,0,0,0.3)</code></li>
+      <li><code>text-shadow: 1px 1px 2px gray</code></li>
+    </ul>
+  </section>
+
+  <section id="unitref">
+    <div class="sec-head"><span class="sec-num">22</span><h2>Units Quick Reference</h2></div>
+    <table>
+      <tr><th>Unit</th><th>Meaning</th></tr>
+      <tr><td><code>%</code></td><td>Relative to parent</td></tr>
+      <tr><td><code>em</code></td><td>Relative to parent font-size</td></tr>
+      <tr><td><code>rem</code></td><td>Relative to root font-size</td></tr>
+      <tr><td><code>vw</code> / <code>vh</code></td><td>1% of viewport width / height</td></tr>
+      <tr><td><code>fr</code></td><td>Fraction of available grid space</td></tr>
+    </table>
+  </section>
+
+  <section id="practices">
+    <div class="sec-head"><span class="sec-num">23</span><h2>Best Practices</h2></div>
+    <ul>
+      <li>Use external CSS files, not inline styles</li>
+      <li>Prefer classes over IDs for styling hooks</li>
+      <li>Use <code>rem</code>/<code>em</code> for scalable, responsive sizing</li>
+      <li>Use Flexbox/Grid over floats for layout</li>
+      <li>Keep specificity low — avoid <code>!important</code></li>
+      <li>Design mobile-first, then layer on media queries</li>
+    </ul>
+  </section>
+
+  <footer>/* end of stylesheet.css — happy revising */</footer>
+</main>
+
+<script>
+  // scroll-spy: highlight active section in sidebar
+  const links = document.querySelectorAll('.sidebar a');
+  const sections = Array.from(links).map(l => document.querySelector(l.getAttribute('href')));
+
+  function onScroll(){
+    let idx = 0;
+    const scrollPos = window.scrollY + 120;
+    sections.forEach((sec, i) => {
+      if (sec && sec.offsetTop <= scrollPos) idx = i;
+    });
+    links.forEach(l => l.classList.remove('active'));
+    if (links[idx]) links[idx].classList.add('active');
+  }
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+</script>
+
+</body>
+</html>

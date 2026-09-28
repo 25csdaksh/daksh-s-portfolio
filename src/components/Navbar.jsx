@@ -4,7 +4,7 @@ import { Volume2, VolumeX, Menu, X, ArrowUpRight, Sparkles, BookOpen, FileText }
 import { soundManager } from "../utils/sound";
 import { profileData } from "../data/profile";
 
-export function Navbar({ activeSection, onNavigate, onOpenResume, onOpenLearning }) {
+export function Navbar({ activeSection, onNavigate, onOpenResume, onOpenLearning, onOpenGift }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(false);
@@ -19,8 +19,9 @@ export function Navbar({ activeSection, onNavigate, onOpenResume, onOpenLearning
 
   const navItems = [
     { label: "About", href: "#about" },
-    { label: "Certificates", href: "#certificates" },
     { label: "Projects", href: "#projects" },
+    { label: "Certificates", href: "#certificates" },
+    { label: "🎁 Gift for Coders", isAction: true, action: "gift", highlight: true },
     { label: "Hackathons", href: "#hackathons" },
     { label: "Learning", isAction: true, action: "learning" },
     { label: "Insights", href: "#blog" },
@@ -38,6 +39,16 @@ export function Navbar({ activeSection, onNavigate, onOpenResume, onOpenLearning
 
     if (item.isAction && item.action === "learning") {
       if (onOpenLearning) onOpenLearning();
+      return;
+    }
+
+    if (item.isAction && item.action === "gift") {
+      if (onOpenGift) {
+        onOpenGift("c-lang");
+      } else {
+        const target = document.querySelector("#gift-for-coders");
+        if (target) target.scrollIntoView({ behavior: "smooth" });
+      }
       return;
     }
 
@@ -192,6 +203,20 @@ export function Navbar({ activeSection, onNavigate, onOpenResume, onOpenLearning
                 <button
                   onClick={() => {
                     setMobileMenuOpen(false);
+                    if (onOpenGift) {
+                      onOpenGift("c-lang");
+                    } else {
+                      const target = document.querySelector("#gift-for-coders");
+                      if (target) target.scrollIntoView({ behavior: "smooth" });
+                    }
+                  }}
+                  className="w-full py-2.5 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-purple-950 text-xs font-black flex items-center justify-center gap-1.5 shadow-md shadow-amber-500/20 border border-yellow-300"
+                >
+                  <span>🎁 Open Gift for Coders (3 Notes)</span>
+                </button>
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
                     if (onOpenLearning) onOpenLearning();
                   }}
                   className="w-full py-2.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-400/50 text-xs font-bold flex items-center justify-center gap-1.5"
@@ -217,7 +242,7 @@ export function Navbar({ activeSection, onNavigate, onOpenResume, onOpenLearning
                     const target = document.querySelector("#contact");
                     if (target) target.scrollIntoView({ behavior: "smooth" });
                   }}
-                  className="w-full py-2.5 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-purple-950 text-xs font-extrabold text-center shadow-md border border-yellow-300"
+                  className="w-full py-2.5 rounded-full bg-[#160b45] hover:bg-[#1e0f5c] text-purple-200 text-xs font-extrabold text-center shadow-md border border-purple-400/40"
                 >
                   Let's Connect →
                 </a>

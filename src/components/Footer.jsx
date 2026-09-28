@@ -4,7 +4,7 @@ import { Github, Linkedin, Instagram } from "./Icons";
 import { profileData } from "../data/profile";
 import { soundManager } from "../utils/sound";
 
-export function Footer({ onOpenLearning }) {
+export function Footer({ onOpenLearning, onOpenGift }) {
   const scrollToTop = () => {
     soundManager.playClick();
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -70,6 +70,22 @@ export function Footer({ onOpenLearning }) {
                 >
                   Certifications
                 </a>
+              </li>
+              <li>
+                <button
+                  onClick={() => {
+                    soundManager.playClick();
+                    if (onOpenGift) onOpenGift("c-lang");
+                    else {
+                      const target = document.querySelector("#gift-for-coders");
+                      if (target) target.scrollIntoView({ behavior: "smooth" });
+                    }
+                  }}
+                  className="text-amber-400 hover:text-amber-300 transition-colors text-left font-bold flex items-center gap-1"
+                  data-cursor="pointer"
+                >
+                  <span>🎁 Gift for Coders (3 Notes)</span>
+                </button>
               </li>
               {onOpenLearning && (
                 <li>

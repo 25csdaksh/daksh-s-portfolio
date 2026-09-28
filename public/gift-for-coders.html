@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🎁 Gift for Coders — Free Interactive Cheatsheets & Complete Guides | Daksh Soni</title>
+  <meta name="description" content="Free comprehensive programming notes and cheat sheets curated by Daksh Soni: C Language Full Short Notes, The Complete HTML Course (32 Chapters), and CSS Master Reference." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #030014;
+      --bg-panel: #0d0728;
+      --bg-card: #12093a;
+      --border: rgba(168, 85, 247, 0.25);
+      --border-active: rgba(234, 179, 8, 0.8);
+      --text: #ffffff;
+      --text-dim: #94a3b8;
+      --accent: #a855f7;
+      --accent-gold: #fbbf24;
+      --c-accent: #7fb0e8;
+      --html-accent: #e34f26;
+      --css-accent: #7dd3c0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+    ::selection { background: var(--accent); color: #fff; }
+
+    /* Top Navigation */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(13, 7, 40, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 24px;
+    }
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #fff;
+    }
+    .brand-logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #a855f7, #6366f1);
+      border: 2px solid var(--accent-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 13px;
+      color: #fff;
+    }
+    .brand-text h1 {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .brand-text span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--accent-gold);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-secondary {
+      background: rgba(168, 85, 247, 0.15);
+      color: #e9d5ff;
+      border: 1px solid rgba(168, 85, 247, 0.35);
+    }
+    .btn-secondary:hover {
+      background: rgba(168, 85, 247, 0.3);
+      color: #fff;
+      border-color: rgba(168, 85, 247, 0.6);
+      transform: translateY(-1px);
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      color: #1e1b4b;
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.25);
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #fcd34d, #fbbf24);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+    }
+
+    /* Hero Banner */
+    .hero {
+      text-align: center;
+      padding: 48px 24px 32px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(168, 85, 247, 0.15);
+      border: 1px solid rgba(168, 85, 247, 0.4);
+      padding: 6px 16px;
+      border-radius: 9999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: #d8b4fe;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
+    }
+    .hero h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(32px, 5vw, 54px);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #ffffff 30%, #e9d5ff 70%, #fbbf24 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      font-size: clamp(14px, 2vw, 17px);
+      color: var(--text-dim);
+      line-height: 1.6;
+      max-width: 680px;
+      margin: 0 auto 28px;
+    }
+
+    /* Tabs Bar */
+    .tabs-wrap {
+      max-width: 1400px;
+      margin: 0 auto 24px;
+      padding: 0 24px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .tabs-nav {
+      display: flex;
+      gap: 8px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      padding: 6px;
+      border-radius: 9999px;
+    }
+    .tab-btn {
+      padding: 10px 22px;
+      border-radius: 9999px;
+      border: none;
+      background: transparent;
+      color: var(--text-dim);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+    .tab-btn:hover {
+      color: #fff;
+    }
+    .tab-btn.active {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.4), rgba(99, 102, 241, 0.4));
+      color: #fff;
+      border: 1px solid rgba(168, 85, 247, 0.6);
+      box-shadow: 0 4px 15px rgba(168, 85, 247, 0.25);
+    }
+    .tab-btn.active.tab-c { border-color: var(--c-accent); color: var(--c-accent); }
+    .tab-btn.active.tab-html { border-color: var(--html-accent); color: var(--html-accent); }
+    .tab-btn.active.tab-css { border-color: var(--css-accent); color: var(--css-accent); }
+
+    .reader-tools {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Reader Frame Container */
+    .reader-container {
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto 40px;
+      padding: 0 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .reader-shell {
+      background: #090b10;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), 0 0 30px rgba(168, 85, 247, 0.1);
+      display: flex;
+      flex-direction: column;
+      height: 78vh;
+      min-height: 600px;
+      position: relative;
+    }
+    .reader-header {
+      background: #10131d;
+      border-bottom: 1px solid #22293b;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .window-dots {
+      display: flex;
+      gap: 6px;
+    }
+    .dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+    }
+    .dot-red { background: #ef4444; }
+    .dot-yellow { background: #f59e0b; }
+    .dot-green { background: #10b981; }
+
+    .reader-title-bar {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .reader-title-bar span.badge {
+      background: rgba(168, 85, 247, 0.2);
+      color: #d8b4fe;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 10px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: #0f1115;
+      flex: 1;
+    }
+
+    /* Cards Grid */
+    .cards-section {
+      max-width: 1400px;
+      margin: 0 auto 60px;
+      padding: 0 24px;
+    }
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(234, 179, 8, 0.6);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 25px rgba(168, 85, 247, 0.2);
+    }
+    .card-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      display: inline-block;
+      margin-bottom: 12px;
+      width: fit-content;
+    }
+    .card-c .card-tag { background: rgba(127, 176, 232, 0.15); color: var(--c-accent); border: 1px solid rgba(127, 176, 232, 0.3); }
+    .card-html .card-tag { background: rgba(227, 79, 38, 0.15); color: var(--html-accent); border: 1px solid rgba(227, 79, 38, 0.3); }
+    .card-css .card-tag { background: rgba(125, 211, 192, 0.15); color: var(--css-accent); border: 1px solid rgba(125, 211, 192, 0.3); }
+
+    .card h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+    .card p {
+      font-size: 13.5px;
+      color: var(--text-dim);
+      line-height: 1.55;
+      margin-bottom: 18px;
+    }
+    .card-features {
+      list-style: none;
+      margin-bottom: 24px;
+      font-size: 12.5px;
+      color: #cbd5e1;
+    }
+    .card-features li {
+      margin-bottom: 6px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .card-features li::before {
+      content: "✓";
+      color: var(--accent-gold);
+      font-weight: 800;
+    }
+    .card-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: auto;
+    }
+    .card-actions .btn {
+      flex: 1;
+      justify-content: center;
+      font-size: 12.5px;
+      padding: 9px 12px;
+    }
+
+    /* Footer */
+    footer {
+      background: #040114;
+      border-top: 1px solid var(--border);
+      padding: 30px 24px;
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: #64748b;
+      margin-top: auto;
+    }
+    footer a { color: var(--accent-gold); text-decoration: none; font-weight: 600; }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 768px) {
+      .tabs-wrap { flex-direction: column; align-items: stretch; }
+      .tabs-nav { overflow-x: auto; width: 100%; justify-content: flex-start; }
+      .reader-shell { height: 70vh; min-height: 480px; }
+      .card-actions { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Sticky Navigation -->
+  <header>
+    <div class="nav-container">
+      <a href="/" class="brand">
+        <div class="brand-logo">DS</div>
+        <div class="brand-text">
+          <h1>Daksh Soni</h1>
+          <span>Developer Resources & Notes</span>
+        </div>
+      </a>
+      <div class="nav-actions">
+        <a href="/" class="btn btn-secondary">
+          ← Back to Portfolio
+        </a>
+        <a href="#downloads" class="btn btn-primary">
+          🎁 All 3 Notes Free
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <main>
+    <section class="hero">
+      <div class="hero-badge">
+        <span>✨ 100% Free Developer Community Gift</span>
+      </div>
+      <h2>Gift for Coders</h2>
+      <p>
+        Clean, beautifully formatted, dark-mode cheat sheets and full-length courses to supercharge your revision, interview preparation, and day-to-day coding mastery.
+      </p>
+    </section>
+
+    <!-- Interactive Reader & Tab Selector -->
+    <div class="tabs-wrap">
+      <div class="tabs-nav" id="tabNav">
+        <button class="tab-btn active tab-c" onclick="switchNote('c-lang')">
+          <span>⚙️ C Language Notes</span>
+        </button>
+        <button class="tab-btn tab-html" onclick="switchNote('html-course')">
+          <span>🌐 HTML Complete Course</span>
+        </button>
+        <button class="tab-btn tab-css" onclick="switchNote('css-notes')">
+          <span>🎨 CSS Full Short Notes</span>
+        </button>
+      </div>
+
+      <div class="reader-tools">
+        <a id="btnNewTab" href="/notes/c-notes.html" target="_blank" class="btn btn-secondary" title="Open in dedicated full browser tab">
+          ↗ Open in New Tab
+        </a>
+        <a id="btnDownload" href="/notes/c-notes.html" download="C_Language_Short_Notes_Daksh_Soni.html" class="btn btn-primary" title="Download standalone single-file HTML for offline revision">
+          ↓ Download Offline HTML
+        </a>
+      </div>
+    </div>
+
+    <!-- Live Reader Container -->
+    <div class="reader-container">
+      <div class="reader-shell">
+        <div class="reader-header">
+          <div class="window-dots">
+            <span class="dot dot-red"></span>
+            <span class="dot dot-yellow"></span>
+            <span class="dot dot-green"></span>
+          </div>
+          <div class="reader-title-bar" id="readerTitleBar">
+            <span id="currentNoteFileName">c-notes.h</span>
+            <span class="badge" id="currentNoteBadge">21 Sections · Dark Mode</span>
+          </div>
+          <button class="btn btn-secondary" onclick="toggleFullscreen()" style="padding: 4px 12px; font-size: 11px;">
+            ⛶ Fullscreen
+          </button>
+        </div>
+        <iframe id="readerFrame" src="/notes/c-notes.html" title="Interactive Code Notes Reader"></iframe>
+      </div>
+    </div>
+
+    <!-- Cards Breakdown Section -->
+    <section class="cards-section" id="downloads">
+      <h3 class="section-title">
+        <span>📦 Included Free Gift Resources</span>
+      </h3>
+      <div class="grid">
+        
+        <!-- Card 1: C Language -->
+        <div class="card card-c">
+          <div>
+            <span class="card-tag">Low-Level Mastery</span>
+            <h3>C Language — Full Short Notes</h3>
+            <p>Complete revision cheat sheet from basic data types, control flow, functions to low-level pointers, dynamic memory (malloc/stack/heap), structures, and file I/O.</p>
+            <ul class="card-features">
+              <li>Plain-English explanations before every snippet</li>
+              <li>Interactive memory diagram (Stack, Heap, Code)</li>
+              <li>Pointers, memory addresses &amp; dereferencing</li>
+              <li>Format specifiers &amp; storage class tables</li>
+              <li>21 Complete fast-revision chapters</li>
+            </ul>
+          </div>
+          <div class="card-actions">
+            <button onclick="switchNote('c-lang'); window.scrollTo({top: 240, behavior: 'smooth'});" class="btn btn-secondary">
+              📖 Read Online
+            </button>
+            <a href="/notes/c-notes.html" download="C_Language_Short_Notes_Daksh_Soni.html" class="btn btn-primary">
+              ↓ Download HTML
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 2: HTML Course -->
+        <div class="card card-html">
+          <div>
+            <span class="card-tag">32 Full Chapters + Quizzes</span>
+            <h3>&lt;Markup/&gt; — Complete HTML Course</h3>
+            <p>From your first &lt;p&gt; to shipping accessible, SEO-ready, production-grade markup. Includes interactive collapsible quizzes, coding exercises, and interview Q&amp;A.</p>
+            <ul class="card-features">
+              <li>Complete 32-chapter self-contained curriculum</li>
+              <li>Interactive collapsible quiz checkups</li>
+              <li>Forms, every input type &amp; HTML5 semantics</li>
+              <li>Full tag cheat sheet &amp; technical interview Q&amp;A</li>
+              <li>6 Real capstone project wireframes</li>
+            </ul>
+          </div>
+          <div class="card-actions">
+            <button onclick="switchNote('html-course'); window.scrollTo({top: 240, behavior: 'smooth'});" class="btn btn-secondary">
+              📖 Read Online
+            </button>
+            <a href="/notes/html-course.html" download="Complete_HTML_Course_Daksh_Soni.html" class="btn btn-primary">
+              ↓ Download HTML
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 3: CSS Notes -->
+        <div class="card card-css">
+          <div>
+            <span class="card-tag">Modern Layouts &amp; Motion</span>
+            <h3>CSS — Full Short Notes</h3>
+            <p>Condensed master reference for modern web design: selectors, specificity priority, visual box model, 1D Flexbox, 2D Grid, transitions, keyframe animations, and media queries.</p>
+            <ul class="card-features">
+              <li>Visual CSS Box Model layer diagram</li>
+              <li>Specificity hierarchy calculation guide</li>
+              <li>Flexbox &amp; Grid complete syntax rules</li>
+              <li>CSS Variables, transforms &amp; animations</li>
+              <li>23 Chapters of fast responsive reference</li>
+            </ul>
+          </div>
+          <div class="card-actions">
+            <button onclick="switchNote('css-notes'); window.scrollTo({top: 240, behavior: 'smooth'});" class="btn btn-secondary">
+              📖 Read Online
+            </button>
+            <a href="/notes/css-notes.html" download="CSS_Short_Notes_Daksh_Soni.html" class="btn btn-primary">
+              ↓ Download HTML
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      Curated with 💜 for developers by <a href="/">Daksh Soni</a> • All resources are 100% free and open for personal learning and revision.
+    </p>
+  </footer>
+
+  <script>
+    const notesData = {
+      'c-lang': {
+        url: '/notes/c-notes.html',
+        file: 'c-notes.h',
+        badge: '21 Sections · Dark Mode',
+        downloadName: 'C_Language_Short_Notes_Daksh_Soni.html',
+        activeClass: 'tab-c'
+      },
+      'html-course': {
+        url: '/notes/html-course.html',
+        file: 'markup-course.html',
+        badge: '32 Chapters + Quizzes',
+        downloadName: 'Complete_HTML_Course_Daksh_Soni.html',
+        activeClass: 'tab-html'
+      },
+      'css-notes': {
+        url: '/notes/css-notes.html',
+        file: 'stylesheet.css',
+        badge: '23 Sections · Layouts & Motion',
+        downloadName: 'CSS_Short_Notes_Daksh_Soni.html',
+        activeClass: 'tab-css'
+      }
+    };
+
+    function switchNote(id) {
+      const data = notesData[id];
+      if (!data) return;
+
+      // Update iframe
+      document.getElementById('readerFrame').src = data.url;
+      document.getElementById('currentNoteFileName').textContent = data.file;
+      document.getElementById('currentNoteBadge').textContent = data.badge;
+
+      // Update CTA links
+      const btnNewTab = document.getElementById('btnNewTab');
+      btnNewTab.href = data.url;
+
+      const btnDownload = document.getElementById('btnDownload');
+      btnDownload.href = data.url;
+      btnDownload.setAttribute('download', data.downloadName);
+
+      // Update tab styles
+      const tabBtns = document.querySelectorAll('.tab-btn');
+      tabBtns.forEach(btn => {
+        btn.classList.remove('active', 'tab-c', 'tab-html', 'tab-css');
+      });
+
+      if (id === 'c-lang') {
+        tabBtns[0].classList.add('active', 'tab-c');
+      } else if (id === 'html-course') {
+        tabBtns[1].classList.add('active', 'tab-html');
+      } else if (id === 'css-notes') {
+        tabBtns[2].classList.add('active', 'tab-css');
+      }
+    }
+
+    function toggleFullscreen() {
+      const frame = document.querySelector('.reader-shell');
+      if (!document.fullscreenElement) {
+        if (frame.requestFullscreen) {
+          frame.requestFullscreen();
+        } else if (frame.webkitRequestFullscreen) {
+          frame.webkitRequestFullscreen();
+        }
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
+
+    // Check hash on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      const hash = window.location.hash.replace('#', '');
+      if (hash === 'c' || hash === 'c-lang') switchNote('c-lang');
+      else if (hash === 'html' || hash === 'html-course') switchNote('html-course');
+      else if (hash === 'css' || hash === 'css-notes') switchNote('css-notes');
+    });
+  </script>
+</body>
+</html>

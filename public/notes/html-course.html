@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>&lt;Markup/&gt; — The Complete HTML Course</title>
+<style>
+  :root{
+    --bg:#0b0e14;
+    --bg-panel:#11151d;
+    --bg-code:#0d1117;
+    --line:#232936;
+    --text:#dbe1ea;
+    --text-dim:#8b93a3;
+    --accent:#e34f26;      /* HTML5 spec orange */
+    --accent-2:#3ddc97;    /* terminal green for code/success */
+    --accent-3:#5b8cff;    /* attribute blue */
+    --warn:#ffcf5c;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:'Inter',-apple-system,Segoe UI,Roboto,sans-serif;
+    font-size:16px; line-height:1.65;
+  }
+  code, pre, .tag, .mono{font-family:'JetBrains Mono','Fira Code',Consolas,monospace;}
+
+  /* ---- Layout ---- */
+  .shell{display:grid; grid-template-columns:280px 1fr; min-height:100vh;}
+  nav.toc{
+    position:sticky; top:0; height:100vh; overflow-y:auto;
+    background:var(--bg-panel); border-right:1px solid var(--line);
+    padding:24px 18px 60px;
+  }
+  nav.toc::-webkit-scrollbar{width:8px;}
+  nav.toc::-webkit-scrollbar-thumb{background:#252c39; border-radius:4px;}
+  .brand{display:flex; align-items:baseline; gap:8px; margin-bottom:6px;}
+  .brand .lt{color:var(--accent); font-weight:700; font-family:'JetBrains Mono',monospace; font-size:22px;}
+  .brand span.title{font-weight:800; font-size:18px; letter-spacing:.2px;}
+  .brand-sub{color:var(--text-dim); font-size:12.5px; margin-bottom:22px;}
+  nav.toc a{
+    display:block; color:var(--text-dim); text-decoration:none; font-size:13.5px;
+    padding:6px 10px; border-radius:6px; margin-bottom:1px; transition:.15s;
+    border-left:2px solid transparent;
+  }
+  nav.toc a .num{color:var(--accent); font-family:'JetBrains Mono',monospace; font-size:11.5px; margin-right:6px;}
+  nav.toc a:hover{background:#1a2130; color:var(--text); border-left-color:var(--accent-3);}
+  nav.toc .group-label{
+    text-transform:uppercase; font-size:10.5px; letter-spacing:1.2px; color:#5b6478;
+    margin:20px 0 6px 10px; font-weight:700;
+  }
+
+  main{padding:60px 64px 120px; max-width:920px;}
+  @media (max-width:900px){
+    .shell{grid-template-columns:1fr;}
+    nav.toc{position:relative; height:auto; max-height:70vh;}
+    main{padding:32px 22px 100px;}
+  }
+
+  /* ---- Hero ---- */
+  .hero{padding:10px 0 50px; border-bottom:1px solid var(--line); margin-bottom:50px;}
+  .hero .eyebrow{color:var(--accent-2); font-family:'JetBrains Mono',monospace; font-size:13px; margin-bottom:14px;}
+  .hero h1{font-size:52px; line-height:1.05; margin:0 0 18px; letter-spacing:-1px;}
+  .hero h1 .lt{color:var(--accent);}
+  .hero p.lead{color:var(--text-dim); font-size:18px; max-width:640px; margin:0 0 26px;}
+  .hero-tags{display:flex; flex-wrap:wrap; gap:8px;}
+  .pill{
+    border:1px solid var(--line); color:var(--text-dim); font-family:'JetBrains Mono',monospace;
+    font-size:12px; padding:5px 10px; border-radius:20px;
+  }
+
+  /* ---- Chapters ---- */
+  .chapter{margin-bottom:78px; scroll-margin-top:24px;}
+  .chapter .chnum{
+    display:inline-block; font-family:'JetBrains Mono',monospace; color:var(--accent);
+    font-size:13px; border:1px solid #3a2318; background:#1c130d; padding:3px 10px;
+    border-radius:5px; margin-bottom:14px;
+  }
+  .chapter h2{font-size:30px; margin:0 0 6px; letter-spacing:-.4px;}
+  .chapter .sub{color:var(--text-dim); font-size:15.5px; margin:0 0 26px;}
+  .chapter h3{font-size:19px; margin:34px 0 12px; color:#f0f3f8;}
+  .chapter h3 .lt{color:var(--accent-3);}
+  .chapter p{color:#c4cad6;}
+
+  pre{
+    background:var(--bg-code); border:1px solid var(--line); border-radius:8px;
+    padding:16px 18px; overflow-x:auto; margin:14px 0; font-size:13.5px; line-height:1.6;
+  }
+  code.inline{background:#1a2130; border:1px solid var(--line); padding:1px 6px; border-radius:4px; font-size:.88em; color:var(--warn);}
+  .tagname{color:var(--accent-3);}
+  .attr{color:var(--warn);}
+  .str{color:var(--accent-2);}
+  .cmt{color:#5b6478; font-style:italic;}
+
+  table.ref{width:100%; border-collapse:collapse; margin:16px 0 24px; font-size:14px;}
+  table.ref th{
+    text-align:left; color:var(--text-dim); font-weight:600; font-size:12px;
+    text-transform:uppercase; letter-spacing:.5px; padding:8px 12px; border-bottom:1px solid var(--line);
+  }
+  table.ref td{padding:10px 12px; border-bottom:1px solid #1a2028; vertical-align:top;}
+  table.ref code{color:var(--accent-3);}
+
+  .callout{
+    border-left:3px solid var(--accent-2); background:#0f1a16; padding:14px 18px;
+    border-radius:0 8px 8px 0; margin:16px 0; font-size:14.5px;
+  }
+  .callout.warn{border-left-color:var(--warn); background:#1a170e;}
+  .callout b{color:var(--text);}
+
+  details.quiz{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:8px;
+    padding:14px 18px; margin:10px 0;
+  }
+  details.quiz summary{cursor:pointer; font-weight:600; color:#f0f3f8;}
+  details.quiz .answer{margin-top:10px; color:var(--accent-2); font-size:14.5px;}
+
+  .exercise-box{
+    background:var(--bg-panel); border:1px dashed #3a4152; border-radius:8px;
+    padding:16px 20px; margin:16px 0;
+  }
+  .exercise-box h4{margin:0 0 8px; font-size:14px; color:var(--warn); text-transform:uppercase; letter-spacing:.5px;}
+
+  ul.clean{padding-left:20px; color:#c4cad6;}
+  ul.clean li{margin-bottom:6px;}
+
+  .badge-list{display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 20px;}
+  .badge{font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--text-dim); border:1px solid var(--line); padding:3px 8px; border-radius:5px;}
+
+  footer.page{border-top:1px solid var(--line); padding-top:30px; color:var(--text-dim); font-size:13px;}
+
+  ::selection{background:#3a2318; color:#fff;}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<nav class="toc">
+  <div class="brand"><span class="lt">&lt;/&gt;</span><span class="title">Markup</span></div>
+  <div class="brand-sub">The Complete HTML Course<br>Beginner → Advanced</div>
+
+  <div class="group-label">Foundations</div>
+  <a href="#ch01"><span class="num">01</span>Introduction to HTML</a>
+  <a href="#ch02"><span class="num">02</span>What HTML Is &amp; How It Works</a>
+  <a href="#ch03"><span class="num">03</span>Document Structure</a>
+  <a href="#ch04"><span class="num">04</span>Headings &amp; Paragraphs</a>
+  <a href="#ch05"><span class="num">05</span>Text Formatting</a>
+  <a href="#ch06"><span class="num">06</span>Comments</a>
+
+  <div class="group-label">Content &amp; Media</div>
+  <a href="#ch07"><span class="num">07</span>Links &amp; Navigation</a>
+  <a href="#ch08"><span class="num">08</span>Images</a>
+  <a href="#ch09"><span class="num">09</span>Lists</a>
+  <a href="#ch10"><span class="num">10</span>Tables</a>
+  <a href="#ch13"><span class="num">13</span>Audio &amp; Video</a>
+  <a href="#ch14"><span class="num">14</span>YouTube Embeds</a>
+
+  <div class="group-label">Interaction</div>
+  <a href="#ch11"><span class="num">11</span>Forms</a>
+  <a href="#ch12"><span class="num">12</span>Buttons</a>
+
+  <div class="group-label">Structure &amp; Semantics</div>
+  <a href="#ch15"><span class="num">15</span>Semantic HTML5</a>
+  <a href="#ch16"><span class="num">16</span>div vs span</a>
+  <a href="#ch17"><span class="num">17</span>HTML Entities</a>
+  <a href="#ch18"><span class="num">18</span>Meta Tags</a>
+  <a href="#ch19"><span class="num">19</span>Favicon</a>
+  <a href="#ch20"><span class="num">20</span>Linking CSS &amp; JS</a>
+  <a href="#ch21"><span class="num">21</span>Attributes Reference</a>
+  <a href="#ch22"><span class="num">22</span>HTML5 Elements</a>
+
+  <div class="group-label">Professional Skills</div>
+  <a href="#ch23"><span class="num">23</span>Accessibility</a>
+  <a href="#ch24"><span class="num">24</span>SEO Basics</a>
+  <a href="#ch25"><span class="num">25</span>Responsive Best Practices</a>
+  <a href="#ch26"><span class="num">26</span>Best Practices &amp; Mistakes</a>
+
+  <div class="group-label">Reference</div>
+  <a href="#ch27"><span class="num">27</span>Cheat Sheet</a>
+  <a href="#ch28"><span class="num">28</span>Interview Questions</a>
+
+  <div class="group-label">Build</div>
+  <a href="#ch32"><span class="num">32</span>Final Projects</a>
+  <a href="#roadmap"><span class="num">→</span>Next: CSS &amp; JS Roadmap</a>
+</nav>
+
+<main>
+
+  <section class="hero">
+    <div class="eyebrow">// a self-contained curriculum, chapter 01 → 32</div>
+    <h1><span class="lt">&lt;html&gt;</span><br>from first tag<br>to final project</h1>
+    <p class="lead">Everything you need to go from writing your first <code class="inline">&lt;p&gt;</code> to shipping accessible, SEO-ready, production-grade markup — with quizzes, exercises, and real projects along the way.</p>
+    <div class="hero-tags">
+      <span class="pill">32 chapters</span>
+      <span class="pill">quizzes + exercises</span>
+      <span class="pill">6 final projects</span>
+      <span class="pill">full cheat sheet</span>
+      <span class="pill">interview prep</span>
+    </div>
+  </section>
+
+  <section class="chapter" id="ch01">
+    <span class="chnum">CHAPTER 01</span>
+    <h2>Introduction to HTML</h2>
+    <p class="sub">Why every website — no matter how fancy the framework — is HTML underneath.</p>
+
+    <p>HTML (HyperText Markup Language) is the language browsers use to understand what's on a page: this is a heading, this is a paragraph, this is a list, this is a picture. It doesn't make things pretty (that's CSS) or make things interactive (that's JavaScript) — it gives content <b>meaning and structure</b>.</p>
+
+    <h3><span class="lt">→</span> Why learn HTML first?</h3>
+    <ul class="clean">
+      <li>Every web page — React, Vue, WordPress, plain static sites — ends up as HTML in the browser.</li>
+      <li>Screen readers, search engines, and browsers all rely on correct HTML structure to work properly.</li>
+      <li>It's the fastest language to see results in: write a file, open it in a browser, done.</li>
+    </ul>
+
+    <h3><span class="lt">→</span> Your first HTML file</h3>
+    <pre><code><span class="cmt">&lt;!-- index.html --&gt;</span>
+<span class="tagname">&lt;!DOCTYPE html&gt;</span>
+<span class="tagname">&lt;html&gt;</span>
+  <span class="tagname">&lt;head&gt;</span>
+    <span class="tagname">&lt;title&gt;</span>My First Page<span class="tagname">&lt;/title&gt;</span>
+  <span class="tagname">&lt;/head&gt;</span>
+  <span class="tagname">&lt;body&gt;</span>
+    <span class="tagname">&lt;h1&gt;</span>Hello, world!<span class="tagname">&lt;/h1&gt;</span>
+  <span class="tagname">&lt;/body&gt;</span>
+<span class="tagname">&lt;/html&gt;</span></code></pre>
+
+    <div class="callout"><b>Try it:</b> save this as <code class="inline">index.html</code> and open it by double-clicking the file. No server, no install — that's the beauty of HTML.</div>
+
+    <div class="exercise-box">
+      <h4>Exercise 1.1</h4>
+      Create <code class="inline">index.html</code> with a heading containing your name and a paragraph describing why you're learning to code.
+    </div>
+
+    <details class="quiz">
+      <summary>Quiz: What does HTML stand for, and what is it NOT responsible for?</summary>
+      <div class="answer">HyperText Markup Language. It is not responsible for styling (CSS) or behavior/interactivity (JavaScript) — only structure and meaning.</div>
+    </details>
+  </section>
+
+  <section class="chapter" id="ch02">
+    <span class="chnum">CHAPTER 02</span>
+    <h2>What HTML Is &amp; How It Works</h2>
+    <p class="sub">Tags, elements, the DOM, and what the browser actually does with your markup.</p>
+
+    <h3><span class="lt">→</span> Tags vs. Elements</h3>
+    <p>A <b>tag</b> is the markup itself, like <code class="inline">&lt;p&gt;</code>. An <b>element</b> is the tag plus its content and closing tag: <code class="inline">&lt;p&gt;Hello&lt;/p&gt;</code>. Most elements have an opening and closing tag; some, called <b>void elements</b>, don't (<code class="inline">&lt;img&gt;</code>, <code class="inline">&lt;br&gt;</code>, <code class="inline">&lt;input&gt;</code>).</p>
+
+    <table class="ref">
+      <tr><th>Term</th><th>Example</th><th>Meaning</th></tr>
+      <tr><td>Tag</td><td><code>&lt;p&gt;</code></td><td>The markup marker itself</td></tr>
+      <tr><td>Element</td><td><code>&lt;p&gt;Text&lt;/p&gt;</code></td><td>Opening tag + content + closing tag</td></tr>
+      <tr><td>Attribute</td><td><code>class="intro"</code></td><td>Extra info attached to an opening tag</td></tr>
+      <tr><td>Void element</td><td><code>&lt;img&gt;</code></td><td>Self-closing, holds no inner content</td></tr>
+    </table>
+
+    <h3><span class="lt">→</span> How a browser turns HTML into a page</h3>
+    <pre><code class="cmt">HTML file
+   │
+   ▼
+Browser parses text  →  builds the DOM (Document Object Model)
+   │                        a tree of nodes representing every element
+   ▼
+CSS is applied to the DOM (the "how it looks")
+   │
+   ▼
+JavaScript can read/change the DOM (the "how it behaves")
+   │
+   ▼
+Pixels on screen</code></pre>
+
+    <p>The DOM is the key idea: your HTML isn't just text, it becomes a tree structure in memory that CSS and JavaScript both operate on. This is why nesting and structure matter so much.</p>
+
+    <div class="exercise-box">
+      <h4>Exercise 2.1</h4>
+      Open any website, right-click → "Inspect", and find the DOM tree in the Elements panel. Identify 3 elements and their attributes.
+    </div>
+
+    <details class="quiz">
+      <summary>Quiz: What is the DOM?</summary>
+      <div class="answer">A tree-like in-memory representation of the HTML document that the browser builds after parsing, which CSS and JavaScript can then read and modify.</div>
+    </details>
+  </section>
+
+  <section class="chapter" id="ch03">
+    <span class="chnum">CHAPTER 03</span>
+    <h2>HTML Document Structure</h2>
+    <p class="sub"><code class="inline">&lt;!DOCTYPE&gt;</code>, <code class="inline">&lt;html&gt;</code>, <code class="inline">&lt;head&gt;</code>, <code class="inline">&lt;body&gt;</code> — the skeleton every page shares.</p>
+
+    <pre><code><span class="tagname">&lt;!DOCTYPE html&gt;</span>              <span class="cmt">&lt;!-- tells browser: use modern HTML5 rules --&gt;</span>
+<span class="tagname">&lt;html</span> <span class="attr">lang</span>=<span class="str">"en"</span><span class="tagname">&gt;</span>              <span class="cmt">&lt;!-- root element, wraps everything --&gt;</span>
+<span class="tagname">&lt;head&gt;</span>                        <span class="cmt">&lt;!-- metadata, not visible content --&gt;</span>
+  <span class="tagname">&lt;meta</span> <span class="attr">charset</span>=<span class="str">"UTF-8"</span><span class="tagname">&gt;</span>
+  <span class="tagname">&lt;title&gt;</span>Page Title<span class="tagname">&lt;/title&gt;</span>
+<span class="tagname">&lt;/head&gt;</span>
+<span class="tagname">&lt;body&gt;</span>                        <span class="cmt">&lt;!-- everything visible on the page --&gt;</span>
+  <span class="tagname">&lt;h1&gt;</span>Visible content<span class="tagname">&lt;/h1&gt;</span>
+<span class="tagname">&lt;/body&gt;</span>
+<span class="tagname">&lt;/html&gt;</span></code></pre>
+
+    <table class="ref">
+      <tr><th>Piece</th><th>Purpose</th></tr>
+      <tr><td><code>&lt;!DOCTYPE html&gt;</code></td><td>Not a tag — a declaration telling the browser to render in standards mode (HTML5). Must be the very first line.</td></tr>
+      <tr><td><code>&lt;html&gt;</code></td><td>The root element. The <code>lang</code> attribute helps screen readers and search engines.</td></tr>
+      <tr><td><code>&lt;head&gt;</code></td><td>Holds metadata: title, character encoding, CSS/JS links, favicon, SEO tags. Nothing here is shown directly.</td></tr>
+      <tr><td><code>&lt;body&gt;</code></td><td>Holds everything the user actually sees on the page.</td></tr>
+    </table>
+
+    <div class="callout warn"><b>Common mistake:</b> forgetting <code class="inline">&lt;!DOCTYPE html&gt;</code> triggers "quirks mode," where old, inconsistent rendering rules kick in — layouts break in subtle ways.</div>
+
+    <div class="exercise-box">
+      <h4>Exercise 3.1</h4>
+      Build a blank page skeleton from memory (no copy-paste) with correct DOCTYPE, html, head with title, and an empty body.
+    </div>
+  </section>
+
+  <section class="chapter" id="ch04">
+    <span class="chnum">CHAPTER 04</span>
+    <h2>Headings &amp; Paragraphs</h2>
+    <p class="sub">The backbone of readable, well-structured content.</p>
+
+    <pre><code><span class="tagname">&lt;h1&gt;</span>Main Page Title<span class="tagname">&lt;/h1&gt;</span>
+<span class="tagname">&lt;h2&gt;</span>Section Heading<span class="tagname">&lt;/h2&gt;</span>
+<span class="tagname">&lt;h3&gt;</span>Sub-section<span class="tagname">&lt;/h3&gt;</span>
+<span class="tagname">&lt;p&gt;</span>A paragraph of body text goes here.<span class="tagname">&lt;/p&gt;</span></code></pre>
+
+    <table class="ref">
+      <tr><th>Tag</th><th>Purpose</th><th>Best practice</th></tr>
+      <tr><td><code>&lt;h1&gt;</code>–<code>&lt;h6&gt;</code></td><td>Headings, in decreasing importance</td><td>Use exactly one <code>&lt;h1&gt;</code> per page; never skip levels (h2 → h4)</td></tr>
+      <tr><td><code>&lt;p&gt;</code></td><td>A paragraph of text</td><td>Don't use for spacing — use CSS margins</td></tr>
+    </table>
+
+    <div class="callout warn"><b>Common mistake:</b> choosing heading tags by how big they look rather than by document outline. Fix the hierarchy in CSS, not by picking a smaller heading tag.</div>
+
+    <details class="quiz">
+      <summary>Quiz: How many &lt;h1&gt; tags should a well-structured page usually have?</summary>
+      <div class="answer">One — it represents the page's main title, and both accessibility tools and search engines rely on this being unique.</div>
+    </details>
+
+    <div class="exercise-box">
+      <h4>Exercise 4.1</h4>
+      Write a page outline for a recipe blog post using h1–h3 correctly, with two paragraphs of filler text.
+    </div>
+  </section>
+
+  <section class="chapter" id="ch05">
+    <span class="chnum">CHAPTER 05</span>
+    <h2>Text Formatting Tags</h2>
+    <p class="sub">Emphasis, importance, and inline meaning — not just bold and italic.</p>
+
+    <table class="ref">
+      <tr><th>Tag</th><th>Meaning</th><th>Renders as</th></tr>
+      <tr><td><code>&lt;strong&gt;</code></td><td>Strong importance (semantic)</td><td>bold</td></tr>
+      <tr><td><code>&lt;em&gt;</code></td><td>Stressed emphasis (semantic)</td><td>italic</td></tr>
+      <tr><td><code>&lt;b&gt;</code></td><td>Stylistically bold, no extra importance</td><td>bold</td></tr>
+      <tr><td><code>&lt;i&gt;</code></td><td>Stylistically italic (e.g. foreign term)</td><td>italic</td></tr>
+      <tr><td><code>&lt;mark&gt;</code></td><td>Highlighted / relevant text</td><td>yellow highlight</td></tr>
+      <tr><td><code>&lt;small&gt;</code></td><td>Fine print / side comments</td><td>smaller text</td></tr>
+      <tr><td><code>&lt;del&gt;</code> / <code>&lt;ins&gt;</code></td><td>Deleted / inserted text</td><td>strikethrough / underline</td></tr>
+      <tr><td><code>&lt;sub&gt;</code> / <code>&lt;sup&gt;</code></td><td>Subscript / superscript</td><td>H<sub>2</sub>O, x<sup>2</sup></td></tr>
+      <tr><td><code>&lt;code&gt;</code></td><td>Inline code snippet</td><td>monospace</td></tr>
+      <tr><td><code>&lt;blockquote&gt;</code></td><td>Long quotation</td><td>indented block</td></tr>
+      <tr><td><code>&lt;br&gt;</code></td><td>Line break (void element)</td><td>new line</td></tr>
+      <tr><td><code>&lt;hr&gt;</code></td><td>Thematic break (void element)</td><td>horizontal rule</td></tr>
+    </table>
+
+    <div class="callout"><b>Best practice:</b> use <code class="inline">&lt;strong&gt;</code>/<code class="inline">&lt;em&gt;</code> for meaning, and reach for CSS <code class="inline">font-weight</code>/<code class="inline">font-style</code> for pure visual styling that carries no semantic weight.</div>
+
+    <details class="quiz">
+      <summary>Quiz: What's the difference between &lt;b&gt; and &lt;strong&gt;?</summary>
+      <div class="answer">Both render bold, but &lt;strong&gt; tells assistive technology and search engines the text is genuinely important; &lt;b&gt; is purely visual with no added meaning.</div>
+    </details>
+
+    <div class="exercise-box">
+      <h4>Exercise 5.1</h4>
+      Format a short product description using at least 5 different formatting tags meaningfully (not just for looks).
+    </div>
+  </section>
+
+  <section class="chapter" id="ch06">
+    <span class="chnum">CHAPTER 06</span>
+    <h2>Comments</h2>
+    <p class="sub">Leaving notes in your code that browsers ignore.</p>
+
+    <pre><code><span class="cmt">&lt;!-- This is a comment, it won't be shown on the page --&gt;</span>
+<span class="tagname">&lt;p&gt;</span>Visible text<span class="tagname">&lt;/p&gt;</span>
+<span class="cmt">&lt;!--
+  Multi-line comments
+  work the same way
+--&gt;</span></code></pre>
+
+    <ul class="clean">
+      <li>Use comments to explain <i>why</i>, not restate the obvious.</li>
+      <li>Handy for temporarily disabling a block of markup while testing.</li>
+      <li>Never put sensitive information in comments — anyone can view page source.</li>
+    </ul>
+
+    <div class="callout warn"><b>Common mistake:</b> comments cannot be nested — a <code class="inline">--&gt;</code> inside another comment closes it early and breaks the rest of the page.</div>
+
+    <details class="quiz">
+      <summary>Quiz: Are HTML comments visible in "View Page Source"?</summary>
+      <div class="answer">Yes — comments are only hidden from the rendered page, not from the raw source. Never store secrets in them.</div>
+    </details>
+  </section>
+
+  <section class="chapter" id="ch07">
+    <span class="chnum">CHAPTER 07</span>
+    <h2>Links &amp; Navigation</h2>
+    <p class="sub">Connecting pages with <code class="inline">&lt;a&gt;</code>.</p>
+
+    <pre><code><span class="tagname">&lt;a</span> <span class="attr">href</span>=<span class="str">"https://example.com"</span><span class="tagname">&gt;</span>External link<span class="tagname">&lt;/a&gt;</span>
+<span class="tagname">&lt;a</span> <span class="attr">href</span>=<span class="str">"about.html"</span><span class="tagname">&gt;</span>Relative link<span class="tagname">&lt;/a&gt;</span>
+<span class="tagname">&lt;a</span> <span class="attr">href</span>=<span class="str">"#pricing"</span><span class="tagname">&gt;</span>Jump to section<span class="tagname">&lt;/a&gt;</span>
+<span class="tagname">&lt;a</span> <span class="attr">href</span>=<span class="str">"mailto:hi@example.com"</span><span class="tagname">&gt;</span>Email us<span class="tagname">&lt;/a&gt;</span>
+<span class="tagname">&lt;a</span> <span class="attr">href</span>=<span class="str">"tel:+911234567890"</span><span class="tagname">&gt;</span>Call us<span class="tagname">&lt;/a&gt;</span>
+<span class="tagname">&lt;a</span> <span class="attr">href</span>=<span class="str">"https://example.com"</span> <span class="attr">target</span>=<span class="str">"_blank"</span> <span class="attr">rel</span>=<span class="str">"noopener noreferrer"</span><span class="tagname">&gt;</span>New tab<span class="tagname">&lt;/a&gt;</span></code></pre>
+
+    <table class="ref">
+      <tr><th>Attribute</th><th>Purpose</th></tr>
+      <tr><td><code>href</code></td><td>Destination — URL, relative path, anchor (<code>#id</code>), <code>mailto:</code>, <code>tel:</code></td></tr>
+      <tr><td><code>target="_blank"</code></td><td>Opens in a new tab — always pair with <code>rel="noopener"</code> for security</td></tr>
+      <tr><td><code>download</code></td><td>Forces the browser to download the file instead of navigating</td></tr>
+      <tr><td><code>title</code></td><td>Tooltip text shown on hover</td></tr>
+    </table>
+
+    <div class="callout warn"><b>Common mistake:</b> using <code class="inline">target="_blank"</code> without <code class="inline">rel="noopener"</code> — the new tab can access the opening page via <code class="inline">window.opener</code>, a real security risk.</div>
+
+    <div class="exercise-box">
+      <h4>Exercise 7.1</h4>
+      Build a simple nav bar with 4 links: Home, About, an in-page anchor link to a "Contact" section, and a mailto link.
+    </div>
+  </section>
+
+  <section class="chapter" id="ch08">
+    <span class="chnum">CHAPTER 08</span>
+    <h2>Images &amp; Image Attributes</h2>
+    <p class="sub"><code class="inline">&lt;img&gt;</code>, responsive images, and why <code class="inline">alt</code> is never optional.</p>
+
+    <pre><code><span class="tagname">&lt;img</span> <span class="attr">src</span>=<span class="str">"cat.jpg"</span> <span class="attr">alt</span>=<span class="str">"Orange tabby cat sleeping on a windowsill"</span>
+     <span class="attr">width</span>=<span class="str">"400"</span> <span class="attr">height</span>=<span class="str">"300"</span> <span class="attr">loading</span>=<span class="str">"lazy"</span><span class="tagname">&gt;</span>
+
+<span class="cmt">&lt;!-- responsive: browser picks the best size --&gt;</span>
+<span class="tagname">&lt;img</span> <span class="attr">srcset</span>=<span class="str">"small.jpg 480w, large.jpg 1024w"</span>
+     <span class="attr">sizes</span>=<span class="str">"(max-width: 600px) 480px, 1024px"</span>
+     <span class="attr">src</span>=<span class="str">"large.jpg"</span> <span class="attr">alt</span>=<span class="str">"Product photo"</span><span class="tagname">&gt;</span></code></pre>
+
+    <table class="ref">
+      <tr><th>Attribute</th><th>Purpose</th></tr>
+      <tr><td><code>src</code></td><td>Image file path/URL</td></tr>
+      <tr><td><code>alt</code></td><td>Text alternative — read by screen readers, shown if the image fails to load, used by search engines. Use <code>alt=""</code> only for purely decorative images.</td></tr>
+      <tr><td><code>width</code> / <code>height</code></td><td>Reserves space before the image loads, preventing layout shift</td></tr>
+      <tr><td><code>loading="lazy"</code></td><td>Defers loading off-screen images for performance</td></tr>
+      <tr><td><code>srcset</code> / <code>sizes</code></td><td>Serve different image sizes to different screens</td></tr>
+    </table>
+
+    <div class="callout warn"><b>Common mistake:</b> writing <code class="inline">alt="image"</code> or <code class="inline">alt="IMG_2931.jpg"</code> — meaningless alt text is functionally the same as missing alt text.</div>
+
+    <details class="quiz">
+      <summary>Quiz: When should alt="" (empty) be used?</summary>
+      <div class="answer">Only for purely decorative images that add no information — this tells screen readers to skip the image entirely rather than reading a filename.</div>
+    </details>
+
+    <div class="exercise-box">
+      <h4>Exercise 8.1</h4>
+      Add 3 images to a page: one with descriptive alt text, one decorative with empty alt, and one using srcset for two screen sizes.
+    </div>
+  </section>
+
+  <section class="chapter" id="ch09">
+    <span class="chnum">CHAPTER 09</span>
+    <h2>Lists: Ordered, Unordered, Description</h2>
+    <p class="sub">Grouping related items with the right kind of list.</p>
+
+    <pre><code><span class="cmt">&lt;!-- Unordered: order doesn't matter --&gt;</span>
+<span class="tagname">&lt;ul&gt;</span>
+  <span class="tagname">&lt;li&gt;</span>Milk<span class="tagname">&lt;/li&gt;</span>
+  <span class="tagname">&lt;li&gt;</span>Eggs<span class="tagname">&lt;/li&gt;</span>
+<span class="tagname">&lt;/ul&gt;</span>
+
+<span class="cmt">&lt;!-- Ordered: sequence matters --&gt;</span>
+<span class="tagname">&lt;ol&gt;</span>
+  <span class="tagname">&lt;li&gt;</span>Preheat oven<span class="tagname">&lt;/li&gt;</span>
+  <span class="tagname">&lt;li&gt;</span>Mix batter<span class="tagname">&lt;/li&gt;</span>
+<span class="tagname">&lt;/ol&gt;</span>
+
+<span class="cmt">&lt;!-- Description list: term/definition pairs --&gt;</span>
+<span class="tagname">&lt;dl&gt;</span>
+  <span class="tagname">&lt;dt&gt;</span>HTML<span class="tagname">&lt;/dt&gt;</span>
+  <span class="tagname">&lt;dd&gt;</span>HyperText Markup Language<span class="tagname">&lt;/dd&gt;</span>
+<span class="tagname">&lt;/dl&gt;</span></code></pre>
+
+    <table class="ref">
+      <tr><th>Tag</th><th>Use for</th></tr>
+      <tr><td><code>&lt;ul&gt;</code> / <code>&lt;li&gt;</code></td><td>Unordered lists — bullets</td></tr>
+      <tr><td><code>&lt;ol&gt;</code> / <code>&lt;li&gt;</code></td><td>Ordered lists — numbered, sequence matters (use <code>start</code> or <code>reversed</code> attributes to customize)</td></tr>
+      <tr><td><code>&lt;dl&gt;/&lt;dt&gt;/&lt;dd&gt;</code></td><td>Term-definition pairs — glossaries, FAQs, key-value data</td></tr>
+    </table>
+
+    <div class="callout warn"><b>Common mistake:</b> nesting lists incorrectly — a nested <code class="inline">&lt;ul&gt;</code> must live <i>inside</i> an <code class="inline">&lt;li&gt;</code>, not as a sibling of one.</div>
+
+    <div class="exercise-box">
+      <h4>Exercise 9.1</h4>
+      Build a recipe page: an unordered ingredient list, an ordered steps list, and a description list defining 3 cooking terms.
+    </div>
+  </section>
+
+  <section class="chapter" id="ch10">
+    <span class="chnum">CHAPTER 10</span>
+    <h2>Tables</h2>
+    <p class="sub">Tabular data done properly — <code class="inline">thead</code>, <code class="inline">tbody</code>, <code class="inline">tfoot</code>, and merged cells.</p>
+
+    <pre><code><span class="tagname">&lt;table&gt;</span>
+  <span class="tagname">&lt;thead&gt;</span>
+    <span class="tagname">&lt;tr&gt;</span><span class="tagname">&lt;th&gt;</span>Product<span class="tagname">&lt;/th&gt;</span><span class="tagname">&lt;th&gt;</span>Q1<span class="tagname">&lt;/th&gt;</span><span class="tagname">&lt;th&gt;</span>Q2<span class="tagname">&lt;/th&gt;</span><span class="tagname">&lt;/tr&gt;</span>
+  <span class="tagname">&lt;/thead&gt;</span>
+  <span class="tagname">&lt;tbody&gt;</span>
+    <span class="tagname">&lt;tr&gt;</span>
+      <span class="tagname">&lt;td&gt;</span>Widgets<span class="tagname">&lt;/td&gt;</span>
+      <span class="tagname">&lt;td</span> <span class="attr">colspan</span>=<span class="str">"2"</span><span class="tagname">&gt;</span>Combined total<span class="tagname">&lt;/td&gt;</span>
+    <span class="tagname">&lt;/tr&gt;</span>
+    <span class="tagname">&lt;tr&gt;</span>
+      <span class="tagname">&lt;td</span> <span class="attr">rowspan</span>=<span class="str">"2"</span><span class="tagname">&gt;</span>Gadgets<span class="tagname">&lt;/td&gt;</span>
+      <span class="tagname">&lt;td&gt;</span>120<span class="tagname">&lt;/td&gt;</span><span class="tagname">&lt;td&gt;</span>150<span class="tagname">&lt;/td&gt;</span>
+    <span class="tagname">&lt;/tr&gt;</span>
+  <span class="tagname">&lt;/tbody&gt;</span>
+  <span class="tagname">&lt;tfoot&gt;</span>
+    <span class="tagname">&lt;tr&gt;</span><span class="tagname">&lt;td&gt;</span>Total<span class="tagname">&lt;/td&gt;</span><span class="tagname">&lt;td</span> <span class="attr">colspan</span>=<span class="str">"2"</span><span class="tagname">&gt;</span>270<span class="tagname">&lt;/td&gt;</span><span class="tagname">&lt;/tr&gt;</span>
+  <span class="tagname">&lt;/tfoot&gt;</span>
+<span class="tagname">&lt;/table&gt;</span></code></pre>
+
+    <table class="ref">
+      <tr><th>Tag/Attr</th><th>Purpose</th></tr>
+      <tr><td><code>&lt;thead&gt;</code></td><td>Header row(s) — repeats when printed across pages</td></tr>
+      <tr><td><code>&lt;tbody&gt;</code></td><td>Main data rows</td></tr>
+      <tr><td><code>&lt;tfoot&gt;</code></td><td>Summary/footer rows (totals etc.)</td></tr>
+      <tr><td><code>colspan</code></td><td>Merges a cell across multiple columns</td></tr>
+      <tr><td><code>rowspan</code></td><td>Merges a cell across multiple rows</td></tr>
+      <tr><td><code>&lt;caption&gt;</code></td><td>Accessible title for the whole table</td></tr>
+    </table>
+
+    <div class="callout warn"><b>Common mistake:</b> using tables for page layout instead of tabular data — that's what CSS Grid/Flexbox are for. Tables are for data with rows and columns.</div>
+
+    <div class="exercise-box">
+      <h4>Exercise 10.1</h4>
+      Build a class timetable table with thead/tbody, and one cell that uses rowspan for a double period.
+    </div>
+  </section>
+
+  <section class="chapter" id="ch11">
+    <span class="chnum">CHAPTER 11</span>
+    <h2>Forms — Every Input Type</h2>
+    <p class="sub">How the web collects information from people.</p>
+
+    <pre><code><span class="tagname">&lt;form</span> <span class="attr">action</span>=<span class="str">"/submit"</span> <span class="attr">method</span>=<span class="str">"POST"</span><span class="tagname">&gt;</span>
+  <span class="tagname">&lt;label</span> <span class="attr">for</span>=<span class="str">"email"</span><span class="tagname">&gt;</span>Email<span class="tagname">&lt;/label&gt;</span>
+  <span class="tagname">&lt;input</span> <span class="attr">type</span>=<span class="str">"email"</span> <span class="attr">id</span>=<span class="str">"email"</span> <span class="attr">name</span>=<span class="str">"email"</span> <span class="attr">required</span><span class="tagname">&gt;</span>
+
+  <span class="tagname">&lt;button</span> <span class="attr">type</span>=<span class="str">"submit"</span><span class="tagname">&gt;</span>Send<span class="tagname">&lt;/button&gt;</span>
+<span class="tagname">&lt;/form&gt;</span></code></pre>
+
+    <p>Every input needs a <code class="inline">&lt;label&gt;</code> linked via <code class="inline">for</code>/<code class="inline">id</code> — this is both an accessibility requirement and a usability win (clicking the label focuses the field).</p>
+
+    <h3><span class="lt">→</span> Every <code class="inline">&lt;input type="..."&gt;</code></h3>
+    <table class="ref">
+      <tr><th>Type</th><th>Use for</th><th>Example</th></tr>
+      <tr><td><code>text</code></td><td>Single-line free text</td><td><code>&lt;input type="text"&gt;</code></td></tr>
+      <tr><td><code>email</code></td><td>Email, validates format &amp; shows email keyboard on mobile</td><td><code>&lt;input type="email"&gt;</code></td></tr>
+      <tr><td><code>password</code></td><td>Masked text input</td><td><code>&lt;input type="password"&gt;</code></td></tr>
+      <tr><td><code>number</code></td><td>Numeric input with spinners</td><td><code>&lt;input type="number" min="1" max="10"&gt;</code></td></tr>
+      <tr><td><code>tel</code></td><td>Phone numbers, numeric keyboard on mobile</td><td><code>&lt;input type="tel"&gt;</code></td></tr>
+      <tr><td><code>url</code></td><td>Web addresses, validates URL shape</td><td><code>&lt;input type="url"&gt;</code></td></tr>
+      <tr><td><code>search</code></td><td>Search box (adds a clear "x" in most browsers)</td><td><code>&lt;input type="search"&gt;</code></td></tr>
+      <tr><td><code>date</code></td><td>Native date picker</td><td><code>&lt;input type="date"&gt;</code></td></tr>
+      <tr><td><code>time</code></td><td>Native time picker</td><td><code>&lt;input type="time"&gt;</code></td></tr>
+      <tr><td><code>datetime-local</code></td><td>Date + time picker</td><td><code>&lt;input type="datetime-local"&gt;</code></td></tr>
+      <tr><td><code>month</code> / <code>week</code></td><td>Month or week picker</td><td><code>&lt;input type="month"&gt;</code></td></tr>
+      <tr><td><code>checkbox</code></td><td>Multiple independent choices</td><td><code>&lt;input type="checkbox"&gt;</code></td></tr>
+      <tr><td><code>radio</code></td><td>Single choice from a group (same <code>name</code>)</td><td><code>&lt;input type="radio" name="plan"&gt;</code></td></tr>
+      <tr><td><code>range</code></td><td>Slider between min/max</td><td><code>&lt;input type="range" min="0" max="100"&gt;</code></td></tr>
+      <tr><td><code>color</code></td><td>Native color picker</td><td><code>&lt;input type="color"&gt;</code></td></tr>
+      <tr><td><code>file</code></td><td>Upload files</td><td><code>&lt;input type="file" accept="image/*"&gt;</code></td></tr>
+      <tr><td><code>hidden</code></td><td>Data sent but not shown to the user</td><td><code>&lt;input type="hidden" name="token"&gt;</code></td></tr>
+      <tr><td><code>submit</code></td><td>Submits the form</td><td><code>&lt;input type="submit" value="Send"&gt;</code></td></tr>
+      <tr><td><code>reset</code></td><td>Clears the form</td><td><code>&lt;input type="reset"&gt;</code></td></tr>
+    </table>
+
+    <h3><span class="lt">→</span> Beyond &lt;input&gt;</h3>
+    <table class="ref">
+      <tr><th>Element</th><th>Purpose</th></tr>
+      <tr><td><code>&lt;textarea&gt;</code></td><td>Multi-line free text</td></tr>
+      <tr><td><code>&lt;select&gt;/&lt;option&gt;</code></td><td>Dropdown of choices</td></tr>
+      <tr><td><code>&lt;select multiple&gt;</code></td><td>Multi-select list box</td></tr>
+      <tr><td><code>&lt;fieldset&gt;/&lt;legend&gt;</code></td><td>Groups related fields with a caption — great for radio groups</td></tr>
+      <tr><td><code>&lt;datalist&gt;</code></td><td>Autocomplete suggestions tied to a text input</td></tr>
+      <tr><td><code>&lt;output&gt;</code></td><td>Displays the result of a calculation</td></tr>
+    </table>
+
+    <h3><span class="lt">→</span> Key attributes</h3>
+    <table class="ref">
+      <tr><th>Attribute</th><th>Purpose</th></tr>
+      <tr><td><code>required</code></td><td>Field must be filled before submit</td></tr>
+      <tr><td><code>placeholder</code></td><td>Faint hint text — not a replacement for a label</td></tr>
+      <tr><td><code>pattern</code></td><td>Custom regex validation</td></tr>
+      <tr><td><code>min</code> / <code>max</code> / <code>step</code></td><td>Bounds for number/date/range inputs</td></tr>
+      <tr><td><code>autocomplete</code></td><td>Lets browsers fill in known values</td></tr>
+      <tr><td><code>disabled</code> / <code>readonly</code></td><td>Blocks editing (disabled also excludes from submission)</td></tr>
+    </table>
+
+    <div class="callout warn"><b>Common mistake:</b> using <code class="inline">placeholder</code> as a substitute for <code class="inline">&lt;label&gt;</code> — placeholder text disappears the moment someone types, leaving no context.</div>
+
+    <details class="quiz">
+      <summary>Quiz: What's the difference between disabled and readonly?</summary>
+      <div class="answer">A disabled field can't be focused or edited AND its value is not sent on submit. A readonly field can't be edited but its value IS still submitted.</div>
+    </details>
+
+    <div class="exercise-box">
+      <h4>Exercise 11.1</h4>
+      Build a signup form: name (text), email, password, birthdate, a radio group for plan (Free/Pro), a checkbox for terms, and a submit button — all correctly labeled.
+    </div>
+  </section>
+
+  <section class="chapter" id="ch12">
+    <span class="chnum">CHAPTER 12</span>
+    <h2>Buttons</h2>
+    <p class="sub">Three ways to make something clickable — and why they aren't interchangeable.</p>
+
+    <pre><code><span class="tagname">&lt;button</span> <span class="attr">type</span>=<span class="str">"submit"</span><span class="tagname">&gt;</span>Submit form<span class="tagname">&lt;/button&gt;</span>
+<span class="tagname">&lt;button</span> <span class="attr">type</span>=<span class="str">"button"</span> <span class="attr">onclick</span>=<span class="str">"doSomething()"</span><span class="tagname">&gt;</span>Run a script<span class="tagname">&lt;/button&gt;</span>
+<span class="tagname">&lt;button</span> <span class="attr">type</span>=<span class="str">"reset"</span><span class="tagname">&gt;</span>Clear form<span class="tagname">&lt;/button&gt;</span></code></pre>
+
+    <table class="ref">
+      <tr><th>type</th><th>Behavior</th></tr>
+      <tr><td><code>submit</code> (default inside a form)</td><td>Submits the enclosing form</td></tr>
+      <tr><td><code>button</code></td><td>Does nothing by itself — used with JavaScript</td></tr>
+      <tr><td><code>reset</code></td><td>Resets all fields in the form to their default value</td></tr>
+    </table>
+
+    <div class="callout warn"><b>Common mistake:</b> a <code class="inline">&lt;button&gt;</code> inside a <code class="inline">&lt;form&gt;</code> defaults to <code class="inline">type="submit"</code> — a "Cancel" or "Show more" button without an explicit <code class="inline">type="button"</code> will unexpectedly submit the form.</div>
+
+    <div class="callout"><b>Best practice:</b> for navigation ("go to another page"), use <code class="inline">&lt;a href="..."&gt;</code> styled as a button, not a real <code class="inline">&lt;button&gt;</code> — buttons are for actions, links are for navigation.</div>
+
+    <div class="exercise-box">
+      <h4>Exercise 12.1</h4>
+      Build a small form with three buttons: Submit, Cancel (type="button", does nothing yet), and Reset — verify only Submit posts the form.
+    </div>
+  </section>
+
+  <section class="chapter" id="ch13">
+    <span class="chnum">CHAPTER 13</span>
+    <h2>Audio &amp; Video</h2>
+    <p class="sub">Native media playback, no plugins required.</p>
+
+    <pre><code><span class="tagname">&lt;video</span> <span class="attr">controls</span> <span class="attr">width</span>=<span class="str">"640"</span> <span class="attr">poster</span>=<span class="str">"thumb.jpg"</span><span class="tagname">&gt;</span>
+  <span class="tagname">&lt;source</span> <span class="attr">src</span>=<span class="str">"movie.mp4"</span> <span class="attr">type</span>=<span class="str">"video/mp4"</span><span class="tagname">&gt;</span>
+  <span class="tagname">&lt;source</span> <span class="attr">src</span>=<span class="str">"movie.webm"</span> <span class="attr">type</span>=<span class="str">"video/webm"</span><span class="tagname">&gt;</span>
+  Your browser doesn't support video.
+<span class="tagname">&lt;/video&gt;</span>
+
+<span class="tagname">&lt;audio</span> <span class="attr">controls</span><span class="tagname">&gt;</span>
+  <span class="tagname">&lt;source</span> <span class="attr">src</span>=<span class="str">"song.mp3"</span> <span class="attr">type</span>=<span class="str">"audio/mpeg"</span><span class="tagname">&gt;</span>
+<span class="tagname">&lt;/audio&gt;</span></code></pre>
+
+    <table class="ref">
+      <tr><th>Attribute</th><th>Purpose</th></tr>
+      <tr><td><code>controls</code></td><td>Shows the native play/pause/volume UI</td></tr>
+      <tr><td><code>autoplay</code></td><td>Starts playing automatically — most browsers require <code>muted</code> too</td></tr>
+      <tr><td><code>loop</code></td><td>Restarts automatically when finished</td></tr>
+      <tr><td><code>muted</code></td><td>Starts silent — required for autoplay to work in most browsers</td></tr>
+      <tr><td><code>poster</code></td><td>Preview image shown before video plays</td></tr>
+      <tr><td><code>&lt;source&gt;</code></td><td>Multiple formats — browser picks the first one it supports</td></tr>
+    </table>
+
+    <div class="callout warn"><b>Common mistake:</b> relying on <code class="inline">autoplay</code> with sound — nearly every modern browser blocks it unless the video is also muted.</div>
+
+    <div class="exercise-box">
+      <h4>Exercise 13.1</h4>
+      Embed a video with controls and a poster image, and an audio player with controls, using two source formats each.
+    </div>
+  </section>
+
+  <section class="chapter" id="ch14">
+    <span class="chnum">CHAPTER 14</span>
+    <h2>YouTube Embedding via iframe</h2>
+    <p class="sub">Embedding third-party content safely.</p>
+
+    <pre><code><span class="tagname">&lt;iframe</span> <span class="attr">width</span>=<span class="str">"560"</span> <span class="attr">height</span>=<span class="str">"315"</span>
+  <span class="attr">src</span>=<span class="str">"https://www.youtube.com/embed/VIDEO_ID"</span>
+  <span class="attr">title</span>=<span class="str">"YouTube video player"</span>
+  <span class="attr">frameborder</span>=<span class="str">"0"</span>
+  <span class="attr">allow</span>=<span class="str">"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"</span>
+  <span class="attr">allowfullscreen</span><span class="tagname">&gt;</span>
+<span class="tagname">&lt;/iframe&gt;</span></code></pre>
+
+    <ul class="clean">
+      <li>Use the <b>/embed/</b> URL path from YouTube's "Share → Embed" option, not the normal watch URL.</li>
+      <li>Always include a <code class="inline">title</code> attribute — screen readers announce it to describe the frame's content.</li>
+      <li>Wrap the iframe in a container with <code class="inline">aspect-ratio</code> CSS to keep it responsive across screen sizes.</li>
+    </ul>
+
+    <div class="callout warn"><b>Common mistake:</b> hardcoding a fixed pixel width/height with no responsive wrapper — the video overflows on mobile screens.</div>
+
+    <div class="exercise-box">
+      <h4>Exercise 14.1</h4>
+      Embed a YouTube video responsively using a wrapper div with <code class="inline">aspect-ratio: 16/9</code> and <code class="inline">width: 100%</code> on the iframe.
+    </div>
+  </section>
+
+  <section class="chapter" id="ch15">
+    <span class="chnum">CHAPTER 15</span>
+    <h2>Semantic HTML5 Tags</h2>
+    <p class="sub">Structuring a page so its meaning is obvious to browsers, search engines, and screen readers.</p>
+
+    <pre><code><span class="tagname">&lt;header&gt;</span> ... <span class="tagname">&lt;/header&gt;</span>
+<span class="tagname">&lt;nav&gt;</span> ... <span class="tagname">&lt;/nav&gt;</span>
+<span class="tagname">&lt;main&gt;</span>
+  <span class="tagname">&lt;section&gt;</span>
+    <span class="tagname">&lt;article&gt;</span> ... <span class="tagname">&lt;/article&gt;</span>
+  <span class="tagname">&lt;/section&gt;</span>
+  <span class="tagname">&lt;aside&gt;</span> ... <span class="tagname">&lt;/aside&gt;</span>
+<span class="tagname">&lt;/main&gt;</span>
+<span class="tagname">&lt;footer&gt;</span> ... <span class="tagname">&lt;/footer&gt;</span></code></pre>
+
+    <table class="ref">
+      <tr><th>Tag</th><th>Represents</th></tr>
+      <tr><td><code>&lt;header&gt;</code></td><td>Intro content for a page or section — logo, title, nav</td></tr>
+      <tr><td><code>&lt;nav&gt;</code></td><td>Major navigation links</td></tr>
+      <tr><td><code>&lt;main&gt;</code></td><td>The single dominant content of the page — one per page</td></tr>
+      <tr><td><code>&lt;section&gt;</code></td><td>A thematic grouping of content, usually with its own heading</td></tr>
+      <tr><td><code>&lt;article&gt;</code></td><td>Self-contained content that could stand alone (blog post, news story, product card)</td></tr>
+      <tr><td><code>&lt;aside&gt;</code></td><td>Tangential content — sidebars, pull quotes, related links</td></tr>
+      <tr><td><code>&lt;footer&gt;</code></td><td>Closing content for a page or section — copyright, links</td></tr>
+    </table>
+
+    <div class="callout"><b>Why it matters:</b> semantic tags give screen readers "landmarks" to jump between (skip to nav, skip to main), and help search engines understand which content is the actual article vs. a sidebar.</div>
+
+    <details class="quiz">
+      <summary>Quiz: What's the difference between &lt;section&gt; and &lt;article&gt;?</summary>
+      <div class="answer">An &lt;article&gt; is self-contained and would make sense distributed on its own (like an RSS feed item). A &lt;section&gt; is just a thematic grouping within the current page and doesn't need to stand alone.</div>
+    </details>
+
+    <div class="exercise-box">
+      <h4>Exercise 15.1</h4>
+      Rebuild a page you made earlier (like the recipe page) using header, nav, main, article, aside, and footer instead of generic divs.
+    </div>
+  </section>
+
+  <section class="chapter" id="ch16">
+    <span class="chnum">CHAPTER 16</span>
+    <h2><code class="inline">div</code> vs <code class="inline">span</code></h2>
+    <p class="sub">The two generic containers — and when semantic tags should replace them.</p>
+
+    <table class="ref">
+      <tr><th></th><th><code>&lt;div&gt;</code></th><th><code>&lt;span&gt;</code></th></tr>
+      <tr><td>Display type</td><td>Block (takes full width, starts new line)</td><td>Inline (flows with surrounding text)</td></tr>
+      <tr><td>Use for</td><td>Grouping larger chunks: cards, layout containers, sections</td><td>Wrapping a small piece of text/inline content to style or target with JS</td></tr>
+      <tr><td>Semantic meaning</td><td>None</td><td>None</td></tr>
+    </table>
+
+    <pre><code><span class="tagname">&lt;div</span> <span class="attr">class</span>=<span class="str">"card"</span><span class="tagname">&gt;</span>
+  <span class="tagname">&lt;p&gt;</span>Price: <span class="tagname">&lt;span</span> <span class="attr">class</span>=<span class="str">"highlight"</span><span class="tagname">&gt;</span>$29<span class="tagname">&lt;/span&gt;</span><span class="tagname">&lt;/p&gt;</span>
+<span class="tagname">&lt;/div&gt;</span></code></pre>
+
+    <div class="callout"><b>Best practice:</b> reach for div/span only when no semantic tag fits — <code class="inline">header</code>, <code class="inline">nav</code>, <code class="inline">article</code>, <code class="inline">strong</code>, <code class="inline">em</code> etc. all carry meaning that a div/span cannot.</div>
+  </section>
+
+  <section class="chapter" id="ch17">
+    <span class="chnum">CHAPTER 17</span>
+    <h2>HTML Entities</h2>
+    <p class="sub">Writing reserved and special characters safely.</p>
+
+    <table class="ref">
+      <tr><th>Character</th><th>Entity</th><th>Meaning</th></tr>
+      <tr><td>&lt;</td><td><code>&amp;lt;</code></td><td>Less than (needed since it starts tags)</td></tr>
+      <tr><td>&gt;</td><td><code>&amp;gt;</code></td><td>Greater than</td></tr>
+      <tr><td>&amp;</td><td><code>&amp;amp;</code></td><td>Ampersand (needed since it starts entities)</td></tr>
+      <tr><td>"</td><td><code>&amp;quot;</code></td><td>Double quote</td></tr>
+      <tr><td>&nbsp;</td><td><code>&amp;nbsp;</code></td><td>Non-breaking space</td></tr>
+      <tr><td>©</td><td><code>&amp;copy;</code></td><td>Copyright symbol</td></tr>
+      <tr><td>→</td><td><code>&amp;rarr;</code></td><td>Right arrow</td></tr>
+      <tr><td>€</td><td><code>&amp;euro;</code></td><td>Euro sign</td></tr>
+    </table>
+
+    <div class="callout warn"><b>Common mistake:</b> pasting text with raw <code class="inline">&lt;</code>, <code class="inline">&gt;</code>, or <code class="inline">&amp;</code> characters into HTML — the browser tries to parse them as markup. Always escape them.</div>
+
+    <div class="exercise-box">
+      <h4>Exercise 17.1</h4>
+      Write a paragraph that correctly displays the literal text: <code class="inline">Use &lt;div&gt; &amp; &lt;span&gt; wisely.</code>
+    </div>
+  </section>
+
+  <section class="chapter" id="ch18">
+    <span class="chnum">CHAPTER 18</span>
+    <h2>Meta Tags</h2>
+    <p class="sub">Page metadata that browsers, search engines, and social platforms all read.</p>
+
+    <pre><code><span class="tagname">&lt;meta</span> <span class="attr">charset</span>=<span class="str">"UTF-8"</span><span class="tagname">&gt;</span>
+<span class="tagname">&lt;meta</span> <span class="attr">name</span>=<span class="str">"viewport"</span> <span class="attr">content</span>=<span class="str">"width=device-width, initial-scale=1.0"</span><span class="tagname">&gt;</span>
+<span class="tagname">&lt;meta</span> <span class="attr">name</span>=<span class="str">"description"</span> <span class="attr">content</span>=<span class="str">"A short summary for search results"</span><span class="tagname">&gt;</span>
+<span class="tagname">&lt;meta</span> <span class="attr">property</span>=<span class="str">"og:title"</span> <span class="attr">content</span>=<span class="str">"Page title for social shares"</span><span class="tagname">&gt;</span>
+<span class="tagname">&lt;meta</span> <span class="attr">property</span>=<span class="str">"og:image"</span> <span class="attr">content</span>=<span class="str">"preview.jpg"</span><span class="tagname">&gt;</span></code></pre>
+
+    <table class="ref">
+      <tr><th>Tag</th><th>Purpose</th></tr>
+      <tr><td><code>charset</code></td><td>Character encoding — always UTF-8 for modern pages</td></tr>
+      <tr><td><code>viewport</code></td><td>Controls mobile scaling — essential for responsive design</td></tr>
+      <tr><td><code>description</code></td><td>The snippet shown under your link in search results</td></tr>
+      <tr><td><code>og:*</code> (Open Graph)</td><td>Controls how the page previews when shared on social media</td></tr>
+    </table>
+
+    <div class="callout warn"><b>Common mistake:</b> forgetting the viewport meta tag — the page renders as a zoomed-out desktop layout on mobile.</div>
+  </section>
+
+  <section class="chapter" id="ch19">
+    <span class="chnum">CHAPTER 19</span>
+    <h2>Favicon</h2>
+    <p class="sub">The small icon in the browser tab.</p>
+
+    <pre><code><span class="tagname">&lt;link</span> <span class="attr">rel</span>=<span class="str">"icon"</span> <span class="attr">type</span>=<span class="str">"image/png"</span> <span class="attr">href</span>=<span class="str">"favicon.png"</span><span class="tagname">&gt;</span>
+<span class="tagname">&lt;link</span> <span class="attr">rel</span>=<span class="str">"apple-touch-icon"</span> <span class="attr">href</span>=<span class="str">"apple-touch-icon.png"</span><span class="tagname">&gt;</span></code></pre>
+
+    <ul class="clean">
+      <li>Goes in <code class="inline">&lt;head&gt;</code>, alongside meta tags.</li>
+      <li>Common sizes: 32×32 or 16×16 for tabs, 180×180 for Apple touch icons.</li>
+      <li>Without one, browsers fall back to a generic globe icon.</li>
+    </ul>
+  </section>
+
+  <section class="chapter" id="ch20">
+    <span class="chnum">CHAPTER 20</span>
+    <h2>Linking CSS &amp; JavaScript</h2>
+    <p class="sub">Bringing style and behavior into an HTML page.</p>
+
+    <pre><code><span class="cmt">&lt;!-- in &lt;head&gt;: external CSS --&gt;</span>
+<span class="tagname">&lt;link</span> <span class="attr">rel</span>=<span class="str">"stylesheet"</span> <span class="attr">href</span>=<span class="str">"styles.css"</span><span class="tagname">&gt;</span>
+
+<span class="cmt">&lt;!-- inline &lt;style&gt; block --&gt;</span>
+<span class="tagname">&lt;style&gt;</span>
+  body { font-family: sans-serif; }
+<span class="tagname">&lt;/style&gt;</span>
+
+<span class="cmt">&lt;!-- near end of &lt;body&gt;: external JS --&gt;</span>
+<span class="tagname">&lt;script</span> <span class="attr">src</span>=<span class="str">"app.js"</span> <span class="attr">defer</span><span class="tagname">&gt;&lt;/script&gt;</span></code></pre>
+
+    <table class="ref">
+      <tr><th>Attribute</th><th>Purpose</th></tr>
+      <tr><td><code>defer</code></td><td>Downloads the script in the background, runs it after the HTML is fully parsed — keeps the page from freezing while loading</td></tr>
+      <tr><td><code>async</code></td><td>Downloads and runs as soon as it's ready, possibly before parsing finishes — best for independent scripts (ads, analytics)</td></tr>
+    </table>
+
+    <div class="callout"><b>Best practice:</b> put CSS <code class="inline">&lt;link&gt;</code> tags in <code class="inline">&lt;head&gt;</code> so styles are ready before paint; put JS <code class="inline">&lt;script&gt;</code> tags with <code class="inline">defer</code> so they don't block rendering.</div>
+
+    <div class="exercise-box">
+      <h4>Exercise 20.1</h4>
+      Create <code class="inline">styles.css</code> and <code class="inline">app.js</code>, link both correctly, and confirm the JS runs only after the page content is visible.
+    </div>
+  </section>
+
+  <section class="chapter" id="ch21">
+    <span class="chnum">CHAPTER 21</span>
+    <h2>HTML Attributes Reference</h2>
+    <p class="sub">The commonly-used attributes that show up across many different tags.</p>
+
+    <table class="ref">
+      <tr><th>Attribute</th><th>Applies to</th><th>Purpose</th></tr>
+      <tr><td><code>id</code></td><td>Any element</td><td>Unique identifier — used for anchors, CSS, JS targeting. Must be unique on the page.</td></tr>
+      <tr><td><code>class</code></td><td>Any element</td><td>Reusable label(s) for styling/scripting; multiple classes are space-separated.</td></tr>
+      <tr><td><code>style</code></td><td>Any element</td><td>Inline CSS — use sparingly, prefer stylesheets.</td></tr>
+      <tr><td><code>title</code></td><td>Any element</td><td>Tooltip shown on hover.</td></tr>
+      <tr><td><code>data-*</code></td><td>Any element</td><td>Custom data attributes for JavaScript to read, e.g. <code>data-user-id="42"</code>.</td></tr>
+      <tr><td><code>hidden</code></td><td>Any element</td><td>Hides the element completely from render and screen readers.</td></tr>
+      <tr><td><code>tabindex</code></td><td>Any element</td><td>Controls keyboard tab order; <code>0</code> makes a non-interactive element focusable.</td></tr>
+      <tr><td><code>contenteditable</code></td><td>Any element</td><td>Makes an element's content directly editable by the user.</td></tr>
+      <tr><td><code>draggable</code></td><td>Any element</td><td>Enables native drag-and-drop.</td></tr>
+      <tr><td><code>lang</code></td><td>html, or any element</td><td>Declares the content's language for screen readers and translators.</td></tr>
+      <tr><td><code>disabled</code></td><td>Form controls</td><td>Disables interaction and excludes value from submission.</td></tr>
+      <tr><td><code>autofocus</code></td><td>Form controls</td><td>Focuses the element automatically on page load.</td></tr>
+    </table>
+
+    <div class="callout"><b>Best practice:</b> use <code class="inline">id</code> for single unique targets (an anchor, a specific JS hook) and <code class="inline">class</code> for anything reused across multiple elements.</div>
+
+    <div class="exercise-box">
+      <h4>Exercise 21.1</h4>
+      Add a <code class="inline">data-*</code> attribute to a button and read its value in the browser console using <code class="inline">element.dataset</code>.
+    </div>
+  </section>
+
+  <section class="chapter" id="ch22">
+    <span class="chnum">CHAPTER 22</span>
+    <h2>Modern HTML5 Elements</h2>
+    <p class="sub">Beyond the basics: disclosure widgets, figures, progress, and graphics.</p>
+
+    <pre><code><span class="tagname">&lt;details&gt;</span>
+  <span class="tagname">&lt;summary&gt;</span>Click to expand<span class="tagname">&lt;/summary&gt;</span>
+  <span class="tagname">&lt;p&gt;</span>Hidden content revealed on click — no JavaScript needed.<span class="tagname">&lt;/p&gt;</span>
+<span class="tagname">&lt;/details&gt;</span>
+
+<span class="tagname">&lt;figure&gt;</span>
+  <span class="tagname">&lt;img</span> <span class="attr">src</span>=<span class="str">"chart.png"</span> <span class="attr">alt</span>=<span class="str">"Sales chart"</span><span class="tagname">&gt;</span>
+  <span class="tagname">&lt;figcaption&gt;</span>Fig 1. Quarterly sales<span class="tagname">&lt;/figcaption&gt;</span>
+<span class="tagname">&lt;/figure&gt;</span>
+
+<span class="tagname">&lt;progress</span> <span class="attr">value</span>=<span class="str">"70"</span> <span class="attr">max</span>=<span class="str">"100"</span><span class="tagname">&gt;&lt;/progress&gt;</span>
+<span class="tagname">&lt;meter</span> <span class="attr">value</span>=<span class="str">"0.6"</span><span class="tagname">&gt;&lt;/meter&gt;</span></code></pre>
+
+    <table class="ref">
+      <tr><th>Element</th><th>Purpose</th></tr>
+      <tr><td><code>&lt;details&gt;/&lt;summary&gt;</code></td><td>Native collapsible/expandable content — FAQs, spoilers</td></tr>
+      <tr><td><code>&lt;figure&gt;/&lt;figcaption&gt;</code></td><td>An image, diagram, or code block with its own caption</td></tr>
+      <tr><td><code>&lt;progress&gt;</code></td><td>Task completion (e.g. file upload %) — changes over time</td></tr>
+      <tr><td><code>&lt;meter&gt;</code></td><td>A static value within a known range (e.g. disk usage) — doesn't imply progress</td></tr>
+      <tr><td><code>&lt;canvas&gt;</code></td><td>A blank drawing surface controlled entirely by JavaScript</td></tr>
+      <tr><td><code>&lt;svg&gt;</code></td><td>Vector graphics described directly in markup — scales infinitely, stylable with CSS</td></tr>
+      <tr><td><code>&lt;template&gt;</code></td><td>Markup that's parsed but not rendered until cloned via JavaScript</td></tr>
+      <tr><td><code>&lt;dialog&gt;</code></td><td>Native modal dialog box</td></tr>
+    </table>
+
+    <div class="exercise-box">
+      <h4>Exercise 22.1</h4>
+      Build an FAQ section using 3 &lt;details&gt; elements, and a captioned image using &lt;figure&gt;.
+    </div>
+  </section>
+
+  <section class="chapter" id="ch23">
+    <span class="chnum">CHAPTER 23</span>
+    <h2>Accessibility Basics</h2>
+    <p class="sub">Markup that works for everyone, including screen reader and keyboard users.</p>
+
+    <table class="ref">
+      <tr><th>Technique</th><th>Why it matters</th></tr>
+      <tr><td>Meaningful <code>alt</code> text</td><td>Screen readers announce it in place of the image</td></tr>
+      <tr><td><code>&lt;label&gt;</code> for every input</td><td>Screen readers announce what a field is for</td></tr>
+      <tr><td>Semantic tags (header, nav, main...)</td><td>Creates navigable "landmarks" for assistive tech</td></tr>
+      <tr><td>Logical heading order</td><td>Screen reader users often navigate by jumping between headings</td></tr>
+      <tr><td><code>aria-label</code></td><td>Names an element when there's no visible text label (e.g. icon-only button)</td></tr>
+      <tr><td><code>aria-hidden="true"</code></td><td>Hides purely decorative elements from assistive tech</td></tr>
+      <tr><td>Visible focus states</td><td>Keyboard users need to see which element is focused</td></tr>
+      <tr><td>Sufficient color contrast</td><td>Text must be readable for low-vision users</td></tr>
+    </table>
+
+    <pre><code><span class="cmt">&lt;!-- icon-only button needs a label --&gt;</span>
+<span class="tagname">&lt;button</span> <span class="attr">aria-label</span>=<span class="str">"Close dialog"</span><span class="tagname">&gt;</span>✕<span class="tagname">&lt;/button&gt;</span></code></pre>
+
+    <div class="callout"><b>Rule of thumb:</b> if you can complete every task on the page using only Tab, Enter, and a screen reader, you're most of the way to accessible.</div>
+
+    <details class="quiz">
+      <summary>Quiz: When should you reach for an ARIA attribute instead of a native HTML element?</summary>
+      <div class="answer">Only as a last resort — a native &lt;button&gt; is already keyboard-accessible and announced correctly; ARIA is for filling gaps native HTML can't cover, like custom widgets.</div>
+    </details>
+
+    <div class="exercise-box">
+      <h4>Exercise 23.1</h4>
+      Take a form you built earlier and run it through a screen reader (VoiceOver/NVDA) or a browser accessibility checker — fix any missing labels.
+    </div>
+  </section>
+
+  <section class="chapter" id="ch24">
+    <span class="chnum">CHAPTER 24</span>
+    <h2>SEO Basics Using HTML</h2>
+    <p class="sub">How your markup choices affect search rankings and result snippets.</p>
+
+    <table class="ref">
+      <tr><th>Element</th><th>SEO impact</th></tr>
+      <tr><td><code>&lt;title&gt;</code></td><td>The clickable blue link text in search results — the single most important on-page SEO tag</td></tr>
+      <tr><td><code>meta description</code></td><td>The snippet text shown under the title — doesn't affect ranking directly but affects click-through</td></tr>
+      <tr><td>One <code>&lt;h1&gt;</code></td><td>Signals the page's main topic</td></tr>
+      <tr><td>Descriptive <code>alt</code> text</td><td>Lets image search understand and index pictures</td></tr>
+      <tr><td>Semantic tags</td><td>Helps search engines identify the real article content vs. boilerplate</td></tr>
+      <tr><td>Internal links</td><td>Helps crawlers discover other pages on your site</td></tr>
+      <tr><td><code>&lt;link rel="canonical"&gt;</code></td><td>Tells search engines the "master" URL when duplicate content exists</td></tr>
+    </table>
+
+    <div class="callout warn"><b>Common mistake:</b> stuffing keywords unnaturally into headings and alt text — modern search engines penalize this rather than rewarding it.</div>
+
+    <div class="exercise-box">
+      <h4>Exercise 24.1</h4>
+      Write a title tag (under 60 characters) and meta description (under 160 characters) for a blog post about home coffee brewing.
+    </div>
+  </section>
+
+  <section class="chapter" id="ch25">
+    <span class="chnum">CHAPTER 25</span>
+    <h2>Responsive HTML Best Practices</h2>
+    <p class="sub">Markup decisions (not just CSS) that make pages work across screen sizes.</p>
+
+    <ul class="clean">
+      <li>Always include <code class="inline">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code>.</li>
+      <li>Use <code class="inline">srcset</code>/<code class="inline">sizes</code> on images instead of one oversized image for every screen.</li>
+      <li>Prefer relative units in linked CSS (<code class="inline">%</code>, <code class="inline">rem</code>, <code class="inline">vw</code>) over fixed pixels for layout containers.</li>
+      <li>Structure content so it still makes sense read top-to-bottom on a narrow screen (mobile-first thinking).</li>
+      <li>Avoid fixed <code class="inline">width</code>/<code class="inline">height</code> on containers that should flex; use them only on images/video to reserve space.</li>
+    </ul>
+
+    <div class="callout"><b>Best practice:</b> design and write your HTML mobile-first, then progressively enhance the layout for larger screens — it's far easier than trying to shrink a desktop layout down later.</div>
+  </section>
+
+  <section class="chapter" id="ch26">
+    <span class="chnum">CHAPTER 26</span>
+    <h2>Best Practices &amp; Common Mistakes</h2>
+    <p class="sub">A field guide to writing HTML that holds up in production.</p>
+
+    <table class="ref">
+      <tr><th>Do</th><th>Instead of</th></tr>
+      <tr><td>Close every element properly, even void elements as <code>&lt;br&gt;</code></td><td>Leaving tags unclosed and relying on the browser's error recovery</td></tr>
+      <tr><td>Use lowercase tag/attribute names</td><td>Mixed case, which is harder to scan and inconsistent with modern conventions</td></tr>
+      <tr><td>Quote all attribute values</td><td><code>&lt;input type=text&gt;</code> without quotes</td></tr>
+      <tr><td>Nest elements correctly (block inside block, etc.)</td><td>Putting block-level elements inside inline ones like &lt;span&gt;</td></tr>
+      <tr><td>One &lt;h1&gt;, logical heading order</td><td>Multiple &lt;h1&gt;s or skipping levels for visual size</td></tr>
+      <tr><td>Semantic tags where they fit</td><td>"div soup" — divs for everything</td></tr>
+      <tr><td>Validate with the W3C validator</td><td>Assuming it's fine because it looks right in one browser</td></tr>
+    </table>
+
+    <div class="callout warn"><b>Common mistake:</b> assuming "it displays fine so it's correct" — invalid or poorly structured HTML can still render acceptably while breaking accessibility tools, SEO, and older browsers.</div>
+  </section>
+
+  <section class="chapter" id="ch27">
+    <span class="chnum">CHAPTER 27</span>
+    <h2>Complete HTML Cheat Sheet</h2>
+    <p class="sub">Every tag from this course, grouped for quick lookup.</p>
+
+    <h3><span class="lt">→</span> Document</h3>
+    <table class="ref">
+      <tr><td><code>&lt;!DOCTYPE html&gt;</code></td><td><code>&lt;html&gt;</code></td><td><code>&lt;head&gt;</code></td><td><code>&lt;body&gt;</code></td><td><code>&lt;title&gt;</code></td><td><code>&lt;meta&gt;</code></td></tr>
+    </table>
+    <h3><span class="lt">→</span> Text</h3>
+    <table class="ref">
+      <tr><td><code>&lt;h1&gt;</code>–<code>&lt;h6&gt;</code></td><td><code>&lt;p&gt;</code></td><td><code>&lt;strong&gt;</code></td><td><code>&lt;em&gt;</code></td><td><code>&lt;b&gt;</code></td><td><code>&lt;i&gt;</code></td></tr>
+      <tr><td><code>&lt;mark&gt;</code></td><td><code>&lt;small&gt;</code></td><td><code>&lt;del&gt;</code></td><td><code>&lt;ins&gt;</code></td><td><code>&lt;sub&gt;</code></td><td><code>&lt;sup&gt;</code></td></tr>
+      <tr><td><code>&lt;code&gt;</code></td><td><code>&lt;blockquote&gt;</code></td><td><code>&lt;br&gt;</code></td><td><code>&lt;hr&gt;</code></td><td><code>&lt;!-- --&gt;</code></td><td></td></tr>
+    </table>
+    <h3><span class="lt">→</span> Links, Media &amp; Lists</h3>
+    <table class="ref">
+      <tr><td><code>&lt;a&gt;</code></td><td><code>&lt;img&gt;</code></td><td><code>&lt;video&gt;</code></td><td><code>&lt;audio&gt;</code></td><td><code>&lt;source&gt;</code></td><td><code>&lt;iframe&gt;</code></td></tr>
+      <tr><td><code>&lt;ul&gt;</code></td><td><code>&lt;ol&gt;</code></td><td><code>&lt;li&gt;</code></td><td><code>&lt;dl&gt;</code></td><td><code>&lt;dt&gt;</code></td><td><code>&lt;dd&gt;</code></td></tr>
+    </table>
+    <h3><span class="lt">→</span> Tables</h3>
+    <table class="ref">
+      <tr><td><code>&lt;table&gt;</code></td><td><code>&lt;thead&gt;</code></td><td><code>&lt;tbody&gt;</code></td><td><code>&lt;tfoot&gt;</code></td><td><code>&lt;tr&gt;</code></td><td><code>&lt;th&gt;</code></td></tr>
+      <tr><td><code>&lt;td&gt;</code></td><td><code>&lt;caption&gt;</code></td><td><code>colspan</code></td><td><code>rowspan</code></td><td></td><td></td></tr>
+    </table>
+    <h3><span class="lt">→</span> Forms</h3>
+    <table class="ref">
+      <tr><td><code>&lt;form&gt;</code></td><td><code>&lt;label&gt;</code></td><td><code>&lt;input&gt;</code></td><td><code>&lt;textarea&gt;</code></td><td><code>&lt;select&gt;</code></td><td><code>&lt;option&gt;</code></td></tr>
+      <tr><td><code>&lt;button&gt;</code></td><td><code>&lt;fieldset&gt;</code></td><td><code>&lt;legend&gt;</code></td><td><code>&lt;datalist&gt;</code></td><td><code>&lt;output&gt;</code></td><td></td></tr>
+    </table>
+    <h3><span class="lt">→</span> Semantic Structure</h3>
+    <table class="ref">
+      <tr><td><code>&lt;header&gt;</code></td><td><code>&lt;nav&gt;</code></td><td><code>&lt;main&gt;</code></td><td><code>&lt;section&gt;</code></td><td><code>&lt;article&gt;</code></td><td><code>&lt;aside&gt;</code></td></tr>
+      <tr><td><code>&lt;footer&gt;</code></td><td><code>&lt;div&gt;</code></td><td><code>&lt;span&gt;</code></td><td></td><td></td><td></td></tr>
+    </table>
+    <h3><span class="lt">→</span> HTML5 Extras</h3>
+    <table class="ref">
+      <tr><td><code>&lt;details&gt;</code></td><td><code>&lt;summary&gt;</code></td><td><code>&lt;figure&gt;</code></td><td><code>&lt;figcaption&gt;</code></td><td><code>&lt;progress&gt;</code></td><td><code>&lt;meter&gt;</code></td></tr>
+      <tr><td><code>&lt;canvas&gt;</code></td><td><code>&lt;svg&gt;</code></td><td><code>&lt;template&gt;</code></td><td><code>&lt;dialog&gt;</code></td><td></td><td></td></tr>
+    </table>
+    <h3><span class="lt">→</span> Global Attributes</h3>
+    <table class="ref">
+      <tr><td><code>id</code></td><td><code>class</code></td><td><code>style</code></td><td><code>title</code></td><td><code>data-*</code></td><td><code>hidden</code></td></tr>
+      <tr><td><code>tabindex</code></td><td><code>lang</code></td><td><code>contenteditable</code></td><td><code>draggable</code></td><td><code>aria-*</code></td><td></td></tr>
+    </table>
+  </section>
+
+  <section class="chapter" id="ch28">
+    <span class="chnum">CHAPTER 28</span>
+    <h2>HTML Interview Questions</h2>
+    <p class="sub">Beginner to advanced — with answers.</p>
+
+    <h3><span class="lt">→</span> Beginner</h3>
+    <details class="quiz"><summary>What is semantic HTML and why does it matter?</summary><div class="answer">HTML that describes meaning, not just appearance (e.g. &lt;nav&gt; vs a plain &lt;div&gt;). It improves accessibility, SEO, and code readability.</div></details>
+    <details class="quiz"><summary>What's the difference between an HTML element and a tag?</summary><div class="answer">A tag is the markup marker (&lt;p&gt;); an element is the tag plus its content and closing tag.</div></details>
+    <details class="quiz"><summary>What are void/self-closing elements? Name three.</summary><div class="answer">Elements with no closing tag or content: &lt;img&gt;, &lt;br&gt;, &lt;input&gt;, &lt;hr&gt;, &lt;meta&gt;.</div></details>
+    <details class="quiz"><summary>What does the DOCTYPE declaration do?</summary><div class="answer">Tells the browser to render the page in standards mode (HTML5) instead of legacy "quirks mode."</div></details>
+
+    <h3><span class="lt">→</span> Intermediate</h3>
+    <details class="quiz"><summary>What's the difference between &lt;section&gt; and &lt;div&gt;?</summary><div class="answer">&lt;section&gt; carries semantic meaning (a thematic grouping, usually with a heading); &lt;div&gt; is purely a generic, meaningless container.</div></details>
+    <details class="quiz"><summary>How do srcset and sizes improve image performance?</summary><div class="answer">They let the browser choose the most appropriately-sized image file for the current viewport/DPI instead of always downloading one large file.</div></details>
+    <details class="quiz"><summary>What's the difference between async and defer on a &lt;script&gt;?</summary><div class="answer">defer waits until HTML parsing finishes and preserves execution order; async runs as soon as the script downloads, potentially before parsing finishes and out of order relative to other scripts.</div></details>
+    <details class="quiz"><summary>Why should a form input always have an associated &lt;label&gt;?</summary><div class="answer">For accessibility (screen readers announce the label) and usability (clicking the label focuses the input) — placeholder text is not a substitute.</div></details>
+
+    <h3><span class="lt">→</span> Advanced</h3>
+    <details class="quiz"><summary>How does the browser build the DOM from HTML, and how does that relate to the CSSOM and render tree?</summary><div class="answer">The browser tokenizes and parses HTML into the DOM tree; CSS is parsed into the CSSOM; the two are combined into a render tree that determines what's actually painted, skipping non-visual nodes.</div></details>
+    <details class="quiz"><summary>What accessibility tree considerations matter when building a custom widget with divs and ARIA instead of native elements?</summary><div class="answer">You must manually replicate all native behavior: keyboard operability, focus management, correct roles/states via ARIA, and announce changes — native elements provide all this for free, which is why they're preferred when available.</div></details>
+    <details class="quiz"><summary>Why can content-visibility or lazy-loading strategies at the markup level affect Core Web Vitals?</summary><div class="answer">Deferring offscreen images/iframes (loading="lazy") and structuring critical content to render first reduces initial payload and improves metrics like Largest Contentful Paint.</div></details>
+    <details class="quiz"><summary>What's the risk of target="_blank" without rel="noopener", and why does it matter for security?</summary><div class="answer">The newly opened page can access window.opener and potentially redirect the original tab to a malicious page (reverse tabnabbing); rel="noopener" severs that connection.</div></details>
+  </section>
+
+  <section class="chapter" id="ch32">
+    <span class="chnum">CHAPTER 32</span>
+    <h2>Final Projects</h2>
+    <p class="sub">Combine everything from chapters 1–28 into real, structured websites — HTML only, no CSS/JS frameworks required.</p>
+
+    <table class="ref">
+      <tr><th>Project</th><th>What it exercises</th></tr>
+      <tr><td><b>Portfolio Website</b></td><td>Semantic structure (header/nav/main/footer), images with proper alt text, links, a contact form</td></tr>
+      <tr><td><b>Student Management System</b> (static UI)</td><td>Tables with thead/tbody, forms for adding/editing a student, description lists for a profile view</td></tr>
+      <tr><td><b>E-commerce Homepage</b></td><td>Article/section for product cards, figure/figcaption for product images, semantic nav, forms for search/filter</td></tr>
+      <tr><td><b>School Website</b></td><td>Multi-page site with consistent nav, embedded YouTube video, tables for a timetable, forms for admissions inquiry</td></tr>
+      <tr><td><b>Blog</b></td><td>Article-per-post structure, aside for related posts, meta tags for SEO, entities in body copy</td></tr>
+      <tr><td><b>Dashboard</b></td><td>Tables for data, progress/meter elements, details/summary for expandable panels, semantic layout regions</td></tr>
+    </table>
+
+    <div class="callout"><b>How to approach each project:</b> sketch the page as a wireframe first, decide the semantic regions (header/nav/main/aside/footer), then fill each region with the most correct tag for its content — headings, lists, tables, or forms — before touching any styling.</div>
+
+    <div class="exercise-box">
+      <h4>Capstone challenge</h4>
+      Build the Portfolio Website end-to-end using only what's in this course: valid document structure, semantic layout, an image gallery with proper alt text, a project list, and a working contact form — then validate it with the <a href="https://validator.w3.org/" style="color:var(--accent-3)">W3C Markup Validator</a>.
+    </div>
+  </section>
+
+  <section class="chapter" id="roadmap">
+    <span class="chnum">WHAT'S NEXT</span>
+    <h2>Roadmap: Learning CSS &amp; JavaScript After HTML</h2>
+    <p class="sub">HTML gives you structure. Here's where to go next.</p>
+
+    <table class="ref">
+      <tr><th>Stage</th><th>Focus</th></tr>
+      <tr><td>1. CSS Fundamentals</td><td>Selectors, the box model, colors/typography, Flexbox</td></tr>
+      <tr><td>2. CSS Layout</td><td>Grid, responsive design with media queries, mobile-first workflows</td></tr>
+      <tr><td>3. JavaScript Fundamentals</td><td>Variables, functions, the DOM API, events</td></tr>
+      <tr><td>4. Interactive Pages</td><td>Form validation, fetch/APIs, dynamic content updates</td></tr>
+      <tr><td>5. Tooling</td><td>Git/GitHub, a bundler (Vite), and eventually a framework (React) once vanilla JS feels natural</td></tr>
+    </table>
+
+    <div class="callout">Every project in Chapter 32 is a perfect candidate to re-style with CSS and bring to life with JavaScript once you get there — you'll be styling and scripting real structure you already understand.</div>
+  </section>
+
+  <footer class="page">
+    Built as a single-file course — save this page and open it in any browser, no build step required.
+  </footer>
+
+</main>
+</div>
+</body>
+</html>

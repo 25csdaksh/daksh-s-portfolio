@@ -8,12 +8,14 @@ import { ProjectModal } from "./components/ProjectModal";
 import { BlogModal } from "./components/BlogModal";
 import { ResumeModal } from "./components/ResumeModal";
 import { LearningModal } from "./components/LearningModal";
+import { GiftForCodersModal } from "./components/GiftForCodersModal";
 
 import { HeroSection } from "./sections/HeroSection";
 import { AboutSection } from "./sections/AboutSection";
 import { CertificatesSection } from "./sections/CertificatesSection";
 import { ProjectsSection } from "./sections/ProjectsSection";
 import { HackathonsSection } from "./sections/HackathonsSection";
+import { GiftForCodersSection } from "./sections/GiftForCodersSection";
 import { BlogSection } from "./sections/BlogSection";
 import { GithubSection } from "./sections/GithubSection";
 import { ResumeSection } from "./sections/ResumeSection";
@@ -24,7 +26,28 @@ export default function App() {
   const [selectedPost, setSelectedPost] = useState(null);
   const [resumeOpen, setResumeOpen] = useState(false);
   const [learningOpen, setLearningOpen] = useState(false);
+  const [giftOpen, setGiftOpen] = useState(false);
+  const [selectedGiftNoteId, setSelectedGiftNoteId] = useState("c-lang");
   const lenisRef = useRef(null);
+
+  const handleOpenGift = (noteId = "c-lang") => {
+    setSelectedGiftNoteId(noteId);
+    setGiftOpen(true);
+  };
+
+  // Check URL hash for direct links like #gift or #gift-for-coders
+  useEffect(() => {
+    const handleHash = () => {
+      const hash = window.location.hash.toLowerCase();
+      if (hash === "#gift" || hash === "#gift-for-coders" || hash === "#gifts") {
+        const noteParam = new URLSearchParams(window.location.search).get("note");
+        handleOpenGift(noteParam || "c-lang");
+      }
+    };
+    handleHash();
+    window.addEventListener("hashchange", handleHash);
+    return () => window.removeEventListener("hashchange", handleHash);
+  }, []);
 
   // Initialize smooth scroll using Lenis
   useEffect(() => {
@@ -60,7 +83,7 @@ export default function App() {
 
   // Pause background smooth scroll when any modal is open
   useEffect(() => {
-    const isAnyModalOpen = Boolean(selectedProject || selectedPost || resumeOpen || learningOpen);
+    const isAnyModalOpen = Boolean(selectedProject || selectedPost || resumeOpen || learningOpen || giftOpen);
     if (lenisRef.current) {
       if (isAnyModalOpen) {
         lenisRef.current.stop();
@@ -72,7 +95,7 @@ export default function App() {
         document.documentElement.style.overflow = "unset";
       }
     }
-  }, [selectedProject, selectedPost, resumeOpen, learningOpen]);
+  }, [selectedProject, selectedPost, resumeOpen, learningOpen, giftOpen]);
 
   return (
     <div className="relative min-h-screen bg-[#030014] text-white overflow-x-hidden selection:bg-[#A855F7] selection:text-white">
@@ -83,6 +106,7 @@ export default function App() {
       <Navbar
         onOpenResume={() => setResumeOpen(true)}
         onOpenLearning={() => setLearningOpen(true)}
+        onOpenGift={handleOpenGift}
       />
 
       {/* Main Sections */}
@@ -95,6 +119,7 @@ export default function App() {
         <CertificatesSection onOpenLearning={() => setLearningOpen(true)} />
         <ProjectsSection onSelectProject={(p) => setSelectedProject(p)} />
         <HackathonsSection onSelectProject={(p) => setSelectedProject(p)} />
+        <GiftForCodersSection onOpenGiftModal={handleOpenGift} />
         <BlogSection onSelectPost={(post) => setSelectedPost(post)} />
         <GithubSection />
         <ResumeSection onOpenResume={() => setResumeOpen(true)} />
@@ -102,7 +127,10 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <Footer onOpenLearning={() => setLearningOpen(true)} />
+      <Footer
+        onOpenLearning={() => setLearningOpen(true)}
+        onOpenGift={handleOpenGift}
+      />
 
       {/* Interactive Modals */}
       <ProjectModal
@@ -125,6 +153,14 @@ export default function App() {
         isOpen={learningOpen}
         onClose={() => setLearningOpen(false)}
       />
+
+      {/* Dedicated Gift for Coders Interactive Modal */}
+      <GiftForCodersModal
+        isOpen={giftOpen}
+        initialNoteId={selectedGiftNoteId}
+        onClose={() => setGiftOpen(false)}
+      />
     </div>
   );
 }
+

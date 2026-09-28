@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C Language — Full Short Notes</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap');
+
+  :root{
+    --bg: #0f1115;
+    --bg-panel: #161922;
+    --bg-code: #10131a;
+    --border: #262b38;
+    --text: #dde1ea;
+    --text-dim: #838a9c;
+    --text-faint: #565c6e;
+    --accent: #7fb0e8;       /* blue — C is close to the machine, cool tone */
+    --accent-soft: #7fb0e833;
+    --amber: #e8b04b;
+    --pink: #d98ba8;
+    --green: #9fca8a;
+    --radius: 8px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 15.5px;
+    line-height: 1.65;
+    display: flex;
+    min-height: 100vh;
+  }
+
+  ::selection{ background: var(--accent-soft); color: var(--accent); }
+
+  /* ---------- Sidebar ---------- */
+  .sidebar{
+    width: 260px;
+    flex-shrink: 0;
+    background: var(--bg-panel);
+    border-right: 1px solid var(--border);
+    padding: 28px 20px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  .sidebar::-webkit-scrollbar{ width: 6px; }
+  .sidebar::-webkit-scrollbar-thumb{ background: var(--border); border-radius: 4px; }
+
+  .brand{
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--text);
+    margin-bottom: 2px;
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+  .brand span{ color: var(--accent); }
+  .brand-sub{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-faint);
+    margin-bottom: 26px;
+  }
+
+  .nav-group-title{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-faint);
+    margin: 18px 0 6px;
+  }
+  .nav-group-title:first-of-type{ margin-top: 0; }
+
+  .sidebar a{
+    display: block;
+    font-size: 0.83rem;
+    color: var(--text-dim);
+    text-decoration: none;
+    padding: 5px 8px;
+    border-radius: 6px;
+    border-left: 2px solid transparent;
+    transition: color .15s, background .15s, border-color .15s;
+  }
+  .sidebar a:hover{
+    color: var(--text);
+    background: #1c2029;
+  }
+  .sidebar a.active{
+    color: var(--accent);
+    border-left-color: var(--accent);
+    background: var(--accent-soft);
+  }
+
+  /* ---------- Main ---------- */
+  main{
+    flex: 1;
+    max-width: 900px;
+    padding: 48px 56px 120px;
+  }
+
+  .hero{
+    margin-bottom: 48px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-tag{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .hero-tag::before{ content: "// "; color: var(--text-faint); }
+  h1.title{
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2.1rem;
+    font-weight: 700;
+    margin: 0 0 10px;
+    letter-spacing: -0.01em;
+  }
+  .hero-desc{ color: var(--text-dim); max-width: 62ch; font-size: 0.95rem; }
+
+  section{
+    margin-bottom: 46px;
+    scroll-margin-top: 24px;
+  }
+
+  .sec-head{
+    display:flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .sec-num{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--text-faint);
+  }
+  h2{
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--text);
+  }
+  h2 .sub{ color: var(--text-faint); font-weight: 400; font-size: 0.95rem; }
+
+  p{ color: var(--text-dim); margin: 0 0 12px; }
+
+  .explain{
+    background: #141824;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 10px 16px;
+    font-size: 0.87rem;
+    color: var(--text-dim);
+    margin: 0 0 14px;
+  }
+  .explain strong{ color: var(--text); }
+
+  /* code blocks */
+  pre{
+    background: var(--bg-code);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    overflow-x: auto;
+    margin: 10px 0 16px;
+  }
+  code{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    line-height: 1.6;
+  }
+  p code, li code, td code{
+    background: #1c2029;
+    border: 1px solid var(--border);
+    padding: 1px 6px;
+    border-radius: 4px;
+    color: var(--amber);
+    font-size: 0.8rem;
+  }
+  pre code{ color: var(--text); }
+  .kw{ color: var(--accent); }      /* keywords: int, if, for */
+  .typ{ color: var(--green); }      /* types */
+  .val{ color: var(--amber); }      /* literals/values */
+  .fn{ color: var(--pink); }        /* function/identifier names */
+  .cmt{ color: var(--text-faint); font-style: italic; }
+  .punc{ color: var(--text-dim); }
+
+  /* tables */
+  table{
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0 16px;
+    font-size: 0.85rem;
+  }
+  th, td{
+    text-align: left;
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  th{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-faint);
+    font-weight: 500;
+  }
+  td{ color: var(--text-dim); }
+  tr:last-child td{ border-bottom: none; }
+
+  ul, ol{ color: var(--text-dim); margin: 0 0 14px; padding-left: 22px; }
+  li{ margin-bottom: 5px; }
+  li strong{ color: var(--text); }
+
+  .callout{
+    display: flex;
+    gap: 10px;
+    background: #1a2420;
+    border: 1px solid #2b4038;
+    border-left: 3px solid var(--green);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    font-size: 0.85rem;
+    color: #b8ccb4;
+    margin: 12px 0;
+  }
+
+  /* memory diagram signature element */
+  .mem-diagram{
+    display: flex;
+    gap: 10px;
+    margin: 18px 0 22px;
+    flex-wrap: wrap;
+  }
+  .mem-block{
+    flex: 1;
+    min-width: 140px;
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .mem-block .label{ font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.75; margin-bottom: 4px; }
+  .mem-block .val-ex{ font-size: 0.95rem; font-weight: 600; }
+  .mem-stack{ background: #182028; border: 1px solid #3a5266; color: #8bb8d9; }
+  .mem-heap{ background: #23181c; border: 1px solid #6b4550; color: #d98ba8; }
+  .mem-code{ background: #1e2418; border: 1px solid #5c6b3a; color: #c9d98b; }
+
+  footer{
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-faint);
+  }
+
+  @media (max-width: 860px){
+    body{ flex-direction: column; }
+    .sidebar{ position: relative; width: 100%; height: auto; border-right:none; border-bottom: 1px solid var(--border); }
+    main{ padding: 32px 22px 80px; }
+  }
+
+  a:focus-visible, button:focus-visible{
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+</style>
+</head>
+<body>
+
+<nav class="sidebar" id="sidebar">
+  <div class="brand"><span>c</span>notes.h</div>
+  <div class="brand-sub">// full reference · dark mode</div>
+
+  <div class="nav-group-title">Foundations</div>
+  <a href="#intro">01 · What is C</a>
+  <a href="#structure">02 · Program Structure</a>
+  <a href="#datatypes">03 · Data Types</a>
+  <a href="#variables">04 · Variables &amp; Constants</a>
+  <a href="#io">05 · Input / Output</a>
+
+  <div class="nav-group-title">Operators &amp; Flow</div>
+  <a href="#operators">06 · Operators</a>
+  <a href="#conditional">07 · Conditional Statements</a>
+  <a href="#loops">08 · Loops</a>
+  <a href="#jump">09 · Jump Statements</a>
+
+  <div class="nav-group-title">Building Blocks</div>
+  <a href="#functions">10 · Functions</a>
+  <a href="#storage">11 · Storage Classes</a>
+  <a href="#arrays">12 · Arrays</a>
+  <a href="#strings">13 · Strings</a>
+
+  <div class="nav-group-title">Memory &amp; Data</div>
+  <a href="#pointers">14 · Pointers</a>
+  <a href="#memalloc">15 · Dynamic Memory</a>
+  <a href="#structures">16 · Structures</a>
+  <a href="#unions">17 · Unions</a>
+
+  <div class="nav-group-title">Advanced</div>
+  <a href="#preprocessor">18 · Preprocessor Directives</a>
+  <a href="#filehandling">19 · File Handling</a>
+  <a href="#unitref">20 · Format Specifiers</a>
+  <a href="#practices">21 · Best Practices</a>
+</nav>
+
+<main>
+  <div class="hero">
+    <div class="hero-tag">c-notes.h</div>
+    <h1 class="title">C Language — Full Short Notes</h1>
+    <p class="hero-desc">A complete, beginner-friendly reference for revision: syntax, data types, control flow, functions, pointers, memory, and file handling — with a plain-English explanation before every code block.</p>
+  </div>
+
+  <section id="intro">
+    <div class="sec-head"><span class="sec-num">01</span><h2>What is C</h2></div>
+    <div class="explain"><strong>In plain terms:</strong> C is a general-purpose, procedural programming language created in 1972 by Dennis Ritchie. It's called a "middle-level" language — close enough to hardware to manage memory directly, but readable enough for humans. Most modern languages (C++, Java, Python's interpreter, even parts of an OS kernel) are influenced by or built using C.</div>
+    <ul>
+      <li>Procedural — code runs as a sequence of instructions inside functions</li>
+      <li>Compiled — source code is translated to machine code before running</li>
+      <li>Statically typed — every variable's type is fixed at compile time</li>
+      <li>Gives direct access to memory via pointers</li>
+    </ul>
+  </section>
+
+  <section id="structure">
+    <div class="sec-head"><span class="sec-num">02</span><h2>Program Structure</h2></div>
+    <div class="explain">Every C program needs at least one function called <code>main()</code> — that's where execution starts. <code>#include</code> pulls in ready-made code (like <code>printf</code>) from library files.</div>
+    <pre><code><span class="kw">#include</span> <span class="val">&lt;stdio.h&gt;</span>  <span class="cmt">// bring in input/output functions</span>
+
+<span class="typ">int</span> <span class="fn">main</span><span class="punc">()</span> <span class="punc">{</span>
+    <span class="fn">printf</span><span class="punc">(</span><span class="val">"Hello, World!"</span><span class="punc">);</span>  <span class="cmt">// print text to screen</span>
+    <span class="kw">return</span> <span class="val">0</span><span class="punc">;</span>  <span class="cmt">// tells OS the program ended successfully</span>
+<span class="punc">}</span></code></pre>
+  </section>
+
+  <section id="datatypes">
+    <div class="sec-head"><span class="sec-num">03</span><h2>Data Types</h2></div>
+    <div class="explain">A data type tells the compiler what kind of value a variable holds and how much memory to set aside for it.</div>
+    <table>
+      <tr><th>Type</th><th>Meaning</th><th>Typical Size</th></tr>
+      <tr><td><code>int</code></td><td>Whole numbers</td><td>4 bytes</td></tr>
+      <tr><td><code>float</code></td><td>Decimal numbers</td><td>4 bytes</td></tr>
+      <tr><td><code>double</code></td><td>Higher-precision decimals</td><td>8 bytes</td></tr>
+      <tr><td><code>char</code></td><td>Single character</td><td>1 byte</td></tr>
+      <tr><td><code>void</code></td><td>"No value" — used for functions returning nothing</td><td>—</td></tr>
+    </table>
+    <p>Modifiers change range/size: <code>short</code>, <code>long</code>, <code>signed</code>, <code>unsigned</code> (e.g. <code>unsigned long int</code>).</p>
+  </section>
+
+  <section id="variables">
+    <div class="sec-head"><span class="sec-num">04</span><h2>Variables &amp; Constants</h2></div>
+    <div class="explain">A variable is a named box in memory that can hold a value and change over time. A constant is a box whose value is locked once set.</div>
+    <pre><code><span class="typ">int</span> age <span class="punc">=</span> <span class="val">21</span><span class="punc">;</span>              <span class="cmt">// variable — can change</span>
+<span class="kw">const</span> <span class="typ">float</span> PI <span class="punc">=</span> <span class="val">3.14</span><span class="punc">;</span>       <span class="cmt">// constant — cannot change</span>
+<span class="kw">#define</span> MAX <span class="val">100</span>              <span class="cmt">// preprocessor constant</span></code></pre>
+  </section>
+
+  <section id="io">
+    <div class="sec-head"><span class="sec-num">05</span><h2>Input / Output</h2></div>
+    <div class="explain"><code>printf</code> displays output; <code>scanf</code> reads input from the keyboard. Both use format specifiers like <code>%d</code> to know what type of data to handle.</div>
+    <pre><code><span class="typ">int</span> num<span class="punc">;</span>
+<span class="fn">printf</span><span class="punc">(</span><span class="val">"Enter a number: "</span><span class="punc">);</span>
+<span class="fn">scanf</span><span class="punc">(</span><span class="val">"%d"</span><span class="punc">,</span> &amp;num<span class="punc">);</span>   <span class="cmt">// & gives the memory address of num</span>
+<span class="fn">printf</span><span class="punc">(</span><span class="val">"You entered %d"</span><span class="punc">,</span> num<span class="punc">);</span></code></pre>
+  </section>
+
+  <section id="operators">
+    <div class="sec-head"><span class="sec-num">06</span><h2>Operators</h2></div>
+    <div class="explain">Operators perform actions on values (operands) — math, comparisons, logic, or bit-level tricks.</div>
+    <table>
+      <tr><th>Category</th><th>Examples</th></tr>
+      <tr><td>Arithmetic</td><td><code>+ - * / %</code></td></tr>
+      <tr><td>Relational</td><td><code>== != &gt; &lt; &gt;= &lt;=</code></td></tr>
+      <tr><td>Logical</td><td><code>&amp;&amp; || !</code></td></tr>
+      <tr><td>Assignment</td><td><code>= += -= *= /=</code></td></tr>
+      <tr><td>Increment/Decrement</td><td><code>++ --</code></td></tr>
+      <tr><td>Bitwise</td><td><code>&amp; | ^ ~ &lt;&lt; &gt;&gt;</code></td></tr>
+    </table>
+  </section>
+
+  <section id="conditional">
+    <div class="sec-head"><span class="sec-num">07</span><h2>Conditional Statements</h2></div>
+    <div class="explain">These let the program choose different paths depending on whether a condition is true or false.</div>
+    <pre><code><span class="kw">if</span> <span class="punc">(</span>age <span class="punc">&gt;=</span> <span class="val">18</span><span class="punc">)</span> <span class="punc">{</span>
+    <span class="fn">printf</span><span class="punc">(</span><span class="val">"Adult"</span><span class="punc">);</span>
+<span class="punc">}</span> <span class="kw">else</span> <span class="punc">{</span>
+    <span class="fn">printf</span><span class="punc">(</span><span class="val">"Minor"</span><span class="punc">);</span>
+<span class="punc">}</span>
+
+<span class="kw">switch</span> <span class="punc">(</span>grade<span class="punc">)</span> <span class="punc">{</span>
+    <span class="kw">case</span> <span class="val">'A'</span><span class="punc">:</span> <span class="fn">printf</span><span class="punc">(</span><span class="val">"Excellent"</span><span class="punc">);</span> <span class="kw">break</span><span class="punc">;</span>
+    <span class="kw">default</span><span class="punc">:</span> <span class="fn">printf</span><span class="punc">(</span><span class="val">"Invalid"</span><span class="punc">);</span>
+<span class="punc">}</span></code></pre>
+  </section>
+
+  <section id="loops">
+    <div class="sec-head"><span class="sec-num">08</span><h2>Loops</h2></div>
+    <div class="explain">Loops repeat a block of code while a condition holds — used for counting, iterating over data, or repeating a task until done.</div>
+    <pre><code><span class="kw">for</span> <span class="punc">(</span><span class="typ">int</span> i <span class="punc">=</span> <span class="val">0</span><span class="punc">;</span> i <span class="punc">&lt;</span> <span class="val">5</span><span class="punc">;</span> i<span class="punc">++)</span> <span class="punc">{</span>   <span class="cmt">// runs exactly 5 times</span>
+    <span class="fn">printf</span><span class="punc">(</span><span class="val">"%d "</span><span class="punc">,</span> i<span class="punc">);</span>
+<span class="punc">}</span>
+
+<span class="kw">while</span> <span class="punc">(</span>n <span class="punc">&gt;</span> <span class="val">0</span><span class="punc">)</span> <span class="punc">{</span>                 <span class="cmt">// checks condition BEFORE running</span>
+    n<span class="punc">--;</span>
+<span class="punc">}</span>
+
+<span class="kw">do</span> <span class="punc">{</span>
+    n<span class="punc">++;</span>
+<span class="punc">}</span> <span class="kw">while</span> <span class="punc">(</span>n <span class="punc">&lt;</span> <span class="val">5</span><span class="punc">);</span>            <span class="cmt">// runs body at least once, checks AFTER</span></code></pre>
+  </section>
+
+  <section id="jump">
+    <div class="sec-head"><span class="sec-num">09</span><h2>Jump Statements</h2></div>
+    <div class="explain">These break the normal top-to-bottom flow of execution.</div>
+    <ul>
+      <li><code>break</code> — exits a loop or switch immediately</li>
+      <li><code>continue</code> — skips to the next loop iteration</li>
+      <li><code>goto label;</code> — jumps to a labeled line (rarely used, hurts readability)</li>
+      <li><code>return</code> — exits a function, optionally sending back a value</li>
+    </ul>
+  </section>
+
+  <section id="functions">
+    <div class="sec-head"><span class="sec-num">10</span><h2>Functions</h2></div>
+    <div class="explain">A function is a named, reusable block of code. It can take inputs (parameters) and send back an output (return value), which keeps programs organized and avoids repeating code.</div>
+    <pre><code><span class="typ">int</span> <span class="fn">add</span><span class="punc">(</span><span class="typ">int</span> a<span class="punc">,</span> <span class="typ">int</span> b<span class="punc">)</span> <span class="punc">{</span>   <span class="cmt">// declaration + definition</span>
+    <span class="kw">return</span> a <span class="punc">+</span> b<span class="punc">;</span>
+<span class="punc">}</span>
+
+<span class="typ">int</span> <span class="fn">main</span><span class="punc">()</span> <span class="punc">{</span>
+    <span class="typ">int</span> sum <span class="punc">=</span> <span class="fn">add</span><span class="punc">(</span><span class="val">3</span><span class="punc">,</span> <span class="val">4</span><span class="punc">);</span>       <span class="cmt">// calling the function</span>
+<span class="punc">}</span></code></pre>
+  </section>
+
+  <section id="storage">
+    <div class="sec-head"><span class="sec-num">11</span><h2>Storage Classes</h2></div>
+    <div class="explain">A storage class controls a variable's <strong>lifetime</strong> (how long it exists) and <strong>scope</strong> (where it's visible).</div>
+    <table>
+      <tr><th>Class</th><th>Meaning</th></tr>
+      <tr><td><code>auto</code></td><td>Default for local variables, exists only inside its block</td></tr>
+      <tr><td><code>static</code></td><td>Keeps its value between function calls</td></tr>
+      <tr><td><code>extern</code></td><td>Refers to a variable defined in another file</td></tr>
+      <tr><td><code>register</code></td><td>Hints the compiler to store it in a CPU register for speed</td></tr>
+    </table>
+  </section>
+
+  <section id="arrays">
+    <div class="sec-head"><span class="sec-num">12</span><h2>Arrays</h2></div>
+    <div class="explain">An array stores multiple values of the <strong>same type</strong> under one name, in a contiguous block of memory, accessed by index (starting at 0).</div>
+    <pre><code><span class="typ">int</span> nums<span class="punc">[</span><span class="val">5</span><span class="punc">]</span> <span class="punc">=</span> <span class="punc">{</span><span class="val">10</span><span class="punc">,</span> <span class="val">20</span><span class="punc">,</span> <span class="val">30</span><span class="punc">,</span> <span class="val">40</span><span class="punc">,</span> <span class="val">50</span><span class="punc">};</span>
+<span class="fn">printf</span><span class="punc">(</span><span class="val">"%d"</span><span class="punc">,</span> nums<span class="punc">[</span><span class="val">0</span><span class="punc">]);</span>   <span class="cmt">// prints 10 — first element</span>
+
+<span class="typ">int</span> matrix<span class="punc">[</span><span class="val">2</span><span class="punc">][</span><span class="val">3</span><span class="punc">];</span>          <span class="cmt">// 2D array: 2 rows, 3 columns</span></code></pre>
+  </section>
+
+  <section id="strings">
+    <div class="sec-head"><span class="sec-num">13</span><h2>Strings</h2></div>
+    <div class="explain">C has no built-in string type — a string is just a <code>char</code> array ending in a null character <code>'\0'</code> that marks where it stops.</div>
+    <pre><code><span class="typ">char</span> name<span class="punc">[]</span> <span class="punc">=</span> <span class="val">"Alex"</span><span class="punc">;</span>     <span class="cmt">// stored as A l e x \0</span>
+<span class="fn">strlen</span><span class="punc">(</span>name<span class="punc">);</span>            <span class="cmt">// length, excluding \0</span>
+<span class="fn">strcpy</span><span class="punc">(</span>dest<span class="punc">,</span> name<span class="punc">);</span>     <span class="cmt">// copy string</span>
+<span class="fn">strcat</span><span class="punc">(</span>a<span class="punc">,</span> b<span class="punc">);</span>            <span class="cmt">// join/concatenate strings</span>
+<span class="fn">strcmp</span><span class="punc">(</span>a<span class="punc">,</span> b<span class="punc">);</span>            <span class="cmt">// compare, returns 0 if equal</span></code></pre>
+  </section>
+
+  <section id="pointers">
+    <div class="sec-head"><span class="sec-num">14</span><h2>Pointers</h2></div>
+    <div class="explain">A pointer is a variable that stores a <strong>memory address</strong> instead of a normal value. <code>&amp;</code> gets an address; <code>*</code> follows a pointer to reach the value it points to. This is the feature that gives C its low-level power.</div>
+    <pre><code><span class="typ">int</span> x <span class="punc">=</span> <span class="val">10</span><span class="punc">;</span>
+<span class="typ">int</span> <span class="punc">*</span>p <span class="punc">=</span> &amp;x<span class="punc">;</span>        <span class="cmt">// p now holds the address of x</span>
+<span class="fn">printf</span><span class="punc">(</span><span class="val">"%d"</span><span class="punc">,</span> <span class="punc">*</span>p<span class="punc">);</span>  <span class="cmt">// *p "dereferences" p → prints 10</span></code></pre>
+    <div class="callout">Rule of thumb: <code>&amp;</code> means "address of", <code>*</code> means "value at this address".</div>
+  </section>
+
+  <section id="memalloc">
+    <div class="sec-head"><span class="sec-num">15</span><h2>Dynamic Memory</h2></div>
+    <div class="explain">Normal variables live on the <strong>stack</strong> and are cleaned up automatically. Dynamic memory is requested from the <strong>heap</strong> at runtime with <code>malloc</code>/<code>calloc</code>, and must be released manually with <code>free</code> — otherwise it causes a memory leak.</div>
+    <div class="mem-diagram">
+      <div class="mem-block mem-code"><div class="label">code</div><div class="val-ex">instructions</div></div>
+      <div class="mem-block mem-stack"><div class="label">stack</div><div class="val-ex">local vars</div></div>
+      <div class="mem-block mem-heap"><div class="label">heap</div><div class="val-ex">malloc / free</div></div>
+    </div>
+    <pre><code><span class="typ">int</span> <span class="punc">*</span>arr <span class="punc">=</span> <span class="punc">(</span><span class="typ">int</span> <span class="punc">*)</span><span class="fn">malloc</span><span class="punc">(</span><span class="val">5</span> <span class="punc">*</span> <span class="kw">sizeof</span><span class="punc">(</span><span class="typ">int</span><span class="punc">));</span>  <span class="cmt">// request memory for 5 ints</span>
+<span class="fn">free</span><span class="punc">(</span>arr<span class="punc">);</span>   <span class="cmt">// release it back when done</span></code></pre>
+  </section>
+
+  <section id="structures">
+    <div class="sec-head"><span class="sec-num">16</span><h2>Structures</h2></div>
+    <div class="explain">A <code>struct</code> groups related variables of <strong>different types</strong> under one name — useful for modeling a real-world "thing" like a student or point.</div>
+    <pre><code><span class="kw">struct</span> Student <span class="punc">{</span>
+    <span class="typ">char</span> name<span class="punc">[</span><span class="val">30</span><span class="punc">];</span>
+    <span class="typ">int</span> age<span class="punc">;</span>
+<span class="punc">};</span>
+
+<span class="kw">struct</span> Student s1 <span class="punc">=</span> <span class="punc">{</span><span class="val">"Sam"</span><span class="punc">,</span> <span class="val">20</span><span class="punc">};</span>
+<span class="fn">printf</span><span class="punc">(</span><span class="val">"%s"</span><span class="punc">,</span> s1<span class="punc">.</span>name<span class="punc">);</span>  <span class="cmt">// . accesses a member</span></code></pre>
+  </section>
+
+  <section id="unions">
+    <div class="sec-head"><span class="sec-num">17</span><h2>Unions</h2></div>
+    <div class="explain">A <code>union</code> looks like a struct but all members <strong>share the same memory</strong> — only one member holds a valid value at a time. Useful for saving memory when you only need one of several types at once.</div>
+    <pre><code><span class="kw">union</span> Data <span class="punc">{</span>
+    <span class="typ">int</span> i<span class="punc">;</span>
+    <span class="typ">float</span> f<span class="punc">;</span>
+<span class="punc">};</span>  <span class="cmt">// size = size of largest member, not the sum</span></code></pre>
+  </section>
+
+  <section id="preprocessor">
+    <div class="sec-head"><span class="sec-num">18</span><h2>Preprocessor Directives</h2></div>
+    <div class="explain">Lines starting with <code>#</code> run <strong>before compilation</strong> — they edit the source text itself (inserting files, replacing macros, or including/excluding code blocks).</div>
+    <pre><code><span class="kw">#include</span> <span class="val">&lt;stdio.h&gt;</span>   <span class="cmt">// include a header file</span>
+<span class="kw">#define</span> PI <span class="val">3.14</span>      <span class="cmt">// text substitution macro</span>
+<span class="kw">#ifdef</span> DEBUG <span class="cmt">... #endif</span>  <span class="cmt">// conditional compilation</span></code></pre>
+  </section>
+
+  <section id="filehandling">
+    <div class="sec-head"><span class="sec-num">19</span><h2>File Handling</h2></div>
+    <div class="explain">C reads/writes files through a <code>FILE</code> pointer. Always check that the file opened successfully, and close it when done to flush data and free resources.</div>
+    <pre><code><span class="typ">FILE</span> <span class="punc">*</span>fp <span class="punc">=</span> <span class="fn">fopen</span><span class="punc">(</span><span class="val">"data.txt"</span><span class="punc">,</span> <span class="val">"w"</span><span class="punc">);</span>  <span class="cmt">// open for writing</span>
+<span class="kw">if</span> <span class="punc">(</span>fp <span class="punc">!=</span> <span class="val">NULL</span><span class="punc">)</span> <span class="punc">{</span>
+    <span class="fn">fprintf</span><span class="punc">(</span>fp<span class="punc">,</span> <span class="val">"Hello file"</span><span class="punc">);</span>
+    <span class="fn">fclose</span><span class="punc">(</span>fp<span class="punc">);</span>   <span class="cmt">// always close what you open</span>
+<span class="punc">}</span></code></pre>
+    <p>Modes: <code>"r"</code> read, <code>"w"</code> write (overwrite), <code>"a"</code> append, <code>"r+"</code> read &amp; write.</p>
+  </section>
+
+  <section id="unitref">
+    <div class="sec-head"><span class="sec-num">20</span><h2>Format Specifiers</h2></div>
+    <table>
+      <tr><th>Specifier</th><th>Type</th></tr>
+      <tr><td><code>%d</code></td><td>int</td></tr>
+      <tr><td><code>%f</code></td><td>float</td></tr>
+      <tr><td><code>%lf</code></td><td>double</td></tr>
+      <tr><td><code>%c</code></td><td>char</td></tr>
+      <tr><td><code>%s</code></td><td>string</td></tr>
+      <tr><td><code>%p</code></td><td>pointer/address</td></tr>
+      <tr><td><code>%x</code></td><td>hexadecimal</td></tr>
+    </table>
+  </section>
+
+  <section id="practices">
+    <div class="sec-head"><span class="sec-num">21</span><h2>Best Practices</h2></div>
+    <ul>
+      <li>Always initialize variables before use</li>
+      <li>Check <code>malloc</code>/<code>fopen</code> return values for <code>NULL</code> before using them</li>
+      <li><code>free()</code> everything you <code>malloc()</code> — pair every allocation with a release</li>
+      <li>Avoid <code>goto</code> — prefer loops and functions for control flow</li>
+      <li>Use meaningful variable names, not single letters (except loop counters)</li>
+      <li>Compile with warnings on (<code>-Wall</code>) and fix them, don't ignore them</li>
+    </ul>
+  </section>
+
+  <footer>// end of c-notes.h — happy revising</footer>
+</main>
+
+<script>
+  const links = document.querySelectorAll('.sidebar a');
+  const sections = Array.from(links).map(l => document.querySelector(l.getAttribute('href')));
+
+  function onScroll(){
+    let idx = 0;
+    const scrollPos = window.scrollY + 120;
+    sections.forEach((sec, i) => {
+      if (sec && sec.offsetTop <= scrollPos) idx = i;
+    });
+    links.forEach(l => l.classList.remove('active'));
+    if (links[idx]) links[idx].classList.add('active');
+  }
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+</script>
+
+</body>
+</html>

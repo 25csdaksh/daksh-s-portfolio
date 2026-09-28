@@ -58,7 +58,18 @@ export function GiftForCodersModal({ isOpen, onClose, initialNoteId = "c-lang" }
   const getIcon = (id) => {
     if (id === "c-lang") return <Code className="w-4 h-4 text-blue-400" />;
     if (id === "html-course") return <FileCode2 className="w-4 h-4 text-orange-400" />;
-    return <Palette className="w-4 h-4 text-teal-400" />;
+    if (id === "css-notes") return <Palette className="w-4 h-4 text-teal-400" />;
+    if (id === "js-notes") return <Sparkles className="w-4 h-4 text-amber-400" />;
+    return <Layers className="w-4 h-4 text-cyan-400" />;
+  };
+
+  const getNoteLabel = (id) => {
+    if (id === "c-lang") return "C Language";
+    if (id === "html-course") return "HTML (32 Ch)";
+    if (id === "css-notes") return "CSS Notes";
+    if (id === "js-notes") return "JavaScript";
+    if (id === "react-notes") return "React.js";
+    return "Note";
   };
 
   const filteredChapters = currentNote.chapters.filter((ch) =>
@@ -101,7 +112,7 @@ export function GiftForCodersModal({ isOpen, onClose, initialNoteId = "c-lang" }
                 <h3 className="font-heading text-base sm:text-lg font-black tracking-tight text-white flex items-center gap-1.5">
                   <span>Gift for Coders</span>
                   <span className="hidden sm:inline-block px-2 py-0.5 rounded-full bg-amber-400/20 text-amber-300 text-[10px] font-mono font-bold border border-amber-400/40">
-                    FREE MASTER NOTES
+                    5 MASTER NOTES
                   </span>
                 </h3>
               </div>
@@ -179,14 +190,14 @@ export function GiftForCodersModal({ isOpen, onClose, initialNoteId = "c-lang" }
                     setSelectedNoteId(note.id);
                   }}
                   onMouseEnter={() => soundManager.playHover()}
-                  className={`px-3 sm:px-4 py-1.5 rounded-xl font-mono text-xs font-bold transition-all duration-200 flex items-center gap-2 shrink-0 ${
+                  className={`px-3 sm:px-3.5 py-1.5 rounded-xl font-mono text-xs font-bold transition-all duration-200 flex items-center gap-1.5 shrink-0 ${
                     isSelected
                       ? "bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md shadow-purple-600/30 border border-purple-300"
                       : "bg-[#140a3e] text-slate-300 hover:text-white hover:bg-[#1f1057] border border-purple-500/20"
                   }`}
                 >
                   {getIcon(note.id)}
-                  <span>{note.id === "c-lang" ? "C Language" : note.id === "html-course" ? "HTML Course (32 Ch)" : "CSS Full Notes"}</span>
+                  <span>{getNoteLabel(note.id)}</span>
                 </button>
               );
             })}

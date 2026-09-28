@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JavaScript — Full Short Notes</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap');
+
+  :root{
+    --bg: #0f1115;
+    --bg-panel: #161922;
+    --bg-code: #10131a;
+    --border: #262b38;
+    --text: #dde1ea;
+    --text-dim: #838a9c;
+    --text-faint: #565c6e;
+    --accent: #e8c25a;       /* warm gold — nod to JS brand yellow, muted for dark UI */
+    --accent-soft: #e8c25a33;
+    --blue: #7fb0e8;
+    --pink: #d98ba8;
+    --green: #9fca8a;
+    --radius: 8px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 15.5px;
+    line-height: 1.65;
+    display: flex;
+    min-height: 100vh;
+  }
+
+  ::selection{ background: var(--accent-soft); color: var(--accent); }
+
+  /* ---------- Sidebar ---------- */
+  .sidebar{
+    width: 260px;
+    flex-shrink: 0;
+    background: var(--bg-panel);
+    border-right: 1px solid var(--border);
+    padding: 28px 20px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  .sidebar::-webkit-scrollbar{ width: 6px; }
+  .sidebar::-webkit-scrollbar-thumb{ background: var(--border); border-radius: 4px; }
+
+  .brand{
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--text);
+    margin-bottom: 2px;
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+  .brand span{ color: var(--accent); }
+  .brand-sub{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-faint);
+    margin-bottom: 26px;
+  }
+
+  .nav-group-title{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-faint);
+    margin: 18px 0 6px;
+  }
+  .nav-group-title:first-of-type{ margin-top: 0; }
+
+  .sidebar a{
+    display: block;
+    font-size: 0.83rem;
+    color: var(--text-dim);
+    text-decoration: none;
+    padding: 5px 8px;
+    border-radius: 6px;
+    border-left: 2px solid transparent;
+    transition: color .15s, background .15s, border-color .15s;
+  }
+  .sidebar a:hover{
+    color: var(--text);
+    background: #1c2029;
+  }
+  .sidebar a.active{
+    color: var(--accent);
+    border-left-color: var(--accent);
+    background: var(--accent-soft);
+  }
+
+  /* ---------- Main ---------- */
+  main{
+    flex: 1;
+    max-width: 900px;
+    padding: 48px 56px 120px;
+  }
+
+  .hero{
+    margin-bottom: 48px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-tag{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .hero-tag::before{ content: "// "; color: var(--text-faint); }
+  h1.title{
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2.1rem;
+    font-weight: 700;
+    margin: 0 0 10px;
+    letter-spacing: -0.01em;
+  }
+  .hero-desc{ color: var(--text-dim); max-width: 62ch; font-size: 0.95rem; }
+
+  section{
+    margin-bottom: 46px;
+    scroll-margin-top: 24px;
+  }
+
+  .sec-head{
+    display:flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .sec-num{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--text-faint);
+  }
+  h2{
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--text);
+  }
+  h2 .sub{ color: var(--text-faint); font-weight: 400; font-size: 0.95rem; }
+
+  p{ color: var(--text-dim); margin: 0 0 12px; }
+
+  .explain{
+    background: #1c1810;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 10px 16px;
+    font-size: 0.87rem;
+    color: var(--text-dim);
+    margin: 0 0 14px;
+  }
+  .explain strong{ color: var(--text); }
+
+  /* code blocks */
+  pre{
+    background: var(--bg-code);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    overflow-x: auto;
+    margin: 10px 0 16px;
+  }
+  code{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    line-height: 1.6;
+  }
+  p code, li code, td code{
+    background: #1c2029;
+    border: 1px solid var(--border);
+    padding: 1px 6px;
+    border-radius: 4px;
+    color: var(--accent);
+    font-size: 0.8rem;
+  }
+  pre code{ color: var(--text); }
+  .kw{ color: var(--blue); }        /* keywords: const, function, if, return */
+  .typ{ color: var(--green); }      /* built-ins / types */
+  .val{ color: var(--accent); }     /* literals/values */
+  .fn{ color: var(--pink); }        /* function/method names */
+  .cmt{ color: var(--text-faint); font-style: italic; }
+  .punc{ color: var(--text-dim); }
+
+  /* tables */
+  table{
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0 16px;
+    font-size: 0.85rem;
+  }
+  th, td{
+    text-align: left;
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  th{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-faint);
+    font-weight: 500;
+  }
+  td{ color: var(--text-dim); }
+  tr:last-child td{ border-bottom: none; }
+
+  ul, ol{ color: var(--text-dim); margin: 0 0 14px; padding-left: 22px; }
+  li{ margin-bottom: 5px; }
+  li strong{ color: var(--text); }
+
+  .callout{
+    display: flex;
+    gap: 10px;
+    background: #1a2420;
+    border: 1px solid #2b4038;
+    border-left: 3px solid var(--green);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    font-size: 0.85rem;
+    color: #b8ccb4;
+    margin: 12px 0;
+  }
+
+  /* event loop diagram — signature element */
+  .loop{
+    display: flex;
+    gap: 10px;
+    margin: 18px 0 22px;
+    flex-wrap: wrap;
+  }
+  .lnode{
+    flex: 1;
+    min-width: 140px;
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .lnode .label{ font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.75; margin-bottom: 4px; }
+  .lnode .val-ex{ font-size: 0.88rem; font-weight: 600; }
+  .l1{ background: #182028; border: 1px solid #3a5266; color: #8bb8d9; }
+  .l2{ background: #1c1810; border: 1px solid #6b5b2f; color: #e8c25a; }
+  .l3{ background: #23181c; border: 1px solid #6b4550; color: #d98ba8; }
+
+  footer{
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-faint);
+  }
+
+  @media (max-width: 860px){
+    body{ flex-direction: column; }
+    .sidebar{ position: relative; width: 100%; height: auto; border-right:none; border-bottom: 1px solid var(--border); }
+    main{ padding: 32px 22px 80px; }
+  }
+
+  a:focus-visible, button:focus-visible{
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+</style>
+</head>
+<body>
+
+<nav class="sidebar" id="sidebar">
+  <div class="brand"><span>js</span>notes.js</div>
+  <div class="brand-sub">// full reference · dark mode</div>
+
+  <div class="nav-group-title">Foundations</div>
+  <a href="#intro">01 · What is JavaScript</a>
+  <a href="#variables">02 · Variables</a>
+  <a href="#datatypes">03 · Data Types</a>
+  <a href="#operators">04 · Operators</a>
+
+  <div class="nav-group-title">Control Flow</div>
+  <a href="#conditional">05 · Conditionals</a>
+  <a href="#loops">06 · Loops</a>
+  <a href="#functions">07 · Functions</a>
+  <a href="#arrow">08 · Arrow Functions</a>
+  <a href="#scope">09 · Scope &amp; Hoisting</a>
+  <a href="#closures">10 · Closures</a>
+
+  <div class="nav-group-title">Data Structures</div>
+  <a href="#arrays">11 · Arrays</a>
+  <a href="#arraymethods">12 · Array Methods</a>
+  <a href="#objects">13 · Objects</a>
+  <a href="#destructuring">14 · Destructuring</a>
+  <a href="#spread">15 · Spread &amp; Rest</a>
+
+  <div class="nav-group-title">Modern JS &amp; Async</div>
+  <a href="#this">16 · The "this" Keyword</a>
+  <a href="#classes">17 · Classes</a>
+  <a href="#promises">18 · Promises &amp; Async/Await</a>
+  <a href="#eventloop">19 · Event Loop</a>
+
+  <div class="nav-group-title">Browser &amp; Reference</div>
+  <a href="#dom">20 · DOM &amp; Events</a>
+  <a href="#json">21 · JSON &amp; Error Handling</a>
+  <a href="#practices">22 · Best Practices</a>
+</nav>
+
+<main>
+  <div class="hero">
+    <div class="hero-tag">js-notes.js</div>
+    <h1 class="title">JavaScript — Full Short Notes</h1>
+    <p class="hero-desc">Ek complete, beginner-friendly reference revision mate: variables, functions, arrays/objects, closures, promises ane DOM — dar code block pehla simple explanation sathe.</p>
+  </div>
+
+  <section id="intro">
+    <div class="sec-head"><span class="sec-num">01</span><h2>What is JavaScript</h2></div>
+    <div class="explain"><strong>Simple bhasha ma:</strong> JavaScript ek programming language chhe je webpages ne interactive banave chhe — HTML structure ape chhe, CSS style ape chhe, ane JavaScript behavior/logic ape chhe (clicks, animations, data fetching, etc). It runs directly in the browser, and also on servers via Node.js.</div>
+    <ul>
+      <li>Dynamically typed — variable no type runtime par decide thay chhe, fixed nathi hoto</li>
+      <li>Interpreted — line-by-line run thay chhe, alag compile step vagar</li>
+      <li>Single-threaded but asynchronous — ek time e ek kaam, pan slow tasks ne background ma handle kare chhe (event loop)</li>
+      <li>Everything is loosely connected via objects — even functions are objects</li>
+    </ul>
+  </section>
+
+  <section id="variables">
+    <div class="sec-head"><span class="sec-num">02</span><h2>Variables</h2></div>
+    <div class="explain">Variable ek named container chhe jema value store thay chhe. <code>let</code> ane <code>const</code> modern standard chhe; <code>var</code> jauni style chhe ane sambhaline vaparvi joiye (scope-related issues aape chhe).</div>
+    <pre><code><span class="kw">let</span> age <span class="punc">=</span> <span class="val">21</span><span class="punc">;</span>       <span class="cmt">// can be reassigned</span>
+<span class="kw">const</span> name <span class="punc">=</span> <span class="val">"Sam"</span><span class="punc">;</span>  <span class="cmt">// cannot be reassigned</span>
+<span class="kw">var</span> old <span class="punc">=</span> <span class="val">true</span><span class="punc">;</span>     <span class="cmt">// old style — function-scoped, avoid in new code</span></code></pre>
+  </section>
+
+  <section id="datatypes">
+    <div class="sec-head"><span class="sec-num">03</span><h2>Data Types</h2></div>
+    <div class="explain">7 primitive types + object. Primitives store a single value directly; objects (including arrays, functions) store a reference to a collection of data.</div>
+    <table>
+      <tr><th>Type</th><th>Example</th></tr>
+      <tr><td><code>String</code></td><td><code>"hello"</code></td></tr>
+      <tr><td><code>Number</code></td><td><code>42</code>, <code>3.14</code></td></tr>
+      <tr><td><code>Boolean</code></td><td><code>true</code> / <code>false</code></td></tr>
+      <tr><td><code>undefined</code></td><td>Variable declared but no value assigned</td></tr>
+      <tr><td><code>null</code></td><td>Intentional "no value"</td></tr>
+      <tr><td><code>Object</code></td><td><code>{}</code>, arrays, functions</td></tr>
+      <tr><td><code>Symbol</code></td><td>Unique, immutable identifier</td></tr>
+    </table>
+    <pre><code><span class="fn">typeof</span> <span class="val">"hi"</span><span class="punc">;</span>   <span class="cmt">// "string" — check a value's type</span></code></pre>
+  </section>
+
+  <section id="operators">
+    <div class="sec-head"><span class="sec-num">04</span><h2>Operators</h2></div>
+    <div class="explain"><code>==</code> comparing pehla type convert (coerce) kare chhe, pan <code>===</code> type ane value banne check kare chhe. Best practice: hammesha <code>===</code> vapro.</div>
+    <pre><code><span class="val">5</span> <span class="punc">==</span> <span class="val">"5"</span>    <span class="cmt">// true — loose equality, type coerced</span>
+<span class="val">5</span> <span class="punc">===</span> <span class="val">"5"</span>   <span class="cmt">// false — strict equality, different types</span>
+a <span class="punc">??</span> b     <span class="cmt">// nullish coalescing — b only if a is null/undefined</span>
+a <span class="punc">?.</span>b     <span class="cmt">// optional chaining — safely access nested props</span></code></pre>
+  </section>
+
+  <section id="conditional">
+    <div class="sec-head"><span class="sec-num">05</span><h2>Conditionals</h2></div>
+    <div class="explain">Program ne different path par decide karva de chhe, condition true chhe ke false depend karta.</div>
+    <pre><code><span class="kw">if</span> <span class="punc">(</span>age <span class="punc">&gt;=</span> <span class="val">18</span><span class="punc">)</span> <span class="punc">{</span>
+  <span class="fn">console</span><span class="punc">.</span><span class="fn">log</span><span class="punc">(</span><span class="val">"Adult"</span><span class="punc">);</span>
+<span class="punc">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="punc">(</span>age <span class="punc">&gt;</span> <span class="val">12</span><span class="punc">)</span> <span class="punc">{</span>
+  <span class="fn">console</span><span class="punc">.</span><span class="fn">log</span><span class="punc">(</span><span class="val">"Teen"</span><span class="punc">);</span>
+<span class="punc">}</span> <span class="kw">else</span> <span class="punc">{</span>
+  <span class="fn">console</span><span class="punc">.</span><span class="fn">log</span><span class="punc">(</span><span class="val">"Child"</span><span class="punc">);</span>
+<span class="punc">}</span></code></pre>
+  </section>
+
+  <section id="loops">
+    <div class="sec-head"><span class="sec-num">06</span><h2>Loops</h2></div>
+    <div class="explain">Code ne repeatedly run karva mate — count karva, array par iterate karva, ke condition sudhi repeat karva mate.</div>
+    <pre><code><span class="kw">for</span> <span class="punc">(</span><span class="kw">let</span> i <span class="punc">=</span> <span class="val">0</span><span class="punc">;</span> i <span class="punc">&lt;</span> <span class="val">5</span><span class="punc">;</span> i<span class="punc">++)</span> <span class="punc">{</span>
+  <span class="fn">console</span><span class="punc">.</span><span class="fn">log</span><span class="punc">(</span>i<span class="punc">);</span>
+<span class="punc">}</span>
+
+<span class="kw">for</span> <span class="punc">(</span><span class="kw">const</span> fruit <span class="kw">of</span> fruits<span class="punc">)</span> <span class="punc">{</span> <span class="cmt">// iterate over values</span>
+  <span class="fn">console</span><span class="punc">.</span><span class="fn">log</span><span class="punc">(</span>fruit<span class="punc">);</span>
+<span class="punc">}</span>
+
+<span class="kw">while</span> <span class="punc">(</span>n <span class="punc">&gt;</span> <span class="val">0</span><span class="punc">)</span> <span class="punc">{</span> n<span class="punc">--;</span> <span class="punc">}</span>  <span class="cmt">// runs while condition stays true</span></code></pre>
+  </section>
+
+  <section id="functions">
+    <div class="sec-head"><span class="sec-num">07</span><h2>Functions</h2></div>
+    <div class="explain">Function ek reusable block of code chhe je input (parameters) le shake chhe ane output (return value) aapi shake chhe.</div>
+    <pre><code><span class="kw">function</span> <span class="fn">add</span><span class="punc">(</span>a<span class="punc">,</span> b<span class="punc">)</span> <span class="punc">{</span>
+  <span class="kw">return</span> a <span class="punc">+</span> b<span class="punc">;</span>
+<span class="punc">}</span>
+
+<span class="fn">add</span><span class="punc">(</span><span class="val">3</span><span class="punc">,</span> <span class="val">4</span><span class="punc">);</span>   <span class="cmt">// 7 — calling the function</span></code></pre>
+  </section>
+
+  <section id="arrow">
+    <div class="sec-head"><span class="sec-num">08</span><h2>Arrow Functions</h2></div>
+    <div class="explain">Function lakhva no shorter syntax. Important difference: arrow functions ni potani <code>this</code> nathi hoti — te surrounding (parent) scope mathi <code>this</code> le chhe.</div>
+    <pre><code><span class="kw">const</span> add <span class="punc">=</span> <span class="punc">(</span>a<span class="punc">,</span> b<span class="punc">)</span> <span class="punc">=&gt;</span> a <span class="punc">+</span> b<span class="punc">;</span>  <span class="cmt">// short syntax, implicit return</span>
+
+<span class="kw">const</span> square <span class="punc">=</span> x <span class="punc">=&gt;</span> <span class="punc">{</span>
+  <span class="kw">return</span> x <span class="punc">*</span> x<span class="punc">;</span>   <span class="cmt">// explicit return needed with { }</span>
+<span class="punc">};</span></code></pre>
+  </section>
+
+  <section id="scope">
+    <div class="sec-head"><span class="sec-num">09</span><h2>Scope &amp; Hoisting</h2></div>
+    <div class="explain">Scope decide kare chhe variable kya accessible chhe. Hoisting no matlab chhe ke declarations (var, function) code run thava pehla "upar khenchai" jay chhe — pan <code>let</code>/<code>const</code> initialize thay ta sudhi "temporal dead zone" ma rahe chhe.</div>
+    <pre><code><span class="fn">console</span><span class="punc">.</span><span class="fn">log</span><span class="punc">(</span>x<span class="punc">);</span>   <span class="cmt">// undefined, not an error — var is hoisted</span>
+<span class="kw">var</span> x <span class="punc">=</span> <span class="val">5</span><span class="punc">;</span>
+
+<span class="punc">{</span>
+  <span class="kw">let</span> y <span class="punc">=</span> <span class="val">10</span><span class="punc">;</span>  <span class="cmt">// y exists only inside this block</span>
+<span class="punc">}</span>
+<span class="cmt">// y is not accessible here</span></code></pre>
+  </section>
+
+  <section id="closures">
+    <div class="sec-head"><span class="sec-num">10</span><h2>Closures</h2></div>
+    <div class="explain">Closure ek function chhe je potani outer function ni variables ne "yaad" rakhe chhe, outer function finish thaya pachi pan. Data privacy ane counters/generators banavva mate vapraay chhe.</div>
+    <pre><code><span class="kw">function</span> <span class="fn">makeCounter</span><span class="punc">()</span> <span class="punc">{</span>
+  <span class="kw">let</span> count <span class="punc">=</span> <span class="val">0</span><span class="punc">;</span>
+  <span class="kw">return</span> <span class="kw">function</span><span class="punc">()</span> <span class="punc">{</span>
+    count<span class="punc">++;</span>
+    <span class="kw">return</span> count<span class="punc">;</span>   <span class="cmt">// still remembers `count` from outer scope</span>
+  <span class="punc">};</span>
+<span class="punc">}</span>
+
+<span class="kw">const</span> counter <span class="punc">=</span> <span class="fn">makeCounter</span><span class="punc">();</span>
+<span class="fn">counter</span><span class="punc">();</span> <span class="cmt">// 1</span>
+<span class="fn">counter</span><span class="punc">();</span> <span class="cmt">// 2</span></code></pre>
+  </section>
+
+  <section id="arrays">
+    <div class="sec-head"><span class="sec-num">11</span><h2>Arrays</h2></div>
+    <div class="explain">Array ek ordered list chhe je multiple values ekj variable ma store kare chhe, 0 thi start thata index thi access thay chhe.</div>
+    <pre><code><span class="kw">const</span> fruits <span class="punc">=</span> <span class="punc">[</span><span class="val">"apple"</span><span class="punc">,</span> <span class="val">"banana"</span><span class="punc">,</span> <span class="val">"cherry"</span><span class="punc">];</span>
+fruits<span class="punc">[</span><span class="val">0</span><span class="punc">];</span>          <span class="cmt">// "apple" — first item</span>
+fruits<span class="punc">.</span>length<span class="punc">;</span>      <span class="cmt">// 3</span>
+fruits<span class="punc">.</span><span class="fn">push</span><span class="punc">(</span><span class="val">"date"</span><span class="punc">);</span>  <span class="cmt">// adds to the end</span></code></pre>
+  </section>
+
+  <section id="arraymethods">
+    <div class="sec-head"><span class="sec-num">12</span><h2>Array Methods</h2></div>
+    <div class="explain"><code>map</code>, <code>filter</code>, <code>reduce</code> — ah trane original array ne change karya vagar naya result banave chhe (immutable style), je modern JS ma bahu common chhe.</div>
+    <pre><code><span class="kw">const</span> nums <span class="punc">=</span> <span class="punc">[</span><span class="val">1</span><span class="punc">,</span> <span class="val">2</span><span class="punc">,</span> <span class="val">3</span><span class="punc">,</span> <span class="val">4</span><span class="punc">];</span>
+
+nums<span class="punc">.</span><span class="fn">map</span><span class="punc">(</span>n <span class="punc">=&gt;</span> n <span class="punc">*</span> <span class="val">2</span><span class="punc">);</span>         <span class="cmt">// [2,4,6,8] — transform each item</span>
+nums<span class="punc">.</span><span class="fn">filter</span><span class="punc">(</span>n <span class="punc">=&gt;</span> n <span class="punc">%</span> <span class="val">2</span> <span class="punc">===</span> <span class="val">0</span><span class="punc">);</span> <span class="cmt">// [2,4] — keep matching items</span>
+nums<span class="punc">.</span><span class="fn">reduce</span><span class="punc">((</span>sum<span class="punc">,</span> n<span class="punc">)</span> <span class="punc">=&gt;</span> sum <span class="punc">+</span> n<span class="punc">,</span> <span class="val">0</span><span class="punc">);</span>  <span class="cmt">// 10 — collapse to one value</span>
+nums<span class="punc">.</span><span class="fn">find</span><span class="punc">(</span>n <span class="punc">=&gt;</span> n <span class="punc">&gt;</span> <span class="val">2</span><span class="punc">);</span>         <span class="cmt">// 3 — first match</span></code></pre>
+  </section>
+
+  <section id="objects">
+    <div class="sec-head"><span class="sec-num">13</span><h2>Objects</h2></div>
+    <div class="explain">Object key-value pairs ma data store kare chhe — real-world "things" (jem ke ek user) model karva mate.</div>
+    <pre><code><span class="kw">const</span> user <span class="punc">=</span> <span class="punc">{</span>
+  name<span class="punc">:</span> <span class="val">"Sam"</span><span class="punc">,</span>
+  age<span class="punc">:</span> <span class="val">25</span><span class="punc">,</span>
+  <span class="fn">greet</span><span class="punc">()</span> <span class="punc">{</span> <span class="fn">console</span><span class="punc">.</span><span class="fn">log</span><span class="punc">(</span><span class="val">"hi"</span><span class="punc">);</span> <span class="punc">}</span>
+<span class="punc">};</span>
+
+user<span class="punc">.</span>name<span class="punc">;</span>       <span class="cmt">// "Sam" — dot notation</span>
+user<span class="punc">[</span><span class="val">"age"</span><span class="punc">];</span>   <span class="cmt">// 25 — bracket notation, useful for dynamic keys</span></code></pre>
+  </section>
+
+  <section id="destructuring">
+    <div class="sec-head"><span class="sec-num">14</span><h2>Destructuring</h2></div>
+    <div class="explain">Array ke object mathi values ne directly variables ma "unpack" karva ni shortcut — separate lines lakhva ni jarur nathi padti.</div>
+    <pre><code><span class="kw">const</span> <span class="punc">{</span> name<span class="punc">,</span> age <span class="punc">}</span> <span class="punc">=</span> user<span class="punc">;</span>       <span class="cmt">// pulls user.name and user.age out</span>
+<span class="kw">const</span> <span class="punc">[</span>first<span class="punc">,</span> second<span class="punc">]</span> <span class="punc">=</span> fruits<span class="punc">;</span>  <span class="cmt">// pulls first two array items</span></code></pre>
+  </section>
+
+  <section id="spread">
+    <div class="sec-head"><span class="sec-num">15</span><h2>Spread &amp; Rest</h2></div>
+    <div class="explain">Same <code>...</code> syntax, do kaam mate: <strong>spread</strong> ek collection ne "khole" chhe (copy/merge mate), <strong>rest</strong> extra values ne ekathi array ma "bhege" chhe.</div>
+    <pre><code><span class="kw">const</span> arr2 <span class="punc">=</span> <span class="punc">[...</span>nums<span class="punc">,</span> <span class="val">5</span><span class="punc">];</span>      <span class="cmt">// spread — copies nums, adds 5</span>
+<span class="kw">const</span> merged <span class="punc">=</span> <span class="punc">{...</span>user<span class="punc">,</span> age<span class="punc">:</span> <span class="val">30</span><span class="punc">};</span>  <span class="cmt">// spread — merges + overrides age</span>
+
+<span class="kw">function</span> <span class="fn">sum</span><span class="punc">(...</span>nums<span class="punc">)</span> <span class="punc">{</span>       <span class="cmt">// rest — gathers all args into an array</span>
+  <span class="kw">return</span> nums<span class="punc">.</span><span class="fn">reduce</span><span class="punc">((</span>a<span class="punc">,</span>b<span class="punc">)</span><span class="punc">=&gt;</span>a<span class="punc">+</span>b<span class="punc">);</span>
+<span class="punc">}</span></code></pre>
+  </section>
+
+  <section id="this">
+    <div class="sec-head"><span class="sec-num">16</span><h2>The "this" Keyword</h2></div>
+    <div class="explain"><code>this</code> function kai rite call thay chhe teni par depend kare chhe — hammesha "kon owns karyu" e nathi hotu. Object method ma call thay to <code>this</code> = object; arrow function ma <code>this</code> = surrounding scope nu.</div>
+    <pre><code><span class="kw">const</span> obj <span class="punc">=</span> <span class="punc">{</span>
+  name<span class="punc">:</span> <span class="val">"Sam"</span><span class="punc">,</span>
+  <span class="fn">greet</span><span class="punc">()</span> <span class="punc">{</span> <span class="fn">console</span><span class="punc">.</span><span class="fn">log</span><span class="punc">(</span><span class="kw">this</span><span class="punc">.</span>name<span class="punc">);</span> <span class="punc">}</span>  <span class="cmt">// `this` = obj, prints "Sam"</span>
+<span class="punc">};</span></code></pre>
+  </section>
+
+  <section id="classes">
+    <div class="sec-head"><span class="sec-num">17</span><h2>Classes</h2></div>
+    <div class="explain">Object create karva mate no blueprint syntax — objects, methods ane inheritance banavvana traditional ways than clean rite kaam kare chhe. Andar thi hajipan prototypes j vapra chhe.</div>
+    <pre><code><span class="kw">class</span> Animal <span class="punc">{</span>
+  <span class="fn">constructor</span><span class="punc">(</span>name<span class="punc">)</span> <span class="punc">{</span>
+    <span class="kw">this</span><span class="punc">.</span>name <span class="punc">=</span> name<span class="punc">;</span>
+  <span class="punc">}</span>
+  <span class="fn">speak</span><span class="punc">()</span> <span class="punc">{</span>
+    <span class="fn">console</span><span class="punc">.</span><span class="fn">log</span><span class="punc">(</span><span class="kw">this</span><span class="punc">.</span>name <span class="punc">+</span> <span class="val">" makes a sound"</span><span class="punc">);</span>
+  <span class="punc">}</span>
+<span class="punc">}</span>
+
+<span class="kw">const</span> dog <span class="punc">=</span> <span class="kw">new</span> <span class="fn">Animal</span><span class="punc">(</span><span class="val">"Rex"</span><span class="punc">);</span>
+dog<span class="punc">.</span><span class="fn">speak</span><span class="punc">();</span>   <span class="cmt">// "Rex makes a sound"</span></code></pre>
+  </section>
+
+  <section id="promises">
+    <div class="sec-head"><span class="sec-num">18</span><h2>Promises &amp; Async/Await</h2></div>
+    <div class="explain">Promise ek "future value" ne represent kare chhe — jem ke ek API call no result — je pending, fulfilled, ke rejected ho shake. <code>async/await</code> promise-based code ne normal, top-to-bottom code jevu dekhad chhe.</div>
+    <pre><code><span class="kw">async</span> <span class="kw">function</span> <span class="fn">getUser</span><span class="punc">()</span> <span class="punc">{</span>
+  <span class="kw">try</span> <span class="punc">{</span>
+    <span class="kw">const</span> res <span class="punc">=</span> <span class="kw">await</span> <span class="fn">fetch</span><span class="punc">(</span><span class="val">"/api/user"</span><span class="punc">);</span>  <span class="cmt">// waits without blocking the thread</span>
+    <span class="kw">const</span> data <span class="punc">=</span> <span class="kw">await</span> res<span class="punc">.</span><span class="fn">json</span><span class="punc">();</span>
+    <span class="kw">return</span> data<span class="punc">;</span>
+  <span class="punc">}</span> <span class="kw">catch</span> <span class="punc">(</span>err<span class="punc">)</span> <span class="punc">{</span>
+    <span class="fn">console</span><span class="punc">.</span><span class="fn">error</span><span class="punc">(</span><span class="val">"Failed:"</span><span class="punc">,</span> err<span class="punc">);</span>
+  <span class="punc">}</span>
+<span class="punc">}</span></code></pre>
+  </section>
+
+  <section id="eventloop">
+    <div class="sec-head"><span class="sec-num">19</span><h2>Event Loop</h2></div>
+    <div class="explain">JavaScript single-threaded chhe — ek time e ek kaam. Event loop check karto rahe chhe ke call stack khali chhe ke nahi, ane pachi pending async kaam (jem ke timer, fetch result) ne queue mathi run karva de chhe.</div>
+    <div class="loop">
+      <div class="lnode l1"><div class="label">call stack</div><div class="val-ex">runs sync code now</div></div>
+      <div class="lnode l2"><div class="label">web APIs</div><div class="val-ex">timers, fetch run here</div></div>
+      <div class="lnode l3"><div class="label">callback queue</div><div class="val-ex">waits its turn</div></div>
+    </div>
+    <div class="callout">Stack khali thay pachi j event loop queue mathi next kaam stack ma move kare chhe — evu ma promises are prioritized before setTimeout callbacks.</div>
+  </section>
+
+  <section id="dom">
+    <div class="sec-head"><span class="sec-num">20</span><h2>DOM &amp; Events</h2></div>
+    <div class="explain">DOM (Document Object Model) webpage nu structure JS thi accessible object tree tarike represent kare chhe — atle JS thi elements select, change, ke create kari shakay chhe.</div>
+    <pre><code><span class="kw">const</span> btn <span class="punc">=</span> document<span class="punc">.</span><span class="fn">querySelector</span><span class="punc">(</span><span class="val">"#myBtn"</span><span class="punc">);</span>
+btn<span class="punc">.</span>textContent <span class="punc">=</span> <span class="val">"Click me"</span><span class="punc">;</span>       <span class="cmt">// change displayed text</span>
+
+btn<span class="punc">.</span><span class="fn">addEventListener</span><span class="punc">(</span><span class="val">"click"</span><span class="punc">,</span> <span class="punc">()</span> <span class="punc">=&gt;</span> <span class="punc">{</span>
+  <span class="fn">console</span><span class="punc">.</span><span class="fn">log</span><span class="punc">(</span><span class="val">"Button clicked!"</span><span class="punc">);</span>
+<span class="punc">});</span></code></pre>
+  </section>
+
+  <section id="json">
+    <div class="sec-head"><span class="sec-num">21</span><h2>JSON &amp; Error Handling</h2></div>
+    <div class="explain">JSON data ne text tarike store/transfer karva no format chhe (APIs ma bahu common). <code>try/catch</code> runtime errors ne program crash thata pehla handle kare chhe.</div>
+    <pre><code>JSON<span class="punc">.</span><span class="fn">stringify</span><span class="punc">(</span>user<span class="punc">);</span>   <span class="cmt">// object → JSON text</span>
+JSON<span class="punc">.</span><span class="fn">parse</span><span class="punc">(</span>jsonText<span class="punc">);</span>   <span class="cmt">// JSON text → object</span>
+
+<span class="kw">try</span> <span class="punc">{</span>
+  <span class="fn">riskyOperation</span><span class="punc">();</span>
+<span class="punc">}</span> <span class="kw">catch</span> <span class="punc">(</span>error<span class="punc">)</span> <span class="punc">{</span>
+  <span class="fn">console</span><span class="punc">.</span><span class="fn">log</span><span class="punc">(</span><span class="val">"Error:"</span><span class="punc">,</span> error<span class="punc">.</span>message<span class="punc">);</span>
+<span class="punc">}</span></code></pre>
+  </section>
+
+  <section id="practices">
+    <div class="sec-head"><span class="sec-num">22</span><h2>Best Practices</h2></div>
+    <ul>
+      <li><code>let</code>/<code>const</code> vapro, <code>var</code> avoid karo</li>
+      <li>Hammesha <code>===</code> vapro, <code>==</code> nahi (loose equality bugs aapi shake)</li>
+      <li>Array/object ne directly mutate karva na badle naya copies banavo (immutability)</li>
+      <li>Async code ma hammesha errors handle karo (<code>try/catch</code>)</li>
+      <li>Functions ne small ane single-purpose rakho</li>
+      <li>Meaningful variable/function names vaparo, short cryptic names nahi</li>
+    </ul>
+  </section>
+
+  <footer>// end of js-notes.js — happy revising</footer>
+</main>
+
+<script>
+  const links = document.querySelectorAll('.sidebar a');
+  const sections = Array.from(links).map(l => document.querySelector(l.getAttribute('href')));
+
+  function onScroll(){
+    let idx = 0;
+    const scrollPos = window.scrollY + 120;
+    sections.forEach((sec, i) => {
+      if (sec && sec.offsetTop <= scrollPos) idx = i;
+    });
+    links.forEach(l => l.classList.remove('active'));
+    if (links[idx]) links[idx].classList.add('active');
+  }
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+</script>
+
+</body>
+</html>

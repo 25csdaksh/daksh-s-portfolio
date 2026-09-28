@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>🎁 Gift for Coders — Free Interactive Cheatsheets & Complete Guides | Daksh Soni</title>
-  <meta name="description" content="Free comprehensive programming notes and cheat sheets curated by Daksh Soni: C Language Full Short Notes, The Complete HTML Course (32 Chapters), and CSS Master Reference." />
+  <meta name="description" content="Free comprehensive programming notes and cheat sheets curated by Daksh Soni: C Language, Complete HTML Course, CSS Full Notes, JavaScript Master Notes, and React.js Architecture." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet" />
@@ -22,6 +22,8 @@
       --c-accent: #7fb0e8;
       --html-accent: #e34f26;
       --css-accent: #7dd3c0;
+      --js-accent: #e8c25a;
+      --react-accent: #6ecdd8;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -155,12 +157,32 @@
       box-shadow: 0 4px 15px rgba(20, 184, 166, 0.4);
       transform: translateY(-1px);
     }
+    .btn-js {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #1e1b4b;
+      border: 1px solid #fcd34d;
+    }
+    .btn-js:hover {
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+      transform: translateY(-1px);
+    }
+    .btn-react {
+      background: linear-gradient(135deg, #06b6d4, #0284c7);
+      color: #fff;
+      border: 1px solid #38bdf8;
+    }
+    .btn-react:hover {
+      background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+      box-shadow: 0 4px 15px rgba(6, 182, 212, 0.4);
+      transform: translateY(-1px);
+    }
 
     /* Hero Banner */
     .hero {
       text-align: center;
       padding: 48px 24px 32px;
-      max-width: 960px;
+      max-width: 1050px;
       margin: 0 auto;
     }
     .hero-badge {
@@ -193,14 +215,14 @@
       font-size: clamp(14px, 2vw, 17px);
       color: var(--text-dim);
       line-height: 1.6;
-      max-width: 680px;
+      max-width: 720px;
       margin: 0 auto 28px;
     }
     .hero-quick-links {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 12px;
+      gap: 10px;
       margin-top: 10px;
     }
 
@@ -217,26 +239,29 @@
     }
     .tabs-nav {
       display: flex;
-      gap: 8px;
+      gap: 6px;
       background: var(--bg-panel);
       border: 1px solid var(--border);
       padding: 6px;
       border-radius: 9999px;
+      overflow-x: auto;
+      max-width: 100%;
     }
     .tab-btn {
-      padding: 10px 22px;
+      padding: 9px 18px;
       border-radius: 9999px;
       border: none;
       background: transparent;
       color: var(--text-dim);
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 14px;
+      font-size: 13.5px;
       font-weight: 700;
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 8px;
       transition: all 0.2s;
+      white-space: nowrap;
     }
     .tab-btn:hover {
       color: #fff;
@@ -250,6 +275,8 @@
     .tab-btn.active.tab-c { border-color: var(--c-accent); color: var(--c-accent); }
     .tab-btn.active.tab-html { border-color: var(--html-accent); color: var(--html-accent); }
     .tab-btn.active.tab-css { border-color: var(--css-accent); color: var(--css-accent); }
+    .tab-btn.active.tab-js { border-color: var(--js-accent); color: var(--js-accent); }
+    .tab-btn.active.tab-react { border-color: var(--react-accent); color: var(--react-accent); }
 
     .reader-tools {
       display: flex;
@@ -343,14 +370,14 @@
     }
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 24px;
     }
     .card {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 24px;
-      padding: 30px;
+      padding: 28px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -376,24 +403,26 @@
     .card-c .card-tag { background: rgba(127, 176, 232, 0.15); color: var(--c-accent); border: 1px solid rgba(127, 176, 232, 0.4); }
     .card-html .card-tag { background: rgba(227, 79, 38, 0.15); color: var(--html-accent); border: 1px solid rgba(227, 79, 38, 0.4); }
     .card-css .card-tag { background: rgba(125, 211, 192, 0.15); color: var(--css-accent); border: 1px solid rgba(125, 211, 192, 0.4); }
+    .card-js .card-tag { background: rgba(232, 194, 90, 0.15); color: var(--js-accent); border: 1px solid rgba(232, 194, 90, 0.4); }
+    .card-react .card-tag { background: rgba(110, 205, 216, 0.15); color: var(--react-accent); border: 1px solid rgba(110, 205, 216, 0.4); }
 
     .card h3 {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 22px;
+      font-size: 21px;
       font-weight: 800;
       margin-bottom: 10px;
       color: #fff;
     }
     .card p {
-      font-size: 14px;
+      font-size: 13.5px;
       color: var(--text-dim);
       line-height: 1.6;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
     .card-features {
       list-style: none;
-      margin-bottom: 26px;
-      font-size: 13px;
+      margin-bottom: 24px;
+      font-size: 12.5px;
       color: #cbd5e1;
     }
     .card-features li {
@@ -415,12 +444,12 @@
     }
     .card-actions-row {
       display: flex;
-      gap: 10px;
+      gap: 8px;
     }
     .card-actions .btn {
       justify-content: center;
-      font-size: 13px;
-      padding: 11px 16px;
+      font-size: 12.5px;
+      padding: 10px 14px;
     }
 
     /* Footer */
@@ -442,6 +471,7 @@
       .tabs-nav { overflow-x: auto; width: 100%; justify-content: flex-start; }
       .reader-shell { height: 70vh; min-height: 480px; }
       .hero-quick-links { flex-direction: column; align-items: stretch; }
+      .card-actions-row { flex-direction: column; }
     }
   </style>
 </head>
@@ -462,7 +492,7 @@
           ← Back to Portfolio
         </a>
         <a href="#downloads" class="btn btn-primary">
-          🎁 All 3 Notes Free
+          🎁 All 5 Notes Free
         </a>
       </div>
     </div>
@@ -472,31 +502,37 @@
   <main>
     <section class="hero">
       <div class="hero-badge">
-        <span>✨ 100% Free Developer Community Gift</span>
+        <span>✨ 100% Free Developer Community Gift (5 Master Notes)</span>
       </div>
       <h2>Gift for Coders</h2>
       <p>
         Clean, beautifully formatted, dark-mode cheat sheets and full-length courses to supercharge your revision, interview preparation, and day-to-day coding mastery. Click below to open any note directly in a new tab!
       </p>
 
-      <!-- Direct New Tab Launch Buttons -->
+      <!-- Direct New Tab Launch Buttons for All 5 Notes -->
       <div class="hero-quick-links">
         <a href="/notes/c-notes.html" target="_blank" rel="noopener noreferrer" class="btn btn-c">
-          <span>⚙️ Open C Language Notes ↗</span>
+          <span>⚙️ C Language ↗</span>
         </a>
         <a href="/notes/html-course.html" target="_blank" rel="noopener noreferrer" class="btn btn-html">
-          <span>🌐 Open HTML Course (32 Ch) ↗</span>
+          <span>🌐 HTML Course ↗</span>
         </a>
         <a href="/notes/css-notes.html" target="_blank" rel="noopener noreferrer" class="btn btn-css">
-          <span>🎨 Open CSS Full Notes ↗</span>
+          <span>🎨 CSS Notes ↗</span>
+        </a>
+        <a href="/notes/js-notes.html" target="_blank" rel="noopener noreferrer" class="btn btn-js">
+          <span>⚡ JavaScript ↗</span>
+        </a>
+        <a href="/notes/react-notes.html" target="_blank" rel="noopener noreferrer" class="btn btn-react">
+          <span>⚛️ React.js ↗</span>
         </a>
       </div>
     </section>
 
-    <!-- Cards Breakdown Section (Prominent direct launch cards) -->
+    <!-- Cards Breakdown Section (5 Prominent direct launch cards) -->
     <section class="cards-section" id="downloads">
       <h3 class="section-title">
-        <span>📦 Select &amp; Open Your Dedicated Notes</span>
+        <span>📦 Select &amp; Open Your Dedicated Notes (5 Cheat Sheets)</span>
       </h3>
       <div class="grid">
         
@@ -515,16 +551,15 @@
             </ul>
           </div>
           <div class="card-actions">
-            <!-- Direct Open in New Tab -->
-            <a href="/notes/c-notes.html" target="_blank" rel="noopener noreferrer" class="btn btn-c" style="font-weight: 800; font-size: 14px;">
+            <a href="/notes/c-notes.html" target="_blank" rel="noopener noreferrer" class="btn btn-c" style="font-weight: 800; font-size: 13.5px;">
               🚀 Open C Notes in New Tab ↗
             </a>
             <div class="card-actions-row">
               <button onclick="switchNote('c-lang'); document.getElementById('interactive-reader').scrollIntoView({behavior: 'smooth'});" class="btn btn-secondary" style="flex: 1;">
-                👁️ Preview in Reader
+                👁️ Preview
               </button>
               <a href="/notes/c-notes.html" download="C_Language_Short_Notes_Daksh_Soni.html" class="btn btn-secondary" style="flex: 1;">
-                ↓ Download HTML
+                ↓ HTML
               </a>
             </div>
           </div>
@@ -545,16 +580,15 @@
             </ul>
           </div>
           <div class="card-actions">
-            <!-- Direct Open in New Tab -->
-            <a href="/notes/html-course.html" target="_blank" rel="noopener noreferrer" class="btn btn-html" style="font-weight: 800; font-size: 14px;">
+            <a href="/notes/html-course.html" target="_blank" rel="noopener noreferrer" class="btn btn-html" style="font-weight: 800; font-size: 13.5px;">
               🚀 Open HTML Course in New Tab ↗
             </a>
             <div class="card-actions-row">
               <button onclick="switchNote('html-course'); document.getElementById('interactive-reader').scrollIntoView({behavior: 'smooth'});" class="btn btn-secondary" style="flex: 1;">
-                👁️ Preview in Reader
+                👁️ Preview
               </button>
               <a href="/notes/html-course.html" download="Complete_HTML_Course_Daksh_Soni.html" class="btn btn-secondary" style="flex: 1;">
-                ↓ Download HTML
+                ↓ HTML
               </a>
             </div>
           </div>
@@ -575,16 +609,73 @@
             </ul>
           </div>
           <div class="card-actions">
-            <!-- Direct Open in New Tab -->
-            <a href="/notes/css-notes.html" target="_blank" rel="noopener noreferrer" class="btn btn-css" style="font-weight: 800; font-size: 14px;">
+            <a href="/notes/css-notes.html" target="_blank" rel="noopener noreferrer" class="btn btn-css" style="font-weight: 800; font-size: 13.5px;">
               🚀 Open CSS Notes in New Tab ↗
             </a>
             <div class="card-actions-row">
               <button onclick="switchNote('css-notes'); document.getElementById('interactive-reader').scrollIntoView({behavior: 'smooth'});" class="btn btn-secondary" style="flex: 1;">
-                👁️ Preview in Reader
+                👁️ Preview
               </button>
               <a href="/notes/css-notes.html" download="CSS_Short_Notes_Daksh_Soni.html" class="btn btn-secondary" style="flex: 1;">
-                ↓ Download HTML
+                ↓ HTML
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: JavaScript Notes -->
+        <div class="card card-js">
+          <div>
+            <span class="card-tag">Core Engine &amp; Async · 22 Chapters</span>
+            <h3>JavaScript — Full Short Notes</h3>
+            <p>From variables, closures, and scoping to array methods, Promises, async/await, and the Event Loop architecture with practical explanations before every snippet.</p>
+            <ul class="card-features">
+              <li>Event Loop, Call Stack &amp; Web API visual flow</li>
+              <li>Closures, lexical scoping &amp; data privacy</li>
+              <li>Array methods (map, filter, reduce) cheat sheet</li>
+              <li>Promises, Async/Await &amp; DOM Event handlers</li>
+              <li>22 Chapters of core modern ES6+ concepts</li>
+            </ul>
+          </div>
+          <div class="card-actions">
+            <a href="/notes/js-notes.html" target="_blank" rel="noopener noreferrer" class="btn btn-js" style="font-weight: 800; font-size: 13.5px;">
+              🚀 Open JavaScript Notes in New Tab ↗
+            </a>
+            <div class="card-actions-row">
+              <button onclick="switchNote('js-notes'); document.getElementById('interactive-reader').scrollIntoView({behavior: 'smooth'});" class="btn btn-secondary" style="flex: 1;">
+                👁️ Preview
+              </button>
+              <a href="/notes/js-notes.html" download="JavaScript_Short_Notes_Daksh_Soni.html" class="btn btn-secondary" style="flex: 1;">
+                ↓ HTML
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5: React.js Notes -->
+        <div class="card card-react">
+          <div>
+            <span class="card-tag">UI Architecture &amp; Hooks · 20 Chapters</span>
+            <h3>React.js — Full Short Notes</h3>
+            <p>Complete guide to modern React: JSX, functional components, props, useState, essential Hooks (useEffect, useRef, useMemo, useCallback, useContext), custom hooks, and React Router.</p>
+            <ul class="card-features">
+              <li>Unidirectional data flow &amp; component tree diagram</li>
+              <li>All essential React Hooks with code examples</li>
+              <li>Controlled inputs, form state &amp; lifting state up</li>
+              <li>Custom hooks &amp; React Router multi-page routing</li>
+              <li>20 Chapters of modern component best practices</li>
+            </ul>
+          </div>
+          <div class="card-actions">
+            <a href="/notes/react-notes.html" target="_blank" rel="noopener noreferrer" class="btn btn-react" style="font-weight: 800; font-size: 13.5px;">
+              🚀 Open React Notes in New Tab ↗
+            </a>
+            <div class="card-actions-row">
+              <button onclick="switchNote('react-notes'); document.getElementById('interactive-reader').scrollIntoView({behavior: 'smooth'});" class="btn btn-secondary" style="flex: 1;">
+                👁️ Preview
+              </button>
+              <a href="/notes/react-notes.html" download="React_Short_Notes_Daksh_Soni.html" class="btn btn-secondary" style="flex: 1;">
+                ↓ HTML
               </a>
             </div>
           </div>
@@ -598,13 +689,19 @@
       <div class="tabs-wrap">
         <div class="tabs-nav" id="tabNav">
           <button class="tab-btn active tab-c" onclick="switchNote('c-lang')">
-            <span>⚙️ C Language Notes</span>
+            <span>⚙️ C Language</span>
           </button>
           <button class="tab-btn tab-html" onclick="switchNote('html-course')">
-            <span>🌐 HTML Complete Course</span>
+            <span>🌐 HTML Course</span>
           </button>
           <button class="tab-btn tab-css" onclick="switchNote('css-notes')">
-            <span>🎨 CSS Full Short Notes</span>
+            <span>🎨 CSS Notes</span>
+          </button>
+          <button class="tab-btn tab-js" onclick="switchNote('js-notes')">
+            <span>⚡ JavaScript</span>
+          </button>
+          <button class="tab-btn tab-react" onclick="switchNote('react-notes')">
+            <span>⚛️ React.js</span>
           </button>
         </div>
 
@@ -675,6 +772,20 @@
         badge: '23 Sections · Layouts & Motion',
         downloadName: 'CSS_Short_Notes_Daksh_Soni.html',
         activeClass: 'tab-css'
+      },
+      'js-notes': {
+        url: '/notes/js-notes.html',
+        file: 'js-notes.js',
+        badge: '22 Sections · Async & Closures',
+        downloadName: 'JavaScript_Short_Notes_Daksh_Soni.html',
+        activeClass: 'tab-js'
+      },
+      'react-notes': {
+        url: '/notes/react-notes.html',
+        file: 'react-notes.jsx',
+        badge: '20 Sections · Hooks & Architecture',
+        downloadName: 'React_Short_Notes_Daksh_Soni.html',
+        activeClass: 'tab-react'
       }
     };
 
@@ -701,15 +812,19 @@
       // Update tab styles
       const tabBtns = document.querySelectorAll('.tab-btn');
       tabBtns.forEach(btn => {
-        btn.classList.remove('active', 'tab-c', 'tab-html', 'tab-css');
+        btn.classList.remove('active', 'tab-c', 'tab-html', 'tab-css', 'tab-js', 'tab-react');
       });
 
       if (id === 'c-lang') {
-        tabBtns[0].classList.add('active', 'tab-c');
+        tabBtns[0]?.classList.add('active', 'tab-c');
       } else if (id === 'html-course') {
-        tabBtns[1].classList.add('active', 'tab-html');
+        tabBtns[1]?.classList.add('active', 'tab-html');
       } else if (id === 'css-notes') {
-        tabBtns[2].classList.add('active', 'tab-css');
+        tabBtns[2]?.classList.add('active', 'tab-css');
+      } else if (id === 'js-notes') {
+        tabBtns[3]?.classList.add('active', 'tab-js');
+      } else if (id === 'react-notes') {
+        tabBtns[4]?.classList.add('active', 'tab-react');
       }
     }
 
@@ -734,6 +849,8 @@
       if (hash === 'c' || hash === 'c-lang') switchNote('c-lang');
       else if (hash === 'html' || hash === 'html-course') switchNote('html-course');
       else if (hash === 'css' || hash === 'css-notes') switchNote('css-notes');
+      else if (hash === 'js' || hash === 'js-notes' || hash === 'javascript') switchNote('js-notes');
+      else if (hash === 'react' || hash === 'react-notes' || hash === 'reactjs') switchNote('react-notes');
     });
   </script>
 </body>

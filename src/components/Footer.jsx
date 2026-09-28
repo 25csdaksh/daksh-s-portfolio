@@ -78,7 +78,7 @@ export function Footer({ onOpenLearning, onOpenGift }) {
                   className="text-amber-400 hover:text-amber-300 transition-colors text-left font-bold flex items-center gap-1"
                   data-cursor="pointer"
                 >
-                  <span>🎁 Gift for Coders Page (3 Notes)</span>
+                  <span>🎁 Gift for Coders Page (5 Notes)</span>
                 </a>
               </li>
               {onOpenLearning && (

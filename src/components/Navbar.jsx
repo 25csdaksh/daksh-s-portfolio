@@ -203,7 +203,7 @@ export function Navbar({ activeSection, onNavigate, onOpenResume, onOpenLearning
                   }}
                   className="w-full py-2.5 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-purple-950 text-xs font-black flex items-center justify-center gap-1.5 shadow-md shadow-amber-500/20 border border-yellow-300"
                 >
-                  <span>🎁 Open Gift for Coders Page (3 Notes)</span>
+                  <span>🎁 Open Gift for Coders Page (5 Notes)</span>
                 </a>
                 <button
                   onClick={() => {

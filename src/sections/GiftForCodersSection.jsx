@@ -27,13 +27,26 @@ export function GiftForCodersSection({ onOpenGiftModal }) {
   const getIcon = (id) => {
     if (id === "c-lang") return <Code className="w-6 h-6 text-blue-400" />;
     if (id === "html-course") return <FileCode2 className="w-6 h-6 text-orange-400" />;
-    return <Palette className="w-6 h-6 text-teal-400" />;
+    if (id === "css-notes") return <Palette className="w-6 h-6 text-teal-400" />;
+    if (id === "js-notes") return <Sparkles className="w-6 h-6 text-amber-400" />;
+    return <Layers className="w-6 h-6 text-cyan-400" />;
   };
 
   const getTagColor = (id) => {
     if (id === "c-lang") return "bg-blue-500/15 text-blue-300 border-blue-500/30";
     if (id === "html-course") return "bg-orange-500/15 text-orange-300 border-orange-500/30";
-    return "bg-teal-500/15 text-teal-300 border-teal-500/30";
+    if (id === "css-notes") return "bg-teal-500/15 text-teal-300 border-teal-500/30";
+    if (id === "js-notes") return "bg-amber-500/15 text-amber-300 border-amber-500/30";
+    return "bg-cyan-500/15 text-cyan-300 border-cyan-500/30";
+  };
+
+  const getNoteShortName = (id) => {
+    if (id === "c-lang") return "C Notes";
+    if (id === "html-course") return "HTML Course";
+    if (id === "css-notes") return "CSS Notes";
+    if (id === "js-notes") return "JavaScript";
+    if (id === "react-notes") return "React.js";
+    return "Notes";
   };
 
   const handleOpenNote = (id) => {
@@ -90,8 +103,8 @@ export function GiftForCodersSection({ onOpenGiftModal }) {
           </div>
         </div>
 
-        {/* 3 Prominent Cards Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
+        {/* 5 Prominent Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
           {giftNotesData.map((note) => (
             <motion.div
               key={note.id}
@@ -152,7 +165,7 @@ export function GiftForCodersSection({ onOpenGiftModal }) {
                   onClick={() => soundManager.playClick()}
                   className="py-3 px-4 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-purple-950 font-mono text-xs font-black flex items-center justify-center gap-2 shadow-md shadow-amber-500/20 hover:scale-[1.02] transition-all border border-yellow-300"
                 >
-                  <span>🚀 Open {note.id === "c-lang" ? "C Notes" : note.id === "html-course" ? "HTML Course" : "CSS Notes"} (New Tab)</span>
+                  <span>🚀 Open {getNoteShortName(note.id)} (New Tab)</span>
                   <ExternalLink className="w-3.5 h-3.5 stroke-[2.5]" />
                 </a>
 

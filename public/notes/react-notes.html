@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>React.js — Full Short Notes</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap');
+
+  :root{
+    --bg: #0f1115;
+    --bg-panel: #161922;
+    --bg-code: #10131a;
+    --border: #262b38;
+    --text: #dde1ea;
+    --text-dim: #838a9c;
+    --text-faint: #565c6e;
+    --accent: #6ecdd8;       /* cyan — nod to React's brand color */
+    --accent-soft: #6ecdd833;
+    --amber: #e8b04b;
+    --pink: #d98ba8;
+    --green: #9fca8a;
+    --radius: 8px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 15.5px;
+    line-height: 1.65;
+    display: flex;
+    min-height: 100vh;
+  }
+
+  ::selection{ background: var(--accent-soft); color: var(--accent); }
+
+  /* ---------- Sidebar ---------- */
+  .sidebar{
+    width: 260px;
+    flex-shrink: 0;
+    background: var(--bg-panel);
+    border-right: 1px solid var(--border);
+    padding: 28px 20px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  .sidebar::-webkit-scrollbar{ width: 6px; }
+  .sidebar::-webkit-scrollbar-thumb{ background: var(--border); border-radius: 4px; }
+
+  .brand{
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--text);
+    margin-bottom: 2px;
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+  .brand span{ color: var(--accent); }
+  .brand-sub{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-faint);
+    margin-bottom: 26px;
+  }
+
+  .nav-group-title{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-faint);
+    margin: 18px 0 6px;
+  }
+  .nav-group-title:first-of-type{ margin-top: 0; }
+
+  .sidebar a{
+    display: block;
+    font-size: 0.83rem;
+    color: var(--text-dim);
+    text-decoration: none;
+    padding: 5px 8px;
+    border-radius: 6px;
+    border-left: 2px solid transparent;
+    transition: color .15s, background .15s, border-color .15s;
+  }
+  .sidebar a:hover{
+    color: var(--text);
+    background: #1c2029;
+  }
+  .sidebar a.active{
+    color: var(--accent);
+    border-left-color: var(--accent);
+    background: var(--accent-soft);
+  }
+
+  /* ---------- Main ---------- */
+  main{
+    flex: 1;
+    max-width: 900px;
+    padding: 48px 56px 120px;
+  }
+
+  .hero{
+    margin-bottom: 48px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-tag{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .hero-tag::before{ content: "// "; color: var(--text-faint); }
+  h1.title{
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2.1rem;
+    font-weight: 700;
+    margin: 0 0 10px;
+    letter-spacing: -0.01em;
+  }
+  .hero-desc{ color: var(--text-dim); max-width: 62ch; font-size: 0.95rem; }
+
+  section{
+    margin-bottom: 46px;
+    scroll-margin-top: 24px;
+  }
+
+  .sec-head{
+    display:flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .sec-num{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--text-faint);
+  }
+  h2{
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--text);
+  }
+  h2 .sub{ color: var(--text-faint); font-weight: 400; font-size: 0.95rem; }
+
+  p{ color: var(--text-dim); margin: 0 0 12px; }
+
+  .explain{
+    background: #101c1e;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 10px 16px;
+    font-size: 0.87rem;
+    color: var(--text-dim);
+    margin: 0 0 14px;
+  }
+  .explain strong{ color: var(--text); }
+
+  /* code blocks */
+  pre{
+    background: var(--bg-code);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    overflow-x: auto;
+    margin: 10px 0 16px;
+  }
+  code{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    line-height: 1.6;
+  }
+  p code, li code, td code{
+    background: #1c2029;
+    border: 1px solid var(--border);
+    padding: 1px 6px;
+    border-radius: 4px;
+    color: var(--amber);
+    font-size: 0.8rem;
+  }
+  pre code{ color: var(--text); }
+  .kw{ color: var(--accent); }      /* keywords: import, function, return, const */
+  .typ{ color: var(--green); }      /* JSX tags / component names */
+  .val{ color: var(--amber); }      /* literals/values */
+  .fn{ color: var(--pink); }        /* function/hook names */
+  .cmt{ color: var(--text-faint); font-style: italic; }
+  .punc{ color: var(--text-dim); }
+
+  /* tables */
+  table{
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0 16px;
+    font-size: 0.85rem;
+  }
+  th, td{
+    text-align: left;
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  th{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-faint);
+    font-weight: 500;
+  }
+  td{ color: var(--text-dim); }
+  tr:last-child td{ border-bottom: none; }
+
+  ul, ol{ color: var(--text-dim); margin: 0 0 14px; padding-left: 22px; }
+  li{ margin-bottom: 5px; }
+  li strong{ color: var(--text); }
+
+  .callout{
+    display: flex;
+    gap: 10px;
+    background: #1a2420;
+    border: 1px solid #2b4038;
+    border-left: 3px solid var(--green);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    font-size: 0.85rem;
+    color: #b8ccb4;
+    margin: 12px 0;
+  }
+
+  /* component tree diagram — signature element */
+  .tree{
+    display: flex;
+    gap: 10px;
+    margin: 18px 0 22px;
+    flex-wrap: wrap;
+  }
+  .tnode{
+    flex: 1;
+    min-width: 140px;
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .tnode .label{ font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.75; margin-bottom: 4px; }
+  .tnode .val-ex{ font-size: 0.9rem; font-weight: 600; }
+  .t1{ background: #101c1e; border: 1px solid #2b5459; color: #6ecdd8; }
+  .t2{ background: #23181c; border: 1px solid #6b4550; color: #d98ba8; }
+  .t3{ background: #1e2418; border: 1px solid #5c6b3a; color: #c9d98b; }
+
+  footer{
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-faint);
+  }
+
+  @media (max-width: 860px){
+    body{ flex-direction: column; }
+    .sidebar{ position: relative; width: 100%; height: auto; border-right:none; border-bottom: 1px solid var(--border); }
+    main{ padding: 32px 22px 80px; }
+  }
+
+  a:focus-visible, button:focus-visible{
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+</style>
+</head>
+<body>
+
+<nav class="sidebar" id="sidebar">
+  <div class="brand"><span>react</span>notes.jsx</div>
+  <div class="brand-sub">// full reference · dark mode</div>
+
+  <div class="nav-group-title">Foundations</div>
+  <a href="#intro">01 · What is React</a>
+  <a href="#jsx">02 · JSX</a>
+  <a href="#components">03 · Components</a>
+  <a href="#props">04 · Props</a>
+  <a href="#state">05 · State (useState)</a>
+
+  <div class="nav-group-title">Rendering</div>
+  <a href="#events">06 · Event Handling</a>
+  <a href="#conditional">07 · Conditional Rendering</a>
+  <a href="#lists">08 · Lists &amp; Keys</a>
+  <a href="#forms">09 · Forms &amp; Controlled Inputs</a>
+
+  <div class="nav-group-title">Hooks</div>
+  <a href="#useeffect">10 · useEffect</a>
+  <a href="#useref">11 · useRef</a>
+  <a href="#usememo">12 · useMemo &amp; useCallback</a>
+  <a href="#usecontext">13 · useContext</a>
+  <a href="#customhooks">14 · Custom Hooks</a>
+
+  <div class="nav-group-title">App Architecture</div>
+  <a href="#lifting">15 · Lifting State Up</a>
+  <a href="#composition">16 · Component Composition</a>
+  <a href="#router">17 · React Router</a>
+  <a href="#lifecycle">18 · Lifecycle (Class era)</a>
+
+  <div class="nav-group-title">Reference</div>
+  <a href="#hooksref">19 · Hooks Quick Reference</a>
+  <a href="#practices">20 · Best Practices</a>
+</nav>
+
+<main>
+  <div class="hero">
+    <div class="hero-tag">react-notes.jsx</div>
+    <h1 class="title">React.js — Full Short Notes</h1>
+    <p class="hero-desc">A complete, beginner-friendly reference for revision: JSX, components, props, state, hooks, and app architecture — with a plain-English explanation before every code block.</p>
+  </div>
+
+  <section id="intro">
+    <div class="sec-head"><span class="sec-num">01</span><h2>What is React</h2></div>
+    <div class="explain"><strong>In plain terms:</strong> React is a JavaScript library (created by Facebook/Meta) for building user interfaces out of small, reusable pieces called <strong>components</strong>. Instead of manually updating the DOM when data changes, you describe what the UI should look like for a given state, and React updates the screen for you.</div>
+    <ul>
+      <li>Component-based — UI is broken into small, independent, reusable pieces</li>
+      <li>Declarative — you describe the "what", React handles the "how"</li>
+      <li>Virtual DOM — React compares a lightweight in-memory tree to the real DOM and updates only what changed</li>
+      <li>Unidirectional data flow — data flows one way: parent → child, via props</li>
+    </ul>
+  </section>
+
+  <section id="jsx">
+    <div class="sec-head"><span class="sec-num">02</span><h2>JSX <span class="sub">— JavaScript XML</span></h2></div>
+    <div class="explain">JSX lets you write HTML-like markup directly inside JavaScript. It's not valid JS on its own — a build tool (Babel) compiles it into plain <code>React.createElement()</code> calls behind the scenes.</div>
+    <pre><code><span class="kw">const</span> element <span class="punc">=</span> <span class="punc">(</span>
+  <span class="typ">&lt;h1&gt;</span>Hello, <span class="punc">{</span>name<span class="punc">}</span><span class="typ">&lt;/h1&gt;</span>   <span class="cmt">// {} embeds any JS expression</span>
+<span class="punc">);</span></code></pre>
+    <div class="callout">Every JSX block must return a <strong>single root element</strong> — wrap multiple elements in a <code>&lt;div&gt;</code> or a fragment <code>&lt;&gt;...&lt;/&gt;</code>.</div>
+  </section>
+
+  <section id="components">
+    <div class="sec-head"><span class="sec-num">03</span><h2>Components</h2></div>
+    <div class="explain">A component is just a JavaScript function that returns JSX describing part of the UI. Modern React uses <strong>function components</strong> almost exclusively — the older class-based style still works but is rarely used in new code.</div>
+    <pre><code><span class="kw">function</span> <span class="fn">Welcome</span><span class="punc">()</span> <span class="punc">{</span>
+  <span class="kw">return</span> <span class="typ">&lt;h1&gt;</span>Hello there<span class="typ">&lt;/h1&gt;</span><span class="punc">;</span>
+<span class="punc">}</span>
+
+<span class="cmt">// used like a custom HTML tag:</span>
+<span class="typ">&lt;Welcome</span> <span class="typ">/&gt;</span></code></pre>
+  </section>
+
+  <section id="props">
+    <div class="sec-head"><span class="sec-num">04</span><h2>Props <span class="sub">— properties</span></h2></div>
+    <div class="explain">Props pass data from a parent component into a child component — like function arguments. They're <strong>read-only</strong>: a component must never modify its own props.</div>
+    <pre><code><span class="kw">function</span> <span class="fn">Greeting</span><span class="punc">(</span>props<span class="punc">)</span> <span class="punc">{</span>
+  <span class="kw">return</span> <span class="typ">&lt;h1&gt;</span>Hello, <span class="punc">{</span>props<span class="punc">.</span>name<span class="punc">}</span><span class="typ">&lt;/h1&gt;</span><span class="punc">;</span>
+<span class="punc">}</span>
+
+<span class="typ">&lt;Greeting</span> name<span class="punc">=</span><span class="val">"Sam"</span> <span class="typ">/&gt;</span>   <span class="cmt">// passes name="Sam" as a prop</span></code></pre>
+  </section>
+
+  <section id="state">
+    <div class="sec-head"><span class="sec-num">05</span><h2>State <span class="sub">— useState</span></h2></div>
+    <div class="explain">State is data that a component owns and that can change over time. Updating state with the setter function tells React to re-render the component with the new value — you never mutate state directly.</div>
+    <pre><code><span class="kw">import</span> <span class="punc">{</span> <span class="fn">useState</span> <span class="punc">}</span> <span class="kw">from</span> <span class="val">'react'</span><span class="punc">;</span>
+
+<span class="kw">function</span> <span class="fn">Counter</span><span class="punc">()</span> <span class="punc">{</span>
+  <span class="kw">const</span> <span class="punc">[</span>count<span class="punc">,</span> setCount<span class="punc">]</span> <span class="punc">=</span> <span class="fn">useState</span><span class="punc">(</span><span class="val">0</span><span class="punc">);</span>  <span class="cmt">// [current value, setter]</span>
+
+  <span class="kw">return</span> <span class="punc">(</span>
+    <span class="typ">&lt;button</span> onClick<span class="punc">={()</span> <span class="punc">=&gt;</span> <span class="fn">setCount</span><span class="punc">(</span>count <span class="punc">+</span> <span class="val">1</span><span class="punc">)}&gt;</span>
+      Clicked <span class="punc">{</span>count<span class="punc">}</span> times
+    <span class="typ">&lt;/button&gt;</span>
+  <span class="punc">);</span>
+<span class="punc">}</span></code></pre>
+  </section>
+
+  <section id="events">
+    <div class="sec-head"><span class="sec-num">06</span><h2>Event Handling</h2></div>
+    <div class="explain">React events are named in camelCase (<code>onClick</code>, not <code>onclick</code>) and are passed a function reference — not a string like in plain HTML.</div>
+    <pre><code><span class="kw">function</span> <span class="fn">handleClick</span><span class="punc">()</span> <span class="punc">{</span>
+  <span class="fn">console</span><span class="punc">.</span><span class="fn">log</span><span class="punc">(</span><span class="val">'clicked!'</span><span class="punc">);</span>
+<span class="punc">}</span>
+
+<span class="typ">&lt;button</span> onClick<span class="punc">={</span>handleClick<span class="punc">}&gt;</span>Click me<span class="typ">&lt;/button&gt;</span></code></pre>
+  </section>
+
+  <section id="conditional">
+    <div class="sec-head"><span class="sec-num">07</span><h2>Conditional Rendering</h2></div>
+    <div class="explain">Since JSX is just JavaScript, you show/hide UI using normal JS logic — ternaries, <code>&amp;&amp;</code>, or early returns — instead of template-specific directives.</div>
+    <pre><code><span class="punc">{</span>isLoggedIn <span class="punc">?</span> <span class="typ">&lt;p&gt;</span>Welcome back<span class="typ">&lt;/p&gt;</span> <span class="punc">:</span> <span class="typ">&lt;p&gt;</span>Please log in<span class="typ">&lt;/p&gt;</span><span class="punc">}</span>
+
+<span class="punc">{</span>hasError <span class="punc">&amp;&amp;</span> <span class="typ">&lt;p&gt;</span>Something went wrong<span class="typ">&lt;/p&gt;</span><span class="punc">}</span>  <span class="cmt">// renders only if hasError is true</span></code></pre>
+  </section>
+
+  <section id="lists">
+    <div class="sec-head"><span class="sec-num">08</span><h2>Lists &amp; Keys</h2></div>
+    <div class="explain"><code>.map()</code> turns an array of data into an array of JSX elements. Each item needs a unique <code>key</code> prop so React can efficiently track which items changed, were added, or removed.</div>
+    <pre><code><span class="kw">const</span> fruits <span class="punc">=</span> <span class="punc">[</span><span class="val">'apple'</span><span class="punc">,</span> <span class="val">'banana'</span><span class="punc">,</span> <span class="val">'cherry'</span><span class="punc">];</span>
+
+<span class="typ">&lt;ul&gt;</span>
+  <span class="punc">{</span>fruits<span class="punc">.</span><span class="fn">map</span><span class="punc">((</span>fruit<span class="punc">)</span> <span class="punc">=&gt;</span> <span class="punc">(</span>
+    <span class="typ">&lt;li</span> key<span class="punc">={</span>fruit<span class="punc">}&gt;</span><span class="punc">{</span>fruit<span class="punc">}</span><span class="typ">&lt;/li&gt;</span>
+  <span class="punc">))}</span>
+<span class="typ">&lt;/ul&gt;</span></code></pre>
+    <div class="callout">Avoid using array index as <code>key</code> if the list can reorder — it confuses React's diffing and can cause bugs.</div>
+  </section>
+
+  <section id="forms">
+    <div class="sec-head"><span class="sec-num">09</span><h2>Forms &amp; Controlled Inputs</h2></div>
+    <div class="explain">In a "controlled" input, the input's value is driven by React state — every keystroke updates state, and state drives what's displayed. This keeps the form's data in sync with your component.</div>
+    <pre><code><span class="kw">function</span> <span class="fn">NameForm</span><span class="punc">()</span> <span class="punc">{</span>
+  <span class="kw">const</span> <span class="punc">[</span>name<span class="punc">,</span> setName<span class="punc">]</span> <span class="punc">=</span> <span class="fn">useState</span><span class="punc">(</span><span class="val">''</span><span class="punc">);</span>
+
+  <span class="kw">return</span> <span class="punc">(</span>
+    <span class="typ">&lt;input</span>
+      value<span class="punc">={</span>name<span class="punc">}</span>
+      onChange<span class="punc">={(</span>e<span class="punc">)</span> <span class="punc">=&gt;</span> <span class="fn">setName</span><span class="punc">(</span>e<span class="punc">.</span>target<span class="punc">.</span>value<span class="punc">)}</span>
+    <span class="typ">/&gt;</span>
+  <span class="punc">);</span>
+<span class="punc">}</span></code></pre>
+  </section>
+
+  <section id="useeffect">
+    <div class="sec-head"><span class="sec-num">10</span><h2>useEffect</h2></div>
+    <div class="explain">Runs "side effects" — code that reaches outside React, like fetching data, subscriptions, or manually touching the DOM — after render. The dependency array controls <strong>when</strong> it re-runs.</div>
+    <pre><code><span class="kw">import</span> <span class="punc">{</span> <span class="fn">useEffect</span> <span class="punc">}</span> <span class="kw">from</span> <span class="val">'react'</span><span class="punc">;</span>
+
+<span class="fn">useEffect</span><span class="punc">(()</span> <span class="punc">=&gt;</span> <span class="punc">{</span>
+  <span class="fn">console</span><span class="punc">.</span><span class="fn">log</span><span class="punc">(</span><span class="val">'ran after render'</span><span class="punc">);</span>
+<span class="punc">},</span> <span class="punc">[</span>count<span class="punc">]);</span>  <span class="cmt">// re-runs only when `count` changes</span>
+
+<span class="cmt">// [] → runs once on mount   |   no array → runs after every render</span></code></pre>
+  </section>
+
+  <section id="useref">
+    <div class="sec-head"><span class="sec-num">11</span><h2>useRef</h2></div>
+    <div class="explain">Creates a mutable value that <strong>persists across renders without causing a re-render</strong> when changed. Most commonly used to directly access a DOM element.</div>
+    <pre><code><span class="kw">const</span> inputRef <span class="punc">=</span> <span class="fn">useRef</span><span class="punc">(</span><span class="val">null</span><span class="punc">);</span>
+
+<span class="kw">function</span> <span class="fn">focusInput</span><span class="punc">()</span> <span class="punc">{</span>
+  inputRef<span class="punc">.</span>current<span class="punc">.</span><span class="fn">focus</span><span class="punc">();</span>   <span class="cmt">// .current holds the actual DOM node</span>
+<span class="punc">}</span>
+
+<span class="typ">&lt;input</span> ref<span class="punc">={</span>inputRef<span class="punc">}</span> <span class="typ">/&gt;</span></code></pre>
+  </section>
+
+  <section id="usememo">
+    <div class="sec-head"><span class="sec-num">12</span><h2>useMemo &amp; useCallback</h2></div>
+    <div class="explain">Both are performance tools that skip unnecessary recalculation. <code>useMemo</code> caches a computed <strong>value</strong>; <code>useCallback</code> caches a <strong>function</strong> so it isn't recreated on every render.</div>
+    <pre><code><span class="kw">const</span> total <span class="punc">=</span> <span class="fn">useMemo</span><span class="punc">(()</span> <span class="punc">=&gt;</span> <span class="fn">expensiveSum</span><span class="punc">(</span>items<span class="punc">),</span> <span class="punc">[</span>items<span class="punc">]);</span>
+
+<span class="kw">const</span> handleClick <span class="punc">=</span> <span class="fn">useCallback</span><span class="punc">(()</span> <span class="punc">=&gt;</span> <span class="punc">{</span>
+  <span class="fn">doSomething</span><span class="punc">(</span>id<span class="punc">);</span>
+<span class="punc">},</span> <span class="punc">[</span>id<span class="punc">]);</span></code></pre>
+    <div class="callout">Only reach for these once you've actually measured a performance problem — overusing them adds complexity for little benefit.</div>
+  </section>
+
+  <section id="usecontext">
+    <div class="sec-head"><span class="sec-num">13</span><h2>useContext</h2></div>
+    <div class="explain">Lets deeply nested components read shared data (like a logged-in user or theme) without manually passing props down through every level in between — known as "prop drilling."</div>
+    <pre><code><span class="kw">const</span> ThemeContext <span class="punc">=</span> <span class="fn">createContext</span><span class="punc">(</span><span class="val">'light'</span><span class="punc">);</span>
+
+<span class="cmt">// provide it high up in the tree:</span>
+<span class="typ">&lt;ThemeContext.Provider</span> value<span class="punc">=</span><span class="val">"dark"</span><span class="typ">&gt;</span>
+  <span class="typ">&lt;App</span> <span class="typ">/&gt;</span>
+<span class="typ">&lt;/ThemeContext.Provider&gt;</span>
+
+<span class="cmt">// read it anywhere below, no prop passing needed:</span>
+<span class="kw">const</span> theme <span class="punc">=</span> <span class="fn">useContext</span><span class="punc">(</span>ThemeContext<span class="punc">);</span></code></pre>
+  </section>
+
+  <section id="customhooks">
+    <div class="sec-head"><span class="sec-num">14</span><h2>Custom Hooks</h2></div>
+    <div class="explain">A custom hook is just a regular function, prefixed with <code>use</code>, that calls other hooks inside it — used to extract and reuse stateful logic between components.</div>
+    <pre><code><span class="kw">function</span> <span class="fn">useWindowWidth</span><span class="punc">()</span> <span class="punc">{</span>
+  <span class="kw">const</span> <span class="punc">[</span>width<span class="punc">,</span> setWidth<span class="punc">]</span> <span class="punc">=</span> <span class="fn">useState</span><span class="punc">(</span>window<span class="punc">.</span>innerWidth<span class="punc">);</span>
+
+  <span class="fn">useEffect</span><span class="punc">(()</span> <span class="punc">=&gt;</span> <span class="punc">{</span>
+    <span class="kw">const</span> <span class="fn">handler</span> <span class="punc">=</span> <span class="punc">()</span> <span class="punc magic">=&gt;</span> <span class="fn">setWidth</span><span class="punc">(</span>window<span class="punc">.</span>innerWidth<span class="punc">);</span>
+    window<span class="punc">.</span><span class="fn">addEventListener</span><span class="punc">(</span><span class="val">'resize'</span><span class="punc">,</span> handler<span class="punc">);</span>
+    <span class="kw">return</span> <span class="punc">()</span> <span class="punc">=&gt;</span> window<span class="punc">.</span><span class="fn">removeEventListener</span><span class="punc">(</span><span class="val">'resize'</span><span class="punc">,</span> handler<span class="punc">);</span>  <span class="cmt">// cleanup</span>
+  <span class="punc">},</span> <span class="punc">[]);</span>
+
+  <span class="kw">return</span> width<span class="punc">;</span>
+<span class="punc">}</span></code></pre>
+  </section>
+
+  <section id="lifting">
+    <div class="sec-head"><span class="sec-num">15</span><h2>Lifting State Up</h2></div>
+    <div class="explain">When two sibling components need to share the same data, move that state up to their nearest common parent, then pass it down as props. This keeps a single source of truth.</div>
+    <div class="tree">
+      <div class="tnode t1"><div class="label">parent</div><div class="val-ex">owns the state</div></div>
+      <div class="tnode t2"><div class="label">child A</div><div class="val-ex">reads via props</div></div>
+      <div class="tnode t3"><div class="label">child B</div><div class="val-ex">updates via callback prop</div></div>
+    </div>
+  </section>
+
+  <section id="composition">
+    <div class="sec-head"><span class="sec-num">16</span><h2>Component Composition</h2></div>
+    <div class="explain">React favors composition over inheritance — build complex UIs by nesting and combining small components, often passing JSX itself as a prop via <code>children</code>.</div>
+    <pre><code><span class="kw">function</span> <span class="fn">Card</span><span class="punc">({</span> children <span class="punc">})</span> <span class="punc">{</span>
+  <span class="kw">return</span> <span class="typ">&lt;div</span> className<span class="punc">=</span><span class="val">"card"</span><span class="typ">&gt;</span><span class="punc">{</span>children<span class="punc">}</span><span class="typ">&lt;/div&gt;</span><span class="punc">;</span>
+<span class="punc">}</span>
+
+<span class="typ">&lt;Card&gt;</span>
+  <span class="typ">&lt;h2&gt;</span>Title<span class="typ">&lt;/h2&gt;</span>   <span class="cmt">// this becomes Card's `children` prop</span>
+<span class="typ">&lt;/Card&gt;</span></code></pre>
+  </section>
+
+  <section id="router">
+    <div class="sec-head"><span class="sec-num">17</span><h2>React Router <span class="sub">— basics</span></h2></div>
+    <div class="explain">React itself doesn't include page routing. <code>react-router-dom</code> is the standard library for building multi-page navigation in a single-page app without full page reloads.</div>
+    <pre><code><span class="kw">import</span> <span class="punc">{</span> BrowserRouter<span class="punc">,</span> Routes<span class="punc">,</span> Route <span class="punc">}</span> <span class="kw">from</span> <span class="val">'react-router-dom'</span><span class="punc">;</span>
+
+<span class="typ">&lt;BrowserRouter&gt;</span>
+  <span class="typ">&lt;Routes&gt;</span>
+    <span class="typ">&lt;Route</span> path<span class="punc">=</span><span class="val">"/"</span> element<span class="punc">={</span><span class="typ">&lt;Home</span> <span class="typ">/&gt;}</span> <span class="typ">/&gt;</span>
+    <span class="typ">&lt;Route</span> path<span class="punc">=</span><span class="val">"/about"</span> element<span class="punc">={</span><span class="typ">&lt;About</span> <span class="typ">/&gt;}</span> <span class="typ">/&gt;</span>
+  <span class="typ">&lt;/Routes&gt;</span>
+<span class="typ">&lt;/BrowserRouter&gt;</span></code></pre>
+  </section>
+
+  <section id="lifecycle">
+    <div class="sec-head"><span class="sec-num">18</span><h2>Lifecycle <span class="sub">— class-component era</span></h2></div>
+    <div class="explain">Older React used class components with named lifecycle methods. Function components replace all of these with <code>useEffect</code>, but you'll still see this style in older codebases.</div>
+    <table>
+      <tr><th>Class method</th><th>useEffect equivalent</th></tr>
+      <tr><td><code>componentDidMount</code></td><td><code>useEffect(fn, [])</code></td></tr>
+      <tr><td><code>componentDidUpdate</code></td><td><code>useEffect(fn, [dep])</code></td></tr>
+      <tr><td><code>componentWillUnmount</code></td><td>the function <code>useEffect</code> returns</td></tr>
+    </table>
+  </section>
+
+  <section id="hooksref">
+    <div class="sec-head"><span class="sec-num">19</span><h2>Hooks Quick Reference</h2></div>
+    <table>
+      <tr><th>Hook</th><th>Purpose</th></tr>
+      <tr><td><code>useState</code></td><td>Local component state</td></tr>
+      <tr><td><code>useEffect</code></td><td>Side effects after render</td></tr>
+      <tr><td><code>useRef</code></td><td>Persistent mutable value / DOM access</td></tr>
+      <tr><td><code>useMemo</code></td><td>Cache a computed value</td></tr>
+      <tr><td><code>useCallback</code></td><td>Cache a function reference</td></tr>
+      <tr><td><code>useContext</code></td><td>Read shared/global data</td></tr>
+      <tr><td><code>useReducer</code></td><td>Complex state logic, Redux-style</td></tr>
+    </table>
+  </section>
+
+  <section id="practices">
+    <div class="sec-head"><span class="sec-num">20</span><h2>Best Practices</h2></div>
+    <ul>
+      <li>Keep components small and focused on one responsibility</li>
+      <li>Never mutate state directly — always use the setter function</li>
+      <li>Always give list items a stable, unique <code>key</code></li>
+      <li>Clean up subscriptions/timers inside <code>useEffect</code>'s return function</li>
+      <li>Lift state up only as far as necessary — don't over-centralize</li>
+      <li>Name custom hooks starting with <code>use</code> so React can enforce hook rules</li>
+    </ul>
+  </section>
+
+  <footer>// end of react-notes.jsx — happy revising</footer>
+</main>
+
+<script>
+  const links = document.querySelectorAll('.sidebar a');
+  const sections = Array.from(links).map(l => document.querySelector(l.getAttribute('href')));
+
+  function onScroll(){
+    let idx = 0;
+    const scrollPos = window.scrollY + 120;
+    sections.forEach((sec, i) => {
+      if (sec && sec.offsetTop <= scrollPos) idx = i;
+    });
+    links.forEach(l => l.classList.remove('active'));
+    if (links[idx]) links[idx].classList.add('active');
+  }
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+</script>
+
+</body>
+</html>

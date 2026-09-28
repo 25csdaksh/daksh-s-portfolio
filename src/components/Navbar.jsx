@@ -32,7 +32,7 @@ export function Navbar({
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 40);
+      setIsScrolled(window.scrollY > 30);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -42,7 +42,7 @@ export function Navbar({
     { label: "About", href: "#about" },
     { label: "Projects", href: "#projects" },
     { label: "Certificates", href: "#certificates" },
-    { label: "Gift for Coders", href: "/gift-for-coders.html", isLink: true, hasGiftIcon: true },
+    { label: "Gift Notes", href: "/gift-for-coders.html", isLink: true, icon: "🎁" },
     { label: "Hackathons", href: "#hackathons" },
     { label: "Learning", isAction: true, action: "learning" },
     { label: "Insights", href: "#blog" },
@@ -79,16 +79,16 @@ export function Navbar({
   const isLight = effectiveTheme === "light";
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-3 sm:px-6 md:px-8 py-2.5 sm:py-4">
+    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-3 sm:px-6 md:px-8 py-2 sm:py-3.5">
       <div
-        className={`max-w-7xl mx-auto rounded-full transition-all duration-400 px-3 sm:px-5 py-2 flex items-center justify-between gap-2 sm:gap-4 ${
+        className={`max-w-7xl mx-auto rounded-full transition-all duration-300 px-3 sm:px-5 py-1.5 sm:py-2 flex items-center justify-between gap-2 sm:gap-4 border ${
           isLight
             ? isScrolled
-              ? "bg-white/95 backdrop-blur-xl border border-slate-200/90 shadow-xl shadow-slate-900/8"
-              : "bg-white/85 backdrop-blur-md border border-slate-200/70 shadow-lg shadow-slate-900/5"
+              ? "bg-white/95 backdrop-blur-xl border-slate-200 shadow-lg shadow-slate-900/5 text-slate-900"
+              : "bg-white/80 backdrop-blur-md border-slate-200/80 shadow-md shadow-slate-900/4 text-slate-900"
             : isScrolled
-            ? "bg-[#0f072e]/95 backdrop-blur-xl border border-purple-500/40 shadow-2xl shadow-black/80"
-            : "bg-[#0f072e]/85 backdrop-blur-md border border-purple-500/25 shadow-lg shadow-black/50"
+            ? "bg-[#0f072e]/95 backdrop-blur-xl border-purple-500/35 shadow-2xl shadow-black/80 text-white"
+            : "bg-[#0f072e]/85 backdrop-blur-md border-purple-500/25 shadow-xl shadow-black/50 text-white"
         }`}
       >
         {/* Brand Monogram & Name */}
@@ -102,7 +102,7 @@ export function Navbar({
           className="flex items-center gap-2 sm:gap-2.5 group shrink-0"
           data-cursor="pointer"
         >
-          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gradient-to-br from-purple-800 via-indigo-900 to-slate-950 text-amber-400 border-2 border-purple-400/80 flex items-center justify-center font-sans text-xs font-black shadow-md transition-transform duration-300 group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(168,85,247,0.6)]">
+          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gradient-to-br from-purple-800 via-indigo-950 to-slate-950 text-amber-400 border border-purple-400/80 flex items-center justify-center font-sans text-xs font-black shadow-xs transition-transform duration-300 group-hover:scale-105">
             DS
           </div>
           <div className="flex flex-col">
@@ -115,38 +115,29 @@ export function Navbar({
             </span>
             <span
               className={`hidden sm:inline-block font-mono text-[9px] tracking-wider uppercase font-semibold leading-tight ${
-                isLight ? "text-slate-500" : "text-purple-300/90"
+                isLight ? "text-slate-500" : "text-purple-300/80"
               }`}
             >
-              Engineer • AI & Full Stack
+              AI & Full Stack
             </span>
           </div>
         </a>
 
-        {/* Desktop Navigation Links */}
-        <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1.5 shrink-0">
+        {/* Desktop Navigation Links (Clean, Uniform, Modern) */}
+        <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1 shrink-0">
           {navItems.map((item) => (
             <button
               key={item.label}
               onClick={() => handleItemClick(item)}
               onMouseEnter={() => soundManager.playHover()}
-              className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 flex items-center gap-1.5 whitespace-nowrap shrink-0 ${
-                item.hasGiftIcon
-                  ? isLight
-                    ? "text-amber-800 bg-amber-100/90 hover:bg-amber-200 border border-amber-300/60 font-semibold shadow-xs"
-                    : "text-amber-300 bg-amber-400/15 hover:bg-amber-400/25 border border-amber-400/40 font-semibold shadow-xs"
-                  : item.isAction
-                  ? isLight
-                    ? "text-purple-800 bg-purple-100/90 hover:bg-purple-200 font-bold border border-purple-300/60 shadow-xs"
-                    : "text-purple-200 bg-purple-500/20 hover:bg-purple-500 hover:text-white font-bold border border-purple-400/50 shadow-xs"
-                  : isLight
+              className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-150 flex items-center gap-1.5 whitespace-nowrap shrink-0 ${
+                isLight
                   ? "text-slate-700 hover:text-purple-700 hover:bg-slate-100"
-                  : "text-slate-200 hover:text-purple-300 hover:bg-purple-500/10"
+                  : "text-slate-300 hover:text-white hover:bg-purple-500/15"
               }`}
               data-cursor="pointer"
             >
-              {item.hasGiftIcon && <span className="text-xs">🎁</span>}
-              {item.isAction && <BookOpen className="w-3.5 h-3.5 opacity-80" />}
+              {item.icon && <span className="text-xs">{item.icon}</span>}
               <span>{item.label}</span>
             </button>
           ))}
@@ -178,7 +169,7 @@ export function Navbar({
             title={soundEnabled ? "Mute audio" : "Enable sound"}
             className={`p-1.5 sm:p-2 rounded-full border transition-colors shrink-0 ${
               isLight
-                ? "border-slate-300/80 text-slate-600 hover:text-purple-700 hover:border-purple-400 hover:bg-purple-50"
+                ? "border-slate-200 text-slate-600 hover:text-purple-700 hover:border-purple-300 hover:bg-slate-100"
                 : "border-purple-400/30 text-purple-300 hover:text-white hover:border-purple-400 hover:bg-purple-400/20"
             }`}
             data-cursor="pointer"
@@ -193,9 +184,9 @@ export function Navbar({
               if (onOpenResume) onOpenResume();
             }}
             onMouseEnter={() => soundManager.playHover()}
-            className={`hidden sm:flex items-center gap-1 px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-bold border transition-all duration-200 whitespace-nowrap shrink-0 ${
+            className={`hidden sm:flex items-center gap-1 px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-bold border transition-all duration-150 whitespace-nowrap shrink-0 ${
               isLight
-                ? "border-purple-300/80 text-purple-800 bg-purple-50 hover:bg-purple-600 hover:text-white hover:border-purple-600"
+                ? "border-slate-300 text-slate-800 hover:border-purple-600 hover:text-purple-700 hover:bg-purple-50"
                 : "border-purple-400/40 text-purple-200 bg-purple-500/15 hover:bg-purple-500 hover:text-white"
             }`}
             data-cursor="pointer"
@@ -215,7 +206,7 @@ export function Navbar({
               if (target) target.scrollIntoView({ behavior: "smooth" });
             }}
             onMouseEnter={() => soundManager.playHover()}
-            className="hidden md:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-purple-950 text-xs font-extrabold border border-yellow-300 shadow-md shadow-amber-500/20 transition-all duration-200 hover:shadow-lg hover:shadow-amber-500/40 hover:scale-[1.03] whitespace-nowrap shrink-0"
+            className="hidden md:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-purple-950 text-xs font-extrabold border border-yellow-300 shadow-md shadow-amber-500/20 transition-all duration-200 hover:shadow-lg hover:shadow-amber-500/40 hover:scale-[1.02] whitespace-nowrap shrink-0"
             data-cursor="pointer"
           >
             <span>Let's Connect</span>
@@ -279,7 +270,7 @@ export function Navbar({
                     }`}
                   >
                     <span>{item.label}</span>
-                    {item.isAction && <Sparkles className="w-3 h-3 text-purple-400" />}
+                    {item.icon && <span className="text-xs">{item.icon}</span>}
                   </button>
                 ))}
               </div>

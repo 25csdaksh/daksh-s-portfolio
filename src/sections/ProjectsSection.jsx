@@ -42,7 +42,7 @@ export function ProjectsSection({ onSelectProject }) {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.35, delay: idx * 0.06 }}
-                  className={`editorial-card group relative overflow-hidden flex flex-col justify-between bg-[#0f072e] border border-purple-500/25 hover:border-purple-400 hover:shadow-2xl hover:shadow-purple-500/20 rounded-2xl text-white ${
+                  className={`editorial-card group relative overflow-hidden flex flex-col justify-between bg-white dark:bg-[#0f072e] border border-purple-200 dark:border-purple-500/25 hover:border-purple-400 dark:hover:border-purple-400 hover:shadow-2xl hover:shadow-purple-500/20 rounded-3xl text-slate-900 dark:text-white ${
                     isLarge ? "lg:col-span-6" : "lg:col-span-4"
                   }`}
                   data-cursor="project"
@@ -53,25 +53,34 @@ export function ProjectsSection({ onSelectProject }) {
                   }}
                 >
                   {/* Visual Preview Header Container with High-Res Cover Image */}
-                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-950 border-b border-purple-500/20 group/cover">
+                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-900 border-b border-purple-200 dark:border-purple-500/20 group/cover">
                     {project.coverImage ? (
                       <img
                         src={project.coverImage}
                         alt={`${project.title} Cover`}
                         className="w-full h-full object-cover object-top group-hover/cover:scale-105 transition-transform duration-700 ease-out"
                         loading="lazy"
+                        onError={(e) => {
+                          e.currentTarget.style.display = "none";
+                          e.currentTarget.nextElementSibling?.classList.remove("hidden");
+                        }}
                       />
-                    ) : (
-                      <div className="w-full h-full bg-gradient-to-br from-purple-900 via-indigo-950 to-slate-950" />
-                    )}
+                    ) : null}
 
-                    {/* Subtle Gradient Vignette Overlay for Crisp Text Contrast */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#030014]/90 via-[#030014]/30 to-[#030014]/40 pointer-events-none" />
+                    {/* Fallback Banner if image fails */}
+                    <div className="hidden w-full h-full bg-gradient-to-br from-purple-900 via-indigo-950 to-slate-950 flex-col items-center justify-center p-6 text-center">
+                      <Sparkles className="w-10 h-10 text-amber-400 mb-2" />
+                      <span className="font-heading text-lg font-bold text-white">{project.title}</span>
+                      <span className="font-mono text-xs text-purple-300">{project.category}</span>
+                    </div>
+
+                    {/* Clean Gradient Bottom-Only Shadow for Badge & Metric Legibility */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-black/30 pointer-events-none" />
 
                     {/* Top Badges Bar */}
                     <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-10">
                       <div className="flex items-center gap-1.5 flex-wrap">
-                        <span className="px-2.5 sm:px-3 py-1 rounded-full bg-purple-900/90 text-purple-200 font-mono text-[9px] sm:text-[10px] font-bold tracking-wider backdrop-blur-md border border-purple-400/50 shadow-xs">
+                        <span className="px-2.5 sm:px-3 py-1 rounded-full bg-purple-950/85 text-purple-200 font-mono text-[9px] sm:text-[10px] font-bold tracking-wider backdrop-blur-md border border-purple-400/50 shadow-xs">
                           {project.category}
                         </span>
                         {project.featuredBadge && (
@@ -80,14 +89,14 @@ export function ProjectsSection({ onSelectProject }) {
                           </span>
                         )}
                       </div>
-                      <span className="px-2 sm:px-2.5 py-1 rounded-full bg-black/70 backdrop-blur-md border border-purple-400/30 font-mono text-[9px] sm:text-[10px] text-purple-300 font-bold">
+                      <span className="px-2 sm:px-2.5 py-1 rounded-full bg-black/75 backdrop-blur-md border border-purple-400/30 font-mono text-[9px] sm:text-[10px] text-purple-200 font-bold">
                         {project.year}
                       </span>
                     </div>
 
                     {/* Bottom Overlay Metric Bar & Live Link Launch Button */}
                     <div className="absolute bottom-2.5 left-3 right-3 flex items-center justify-between z-10 text-white">
-                      <div className="flex items-center gap-2 font-mono text-[9px] sm:text-[10px] bg-[#080321]/90 backdrop-blur-md px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl border border-purple-400/30">
+                      <div className="flex items-center gap-2 font-mono text-[9px] sm:text-[10px] bg-slate-950/85 backdrop-blur-md px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl border border-purple-400/30">
                         {Object.entries(project.stats).slice(0, 2).map(([k, v]) => (
                           <div key={k} className="flex items-center gap-1">
                             <span className="font-bold text-amber-400">{v}</span>
@@ -120,7 +129,7 @@ export function ProjectsSection({ onSelectProject }) {
                   <div className="p-5 sm:p-7 flex-1 flex flex-col justify-between space-y-5">
                     <div className="space-y-2.5">
                       <div className="flex items-center justify-between">
-                        <h3 className="text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-white group-hover:text-purple-300 transition-colors">
+                        <h3 className="text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-slate-900 dark:text-white group-hover:text-purple-700 dark:group-hover:text-purple-300 transition-colors">
                           {project.title}
                         </h3>
                         {project.liveUrl && (
@@ -133,7 +142,7 @@ export function ProjectsSection({ onSelectProject }) {
                               soundManager.playClick();
                               window.open(project.liveUrl, "_blank", "noopener,noreferrer");
                             }}
-                            className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-purple-500/20 hover:bg-purple-500 text-purple-300 hover:text-white flex items-center justify-center transition-all transform hover:scale-110 shadow-xs border border-purple-400/50 shrink-0 ml-2"
+                            className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-purple-100 hover:bg-purple-200 text-purple-900 border border-purple-300 dark:bg-purple-500/20 dark:hover:bg-purple-500 dark:text-purple-300 dark:hover:text-white flex items-center justify-center transition-all transform hover:scale-110 shadow-xs dark:border-purple-400/50 shrink-0 ml-2"
                             title="Launch Live Project in New Tab"
                           >
                             <ExternalLink className="w-4 h-4 stroke-[2.5]" />
@@ -141,24 +150,24 @@ export function ProjectsSection({ onSelectProject }) {
                         )}
                       </div>
 
-                      <p className="text-xs sm:text-sm text-slate-300 leading-relaxed line-clamp-3">
+                      <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3">
                         {project.summary}
                       </p>
                     </div>
 
                     {/* Tech Badges & Action Buttons */}
-                    <div className="space-y-3.5 pt-3 border-t border-purple-400/15">
+                    <div className="space-y-3.5 pt-3 border-t border-purple-200 dark:border-purple-400/15">
                       <div className="flex flex-wrap gap-1.5">
                         {project.technologies.slice(0, 4).map((tech) => (
                           <span
                             key={tech}
-                            className="px-2.5 py-0.5 sm:py-1 rounded-md bg-[#080321] border border-purple-400/25 font-mono text-[10px] text-slate-200 font-medium"
+                            className="px-2.5 py-0.5 sm:py-1 rounded-md bg-purple-50 text-purple-900 border border-purple-200 dark:bg-[#080321] dark:border-purple-400/25 font-mono text-[10px] dark:text-slate-200 font-medium"
                           >
                             {tech}
                           </span>
                         ))}
                         {project.technologies.length > 4 && (
-                          <span className="px-2 py-0.5 sm:py-1 rounded-md bg-[#080321] font-mono text-[10px] text-purple-300/80">
+                          <span className="px-2 py-0.5 sm:py-1 rounded-md bg-slate-100 text-slate-700 dark:bg-[#080321] font-mono text-[10px] dark:text-purple-300/80">
                             +{project.technologies.length - 4} more
                           </span>
                         )}
@@ -172,9 +181,9 @@ export function ProjectsSection({ onSelectProject }) {
                             soundManager.playClick();
                             onSelectProject(project);
                           }}
-                          className="text-xs font-mono text-purple-300 font-bold hover:text-purple-200 flex items-center gap-1.5 py-1 transition-colors"
+                          className="text-xs font-mono text-purple-700 dark:text-purple-300 font-bold hover:text-purple-950 dark:hover:text-purple-200 flex items-center gap-1.5 py-1 transition-colors"
                         >
-                          <Eye className="w-3.5 h-3.5 text-purple-400" />
+                          <Eye className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
                           <span>Case Study</span>
                         </button>
                         <div
@@ -192,7 +201,7 @@ export function ProjectsSection({ onSelectProject }) {
                                 window.open(project.githubUrl, "_blank", "noopener,noreferrer");
                               }}
                               onMouseEnter={() => soundManager.playHover()}
-                              className="px-2.5 py-1.5 rounded-lg bg-[#080321] hover:bg-purple-500 hover:text-white border border-purple-400/30 text-white font-mono text-[11px] font-bold flex items-center gap-1.5 transition-colors"
+                              className="px-2.5 py-1.5 rounded-lg bg-slate-100 text-slate-800 border border-slate-300 hover:bg-slate-200 dark:bg-[#080321] dark:hover:bg-purple-500 dark:hover:text-white dark:border-purple-400/30 dark:text-white font-mono text-[11px] font-bold flex items-center gap-1.5 transition-colors"
                               title="View GitHub Repository"
                             >
                               <Github className="w-3.5 h-3.5" />

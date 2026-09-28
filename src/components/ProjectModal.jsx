@@ -125,15 +125,15 @@ export function ProjectModal({ project, onClose }) {
           transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
           onClick={(e) => e.stopPropagation()}
           data-lenis-prevent="true"
-          className="relative w-full max-w-4xl bg-[#0f072e] rounded-3xl border border-purple-500/40 shadow-2xl shadow-purple-950/80 overflow-hidden z-10 max-h-[92vh] flex flex-col overscroll-contain text-white"
+          className="relative w-full max-w-4xl bg-white dark:bg-[#0f072e] rounded-3xl border border-purple-200 dark:border-purple-500/40 shadow-2xl overflow-hidden z-10 max-h-[92vh] flex flex-col overscroll-contain text-slate-900 dark:text-white"
         >
           {/* Header Bar */}
-          <div className="flex items-center justify-between px-4 sm:px-6 py-3.5 sm:py-4 border-b border-purple-500/20 bg-[#080321] shrink-0">
+          <div className="flex items-center justify-between px-4 sm:px-6 py-3.5 sm:py-4 border-b border-purple-200 dark:border-purple-500/20 bg-slate-50/95 dark:bg-[#080321] shrink-0">
             <div className="flex items-center gap-2 sm:gap-3 min-w-0">
               <span className="px-2.5 sm:px-3 py-1 rounded-full bg-gradient-to-r from-amber-400 to-yellow-500 text-blue-950 font-mono text-[11px] sm:text-xs font-bold shadow-xs shrink-0">
                 {project.category}
               </span>
-              <span className="font-mono text-xs text-purple-300 hidden sm:inline">{project.year}</span>
+              <span className="font-mono text-xs text-purple-700 dark:text-purple-300 hidden sm:inline font-semibold">{project.year}</span>
             </div>
 
             <div className="flex items-center gap-2 sm:gap-3 shrink-0">
@@ -168,7 +168,7 @@ export function ProjectModal({ project, onClose }) {
                     window.open(project.githubUrl, "_blank", "noopener,noreferrer");
                   }}
                   onMouseEnter={() => soundManager.playHover()}
-                  className="p-2 rounded-xl border border-purple-500/20 bg-[#080321] hover:bg-[#170c43] hover:border-amber-400 text-slate-200 hover:text-amber-300 transition-colors hidden sm:flex items-center"
+                  className="p-2 rounded-xl border border-slate-300 dark:border-purple-500/20 bg-slate-100 hover:bg-slate-200 dark:bg-[#080321] dark:hover:bg-[#170c43] text-slate-800 dark:text-slate-200 transition-colors hidden sm:flex items-center"
                   title="View Source on GitHub"
                 >
                   <Github className="w-4 h-4" />
@@ -181,7 +181,7 @@ export function ProjectModal({ project, onClose }) {
                   onClose();
                 }}
                 onMouseEnter={() => soundManager.playHover()}
-                className="p-2 rounded-full bg-[#080321] hover:bg-[#170c43] text-slate-300 hover:text-white border border-purple-500/20 transition-colors"
+                className="p-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 dark:bg-[#080321] dark:hover:bg-[#170c43] dark:text-slate-300 dark:hover:text-white border border-slate-300 dark:border-purple-500/20 transition-colors"
                 data-cursor="pointer"
                 aria-label="Close modal"
               >
@@ -198,25 +198,25 @@ export function ProjectModal({ project, onClose }) {
             {/* Title & Tagline */}
             <div>
               <div className="flex flex-wrap items-center gap-2 mb-2">
-                <span className="text-xs font-mono uppercase tracking-widest text-amber-400 font-bold">
+                <span className="text-xs font-mono uppercase tracking-widest text-amber-600 dark:text-amber-400 font-bold">
                   Role: {project.role}
                 </span>
                 {project.featuredBadge && (
-                  <span className="px-2.5 py-0.5 rounded text-[10px] font-mono bg-amber-400/15 text-amber-300 font-bold border border-amber-400/40">
+                  <span className="px-2.5 py-0.5 rounded text-[10px] font-mono bg-amber-100 text-amber-900 border border-amber-300 dark:bg-amber-400/15 dark:text-amber-300 dark:border-amber-400/40 font-bold">
                     {project.featuredBadge}
                   </span>
                 )}
               </div>
-              <h2 className="text-2xl sm:text-4xl font-heading font-extrabold text-white tracking-tight">
+              <h2 className="text-2xl sm:text-4xl font-heading font-extrabold text-slate-900 dark:text-white tracking-tight">
                 {project.title}
               </h2>
-              <p className="text-sm sm:text-base text-slate-200 mt-2 font-sans font-normal leading-relaxed">
+              <p className="text-sm sm:text-base text-slate-600 dark:text-slate-200 mt-2 font-sans font-normal leading-relaxed">
                 {project.tagline}
               </p>
             </div>
 
             {/* Navigation Tabs - Mobile Horizontally Scrollable */}
-            <div className="flex items-center gap-2 border-b border-white/10 pb-3 overflow-x-auto no-scrollbar shrink-0">
+            <div className="flex items-center gap-2 border-b border-purple-200 dark:border-white/10 pb-3 overflow-x-auto no-scrollbar shrink-0">
               <button
                 onClick={() => {
                   soundManager.playClick();
@@ -225,7 +225,7 @@ export function ProjectModal({ project, onClose }) {
                 className={`px-3.5 sm:px-4 py-2 rounded-xl text-xs font-bold font-mono transition-all shrink-0 ${
                   activeTab === "overview"
                     ? "bg-gradient-to-r from-amber-400 to-yellow-500 text-blue-950 shadow-md shadow-amber-500/20"
-                    : "text-slate-300 hover:text-white hover:bg-white/5"
+                    : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5"
                 }`}
                 data-cursor="pointer"
               >
@@ -239,7 +239,7 @@ export function ProjectModal({ project, onClose }) {
                 className={`px-3.5 sm:px-4 py-2 rounded-xl text-xs font-bold font-mono transition-all shrink-0 ${
                   activeTab === "architecture"
                     ? "bg-gradient-to-r from-amber-400 to-yellow-500 text-blue-950 shadow-md shadow-amber-500/20"
-                    : "text-slate-300 hover:text-white hover:bg-white/5"
+                    : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5"
                 }`}
                 data-cursor="pointer"
               >
@@ -253,11 +253,11 @@ export function ProjectModal({ project, onClose }) {
                 className={`px-3.5 sm:px-4 py-2 rounded-xl text-xs font-bold font-mono flex items-center gap-1.5 transition-all shrink-0 ${
                   activeTab === "liveSimulator"
                     ? "bg-gradient-to-r from-amber-400 to-yellow-500 text-blue-950 shadow-md shadow-amber-500/20"
-                    : "text-amber-300 bg-amber-400/10 hover:bg-amber-400/20 border border-amber-400/30"
+                    : "text-amber-800 dark:text-amber-300 bg-amber-100 dark:bg-amber-400/10 hover:bg-amber-200 dark:hover:bg-amber-400/20 border border-amber-300 dark:border-amber-400/30"
                 }`}
                 data-cursor="pointer"
               >
-                <Play className="w-3 h-3 fill-current text-amber-400 group-hover:text-blue-950" />
+                <Play className="w-3 h-3 fill-current text-amber-500 dark:text-amber-400 group-hover:text-blue-950" />
                 <span>Live Interactive Sandbox</span>
               </button>
             </div>
@@ -267,15 +267,18 @@ export function ProjectModal({ project, onClose }) {
               <div className="space-y-6">
                 {/* Full Width Project High-Res Cover Preview */}
                 {project.coverImage && (
-                  <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden border border-purple-500/30 shadow-xl bg-[#080321] group">
+                  <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden border border-purple-200 dark:border-purple-500/30 shadow-xl bg-slate-900 group">
                     <img
                       src={project.coverImage}
                       alt={`${project.title} Cover`}
                       className="w-full h-full object-cover object-top"
+                      onError={(e) => {
+                        e.currentTarget.style.display = "none";
+                      }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#080321]/90 via-transparent to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
                     <div className="absolute bottom-2.5 sm:bottom-3 left-3 sm:left-4 right-3 sm:right-4 flex items-center justify-between text-white font-mono text-xs gap-2">
-                      <span className="bg-[#080321]/85 backdrop-blur-md px-2.5 sm:px-3 py-1 rounded-lg border border-purple-500/30 text-purple-300 font-bold text-[11px] truncate">
+                      <span className="bg-black/80 backdrop-blur-md px-2.5 sm:px-3 py-1 rounded-lg border border-white/20 text-purple-200 font-bold text-[11px] truncate">
                         {project.title} • Production App
                       </span>
                       {project.liveUrl && (
@@ -300,22 +303,22 @@ export function ProjectModal({ project, onClose }) {
 
                 {/* Problem vs Solution Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="p-4 sm:p-5 rounded-2xl bg-rose-950/20 border border-rose-800/40 shadow-xs">
-                    <div className="flex items-center gap-2 text-rose-400 font-mono text-xs font-bold uppercase tracking-wider mb-2">
-                      <AlertCircle className="w-4 h-4 text-rose-400" />
+                  <div className="p-4 sm:p-5 rounded-2xl bg-rose-50 dark:bg-rose-950/20 border border-rose-200 dark:border-rose-800/40 shadow-xs">
+                    <div className="flex items-center gap-2 text-rose-700 dark:text-rose-400 font-mono text-xs font-bold uppercase tracking-wider mb-2">
+                      <AlertCircle className="w-4 h-4 text-rose-600 dark:text-rose-400" />
                       <span>The Problem</span>
                     </div>
-                    <p className="text-xs sm:text-sm text-slate-200 leading-relaxed font-sans">
+                    <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-200 leading-relaxed font-sans">
                       {project.problemSolved}
                     </p>
                   </div>
 
-                  <div className="p-4 sm:p-5 rounded-2xl bg-[#170c43]/80 border border-purple-500/40 shadow-xs">
-                    <div className="flex items-center gap-2 text-purple-300 font-mono text-xs font-bold uppercase tracking-wider mb-2">
-                      <Sparkles className="w-4 h-4 text-amber-400" />
+                  <div className="p-4 sm:p-5 rounded-2xl bg-purple-50 dark:bg-[#170c43]/80 border border-purple-200 dark:border-purple-500/40 shadow-xs">
+                    <div className="flex items-center gap-2 text-purple-800 dark:text-purple-300 font-mono text-xs font-bold uppercase tracking-wider mb-2">
+                      <Sparkles className="w-4 h-4 text-amber-500 dark:text-amber-400" />
                       <span>The Engineered Solution</span>
                     </div>
-                    <p className="text-xs sm:text-sm text-slate-200 leading-relaxed font-sans">
+                    <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-200 leading-relaxed font-sans">
                       {project.solution}
                     </p>
                   </div>
@@ -324,16 +327,16 @@ export function ProjectModal({ project, onClose }) {
                 {/* Key Features List */}
                 {project.keyFeatures && (
                   <div>
-                    <h3 className="text-xs font-mono uppercase tracking-wider text-amber-400 font-bold mb-3">
+                    <h3 className="text-xs font-mono uppercase tracking-wider text-amber-600 dark:text-amber-400 font-bold mb-3">
                       Core Capabilities & Features
                     </h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
                       {project.keyFeatures.map((feat, idx) => (
                         <div
                           key={idx}
-                          className="flex items-start gap-2.5 p-3 rounded-xl bg-[#080321] border border-purple-500/20 text-xs text-slate-200 font-medium"
+                          className="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-[#080321] border border-purple-200 dark:border-purple-500/20 text-xs text-slate-700 dark:text-slate-200 font-medium"
                         >
-                          <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                          <CheckCircle2 className="w-4 h-4 text-amber-500 dark:text-amber-400 shrink-0 mt-0.5" />
                           <span>{feat}</span>
                         </div>
                       ))}
@@ -344,14 +347,14 @@ export function ProjectModal({ project, onClose }) {
                 {/* Tech Stack Badges */}
                 {project.technologies && (
                   <div>
-                    <h3 className="text-xs font-mono uppercase tracking-wider text-amber-400 font-bold mb-3">
+                    <h3 className="text-xs font-mono uppercase tracking-wider text-amber-600 dark:text-amber-400 font-bold mb-3">
                       Technology Stack
                     </h3>
                     <div className="flex flex-wrap gap-2">
                       {project.technologies.map((tech) => (
                         <span
                           key={tech}
-                          className="px-2.5 sm:px-3 py-1 rounded-lg bg-[#080321] border border-purple-500/30 font-mono text-xs font-bold text-purple-200"
+                          className="px-2.5 sm:px-3 py-1 rounded-lg bg-purple-50 dark:bg-[#080321] border border-purple-200 dark:border-purple-500/30 font-mono text-xs font-bold text-purple-900 dark:text-purple-200"
                         >
                           {tech}
                         </span>
@@ -483,9 +486,9 @@ export function ProjectModal({ project, onClose }) {
           </div>
 
           {/* Footer Actions */}
-          <div className="flex flex-col sm:flex-row items-center justify-between px-4 sm:px-6 py-3.5 sm:py-4 border-t border-purple-500/20 bg-[#080321] gap-3">
-            <div className="text-xs text-slate-300 font-mono text-center sm:text-left">
-              Designed & Engineered by <span className="font-bold text-amber-300">Daksh Soni</span>
+          <div className="flex flex-col sm:flex-row items-center justify-between px-4 sm:px-6 py-3.5 sm:py-4 border-t border-purple-200 dark:border-purple-500/20 bg-slate-50 dark:bg-[#080321] gap-3">
+            <div className="text-xs text-slate-600 dark:text-slate-300 font-mono text-center sm:text-left">
+              Designed & Engineered by <span className="font-bold text-amber-600 dark:text-amber-300">Daksh Soni</span>
             </div>
             <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto justify-center sm:justify-end">
               {project.githubUrl && (
@@ -499,7 +502,7 @@ export function ProjectModal({ project, onClose }) {
                     window.open(project.githubUrl, "_blank", "noopener,noreferrer");
                   }}
                   onMouseEnter={() => soundManager.playHover()}
-                  className="flex items-center gap-1.5 px-3.5 sm:px-4 py-2 rounded-full border border-purple-500/20 bg-[#0f072e] text-xs font-bold text-slate-200 hover:text-amber-300 hover:border-amber-400 transition-colors font-mono"
+                  className="flex items-center gap-1.5 px-3.5 sm:px-4 py-2 rounded-full border border-slate-300 dark:border-purple-500/20 bg-slate-100 dark:bg-[#0f072e] text-xs font-bold text-slate-800 dark:text-slate-200 hover:text-purple-700 dark:hover:text-amber-300 transition-colors font-mono"
                 >
                   <Github className="w-3.5 h-3.5" />
                   <span>GitHub</span>

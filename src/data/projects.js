@@ -21,7 +21,7 @@ export const projectsData = [
     accentColor: "#3ddcc8",
     githubUrl: "https://github.com/rashiyaom2/Netram-Deepfake-Detection-",
     liveUrl: "https://naitram.netlify.app/",
-    coverImage: "/projects/netram-gods-eye-cover.png",
+    coverImage: "/projects/netram-gods-eye-cover.jpg",
     stats: {
       syncAccuracy: "98.2%",
       triageLatency: "0.14s",
@@ -61,7 +61,7 @@ async def websocket_endpoint(websocket: WebSocket):
     accentColor: "#1A5442",
     githubUrl: "https://github.com/25csdaksh/krishiSeva",
     liveUrl: "https://swayuragrotech.vercel.app/",
-    coverImage: "/projects/swayur-agrotech-cover.png",
+    coverImage: "/projects/swayur-agrotech-cover.jpg",
     stats: {
       compliance: "FCO 1985 Standard",
       facility: "Anand, Gujarat",
@@ -171,7 +171,7 @@ async def websocket_endpoint(websocket: WebSocket):
     accentColor: "#D4AF37",
     githubUrl: "https://github.com/25csdaksh/devkrupajwellers",
     liveUrl: "https://devkrupajwellers.vercel.app/",
-    coverImage: "/projects/devkrupa-jewellers-cover.png",
+    coverImage: "/projects/devkrupa-jewellers-cover.jpg",
     stats: {
       liveRateSync: "24K / 22K",
       assetDelivery: "Cloudinary CDN",

@@ -3,7 +3,8 @@ import Lenis from "lenis";
 import { CustomCursor } from "./components/CustomCursor";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
-import { SpaceBackground } from "./components/SpaceBackground";
+import { CelestialBackground } from "./components/CelestialBackground";
+import { useCelestialTheme } from "./hooks/useCelestialTheme";
 import { ProjectModal } from "./components/ProjectModal";
 import { BlogModal } from "./components/BlogModal";
 import { ResumeModal } from "./components/ResumeModal";
@@ -22,6 +23,8 @@ import { ResumeSection } from "./sections/ResumeSection";
 import { ContactSection } from "./sections/ContactSection";
 
 export default function App() {
+  const celestialTheme = useCelestialTheme();
+
   const [selectedProject, setSelectedProject] = useState(null);
   const [selectedPost, setSelectedPost] = useState(null);
   const [resumeOpen, setResumeOpen] = useState(false);
@@ -98,15 +101,27 @@ export default function App() {
   }, [selectedProject, selectedPost, resumeOpen, learningOpen, giftOpen]);
 
   return (
-    <div className="relative min-h-screen bg-[#030014] text-white overflow-x-hidden selection:bg-[#A855F7] selection:text-white">
-      {/* Deep Space Animated Starfield Background with Cosmic Purple Nebulae */}
-      <SpaceBackground />
+    <div
+      className={`relative min-h-screen overflow-x-hidden transition-colors duration-500 selection:bg-[#A855F7] selection:text-white ${
+        celestialTheme.isLight ? "bg-[#F8FAFC] text-[#0F172A]" : "bg-[#030014] text-white"
+      }`}
+    >
+      {/* Real-time India IST Sun & Moon Celestial Canvas Background */}
+      <CelestialBackground
+        effectiveTheme={celestialTheme.effectiveTheme}
+        activeBody={celestialTheme.activeBody}
+        celestialX={celestialTheme.x}
+        celestialY={celestialTheme.y}
+        progress={celestialTheme.progress}
+        phase={celestialTheme.phase}
+      />
 
-      {/* Floating Header / Navbar */}
+      {/* Floating Header / Navbar with Indian Time Sun/Moon Theme Engine */}
       <Navbar
         onOpenResume={() => setResumeOpen(true)}
         onOpenLearning={() => setLearningOpen(true)}
         onOpenGift={handleOpenGift}
+        {...celestialTheme}
       />
 
       {/* Main Sections */}
@@ -163,4 +178,3 @@ export default function App() {
     </div>
   );
 }
-

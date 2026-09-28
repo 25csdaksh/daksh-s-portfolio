@@ -2,7 +2,7 @@
 
 @layer base {
   :root {
-    /* Deep Cosmic Space Void Foundation */
+    /* Deep Cosmic Space Void Foundation (Default Dark) */
     --bg-primary: #030014;
     --bg-secondary: #080321;
     --bg-surface: #0f072e;
@@ -49,6 +49,40 @@
     --font-mono: "JetBrains Mono", monospace;
   }
 
+  /* Light Theme (Day / Sunlight Mode) */
+  html.light, body.light {
+    --bg-primary: #F8FAFC;
+    --bg-secondary: #EEF2F6;
+    --bg-surface: rgba(255, 255, 255, 0.9);
+    --bg-surface-elevated: #FFFFFF;
+
+    --accent-purple: #7E22CE;
+    --accent-purple-light: #9333EA;
+    --accent-purple-vibrant: #C026D3;
+    --accent-purple-subtle: rgba(126, 34, 206, 0.08);
+    --accent-purple-glow: rgba(126, 34, 206, 0.25);
+    --border-purple: rgba(126, 34, 206, 0.2);
+    --border-purple-bright: rgba(147, 51, 234, 0.5);
+
+    --accent-gold: #D97706;
+    --accent-gold-light: #F59E0B;
+    --accent-gold-vibrant: #B45309;
+    --accent-gold-subtle: rgba(217, 119, 6, 0.1);
+    --accent-gold-dark: #92400E;
+    --border-gold: rgba(217, 119, 6, 0.3);
+    --border-gold-bright: rgba(245, 158, 11, 0.6);
+
+    --text-primary: #0F172A;
+    --text-secondary: #334155;
+    --text-muted: #64748B;
+
+    --border-subtle: rgba(126, 34, 206, 0.15);
+    --border-medium: rgba(126, 34, 206, 0.3);
+
+    --card-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.08), 0 0 15px rgba(126, 34, 206, 0.05);
+    --card-shadow-hover: 0 20px 40px -8px rgba(15, 23, 42, 0.15), 0 0 25px rgba(126, 34, 206, 0.18);
+  }
+
   html {
     scroll-behavior: smooth;
     font-family: var(--font-sans);
@@ -57,6 +91,7 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.5s ease, color 0.5s ease;
   }
 
   body {
@@ -65,6 +100,7 @@
     overflow-x: hidden;
     position: relative;
     font-family: var(--font-sans);
+    transition: background-color 0.5s ease, color 0.5s ease;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -93,9 +129,21 @@
   -webkit-text-fill-color: transparent;
 }
 
+html.light .gradient-text-purple {
+  background: linear-gradient(135deg, #1E1B4B 0%, #6B21A8 40%, #9333EA 75%, #C026D3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 /* Cosmic Purple to Gold Celestial Fusion Gradient Text */
 .gradient-text-cosmic {
   background: linear-gradient(135deg, #FFFFFF 0%, #E9D5FF 25%, #C084FC 55%, #FBBF24 85%, #F59E0B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+html.light .gradient-text-cosmic {
+  background: linear-gradient(135deg, #0F172A 0%, #581C87 35%, #7E22CE 60%, #B45309 85%, #D97706 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -107,9 +155,21 @@
   -webkit-text-fill-color: transparent;
 }
 
+html.light .gradient-text-gold {
+  background: linear-gradient(135deg, #78350F 0%, #92400E 30%, #B45309 65%, #D97706 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 /* Royal Celestial to Gold Shimmer Gradient Text */
 .gradient-text-royal-gold {
   background: linear-gradient(135deg, #E9D5FF 0%, #93C5FD 35%, #FDE047 75%, #F59E0B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+html.light .gradient-text-royal-gold {
+  background: linear-gradient(135deg, #1E3A8A 0%, #2563EB 40%, #B45309 75%, #D97706 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -122,7 +182,7 @@
   font-weight: 800;
 }
 
-/* Subtle background noise texture with Purple & Gold ambient touch */
+/* Subtle background noise texture */
 .bg-noise {
   background-image: radial-gradient(rgba(168, 85, 247, 0.08) 1px, transparent 0);
   background-size: 24px 24px;
@@ -133,7 +193,7 @@
   background-size: 20px 20px;
 }
 
-/* Cosmic Space Glassmorphic Pro Card */
+/* Cosmic Space Glassmorphic Pro Card (Dark Default) */
 .editorial-card, .pro-card {
   background: rgba(15, 7, 46, 0.82);
   backdrop-filter: blur(16px);
@@ -152,19 +212,38 @@
   transform: translateY(-2px);
 }
 
-/* Custom Scrollbar with Cosmic Purple Glow */
+/* Light Theme Card Styling */
+html.light .editorial-card, html.light .pro-card {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(147, 51, 234, 0.22);
+  color: #0F172A;
+  box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.08), 0 0 15px rgba(147, 51, 234, 0.05);
+}
+
+html.light .editorial-card:hover, html.light .pro-card:hover {
+  background: rgba(255, 255, 255, 0.98);
+  border-color: rgba(147, 51, 234, 0.55);
+  box-shadow: 0 20px 45px -8px rgba(15, 23, 42, 0.14), 0 0 25px rgba(147, 51, 234, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #030014;
+  background: var(--bg-primary);
 }
 
 ::-webkit-scrollbar-thumb {
   background: #581C87;
   border-radius: 9999px;
-  border: 2px solid #030014;
+  border: 2px solid var(--bg-primary);
+}
+
+html.light ::-webkit-scrollbar-thumb {
+  background: #A855F7;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -199,6 +278,11 @@
   opacity: 0.035;
 }
 
+html.light .watermark-text {
+  opacity: 0.05;
+  color: #7E22CE;
+}
+
 /* Sleek Modal Scrollbar */
 .modal-scrollbar::-webkit-scrollbar {
   width: 6px;
@@ -218,11 +302,11 @@
   scrollbar-color: rgba(168, 85, 247, 0.35) transparent;
 }
 
-/* Golden Yellow 30% Primary Action Button */
+/* Buttons */
 .btn-gold {
   background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 50%, #D97706 100%);
   border: 1px solid #FDE047;
-  color: #030014;
+  color: #030014 !important;
   font-weight: 700;
   box-shadow: 0 4px 15px -2px rgba(245, 158, 11, 0.4);
   transition: all 0.3s ease;
@@ -234,11 +318,10 @@
   transform: translateY(-1px);
 }
 
-/* Cosmic Purple Glow Button */
 .btn-purple {
   background: linear-gradient(135deg, #9333EA 0%, #7C3AED 50%, #581C87 100%);
   border: 1px solid rgba(216, 180, 254, 0.5);
-  color: #FFFFFF;
+  color: #FFFFFF !important;
   box-shadow: 0 4px 15px -3px rgba(147, 51, 234, 0.45), 0 0 10px rgba(168, 85, 247, 0.25);
   transition: all 0.3s ease;
 }
@@ -250,7 +333,6 @@
   transform: translateY(-1px);
 }
 
-/* Cosmic Space Fusion Button */
 .btn-cosmic {
   background: linear-gradient(135deg, #170c43 0%, #0f072e 100%);
   border: 1px solid rgba(168, 85, 247, 0.45);
@@ -259,12 +341,102 @@
   transition: all 0.3s ease;
 }
 
+html.light .btn-cosmic {
+  background: linear-gradient(135deg, #FFFFFF 0%, #F3E8FF 100%);
+  border: 1px solid rgba(147, 51, 234, 0.35);
+  color: #581C87;
+  box-shadow: 0 4px 15px -3px rgba(15, 23, 42, 0.08), 0 2px 6px -2px rgba(147, 51, 234, 0.15);
+}
+
 .btn-cosmic:hover {
   background: linear-gradient(135deg, #241460 0%, #170c43 100%);
   border-color: #C084FC;
   color: #F5D0FE;
   box-shadow: 0 8px 25px -4px rgba(3, 0, 20, 0.9), 0 0 15px rgba(168, 85, 247, 0.4);
   transform: translateY(-1px);
+}
+
+html.light .btn-cosmic:hover {
+  background: linear-gradient(135deg, #FAF5FF 0%, #E9D5FF 100%);
+  border-color: #A855F7;
+  color: #3B0764;
+  box-shadow: 0 8px 25px -4px rgba(15, 23, 42, 0.12), 0 0 15px rgba(147, 51, 234, 0.25);
+}
+
+/* =========================================================
+   LIGHT THEME SECTION & TYPOGRAPHY LEGIBILITY OVERRIDES
+========================================================= */
+
+html.light {
+  color-scheme: light;
+}
+
+html.light body {
+  color: #0F172A;
+  background-color: #F8FAFC;
+}
+
+/* Text in Light Mode */
+html.light h1:not(.keep-white),
+html.light h2:not(.keep-white),
+html.light h3:not(.keep-white),
+html.light h4:not(.keep-white),
+html.light h5:not(.keep-white),
+html.light h6:not(.keep-white) {
+  color: #0F172A;
+}
+
+html.light p {
+  color: #334155;
+}
+
+/* Section Backgrounds in Light Mode */
+html.light section {
+  color: #0F172A;
+}
+
+html.light .bg-\[\#030014\],
+html.light .bg-\[\#080321\],
+html.light .bg-\[\#0f072e\],
+html.light .bg-\[\#070E20\],
+html.light .bg-\[\#0D1B3E\],
+html.light .bg-\[\#050A17\],
+html.light .bg-\[\#122452\],
+html.light .bg-\[\#170c43\] {
+  background-color: rgba(255, 255, 255, 0.92) !important;
+  color: #0F172A !important;
+  border-color: rgba(147, 51, 234, 0.18) !important;
+}
+
+/* Ensure text inside dark utility classes adapts in Light mode */
+html.light .bg-\[\#030014\] *,
+html.light .bg-\[\#080321\] *,
+html.light .bg-\[\#0f072e\] *,
+html.light .bg-\[\#070E20\] *,
+html.light .bg-\[\#0D1B3E\] *,
+html.light .bg-\[\#050A17\] * {
+  border-color: rgba(147, 51, 234, 0.18);
+}
+
+/* Light Mode Navbar Header Container */
+html.light header > div {
+  background: rgba(255, 255, 255, 0.92) !important;
+  border-color: rgba(147, 51, 234, 0.25) !important;
+  box-shadow: 0 10px 35px -5px rgba(15, 23, 42, 0.1), 0 0 15px rgba(147, 51, 234, 0.08) !important;
+  color: #0F172A !important;
+}
+
+html.light header span.text-white,
+html.light header a span.text-white {
+  color: #0F172A !important;
+}
+
+html.light header .text-slate-200 {
+  color: #334155 !important;
+}
+
+html.light header .text-slate-200:hover {
+  color: #7E22CE !important;
 }
 
 /* Respect user reduced motion */
@@ -278,4 +450,3 @@
     scroll-behavior: auto !important;
   }
 }
-

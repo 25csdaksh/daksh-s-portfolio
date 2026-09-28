@@ -72,20 +72,14 @@ export function Footer({ onOpenLearning, onOpenGift }) {
                 </a>
               </li>
               <li>
-                <button
-                  onClick={() => {
-                    soundManager.playClick();
-                    if (onOpenGift) onOpenGift("c-lang");
-                    else {
-                      const target = document.querySelector("#gift-for-coders");
-                      if (target) target.scrollIntoView({ behavior: "smooth" });
-                    }
-                  }}
+                <a
+                  href="/gift-for-coders.html"
+                  onClick={() => soundManager.playClick()}
                   className="text-amber-400 hover:text-amber-300 transition-colors text-left font-bold flex items-center gap-1"
                   data-cursor="pointer"
                 >
-                  <span>🎁 Gift for Coders (3 Notes)</span>
-                </button>
+                  <span>🎁 Gift for Coders Page (3 Notes)</span>
+                </a>
               </li>
               {onOpenLearning && (
                 <li>

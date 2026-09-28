@@ -125,12 +125,42 @@
       transform: translateY(-1px);
       box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
     }
+    .btn-c {
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+      color: #fff;
+      border: 1px solid #60a5fa;
+    }
+    .btn-c:hover {
+      background: linear-gradient(135deg, #60a5fa, #2563eb);
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+      transform: translateY(-1px);
+    }
+    .btn-html {
+      background: linear-gradient(135deg, #f97316, #c2410c);
+      color: #fff;
+      border: 1px solid #fb923c;
+    }
+    .btn-html:hover {
+      background: linear-gradient(135deg, #fb923c, #ea580c);
+      box-shadow: 0 4px 15px rgba(249, 115, 22, 0.4);
+      transform: translateY(-1px);
+    }
+    .btn-css {
+      background: linear-gradient(135deg, #14b8a6, #0f766e);
+      color: #fff;
+      border: 1px solid #2dd4bf;
+    }
+    .btn-css:hover {
+      background: linear-gradient(135deg, #2dd4bf, #0d9488);
+      box-shadow: 0 4px 15px rgba(20, 184, 166, 0.4);
+      transform: translateY(-1px);
+    }
 
     /* Hero Banner */
     .hero {
       text-align: center;
       padding: 48px 24px 32px;
-      max-width: 900px;
+      max-width: 960px;
       margin: 0 auto;
     }
     .hero-badge {
@@ -165,6 +195,13 @@
       line-height: 1.6;
       max-width: 680px;
       margin: 0 auto 28px;
+    }
+    .hero-quick-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 10px;
     }
 
     /* Tabs Bar */
@@ -296,8 +333,8 @@
     }
     .section-title {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 22px;
-      font-weight: 700;
+      font-size: 24px;
+      font-weight: 800;
       margin-bottom: 20px;
       display: flex;
       align-items: center;
@@ -306,14 +343,14 @@
     }
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
       gap: 24px;
     }
     .card {
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 28px;
+      border-radius: 24px;
+      padding: 30px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -322,48 +359,48 @@
       overflow: hidden;
     }
     .card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(234, 179, 8, 0.6);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 25px rgba(168, 85, 247, 0.2);
+      transform: translateY(-5px);
+      border-color: rgba(234, 179, 8, 0.8);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 30px rgba(168, 85, 247, 0.25);
     }
     .card-tag {
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
       font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 6px;
+      padding: 4px 12px;
+      border-radius: 8px;
       display: inline-block;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       width: fit-content;
     }
-    .card-c .card-tag { background: rgba(127, 176, 232, 0.15); color: var(--c-accent); border: 1px solid rgba(127, 176, 232, 0.3); }
-    .card-html .card-tag { background: rgba(227, 79, 38, 0.15); color: var(--html-accent); border: 1px solid rgba(227, 79, 38, 0.3); }
-    .card-css .card-tag { background: rgba(125, 211, 192, 0.15); color: var(--css-accent); border: 1px solid rgba(125, 211, 192, 0.3); }
+    .card-c .card-tag { background: rgba(127, 176, 232, 0.15); color: var(--c-accent); border: 1px solid rgba(127, 176, 232, 0.4); }
+    .card-html .card-tag { background: rgba(227, 79, 38, 0.15); color: var(--html-accent); border: 1px solid rgba(227, 79, 38, 0.4); }
+    .card-css .card-tag { background: rgba(125, 211, 192, 0.15); color: var(--css-accent); border: 1px solid rgba(125, 211, 192, 0.4); }
 
     .card h3 {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 20px;
-      font-weight: 700;
-      margin-bottom: 8px;
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 10px;
       color: #fff;
     }
     .card p {
-      font-size: 13.5px;
+      font-size: 14px;
       color: var(--text-dim);
-      line-height: 1.55;
-      margin-bottom: 18px;
+      line-height: 1.6;
+      margin-bottom: 20px;
     }
     .card-features {
       list-style: none;
-      margin-bottom: 24px;
-      font-size: 12.5px;
+      margin-bottom: 26px;
+      font-size: 13px;
       color: #cbd5e1;
     }
     .card-features li {
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       display: flex;
       align-items: flex-start;
-      gap: 8px;
+      gap: 10px;
     }
     .card-features li::before {
       content: "✓";
@@ -372,21 +409,25 @@
     }
     .card-actions {
       display: flex;
+      flex-direction: column;
       gap: 10px;
       margin-top: auto;
     }
+    .card-actions-row {
+      display: flex;
+      gap: 10px;
+    }
     .card-actions .btn {
-      flex: 1;
       justify-content: center;
-      font-size: 12.5px;
-      padding: 9px 12px;
+      font-size: 13px;
+      padding: 11px 16px;
     }
 
     /* Footer */
     footer {
       background: #040114;
       border-top: 1px solid var(--border);
-      padding: 30px 24px;
+      padding: 32px 24px;
       text-align: center;
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
@@ -400,7 +441,7 @@
       .tabs-wrap { flex-direction: column; align-items: stretch; }
       .tabs-nav { overflow-x: auto; width: 100%; justify-content: flex-start; }
       .reader-shell { height: 70vh; min-height: 480px; }
-      .card-actions { flex-direction: column; }
+      .hero-quick-links { flex-direction: column; align-items: stretch; }
     }
   </style>
 </head>
@@ -435,66 +476,34 @@
       </div>
       <h2>Gift for Coders</h2>
       <p>
-        Clean, beautifully formatted, dark-mode cheat sheets and full-length courses to supercharge your revision, interview preparation, and day-to-day coding mastery.
+        Clean, beautifully formatted, dark-mode cheat sheets and full-length courses to supercharge your revision, interview preparation, and day-to-day coding mastery. Click below to open any note directly in a new tab!
       </p>
+
+      <!-- Direct New Tab Launch Buttons -->
+      <div class="hero-quick-links">
+        <a href="/notes/c-notes.html" target="_blank" rel="noopener noreferrer" class="btn btn-c">
+          <span>⚙️ Open C Language Notes ↗</span>
+        </a>
+        <a href="/notes/html-course.html" target="_blank" rel="noopener noreferrer" class="btn btn-html">
+          <span>🌐 Open HTML Course (32 Ch) ↗</span>
+        </a>
+        <a href="/notes/css-notes.html" target="_blank" rel="noopener noreferrer" class="btn btn-css">
+          <span>🎨 Open CSS Full Notes ↗</span>
+        </a>
+      </div>
     </section>
 
-    <!-- Interactive Reader & Tab Selector -->
-    <div class="tabs-wrap">
-      <div class="tabs-nav" id="tabNav">
-        <button class="tab-btn active tab-c" onclick="switchNote('c-lang')">
-          <span>⚙️ C Language Notes</span>
-        </button>
-        <button class="tab-btn tab-html" onclick="switchNote('html-course')">
-          <span>🌐 HTML Complete Course</span>
-        </button>
-        <button class="tab-btn tab-css" onclick="switchNote('css-notes')">
-          <span>🎨 CSS Full Short Notes</span>
-        </button>
-      </div>
-
-      <div class="reader-tools">
-        <a id="btnNewTab" href="/notes/c-notes.html" target="_blank" class="btn btn-secondary" title="Open in dedicated full browser tab">
-          ↗ Open in New Tab
-        </a>
-        <a id="btnDownload" href="/notes/c-notes.html" download="C_Language_Short_Notes_Daksh_Soni.html" class="btn btn-primary" title="Download standalone single-file HTML for offline revision">
-          ↓ Download Offline HTML
-        </a>
-      </div>
-    </div>
-
-    <!-- Live Reader Container -->
-    <div class="reader-container">
-      <div class="reader-shell">
-        <div class="reader-header">
-          <div class="window-dots">
-            <span class="dot dot-red"></span>
-            <span class="dot dot-yellow"></span>
-            <span class="dot dot-green"></span>
-          </div>
-          <div class="reader-title-bar" id="readerTitleBar">
-            <span id="currentNoteFileName">c-notes.h</span>
-            <span class="badge" id="currentNoteBadge">21 Sections · Dark Mode</span>
-          </div>
-          <button class="btn btn-secondary" onclick="toggleFullscreen()" style="padding: 4px 12px; font-size: 11px;">
-            ⛶ Fullscreen
-          </button>
-        </div>
-        <iframe id="readerFrame" src="/notes/c-notes.html" title="Interactive Code Notes Reader"></iframe>
-      </div>
-    </div>
-
-    <!-- Cards Breakdown Section -->
+    <!-- Cards Breakdown Section (Prominent direct launch cards) -->
     <section class="cards-section" id="downloads">
       <h3 class="section-title">
-        <span>📦 Included Free Gift Resources</span>
+        <span>📦 Select &amp; Open Your Dedicated Notes</span>
       </h3>
       <div class="grid">
         
         <!-- Card 1: C Language -->
         <div class="card card-c">
           <div>
-            <span class="card-tag">Low-Level Mastery</span>
+            <span class="card-tag">Low-Level Mastery · 21 Chapters</span>
             <h3>C Language — Full Short Notes</h3>
             <p>Complete revision cheat sheet from basic data types, control flow, functions to low-level pointers, dynamic memory (malloc/stack/heap), structures, and file I/O.</p>
             <ul class="card-features">
@@ -506,12 +515,18 @@
             </ul>
           </div>
           <div class="card-actions">
-            <button onclick="switchNote('c-lang'); window.scrollTo({top: 240, behavior: 'smooth'});" class="btn btn-secondary">
-              📖 Read Online
-            </button>
-            <a href="/notes/c-notes.html" download="C_Language_Short_Notes_Daksh_Soni.html" class="btn btn-primary">
-              ↓ Download HTML
+            <!-- Direct Open in New Tab -->
+            <a href="/notes/c-notes.html" target="_blank" rel="noopener noreferrer" class="btn btn-c" style="font-weight: 800; font-size: 14px;">
+              🚀 Open C Notes in New Tab ↗
             </a>
+            <div class="card-actions-row">
+              <button onclick="switchNote('c-lang'); document.getElementById('interactive-reader').scrollIntoView({behavior: 'smooth'});" class="btn btn-secondary" style="flex: 1;">
+                👁️ Preview in Reader
+              </button>
+              <a href="/notes/c-notes.html" download="C_Language_Short_Notes_Daksh_Soni.html" class="btn btn-secondary" style="flex: 1;">
+                ↓ Download HTML
+              </a>
+            </div>
           </div>
         </div>
 
@@ -530,19 +545,25 @@
             </ul>
           </div>
           <div class="card-actions">
-            <button onclick="switchNote('html-course'); window.scrollTo({top: 240, behavior: 'smooth'});" class="btn btn-secondary">
-              📖 Read Online
-            </button>
-            <a href="/notes/html-course.html" download="Complete_HTML_Course_Daksh_Soni.html" class="btn btn-primary">
-              ↓ Download HTML
+            <!-- Direct Open in New Tab -->
+            <a href="/notes/html-course.html" target="_blank" rel="noopener noreferrer" class="btn btn-html" style="font-weight: 800; font-size: 14px;">
+              🚀 Open HTML Course in New Tab ↗
             </a>
+            <div class="card-actions-row">
+              <button onclick="switchNote('html-course'); document.getElementById('interactive-reader').scrollIntoView({behavior: 'smooth'});" class="btn btn-secondary" style="flex: 1;">
+                👁️ Preview in Reader
+              </button>
+              <a href="/notes/html-course.html" download="Complete_HTML_Course_Daksh_Soni.html" class="btn btn-secondary" style="flex: 1;">
+                ↓ Download HTML
+              </a>
+            </div>
           </div>
         </div>
 
         <!-- Card 3: CSS Notes -->
         <div class="card card-css">
           <div>
-            <span class="card-tag">Modern Layouts &amp; Motion</span>
+            <span class="card-tag">Modern Layouts &amp; Motion · 23 Chapters</span>
             <h3>CSS — Full Short Notes</h3>
             <p>Condensed master reference for modern web design: selectors, specificity priority, visual box model, 1D Flexbox, 2D Grid, transitions, keyframe animations, and media queries.</p>
             <ul class="card-features">
@@ -554,17 +575,75 @@
             </ul>
           </div>
           <div class="card-actions">
-            <button onclick="switchNote('css-notes'); window.scrollTo({top: 240, behavior: 'smooth'});" class="btn btn-secondary">
-              📖 Read Online
-            </button>
-            <a href="/notes/css-notes.html" download="CSS_Short_Notes_Daksh_Soni.html" class="btn btn-primary">
-              ↓ Download HTML
+            <!-- Direct Open in New Tab -->
+            <a href="/notes/css-notes.html" target="_blank" rel="noopener noreferrer" class="btn btn-css" style="font-weight: 800; font-size: 14px;">
+              🚀 Open CSS Notes in New Tab ↗
             </a>
+            <div class="card-actions-row">
+              <button onclick="switchNote('css-notes'); document.getElementById('interactive-reader').scrollIntoView({behavior: 'smooth'});" class="btn btn-secondary" style="flex: 1;">
+                👁️ Preview in Reader
+              </button>
+              <a href="/notes/css-notes.html" download="CSS_Short_Notes_Daksh_Soni.html" class="btn btn-secondary" style="flex: 1;">
+                ↓ Download HTML
+              </a>
+            </div>
           </div>
         </div>
 
       </div>
     </section>
+
+    <!-- Embedded Live Reader Preview -->
+    <div id="interactive-reader">
+      <div class="tabs-wrap">
+        <div class="tabs-nav" id="tabNav">
+          <button class="tab-btn active tab-c" onclick="switchNote('c-lang')">
+            <span>⚙️ C Language Notes</span>
+          </button>
+          <button class="tab-btn tab-html" onclick="switchNote('html-course')">
+            <span>🌐 HTML Complete Course</span>
+          </button>
+          <button class="tab-btn tab-css" onclick="switchNote('css-notes')">
+            <span>🎨 CSS Full Short Notes</span>
+          </button>
+        </div>
+
+        <div class="reader-tools">
+          <a id="btnNewTab" href="/notes/c-notes.html" target="_blank" rel="noopener noreferrer" class="btn btn-primary" title="Open currently selected note in full dedicated browser tab">
+            🚀 Open Note in New Tab ↗
+          </a>
+          <a id="btnDownload" href="/notes/c-notes.html" download="C_Language_Short_Notes_Daksh_Soni.html" class="btn btn-secondary" title="Download standalone single-file HTML for offline revision">
+            ↓ Download HTML
+          </a>
+        </div>
+      </div>
+
+      <!-- Live Reader Shell -->
+      <div class="reader-container">
+        <div class="reader-shell">
+          <div class="reader-header">
+            <div class="window-dots">
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
+            </div>
+            <div class="reader-title-bar" id="readerTitleBar">
+              <span id="currentNoteFileName">c-notes.h</span>
+              <span class="badge" id="currentNoteBadge">21 Sections · Dark Mode</span>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <a id="btnFrameOpenNewTab" href="/notes/c-notes.html" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="padding: 4px 12px; font-size: 11px;">
+                ↗ Dedicated Tab
+              </a>
+              <button class="btn btn-secondary" onclick="toggleFullscreen()" style="padding: 4px 12px; font-size: 11px;">
+                ⛶ Fullscreen
+              </button>
+            </div>
+          </div>
+          <iframe id="readerFrame" src="/notes/c-notes.html" title="Interactive Code Notes Reader"></iframe>
+        </div>
+      </div>
+    </div>
   </main>
 
   <!-- Footer -->
@@ -611,6 +690,9 @@
       // Update CTA links
       const btnNewTab = document.getElementById('btnNewTab');
       btnNewTab.href = data.url;
+
+      const btnFrameOpenNewTab = document.getElementById('btnFrameOpenNewTab');
+      if (btnFrameOpenNewTab) btnFrameOpenNewTab.href = data.url;
 
       const btnDownload = document.getElementById('btnDownload');
       btnDownload.href = data.url;

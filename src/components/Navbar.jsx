@@ -21,7 +21,7 @@ export function Navbar({ activeSection, onNavigate, onOpenResume, onOpenLearning
     { label: "About", href: "#about" },
     { label: "Projects", href: "#projects" },
     { label: "Certificates", href: "#certificates" },
-    { label: "🎁 Gift for Coders", isAction: true, action: "gift", highlight: true },
+    { label: "🎁 Gift for Coders", href: "/gift-for-coders.html", isLink: true, highlight: true },
     { label: "Hackathons", href: "#hackathons" },
     { label: "Learning", isAction: true, action: "learning" },
     { label: "Insights", href: "#blog" },
@@ -42,13 +42,8 @@ export function Navbar({ activeSection, onNavigate, onOpenResume, onOpenLearning
       return;
     }
 
-    if (item.isAction && item.action === "gift") {
-      if (onOpenGift) {
-        onOpenGift("c-lang");
-      } else {
-        const target = document.querySelector("#gift-for-coders");
-        if (target) target.scrollIntoView({ behavior: "smooth" });
-      }
+    if (item.isLink && item.href) {
+      window.location.href = item.href;
       return;
     }
 
@@ -200,20 +195,16 @@ export function Navbar({ activeSection, onNavigate, onOpenResume, onOpenLearning
                 ))}
               </div>
               <div className="pt-3 border-t border-purple-400/20 flex flex-col gap-2">
-                <button
+                <a
+                  href="/gift-for-coders.html"
                   onClick={() => {
+                    soundManager.playClick();
                     setMobileMenuOpen(false);
-                    if (onOpenGift) {
-                      onOpenGift("c-lang");
-                    } else {
-                      const target = document.querySelector("#gift-for-coders");
-                      if (target) target.scrollIntoView({ behavior: "smooth" });
-                    }
                   }}
                   className="w-full py-2.5 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-purple-950 text-xs font-black flex items-center justify-center gap-1.5 shadow-md shadow-amber-500/20 border border-yellow-300"
                 >
-                  <span>🎁 Open Gift for Coders (3 Notes)</span>
-                </button>
+                  <span>🎁 Open Gift for Coders Page (3 Notes)</span>
+                </a>
                 <button
                   onClick={() => {
                     setMobileMenuOpen(false);

@@ -144,37 +144,38 @@ export function GiftForCodersSection({ onOpenGiftModal }) {
 
               {/* Action Buttons */}
               <div className="pt-6 mt-6 border-t border-purple-500/20 flex flex-col gap-2.5">
+                {/* Primary Direct Open in New Tab */}
+                <a
+                  href={note.fileUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => soundManager.playClick()}
+                  className="py-3 px-4 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-purple-950 font-mono text-xs font-black flex items-center justify-center gap-2 shadow-md shadow-amber-500/20 hover:scale-[1.02] transition-all border border-yellow-300"
+                >
+                  <span>🚀 Open {note.id === "c-lang" ? "C Notes" : note.id === "html-course" ? "HTML Course" : "CSS Notes"} (New Tab)</span>
+                  <ExternalLink className="w-3.5 h-3.5 stroke-[2.5]" />
+                </a>
+
                 <div className="grid grid-cols-2 gap-2">
                   <button
                     onClick={() => handleOpenNote(note.id)}
-                    className="py-2.5 px-3 rounded-xl bg-purple-500/20 hover:bg-purple-500/35 border border-purple-400/40 text-purple-200 hover:text-white font-mono text-xs font-bold flex items-center justify-center gap-1.5 transition-all"
+                    className="py-2 px-3 rounded-xl bg-purple-500/20 hover:bg-purple-500/35 border border-purple-400/40 text-purple-200 hover:text-white font-mono text-[11px] font-bold flex items-center justify-center gap-1.5 transition-all"
                   >
                     <BookOpen className="w-3.5 h-3.5" />
-                    <span>Read Note</span>
+                    <span>Quick Preview</span>
                   </button>
 
                   <a
                     href={note.fileUrl}
                     download={note.downloadName}
                     onClick={() => soundManager.playClick()}
-                    className="py-2.5 px-3 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-purple-950 font-mono text-xs font-extrabold flex items-center justify-center gap-1.5 shadow-md shadow-amber-500/20 hover:scale-[1.03] transition-all border border-yellow-300"
+                    className="py-2 px-3 rounded-xl bg-[#140a3e] hover:bg-[#1f1057] text-purple-200 hover:text-white font-mono text-[11px] font-bold flex items-center justify-center gap-1.5 transition-all border border-purple-500/30"
                     title="Download standalone single-file HTML"
                   >
-                    <Download className="w-3.5 h-3.5 stroke-[2.5]" />
+                    <Download className="w-3.5 h-3.5" />
                     <span>Download</span>
                   </a>
                 </div>
-
-                <a
-                  href={note.fileUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={() => soundManager.playClick()}
-                  className="w-full py-1.5 text-center font-mono text-[11px] text-slate-400 hover:text-purple-300 transition-colors flex items-center justify-center gap-1"
-                >
-                  <span>Open Standalone Tab</span>
-                  <ExternalLink className="w-3 h-3" />
-                </a>
               </div>
             </motion.div>
           ))}

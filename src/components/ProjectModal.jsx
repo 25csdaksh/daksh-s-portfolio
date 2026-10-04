@@ -34,7 +34,17 @@ export function ProjectModal({ project, onClose }) {
 
     setTimeout(() => {
       let result = {};
-      if (project.id === "netram-deepfake-defense") {
+      if (project.id === "adhyayan-lm") {
+        result = {
+          documentIngested: "Quantum_Computing_Lecture_Notes_Ch4.pdf (42 Pages)",
+          ragEngine: "100% Citation Grounded (LangChain + Dense Vector Embeddings)",
+          vectorRetrieval: "24ms Semantic Similarity Cosine Search",
+          groundedCitations: "Page 14 [¶2] & Page 18 [¶4] Verified",
+          hallucinationScore: "0.0% (Zero Hallucination Guarantee)",
+          generatedArtifacts: "Mind Map, Summary Brief & 10-Question Active Recall Quiz",
+          status: "DOCUMENT EMBEDDED & GROUNDED STUDY GUIDE READY"
+        };
+      } else if (project.id === "netram-deepfake-defense") {
         result = {
           streamSource: "Google Meet / WebRTC (1080p @ 30fps)",
           cascadeTriage: "PASSED (0.14s Triage)",

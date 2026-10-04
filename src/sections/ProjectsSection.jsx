@@ -33,7 +33,7 @@ export function ProjectsSection({ onSelectProject }) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10">
           <AnimatePresence>
             {projectsData.map((project, idx) => {
-              const isLarge = idx === 0 || idx === 1;
+              const isLarge = idx === 0 || idx === 1 || idx === 5 || idx === 6;
               return (
                 <motion.div
                   key={project.id}

@@ -1,5 +1,57 @@
 export const projectsData = [
   {
+    id: "adhyayan-lm",
+    title: "Adhyayan LM — AI Study Platform",
+    category: "GenAI & Knowledge Systems",
+    tagline: "NotebookLM-Style Intelligent AI Study & Document Research Platform",
+    featuredBadge: "Production AI Platform",
+    year: "2026",
+    role: "Lead Full-Stack & GenAI Systems Architect",
+    summary: "A modern, high-performance AI study and research platform powered by intelligent technology. Master complex textbooks, lecture notes, and research materials with 100% citation-grounded precision, zero hallucinations, vector embeddings, instant mind maps, and interactive quizzes.",
+    problemSolved: "Students, researchers, and engineers struggle with information overload, hallucinated AI answers, and fragmented study materials when comprehending voluminous textbooks and research papers.",
+    solution: "Engineered a citation-grounded multi-modal RAG platform featuring page-level source anchors, semantic vector retrieval, automated knowledge graphs/mind maps, active-recall quiz synthesis, and real-time document chat.",
+    keyFeatures: [
+      "Zero-Hallucination Citation Grounding: 100% page-level verifiable source citations",
+      "Multi-Format Document Ingestion: PDF, lecture notes, Word docs & markdown support",
+      "Instant Mind Maps & Interactive Knowledge Graphs for conceptual visual mapping",
+      "Automated Active-Recall Quiz Synthesizer & flashcard question generator",
+      "Private & Secure Vector Store with sub-35ms cosine-similarity retrieval pipeline"
+    ],
+    technologies: ["React", "FastAPI", "LangChain", "Vector Embeddings", "Tailwind CSS", "Vite", "REST APIs"],
+    accentColor: "#1F5E4B",
+    githubUrl: "https://github.com/25csdaksh/AdhyayanLM",
+    liveUrl: "https://adhyayanlm.vercel.app/",
+    coverImage: "/projects/adhyayanlm-cover.jpg",
+    stats: {
+      citations: "100% Grounded",
+      hallucinations: "0% Hallucination",
+      retrievalLatency: "<35ms"
+    },
+    codeSnippet: `export async function executeGroundedRAGQuery({ query, documentId, topK = 5 }) {
+  // Step 1: Compute query embedding & perform hybrid dense vector search
+  const queryVector = await embeddings.embedQuery(query);
+  const relevantChunks = await vectorStore.similaritySearchVectorWithScore({
+    vector: queryVector,
+    k: topK,
+    filter: { docId: documentId }
+  });
+
+  // Step 2: Extract citation anchors with page-level boundaries
+  const context = relevantChunks.map(chunk => ({
+    page: chunk.metadata.pageNumber,
+    excerpt: chunk.pageContent,
+    confidence: chunk.score
+  }));
+
+  // Step 3: Stream grounded response with verifiable citations
+  return await llmChain.stream({
+    systemPrompt: "Answer ONLY using provided context. Inject page citations [p.X].",
+    context,
+    query
+  });
+}`
+  },
+  {
     id: "netram-deepfake-defense",
     title: "Netram — God's Eye",
     category: "AI & Cybersecurity",

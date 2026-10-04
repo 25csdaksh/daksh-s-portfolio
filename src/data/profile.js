@@ -25,7 +25,7 @@ export const profileData = {
   },
   stats: [
     { value: 2, suffix: "+", label: "Hackathons", detail: "SIH Team Leader & Finalist" },
-    { value: 5, suffix: "+", label: "Major Projects", detail: "Full-Stack & AI Systems" },
+    { value: 7, suffix: "+", label: "Major Projects", detail: "Full-Stack & AI Systems" },
     { value: 15, suffix: "+", label: "Technologies", detail: "React, Node, Python, AI" },
     { value: 100, suffix: "%", label: "Code Craftsmanship", detail: "Production Standard" }
   ],

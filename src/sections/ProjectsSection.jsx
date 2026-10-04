@@ -29,11 +29,10 @@ export function ProjectsSection({ onSelectProject }) {
           </p>
         </div>
 
-        {/* Featured Project Showcase Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10">
+        {/* Featured Project Showcase Cards - Exactly 3 per row */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           <AnimatePresence>
             {projectsData.map((project, idx) => {
-              const isLarge = idx === 0 || idx === 1 || idx === 5 || idx === 6;
               return (
                 <motion.div
                   key={project.id}
@@ -41,10 +40,8 @@ export function ProjectsSection({ onSelectProject }) {
                   initial={{ opacity: 0, y: 25 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.35, delay: idx * 0.06 }}
-                  className={`editorial-card group relative overflow-hidden flex flex-col justify-between bg-white dark:bg-[#0f072e] border border-purple-200 dark:border-purple-500/25 hover:border-purple-400 dark:hover:border-purple-400 hover:shadow-2xl hover:shadow-purple-500/20 rounded-3xl text-slate-900 dark:text-white ${
-                    isLarge ? "lg:col-span-6" : "lg:col-span-4"
-                  }`}
+                  transition={{ duration: 0.35, delay: idx * 0.05 }}
+                  className="editorial-card group relative overflow-hidden flex flex-col justify-between bg-white dark:bg-[#0f072e] border border-purple-200 dark:border-purple-500/25 hover:border-purple-400 dark:hover:border-purple-400 hover:shadow-2xl hover:shadow-purple-500/20 rounded-3xl text-slate-900 dark:text-white h-full"
                   data-cursor="project"
                   data-cursor-text="VIEW PROJECT →"
                   onClick={() => {
@@ -53,12 +50,12 @@ export function ProjectsSection({ onSelectProject }) {
                   }}
                 >
                   {/* Visual Preview Header Container with High-Res Cover Image */}
-                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-900 border-b border-purple-200 dark:border-purple-500/20 group/cover">
+                  <div className="relative aspect-[16/9] w-full overflow-hidden bg-slate-950 border-b border-purple-200 dark:border-purple-500/20 group/cover">
                     {project.coverImage ? (
                       <img
                         src={project.coverImage}
                         alt={`${project.title} Cover`}
-                        className="w-full h-full object-cover object-top group-hover/cover:scale-105 transition-transform duration-700 ease-out"
+                        className="w-full h-full object-cover object-center group-hover/cover:scale-105 transition-transform duration-700 ease-out"
                         loading="lazy"
                         onError={(e) => {
                           e.currentTarget.style.display = "none";

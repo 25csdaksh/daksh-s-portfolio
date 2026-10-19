@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, ExternalLink, Sparkles, Layers, ShieldCheck, Cpu, Terminal, Eye } from "lucide-react";
+import { ArrowUpRight, ExternalLink, Sparkles, Layers, ShieldCheck, Cpu, Terminal, Eye, Smartphone, Download } from "lucide-react";
 import { Github } from "../components/Icons";
 import { projectsData } from "../data/projects";
 import { soundManager } from "../utils/sound";
@@ -83,6 +83,12 @@ export function ProjectsSection({ onSelectProject }) {
                         {project.featuredBadge && (
                           <span className="px-2 sm:px-2.5 py-1 rounded-full text-[8px] sm:text-[9px] font-mono bg-gradient-to-r from-amber-400 to-yellow-500 text-purple-950 font-black backdrop-blur-md shadow-xs">
                             {project.featuredBadge}
+                          </span>
+                        )}
+                        {project.apkUrl && (
+                          <span className="px-2 sm:px-2.5 py-1 rounded-full text-[8px] sm:text-[9px] font-mono bg-emerald-500/90 text-white font-extrabold backdrop-blur-md shadow-xs flex items-center gap-1">
+                            <Smartphone className="w-2.5 h-2.5" />
+                            <span>Android APK</span>
                           </span>
                         )}
                       </div>
@@ -187,6 +193,22 @@ export function ProjectsSection({ onSelectProject }) {
                           className="flex items-center gap-2"
                           onClick={(e) => e.stopPropagation()}
                         >
+                          {project.apkUrl && (
+                            <a
+                              href={project.apkUrl}
+                              download={project.apkName || "app.apk"}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                soundManager.playClick();
+                              }}
+                              onMouseEnter={() => soundManager.playHover()}
+                              className="px-2.5 py-1.5 rounded-lg bg-emerald-100 text-emerald-900 border border-emerald-300 hover:bg-emerald-200 dark:bg-emerald-950/60 dark:hover:bg-emerald-500 dark:hover:text-slate-950 dark:border-emerald-500/40 dark:text-emerald-300 font-mono text-[11px] font-bold flex items-center gap-1.5 transition-all shadow-xs"
+                              title="Download Android APK (Native App)"
+                            >
+                              <Smartphone className="w-3.5 h-3.5" />
+                              <span>APK</span>
+                            </a>
+                          )}
                           {project.githubUrl && (
                             <a
                               href={project.githubUrl}

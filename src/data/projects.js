@@ -59,25 +59,27 @@ export const projectsData = [
     featuredBadge: "Production FinTech",
     year: "2026",
     role: "Lead Full-Stack & Systems Architect",
-    summary: "An intelligent personal expense tracking and financial analytics bridge. Built with React 19, Supabase PostgreSQL with strict Row-Level Security (RLS), interactive Recharts financial telemetry, multi-period comparative budget monitors, formula-injection-safe CSV/PDF report generators, and cross-platform Capacitor mobile app readiness.",
+    summary: "An intelligent personal expense tracking and financial analytics bridge, available both as a live cloud web app and a downloadable native Android APK. Built with React 19, Capacitor, Supabase PostgreSQL with strict Row-Level Security (RLS), interactive Recharts financial telemetry, multi-period comparative budget monitors, formula-injection-safe CSV/PDF report generators.",
     problemSolved: "Individuals and families struggle with fragmented financial records across UPI, cards, cash, and bank transfers, lack real-time visibility into spending trends, and risk exposing sensitive transactional data without multi-tenant security.",
     solution: "Engineered a high-performance FinTech web and mobile platform featuring zero-leakage multi-tenant PostgreSQL RLS isolation, interactive Recharts telemetry charts, automated monthly budget alerts, formula-injection-safe RFC-4180 CSV/PDF ledger exports, and native Capacitor Android capability.",
     keyFeatures: [
+      "Cross-Platform Native Android APK & Web App engineered via Capacitor framework with offline resilience",
       "Multi-Tenant PostgreSQL Row-Level Security (RLS) ensuring strict cross-user data isolation",
       "Interactive Financial Telemetry: Real-time Recharts daily timeline, category donut charts & spending trends",
       "Multi-Period Analytics Engine: Weekly, Monthly, Yearly & Custom Range comparative delta insights",
-      "Formula-Injection-Safe CSV & PDF Audit Report Generator with UTF-8 BOM Excel compliance",
-      "Cross-Platform Ready: Built for Web & Native Android via Capacitor framework with offline resilience"
+      "Formula-Injection-Safe CSV & PDF Audit Report Generator with UTF-8 BOM Excel compliance"
     ],
-    technologies: ["React 19", "Supabase", "PostgreSQL", "Recharts", "Capacitor", "Tailwind CSS", "Vite", "jsPDF"],
+    technologies: ["React 19", "Capacitor (Android)", "Supabase", "PostgreSQL", "Recharts", "Tailwind CSS", "Vite", "jsPDF"],
     accentColor: "#10B981",
     githubUrl: "https://github.com/25csdaksh/daksh_kharch",
     liveUrl: "https://hisabsetu.vercel.app/",
+    apkUrl: "/downloads/hisabsetu.apk",
+    apkName: "HisabSetu.apk",
     coverImage: "/projects/hisabsetu-cover.jpg",
     stats: {
+      platform: "Web & Android APK",
       security: "100% RLS Protected",
-      analytics: "Real-Time Telemetry",
-      export: "CSV & PDF Reports"
+      analytics: "Real-Time Telemetry"
     },
     codeSnippet: `export async function fetchPeriodExpenseTelemetry({ userId, startDate, endDate }) {
   // Query authenticated user records with strict Row-Level Security (RLS)

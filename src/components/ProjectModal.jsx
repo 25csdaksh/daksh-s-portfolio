@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ExternalLink, CheckCircle2, Copy, Check, Terminal, Play, Sparkles, AlertCircle } from "lucide-react";
+import { X, ExternalLink, CheckCircle2, Copy, Check, Terminal, Play, Sparkles, AlertCircle, Smartphone, Download } from "lucide-react";
 import { Github } from "./Icons";
 import { soundManager } from "../utils/sound";
 
@@ -47,12 +47,13 @@ export function ProjectModal({ project, onClose }) {
       } else if (project.id === "hisabsetu") {
         result = {
           telemetryStatus: "Active Supabase Realtime Channel (PostgreSQL)",
+          platformDeployment: "Cross-Platform: Live Web SPA + Native Android (.apk)",
           monthlyOverview: "₹45,000 Income • ₹28,450 Expenses (₹1,24,530 Total Balance)",
           netSavings: "₹16,550 (36.8% Monthly Savings Rate)",
           topSpendingCategory: "Food & Dining (28% of Monthly Budget)",
           securityContract: "PostgreSQL Row-Level Security (RLS) Enforced (auth.uid() = user_id)",
           statementExport: "Generated RFC-4180 CSV & PDF Ledger with Formula-Injection Defense",
-          status: "TRANSACTIONS RECONCILED & BUDGET STATUS OPTIMAL"
+          status: "TRANSACTIONS RECONCILED & NATIVE APK READY FOR INSTALL"
         };
       } else if (project.id === "netram-deepfake-defense") {
         result = {
@@ -157,6 +158,24 @@ export function ProjectModal({ project, onClose }) {
             </div>
 
             <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+              {project.apkUrl && (
+                <a
+                  href={project.apkUrl}
+                  download={project.apkName || "app.apk"}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    soundManager.playClick();
+                  }}
+                  onMouseEnter={() => soundManager.playHover()}
+                  className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-mono text-xs font-black flex items-center gap-1.5 shadow-md shadow-emerald-500/20 hover:shadow-emerald-400/30 transition-all hover:scale-105"
+                  title="Download Android APK (Native App)"
+                >
+                  <Smartphone className="w-3.5 h-3.5 stroke-[2.5]" />
+                  <span className="hidden sm:inline">Download APK</span>
+                  <span className="sm:hidden">APK</span>
+                </a>
+              )}
+
               {project.liveUrl && (
                 <a
                   href={project.liveUrl}
@@ -301,23 +320,75 @@ export function ProjectModal({ project, onClose }) {
                       <span className="bg-black/80 backdrop-blur-md px-2.5 sm:px-3 py-1 rounded-lg border border-white/20 text-purple-200 font-bold text-[11px] truncate">
                         {project.title} • Production App
                       </span>
-                      {project.liveUrl && (
-                        <a
-                          href={project.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            soundManager.playClick();
-                            window.open(project.liveUrl, "_blank", "noopener,noreferrer");
-                          }}
-                          className="bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-blue-950 font-extrabold px-3 py-1.5 rounded-lg flex items-center gap-1.5 shadow-md hover:scale-105 font-mono text-xs transition-all shrink-0"
-                        >
-                          <span>Open Live Site</span>
-                          <ExternalLink className="w-3.5 h-3.5" />
-                        </a>
-                      )}
+                      <div className="flex items-center gap-2">
+                        {project.apkUrl && (
+                          <a
+                            href={project.apkUrl}
+                            download={project.apkName || "app.apk"}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              soundManager.playClick();
+                            }}
+                            className="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black px-3 py-1.5 rounded-lg flex items-center gap-1.5 shadow-md hover:scale-105 font-mono text-xs transition-all shrink-0"
+                            title="Download Android APK"
+                          >
+                            <Download className="w-3.5 h-3.5 stroke-[2.5]" />
+                            <span className="hidden sm:inline">Download APK</span>
+                            <span className="sm:hidden">APK</span>
+                          </a>
+                        )}
+                        {project.liveUrl && (
+                          <a
+                            href={project.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              soundManager.playClick();
+                              window.open(project.liveUrl, "_blank", "noopener,noreferrer");
+                            }}
+                            className="bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-blue-950 font-extrabold px-3 py-1.5 rounded-lg flex items-center gap-1.5 shadow-md hover:scale-105 font-mono text-xs transition-all shrink-0"
+                          >
+                            <span>Open Live Site</span>
+                            <ExternalLink className="w-3.5 h-3.5" />
+                          </a>
+                        )}
+                      </div>
                     </div>
+                  </div>
+                )}
+
+                {/* Android Native App Dedicated Card */}
+                {project.apkUrl && (
+                  <div className="p-4 sm:p-5 rounded-2xl bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800/40 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xs">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                        <Smartphone className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <h4 className="font-heading font-bold text-sm sm:text-base text-slate-900 dark:text-white flex items-center gap-2">
+                          <span>Android Native App Ready (.apk)</span>
+                          <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-500 text-slate-950 font-black">
+                            v0.1.0 Build
+                          </span>
+                        </h4>
+                        <p className="text-xs text-slate-600 dark:text-slate-300 mt-0.5 font-sans">
+                          Cross-platform mobile build compiled with Capacitor framework, local notifications & offline ledger resilience.
+                        </p>
+                      </div>
+                    </div>
+                    <a
+                      href={project.apkUrl}
+                      download={project.apkName || "HisabSetu.apk"}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        soundManager.playClick();
+                      }}
+                      className="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-mono text-xs font-black flex items-center justify-center gap-2 shadow-md shadow-emerald-500/20 transition-all hover:scale-105 shrink-0"
+                    >
+                      <Download className="w-4 h-4 stroke-[2.5]" />
+                      <span>Download Android APK</span>
+                    </a>
                   </div>
                 )}
 

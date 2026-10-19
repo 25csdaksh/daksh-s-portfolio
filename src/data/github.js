@@ -15,6 +15,7 @@ export const languageColors = {
 };
 
 export const repoCuratedDescriptions = {
+  "daksh_kharch": "HisabSetu — Personal expense & budget tracker with React 19, Supabase PostgreSQL RLS & Recharts.",
   "daksh-s-portfolio": "Luxury editorial developer portfolio built with React, Vite, Framer Motion & Tailwind CSS.",
   "VidyaPath": "4-Year CSE curriculum roadmap, interactive code sandbox & placement preparation platform.",
   "bob-ai-hackathon-trialguard-ai": "Bank of Baroda AI Hackathon — Clinical trial compliance & deep analysis security engine.",

@@ -44,6 +44,16 @@ export function ProjectModal({ project, onClose }) {
           generatedArtifacts: "Mind Map, Summary Brief & 10-Question Active Recall Quiz",
           status: "DOCUMENT EMBEDDED & GROUNDED STUDY GUIDE READY"
         };
+      } else if (project.id === "hisabsetu") {
+        result = {
+          telemetryStatus: "Active Supabase Realtime Channel (PostgreSQL)",
+          monthlyOverview: "₹45,000 Income • ₹28,450 Expenses (₹1,24,530 Total Balance)",
+          netSavings: "₹16,550 (36.8% Monthly Savings Rate)",
+          topSpendingCategory: "Food & Dining (28% of Monthly Budget)",
+          securityContract: "PostgreSQL Row-Level Security (RLS) Enforced (auth.uid() = user_id)",
+          statementExport: "Generated RFC-4180 CSV & PDF Ledger with Formula-Injection Defense",
+          status: "TRANSACTIONS RECONCILED & BUDGET STATUS OPTIMAL"
+        };
       } else if (project.id === "netram-deepfake-defense") {
         result = {
           streamSource: "Google Meet / WebRTC (1080p @ 30fps)",

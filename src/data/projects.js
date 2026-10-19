@@ -52,6 +52,53 @@ export const projectsData = [
 }`
   },
   {
+    id: "hisabsetu",
+    title: "HisabSetu — Expense & Budget Tracker",
+    category: "FinTech & Financial Intelligence",
+    tagline: "Your Money. Your Way. Always in Balance.",
+    featuredBadge: "Production FinTech",
+    year: "2026",
+    role: "Lead Full-Stack & Systems Architect",
+    summary: "An intelligent personal expense tracking and financial analytics bridge. Built with React 19, Supabase PostgreSQL with strict Row-Level Security (RLS), interactive Recharts financial telemetry, multi-period comparative budget monitors, formula-injection-safe CSV/PDF report generators, and cross-platform Capacitor mobile app readiness.",
+    problemSolved: "Individuals and families struggle with fragmented financial records across UPI, cards, cash, and bank transfers, lack real-time visibility into spending trends, and risk exposing sensitive transactional data without multi-tenant security.",
+    solution: "Engineered a high-performance FinTech web and mobile platform featuring zero-leakage multi-tenant PostgreSQL RLS isolation, interactive Recharts telemetry charts, automated monthly budget alerts, formula-injection-safe RFC-4180 CSV/PDF ledger exports, and native Capacitor Android capability.",
+    keyFeatures: [
+      "Multi-Tenant PostgreSQL Row-Level Security (RLS) ensuring strict cross-user data isolation",
+      "Interactive Financial Telemetry: Real-time Recharts daily timeline, category donut charts & spending trends",
+      "Multi-Period Analytics Engine: Weekly, Monthly, Yearly & Custom Range comparative delta insights",
+      "Formula-Injection-Safe CSV & PDF Audit Report Generator with UTF-8 BOM Excel compliance",
+      "Cross-Platform Ready: Built for Web & Native Android via Capacitor framework with offline resilience"
+    ],
+    technologies: ["React 19", "Supabase", "PostgreSQL", "Recharts", "Capacitor", "Tailwind CSS", "Vite", "jsPDF"],
+    accentColor: "#10B981",
+    githubUrl: "https://github.com/25csdaksh/daksh_kharch",
+    liveUrl: "https://hisabsetu.vercel.app/",
+    coverImage: "/projects/hisabsetu-cover.jpg",
+    stats: {
+      security: "100% RLS Protected",
+      analytics: "Real-Time Telemetry",
+      export: "CSV & PDF Reports"
+    },
+    codeSnippet: `export async function fetchPeriodExpenseTelemetry({ userId, startDate, endDate }) {
+  // Query authenticated user records with strict Row-Level Security (RLS)
+  const { data: transactions, error } = await supabase
+    .from('expenses')
+    .select('amount, category, payment_method, expense_date')
+    .eq('user_id', userId)
+    .gte('expense_date', startDate)
+    .lte('expense_date', endDate)
+    .order('expense_date', { ascending: false });
+
+  if (error) throw new Error(\`Telemetry error: \${error.message}\`);
+
+  // Compute aggregate metrics: total spend, category distribution & peak days
+  const totalExpenditure = transactions.reduce((sum, tx) => sum + Number(tx.amount), 0);
+  const categoryBreakdown = computeCategoryShares(transactions, totalExpenditure);
+  
+  return { transactions, totalExpenditure, categoryBreakdown, count: transactions.length };
+}`
+  },
+  {
     id: "netram-deepfake-defense",
     title: "Netram — God's Eye",
     category: "AI & Cybersecurity",

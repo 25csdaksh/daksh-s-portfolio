@@ -10,8 +10,7 @@ import {
   Gift,
   BookOpen,
   Sparkles,
-  FileText,
-  Mail
+  Download
 } from "lucide-react";
 import { soundManager } from "../utils/sound";
 import { profileData } from "../data/profile";
@@ -20,7 +19,6 @@ import { CelestialThemeToggle } from "./CelestialThemeToggle";
 export function Navbar({
   activeSection,
   onNavigate,
-  onOpenResume,
   onOpenLearning,
   onOpenGift,
   // Celestial Theme Props
@@ -98,11 +96,12 @@ export function Navbar({
       icon: Sparkles,
     },
     {
-      label: "Resume",
-      desc: "Full PDF & interactive resume",
-      isAction: true,
-      action: "resume",
-      icon: FileText,
+      label: "Download Resume",
+      desc: "Direct ATS PDF file download",
+      href: "/Daksh_Soni_Resume.pdf",
+      download: "Daksh_Soni_Resume.pdf",
+      isDownload: true,
+      icon: Download,
     },
   ];
 
@@ -116,9 +115,18 @@ export function Navbar({
     setMobileMenuOpen(false);
     setMoreDropdownOpen(false);
 
+    if (item.isDownload) {
+      const link = document.createElement("a");
+      link.href = item.href;
+      link.download = item.download || "Daksh_Soni_Resume.pdf";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      return;
+    }
+
     if (item.isAction) {
       if (item.action === "learning" && onOpenLearning) onOpenLearning();
-      if (item.action === "resume" && onOpenResume) onOpenResume();
       return;
     }
 
@@ -449,21 +457,23 @@ export function Navbar({
                   <BookOpen className="w-3.5 h-3.5 text-purple-400" />
                   <span>Open Learning & Specializations</span>
                 </button>
-                <button
+                <a
+                  href="/Daksh_Soni_Resume.pdf"
+                  download="Daksh_Soni_Resume.pdf"
                   onClick={() => {
+                    soundManager.playClick();
                     setMobileMenuOpen(false);
-                    if (onOpenResume) onOpenResume();
                   }}
-                  className={`w-full py-2.5 rounded-full text-xs font-bold flex items-center justify-center gap-1.5 border ${
+                  className={`w-full py-2.5 rounded-full text-xs font-bold flex items-center justify-center gap-2 border ${
                     isLight
                       ? "border-slate-300 text-slate-800 hover:bg-slate-100"
                       : "border-purple-400/40 text-white hover:bg-purple-500 hover:text-white"
                   }`}
+                  data-cursor="pointer"
                 >
-                  <FileText className="w-3.5 h-3.5 text-purple-400" />
-                  <span>View Resume Document</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 ml-auto text-purple-400" />
-                </button>
+                  <Download className="w-3.5 h-3.5 text-amber-400" />
+                  <span>Download Resume PDF</span>
+                </a>
                 <a
                   href="#contact"
                   onClick={(e) => {

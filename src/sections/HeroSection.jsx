@@ -5,7 +5,7 @@ import { HeroVisual3D } from "../components/HeroVisual3D";
 import { profileData } from "../data/profile";
 import { soundManager } from "../utils/sound";
 
-export function HeroSection({ onOpenResume }) {
+export function HeroSection() {
   return (
     <section className="relative min-h-[90vh] sm:min-h-screen pt-24 sm:pt-32 pb-12 sm:pb-16 px-4 sm:px-6 md:px-12 flex flex-col justify-center overflow-hidden bg-transparent">
       {/* Massive Low-Opacity Background Watermark Typography */}

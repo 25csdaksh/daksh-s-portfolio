@@ -1,12 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FileText, Eye, Download, ExternalLink, ArrowRight, Award, GraduationCap, Code } from "lucide-react";
+import { FileText, Download, Award, GraduationCap, Code } from "lucide-react";
 import { resumeData } from "../data/resume";
 import { soundManager } from "../utils/sound";
 
-export function ResumeSection({ onOpenResume }) {
+export function ResumeSection() {
   return (
-    <section className="py-24 sm:py-32 px-4 sm:px-6 md:px-12 relative bg-[#080321]/80 backdrop-blur-sm text-white border-t border-b border-purple-500/20">
+    <section id="resume" className="py-24 sm:py-32 px-4 sm:px-6 md:px-12 relative bg-[#080321]/80 backdrop-blur-sm text-white border-t border-b border-purple-500/20">
       {/* Background Cosmic Purple Ambiance */}
       <div className="absolute top-1/3 left-1/3 w-[400px] h-[400px] bg-purple-600/10 rounded-full blur-[130px] pointer-events-none -z-10" />
 
@@ -24,57 +24,36 @@ export function ResumeSection({ onOpenResume }) {
             A comprehensive overview of academic records, technical proficiencies, production engineering milestones, and hackathon leadership.
           </p>
 
-          {/* Action Buttons */}
-          <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
-            <button
-              onClick={() => {
-                soundManager.playClick();
-                onOpenResume();
-              }}
-              onMouseEnter={() => soundManager.playHover()}
-              className="px-7 py-3.5 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-purple-950 border border-amber-300 text-xs sm:text-sm font-black shadow-lg shadow-amber-500/20 hover:scale-105 transition-all flex items-center gap-2"
-              data-cursor="pointer"
-            >
-              <Eye className="w-4 h-4 text-purple-950 stroke-[2.5]" />
-              <span>View Resume PDF</span>
-            </button>
-
-            <a
-              href={resumeData.personal.pdfUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => soundManager.playClick()}
-              onMouseEnter={() => soundManager.playHover()}
-              className="px-6 py-3.5 rounded-full bg-[#0f072e] border border-purple-400/40 text-purple-200 text-xs sm:text-sm font-bold hover:bg-[#170c43] hover:border-purple-400 transition-all flex items-center gap-2 shadow-md"
-              data-cursor="pointer"
-            >
-              <ExternalLink className="w-4 h-4 text-purple-400" />
-              <span>Open in New Tab</span>
-            </a>
-
+          {/* Single Direct PDF Download Button */}
+          <div className="flex items-center justify-center pt-2">
             <a
               href={resumeData.personal.pdfUrl}
               download="Daksh_Soni_Resume.pdf"
               onClick={() => soundManager.playClick()}
               onMouseEnter={() => soundManager.playHover()}
-              className="px-6 py-3.5 rounded-full bg-[#0f072e] border border-purple-400/20 text-slate-200 text-xs sm:text-sm font-bold hover:bg-[#170c43] hover:text-white transition-all flex items-center gap-2 shadow-md"
+              className="px-8 py-4 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-purple-950 border border-yellow-300 text-sm font-extrabold shadow-xl shadow-amber-500/25 hover:shadow-amber-500/40 hover:scale-105 transition-all flex items-center gap-2.5 group"
               data-cursor="pointer"
+              title="Direct Download Daksh Soni Resume PDF"
             >
-              <Download className="w-4 h-4 text-slate-300" />
-              <span>Download PDF</span>
+              <Download className="w-5 h-5 text-purple-950 stroke-[2.5] group-hover:translate-y-0.5 transition-transform" />
+              <span>Download Resume PDF</span>
+              <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded-full bg-purple-950/15 border border-purple-950/20 font-bold">
+                ATS PDF
+              </span>
             </a>
           </div>
         </div>
 
-        {/* Clean Interactive Resume Teaser Preview */}
-        <motion.div
+        {/* Direct Download Teaser Card */}
+        <motion.a
+          href={resumeData.personal.pdfUrl}
+          download="Daksh_Soni_Resume.pdf"
           whileHover={{ y: -4 }}
-          onClick={() => {
-            soundManager.playClick();
-            onOpenResume();
-          }}
+          onClick={() => soundManager.playClick()}
           onMouseEnter={() => soundManager.playHover()}
-          className="editorial-card p-6 sm:p-10 bg-[#0f072e]/95 hover:bg-[#170c43] border border-purple-500/25 hover:border-purple-400 hover:shadow-2xl hover:shadow-purple-950/80 rounded-2xl max-w-4xl mx-auto space-y-6 cursor-pointer group transition-all duration-300"
+          className="editorial-card block p-6 sm:p-10 bg-[#0f072e]/95 hover:bg-[#170c43] border border-purple-500/25 hover:border-purple-400 hover:shadow-2xl hover:shadow-purple-950/80 rounded-2xl max-w-4xl mx-auto space-y-6 cursor-pointer group transition-all duration-300"
+          data-cursor="pointer"
+          title="Click to Download Resume PDF"
         >
           <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-purple-400/15 gap-3">
             <div>
@@ -85,9 +64,9 @@ export function ResumeSection({ onOpenResume }) {
                 {resumeData.personal.title}
               </p>
             </div>
-            <div className="flex items-center gap-2 font-mono text-xs text-purple-300 font-bold group-hover:underline">
-              <span>VIEW RESUME DOCUMENT</span>
-              <ArrowRight className="w-4 h-4 text-purple-400 group-hover:translate-x-1 transition-transform" />
+            <div className="flex items-center gap-2 font-mono text-xs text-amber-400 font-bold group-hover:underline">
+              <Download className="w-4 h-4 text-amber-400 group-hover:translate-y-0.5 transition-transform" />
+              <span>DOWNLOAD RESUME PDF</span>
             </div>
           </div>
 
@@ -119,7 +98,7 @@ export function ResumeSection({ onOpenResume }) {
               <p className="font-mono text-purple-300 font-semibold">PyTorch, Gemini, PostgreSQL</p>
             </div>
           </div>
-        </motion.div>
+        </motion.a>
       </div>
     </section>
   );

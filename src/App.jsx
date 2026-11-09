@@ -8,7 +8,6 @@ import { WinterSnowfall } from "./components/WinterSnowfall";
 import { useCelestialTheme } from "./hooks/useCelestialTheme";
 import { ProjectModal } from "./components/ProjectModal";
 import { BlogModal } from "./components/BlogModal";
-import { ResumeModal } from "./components/ResumeModal";
 import { LearningModal } from "./components/LearningModal";
 import { GiftForCodersModal } from "./components/GiftForCodersModal";
 
@@ -28,7 +27,6 @@ export default function App() {
 
   const [selectedProject, setSelectedProject] = useState(null);
   const [selectedPost, setSelectedPost] = useState(null);
-  const [resumeOpen, setResumeOpen] = useState(false);
   const [learningOpen, setLearningOpen] = useState(false);
   const [giftOpen, setGiftOpen] = useState(false);
   const [selectedGiftNoteId, setSelectedGiftNoteId] = useState("c-lang");
@@ -87,7 +85,7 @@ export default function App() {
 
   // Pause background smooth scroll when any modal is open
   useEffect(() => {
-    const isAnyModalOpen = Boolean(selectedProject || selectedPost || resumeOpen || learningOpen || giftOpen);
+    const isAnyModalOpen = Boolean(selectedProject || selectedPost || learningOpen || giftOpen);
     if (lenisRef.current) {
       if (isAnyModalOpen) {
         lenisRef.current.stop();
@@ -99,7 +97,7 @@ export default function App() {
         document.documentElement.style.overflow = "unset";
       }
     }
-  }, [selectedProject, selectedPost, resumeOpen, learningOpen, giftOpen]);
+  }, [selectedProject, selectedPost, learningOpen, giftOpen]);
 
   return (
     <div
@@ -122,7 +120,6 @@ export default function App() {
 
       {/* Floating Header / Navbar with Indian Time Sun/Moon Theme Engine */}
       <Navbar
-        onOpenResume={() => setResumeOpen(true)}
         onOpenLearning={() => setLearningOpen(true)}
         onOpenGift={handleOpenGift}
         {...celestialTheme}
@@ -131,7 +128,6 @@ export default function App() {
       {/* Main Sections */}
       <main className="relative z-10">
         <HeroSection
-          onOpenResume={() => setResumeOpen(true)}
           onOpenLearning={() => setLearningOpen(true)}
         />
         <AboutSection />
@@ -141,7 +137,7 @@ export default function App() {
         <GiftForCodersSection onOpenGiftModal={handleOpenGift} />
         <BlogSection onSelectPost={(post) => setSelectedPost(post)} />
         <GithubSection />
-        <ResumeSection onOpenResume={() => setResumeOpen(true)} />
+        <ResumeSection />
         <ContactSection />
       </main>
 
@@ -160,11 +156,6 @@ export default function App() {
       <BlogModal
         post={selectedPost}
         onClose={() => setSelectedPost(null)}
-      />
-
-      <ResumeModal
-        isOpen={resumeOpen}
-        onClose={() => setResumeOpen(false)}
       />
 
       {/* Dedicated Learning & Specializations Modal */}

@@ -15,6 +15,9 @@ export function CelestialThemeToggle({
   phaseLabel,
   phaseEmoji,
   elevationDeg,
+  winterSnowEnabled = true,
+  toggleWinterSnow,
+  isSnowActive = true,
 }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -75,7 +78,7 @@ export function CelestialThemeToggle({
             toggleTheme();
           }}
           onMouseEnter={() => soundManager.playHover()}
-          className={`w-7 h-7 rounded-full flex items-center justify-center transition-all duration-300 m-0.5 shrink-0 ${
+          className={`relative w-7 h-7 rounded-full flex items-center justify-center transition-all duration-300 m-0.5 shrink-0 ${
             isLight
               ? "bg-amber-400 text-slate-950 shadow-xs hover:bg-amber-300 hover:scale-105"
               : "bg-purple-600 text-white shadow-xs hover:bg-purple-500 hover:scale-105"
@@ -97,6 +100,16 @@ export function CelestialThemeToggle({
               <Moon className="w-3.5 h-3.5 fill-white stroke-[2.5]" />
             )}
           </motion.div>
+
+          {/* Winter Snow Indicator */}
+          {!isLight && isSnowActive && (
+            <span
+              className="absolute -top-1 -right-1 text-[9px] leading-none select-none pointer-events-none drop-shadow-sm"
+              title="Winter Snowfall Active"
+            >
+              ❄️
+            </span>
+          )}
         </button>
       </div>
 
@@ -212,6 +225,54 @@ export function CelestialThemeToggle({
                   </div>
                 </div>
                 {themeMode === "dark" && <Check className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />}
+              </button>
+            </div>
+
+            {/* Winter Season Snowfall Control */}
+            <div
+              className={`mt-2.5 pt-2.5 border-t flex items-center justify-between px-2.5 py-1.5 rounded-xl text-xs ${
+                isLight
+                  ? "border-slate-200/80 bg-slate-50 text-slate-700"
+                  : "border-purple-400/20 bg-purple-950/40 text-purple-200"
+              }`}
+            >
+              <div className="flex items-center gap-2">
+                <span className="text-base select-none">❄️</span>
+                <div className="flex flex-col">
+                  <span className="font-bold leading-tight flex items-center gap-1.5">
+                    Winter Snowfall
+                    {!isLight && isSnowActive && (
+                      <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                    )}
+                  </span>
+                  <span className="text-[9px] opacity-75 font-mono">
+                    {!isLight
+                      ? winterSnowEnabled
+                        ? "Active in Night Mode"
+                        : "Turned Off"
+                      : "Active in Night Mode"}
+                  </span>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  soundManager.playClick();
+                  if (toggleWinterSnow) toggleWinterSnow();
+                }}
+                className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
+                  winterSnowEnabled ? "bg-cyan-500" : "bg-slate-400/40"
+                }`}
+                title="Toggle Winter Snowfall"
+                data-cursor="pointer"
+                aria-label="Toggle Winter Snowfall"
+              >
+                <span
+                  className={`pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow-md transition duration-200 ease-in-out ${
+                    winterSnowEnabled ? "translate-x-4" : "translate-x-0"
+                  }`}
+                />
               </button>
             </div>
           </motion.div>

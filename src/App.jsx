@@ -4,6 +4,7 @@ import { CustomCursor } from "./components/CustomCursor";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { CelestialBackground } from "./components/CelestialBackground";
+import { WinterSnowfall } from "./components/WinterSnowfall";
 import { useCelestialTheme } from "./hooks/useCelestialTheme";
 import { ProjectModal } from "./components/ProjectModal";
 import { BlogModal } from "./components/BlogModal";
@@ -115,6 +116,9 @@ export default function App() {
         progress={celestialTheme.progress}
         phase={celestialTheme.phase}
       />
+
+      {/* Winter Season Snowfall (Atmospheric 60FPS Snowfall in Night Mode) */}
+      <WinterSnowfall isActive={celestialTheme.isSnowActive} />
 
       {/* Floating Header / Navbar with Indian Time Sun/Moon Theme Engine */}
       <Navbar

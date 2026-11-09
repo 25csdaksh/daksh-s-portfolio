@@ -25,6 +25,9 @@ export function Navbar({
   elevationDeg,
   x,
   y,
+  winterSnowEnabled,
+  toggleWinterSnow,
+  isSnowActive,
 }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -160,6 +163,9 @@ export function Navbar({
             elevationDeg={elevationDeg}
             x={x}
             y={y}
+            winterSnowEnabled={winterSnowEnabled}
+            toggleWinterSnow={toggleWinterSnow}
+            isSnowActive={isSnowActive}
           />
 
           {/* Audio Feedback Toggle */}

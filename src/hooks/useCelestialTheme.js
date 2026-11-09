@@ -198,6 +198,28 @@ export function useCelestialTheme() {
     });
   }, []);
 
+  // Winter Season Snowfall state (Active during Night Mode, enabled by default for winter)
+  const [winterSnowEnabled, setWinterSnowEnabled] = useState(() => {
+    try {
+      const saved = localStorage.getItem("daksh_winter_snow");
+      return saved !== null ? saved === "true" : true;
+    } catch (_e) {
+      return true;
+    }
+  });
+
+  const toggleWinterSnow = useCallback(() => {
+    setWinterSnowEnabled((prev) => {
+      const next = !prev;
+      try {
+        localStorage.setItem("daksh_winter_snow", String(next));
+      } catch (_e) {
+        // ignore
+      }
+      return next;
+    });
+  }, []);
+
   // Set explicit mode
   const setMode = useCallback((mode) => {
     if (mode === "auto" || mode === "light" || mode === "dark") {
@@ -228,6 +250,10 @@ export function useCelestialTheme() {
     effectiveTheme,
     isLight: effectiveTheme === "light",
     isDark: effectiveTheme === "dark",
+    winterSnowEnabled,
+    setWinterSnowEnabled,
+    toggleWinterSnow,
+    isSnowActive: effectiveTheme === "dark" && winterSnowEnabled,
     indiaTime,
     formattedIstTime,
     shortIstTime,
